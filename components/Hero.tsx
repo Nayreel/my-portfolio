@@ -1,6 +1,8 @@
 import React from "react";
 import { Spotlight } from "./ui/Spotlight";
 import { TextGenerateEffect } from "./ui/Text-Generate-Effect";
+import { DownloadButton } from "./Buttons";
+import { FaDownload } from "react-icons/fa";
 
 const Hero = () => {
   return (
@@ -8,15 +10,15 @@ const Hero = () => {
       <div className="spotlight-container">
         {/* Spotlight effect */}
         <Spotlight
-          className="spotlight1 -top-40 -left-10 md:-left-32 md:-top-20 h-screen"
+          className="spotlight1 -top-40 -left-10 md:left-96 md:-top-20 h-screen"
           fill="white"
         />
         <Spotlight
-          className="spotlight2 top-10 left-full md:-left-32 md:-top-20 h-[80vh] w-[50vw]"
+          className="spotlight2 top-10 left-full md:left-3/4 md:-top-20 h-[80vh] w-[50vw]"
           fill="blue"
         />
         <Spotlight
-          className="spotlight3 top-28 left-80 md:-left-32 md:-top-20 h-[80vh] w-[50vw]"
+          className="spotlight3 top-40 left-56 md:-left-32 md:-top-20 h-[80vh] w-[50vw]"
           fill="blue"
         />
       </div>
@@ -31,15 +33,15 @@ const Hero = () => {
         <div className="max-w-[89vw] md:max-w-2xl lg:max-w-[60vw] flex flex-col items-center justify-center">
           <TextGenerateEffect
             className="text-center text-[40px] md:text-5xl lg:text-6xl"
-            words="Transform Ideas Into Realities"
+            words="Transforming ideas into interactive, responsive, and beautiful web applications."
           />
-          <h2 className="uppercase tracking-widest text-xs text-center text-blue-100 max-w-80">
+          <p className="text-center md:tracking-wider text-blue-100 mb-1 text-lg md:text-lg lg:text-2xl">
             Lee Ryan M. Garcia
-          </h2>
-
-          <p className="text-center md:tracking-wider text-blue-100 mb-4 text-sm md:text-lg lg:text-2xl">
-            Frontend Developer
           </p>
+          <h2 className="uppercase tracking-widest text-[10px] text-center text-blue-100 max-w-80">
+            &lt;Frontend Developer /&gt;
+          </h2>
+          <DownloadButton icon={<FaDownload />} />
         </div>
       </div>
     </div>

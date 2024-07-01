@@ -29,10 +29,12 @@ export const TextGenerateEffect = ({
     return (
       <motion.div ref={scope}>
         {wordsArray.map((word, idx) => {
+          const isSecondToLastIdx = idx === wordsArray.length - 2;
+          const isLastIdx = idx === wordsArray.length - 1;
           return (
             <motion.span
               key={word + idx}
-              className={`${idx > 3 ? 'text-purple' : 'dark:text-white text-black opacity-0'}`}
+              className={`${idx > 2 && !isSecondToLastIdx && !isLastIdx ? 'text-blue-600 opacity-0' : 'dark:text-white'}`}
             >
               {word}{" "}
             </motion.span>
@@ -41,6 +43,8 @@ export const TextGenerateEffect = ({
       </motion.div>
     );
   };
+  
+  
 
   return (
     <div className={cn("font-bold", className)}>
