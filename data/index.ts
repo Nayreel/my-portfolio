@@ -5,6 +5,53 @@ export const navItems = [
   { name: "Contact", link: "#contact" },
 ];
 
+export const words = [
+  {
+    text: "<",
+    className: "mt-10 text-center md:tracking-wider text-blue-100 mb-1 text-lg md:text-lg lg:text-2xl"
+  },
+  {
+    text: "Hi!",
+    className: "text-center md:tracking-wider text-blue-100 mb-1 text-lg md:text-lg lg:text-2xl"
+  },
+  {
+    text: "I'm",
+     className: "text-center md:tracking-wider text-blue-100 mb-1 text-lg md:text-lg lg:text-2xl"
+  },
+  {
+    text: "Lee",
+     className: "text-center md:tracking-wider text-blue-100 mb-1 text-lg md:text-lg lg:text-2xl"
+  },
+  {
+    text: "Ryan",
+     className: "text-center md:tracking-wider text-blue-100 mb-1 text-lg md:text-lg lg:text-2xl"
+  },
+  {
+    text: "Garcia,",
+     className: "text-center md:tracking-wider text-blue-100 mb-1 text-lg md:text-lg lg:text-2xl"
+  },
+  {
+    text: "Your",
+    className: "text-center md:tracking-wider text-blue-100 mb-1 text-lg md:text-lg lg:text-2xl",
+  },
+  {
+    text: "Future",
+    className: "text-center md:tracking-wider text-blue-100 mb-1 text-lg md:text-lg lg:text-2xl",
+  },
+  {
+    text: "Frontend",
+    className: "text-center md:tracking-wider text-blue-600 dark:text-blue-600 mb-1 text-lg md:text-lg lg:text-2xl",
+  },
+  {
+    text: "Developer",
+    className: "text-center md:tracking-wider text-blue-600 dark:text-blue-600 mb-1 text-lg md:text-lg lg:text-2xl",
+  },
+  {
+    text: "/>",
+    className: "text-center md:tracking-wider text-blue-100 mb-1 text-lg md:text-lg lg:text-2xl"
+  },
+];
+
 export const gridItems = [
   {
     id: 1,
