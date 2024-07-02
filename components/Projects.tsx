@@ -25,14 +25,14 @@ const Projects = () => {
                   translateZ="50"
                   className="text-xl font-bold text-neutral-600 dark:text-white"
                 >
-                  Make things float in air
+                  {project.title}
                 </CardItem>
                 <CardItem
                   as="p"
                   translateZ="60"
                   className="text-neutral-500 text-sm max-w-sm mt-2 dark:text-neutral-300"
                 >
-                  Hover over this card to unleash the power of CSS perspective
+                  {project.des}
                 </CardItem>
                 <CardItem translateZ="100" className="w-full mt-4">
                   <Image
@@ -46,11 +46,12 @@ const Projects = () => {
                 <div className="flex justify-between items-center mt-20">
                   <CardItem
                     translateZ={20}
-                    href="https://twitter.com/mannupaaji"
                     target="__blank"
                     className="px-4 py-2 rounded-xl text-xs font-normal dark:text-white"
                   >
+                    <a href={project.link}>
                     <p className="cursor-pointer opacity-50 hover:opacity-100">Visit now →</p>
+                    </a>
                   </CardItem>
                 </div>
               </CardBody>

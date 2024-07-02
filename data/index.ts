@@ -121,7 +121,8 @@ export const gridItems = [
 export const leftTechStack = [
     {
         id:0,
-        name: "React.js"
+        name: "React.js",
+        svgpath:"/svg/reactjs.svg"
     },
     {
         id:1,
@@ -181,19 +182,19 @@ export const rightSpecs= [
 export const projects = [
   {
     id: 1,
-    title: "3D Solar System Planets to Explore",
-    des: "Explore the wonders of our solar system with this captivating 3D simulation of the planets using Three.js.",
-    img: "/svg/p1.svg",
+    title: "Feedback Fusion - Customer Feedback Management System",
+    des: "Analyzes customer feedback sentiment and generates survey QR codes by business owners.",
+    img: "/img/feedbackfusion.png",
     iconLists: ["/re.svg", "/tail.svg", "/ts.svg", "/three.svg", "/fm.svg"],
-    link: "https://github.com/adrianhajdin?tab=repositories",
+    link: "https://feedbackfusion.online",
   },
   {
     id: 2,
-    title: "Yoom - Video Conferencing App",
+    title: "ChatMoko - Messaging Chat",
     des: "Simplify your video conferencing experience with Yoom. Seamlessly connect with colleagues and friends.",
-    img: "/svg/p2.svg",
+    img: "/img/chatmoko.png",
     iconLists: ["/next.svg", "/tail.svg", "/ts.svg", "/stream.svg", "/c.svg"],
-    link: "https://github.com/adrianhajdin/zoom-clone",
+    link: "https://chat-moko.vercel.app",
   },
   {
     id: 3,
