@@ -8,7 +8,7 @@ import { words } from "@/data";
 
 const Hero = () => {
   return (
-    <div className="hero-container pb-20 pt-36">
+    <section className="hero-container pb-20 pt-36">
       <div className="spotlight-container">
         {/* Spotlight effect */}
         <Spotlight
@@ -41,7 +41,7 @@ const Hero = () => {
           <DownloadButton icon={<FaDownload />} />
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

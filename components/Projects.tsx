@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const Projects = () => {
   return (
-    <div className="project-container py-40">
+    <section id="projects" className="project-container py-40">
       <h1 className="heading text-white">
         These projects represent my
         <span className="text-blue-600"> dedication </span>
@@ -39,7 +39,7 @@ const Projects = () => {
                     src={project.img}
                     height="1000"
                     width="1000"
-                    className="h-60 w-full object-cover rounded-xl group-hover/card:shadow-xl"
+                    className="h-60 w-full object-contain rounded-xl group-hover/card:shadow-xl"
                     alt="project"
                   />
                 </CardItem>
@@ -59,7 +59,7 @@ const Projects = () => {
           </div>
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 

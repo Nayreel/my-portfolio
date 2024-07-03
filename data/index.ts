@@ -175,7 +175,7 @@ export const rightSpecs= [
     },
     {
         id: 2,
-        name: "PLDT FIBR 300mbps"
+        name: "PLDT FIBR"
     },
 ];
 
@@ -211,6 +211,26 @@ export const projects = [
     img: "/svg/p4.svg",
     iconLists: ["/next.svg", "/tail.svg", "/ts.svg", "/three.svg", "/gsap.svg"],
     link: "https://github.com/adrianhajdin/iphone",
+  },
+];
+
+export const conferences = [
+  {
+    id: 1,
+    title: "Philippine Startup Challenge 8",
+    des: "Participated in the Regional Pitching Competition by the ICT Industry Development Bureau, where we pitched our capstone project.",
+    date: "October 04, 2023",
+    img: "/img/PSC.jpeg",
+    link: "https://feedbackfusion.online",
+  },
+  {
+    id: 2,
+    title: "ChatMoko - Messaging Chat",
+    des: "Simplify your video conferencing experience with Yoom. Seamlessly connect with colleagues and friends.",
+    date: "",
+    img: "/img/IRCITE.jpeg",
+  
+    link: "https://chat-moko.vercel.app",
   },
 ];
 
