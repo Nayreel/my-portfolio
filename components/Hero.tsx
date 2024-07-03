@@ -1,12 +1,14 @@
 import React from "react";
 import { Spotlight } from "./ui/Spotlight";
-import { TextGenerateEffect } from "./ui/Text-Generate-Effect";
+import { TextGenerateEffect } from "./ui/TextGenerateEffect";
 import { DownloadButton } from "./Buttons";
 import { FaDownload } from "react-icons/fa";
+import { TypewriterEffect } from "./ui/TypeWriterEffect";
+import { words } from "@/data";
 
 const Hero = () => {
   return (
-    <div className="hero-container pb-20 pt-36">
+    <section className="hero-container pb-20 pt-36">
       <div className="spotlight-container">
         {/* Spotlight effect */}
         <Spotlight
@@ -35,16 +37,11 @@ const Hero = () => {
             className="text-center text-[40px] md:text-5xl lg:text-6xl"
             words="Transforming ideas into interactive, responsive, and beautiful web applications."
           />
-          <p className="text-center md:tracking-wider text-blue-100 mb-1 text-lg md:text-lg lg:text-2xl">
-            Lee Ryan M. Garcia
-          </p>
-          <h2 className="uppercase tracking-widest text-[10px] text-center text-blue-100 max-w-80">
-            &lt;Frontend Developer /&gt;
-          </h2>
+          <TypewriterEffect words={words}/>
           <DownloadButton icon={<FaDownload />} />
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

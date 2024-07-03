@@ -5,6 +5,49 @@ export const navItems = [
   { name: "Contact", link: "#contact" },
 ];
 
+export const words = [
+  {
+    text: "Hi!",
+    className: "mt-10 text-center md:tracking-wider text-blue-100 mb-1 text-lg md:text-lg lg:text-2xl"
+  },
+  {
+    text: "I'm",
+     className: "text-center md:tracking-wider text-blue-100 mb-1 text-lg md:text-lg lg:text-2xl"
+  },
+  {
+    text: "Lee",
+     className: "text-center md:tracking-wider text-blue-100 mb-1 text-lg md:text-lg lg:text-2xl"
+  },
+  {
+    text: "Ryan",
+     className: "text-center md:tracking-wider text-blue-100 mb-1 text-lg md:text-lg lg:text-2xl"
+  },
+  {
+    text: "M.",
+     className: "text-center md:tracking-wider text-blue-100 mb-1 text-lg md:text-lg lg:text-2xl"
+  },
+  {
+    text: "Garcia,",
+     className: "text-center md:tracking-wider text-blue-100 mb-1 text-lg md:text-lg lg:text-2xl"
+  },
+  {
+    text: "Your",
+    className: "text-center md:tracking-wider text-blue-100 mb-1 text-lg md:text-lg lg:text-2xl",
+  },
+  {
+    text: "Future",
+    className: "text-center md:tracking-wider text-blue-100 mb-1 text-lg md:text-lg lg:text-2xl",
+  },
+  {
+    text: "<Frontend",
+    className: "text-center md:tracking-wider text-blue-600 dark:text-blue-600 mb-1 text-lg md:text-lg lg:text-2xl",
+  },
+  {
+    text: "Developer/>",
+    className: "text-center md:tracking-wider text-blue-600 dark:text-blue-600 mb-1 text-lg md:text-lg lg:text-2xl",
+  },
+];
+
 export const gridItems = [
   {
     id: 1,
@@ -78,7 +121,8 @@ export const gridItems = [
 export const leftTechStack = [
     {
         id:0,
-        name: "React.js"
+        name: "React.js",
+        svgpath:"/svg/reactjs.svg"
     },
     {
         id:1,
@@ -131,32 +175,32 @@ export const rightSpecs= [
     },
     {
         id: 2,
-        name: "PLDT FIBR 300mbps"
+        name: "PLDT FIBR"
     },
 ];
 
 export const projects = [
   {
     id: 1,
-    title: "3D Solar System Planets to Explore",
-    des: "Explore the wonders of our solar system with this captivating 3D simulation of the planets using Three.js.",
-    img: "/p1.svg",
+    title: "Feedback Fusion - Customer Feedback Management System",
+    des: "Analyzes customer feedback sentiment and generates survey QR codes by business owners.",
+    img: "/img/feedbackfusion.png",
     iconLists: ["/re.svg", "/tail.svg", "/ts.svg", "/three.svg", "/fm.svg"],
-    link: "https://github.com/adrianhajdin?tab=repositories",
+    link: "https://feedbackfusion.online",
   },
   {
     id: 2,
-    title: "Yoom - Video Conferencing App",
+    title: "ChatMoko - Messaging Chat",
     des: "Simplify your video conferencing experience with Yoom. Seamlessly connect with colleagues and friends.",
-    img: "/p2.svg",
+    img: "/img/chatmoko.png",
     iconLists: ["/next.svg", "/tail.svg", "/ts.svg", "/stream.svg", "/c.svg"],
-    link: "https://github.com/adrianhajdin/zoom-clone",
+    link: "https://chat-moko.vercel.app",
   },
   {
     id: 3,
     title: "AI Image SaaS - Canva Application",
     des: "A REAL Software-as-a-Service app with AI features and a payments and credits system using the latest tech stack.",
-    img: "/p3.svg",
+    img: "/svg/p3.svg",
     iconLists: ["/re.svg", "/tail.svg", "/ts.svg", "/three.svg", "/c.svg"],
     link: "https://github.com/adrianhajdin/ai_saas_app",
   },
@@ -164,9 +208,29 @@ export const projects = [
     id: 4,
     title: "Animated Apple Iphone 3D Website",
     des: "Recreated the Apple iPhone 15 Pro website, combining GSAP animations and Three.js 3D effects..",
-    img: "/p4.svg",
+    img: "/svg/p4.svg",
     iconLists: ["/next.svg", "/tail.svg", "/ts.svg", "/three.svg", "/gsap.svg"],
     link: "https://github.com/adrianhajdin/iphone",
+  },
+];
+
+export const conferences = [
+  {
+    id: 1,
+    title: "Philippine Startup Challenge 8",
+    des: "Participated in the Regional Pitching Competition by the ICT Industry Development Bureau, where we pitched our capstone project.",
+    date: "October 04, 2023",
+    img: "/img/PSC.jpeg",
+    link: "https://feedbackfusion.online",
+  },
+  {
+    id: 2,
+    title: "ChatMoko - Messaging Chat",
+    des: "Simplify your video conferencing experience with Yoom. Seamlessly connect with colleagues and friends.",
+    date: "",
+    img: "/img/IRCITE.jpeg",
+  
+    link: "https://chat-moko.vercel.app",
   },
 ];
 
