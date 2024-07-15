@@ -93,7 +93,7 @@ export const BentoGridItem = ({
 
         <div
           className={`absolute right-0 -bottom-5 ${
-            id === 5 && "w-full opacity-80"
+            id === 4 && "w-full opacity-80"
           } `}
         >
           {spareImg && (
@@ -106,11 +106,6 @@ export const BentoGridItem = ({
             />
           )}
         </div>
-        {id === 6 && (
-          <BackgroundGradientAnimation>
-            <div className="absolute z-50 inset-0 flex items-center justify-center text-white font-bold px-4 pointer-events-none text-3xl text-center md:text-4xl lg:text-7xl"></div>
-          </BackgroundGradientAnimation>
-        )}
 
         <div
           className={cn(
@@ -128,7 +123,7 @@ export const BentoGridItem = ({
           {id === 2 && <GlobeDemo />}
 
           {id === 3 && (
-            <div className="flex gap-1 lg:gap-5 w-fit absolute -right-3">
+            <div className="flex gap-1 lg:gap-5 w-fit absolute -right-0">
               <div className="flex flex-col gap-3 md:gap-3 lg:gap-8">
                 {leftTechStack.map((item) => ( 
                   <span
@@ -139,10 +134,8 @@ export const BentoGridItem = ({
                     {item.name}
                   </span>
                 ))}
-                <span className="lg:py-4 lg:px-3 py-4 px-3  rounded-lg text-center bg-[#10132E]"></span>
               </div>
               <div className="flex flex-col gap-3 md:gap-3 lg:gap-8">
-                <span className="lg:py-4 lg:px-3 py-4 px-3  rounded-lg text-center bg-[#10132E]"></span>
                 {rightTechStack.map((item) => (
                   <span
                     key={item.id}
@@ -156,28 +149,7 @@ export const BentoGridItem = ({
             </div>
           )}
 
-          {id === 6 && (
-            <div className="copy-btn-container mt-5 relative pb-5">
-              <div
-                className={`absolute -bottom-5 right-0 ${
-                  copied ? "block" : "block"
-                }`}
-              >
-                {/* <img src="/confetti.gif" alt="confetti" /> */}
-                <Lottie options={defaultOptions} height={200} width={400} />
-              </div>
-              <div className="btn-container absolute flex w-full justify-center">
-                <CopyButton
-                  title={copied ? "Email Copied!" : "Copy email"}
-                  icon={<IoCopyOutline />}
-                  position="left"
-                  onClick={handleCopy}
-                />
-              </div>
-            </div>
-          )}
-
-          {id === 5 && (
+          {id === 4 && (
             <div className="flex flex-col md:flex-row lg:flex-row gap-2 md:gap-10 lg:gap-5 w-fit absolute left-3 top-16 md:top-20 lg:top-32 ">
               <div className="flex text-center content-center h-auto md:flex-col lg:flex-col gap-3 md:gap-3 lg:gap-8">
                 {leftSpecs.map((item) => (
