@@ -225,11 +225,10 @@ export const conferences = [
   },
   {
     id: 2,
-    title: "ChatMoko - Messaging Chat",
-    des: "Simplify your video conferencing experience with Yoom. Seamlessly connect with colleagues and friends.",
-    date: "",
+    title: "International Research Conference on Information Technology Education (IRCITE)",
+    des: "Invited for Poster Presentation by the PSITE-Central Luzon where we showcase our capstone project.",
+    date: "March 08, 2024",
     img: "/img/IRCITE.jpeg",
-  
     link: "https://chat-moko.vercel.app",
   },
 ];
