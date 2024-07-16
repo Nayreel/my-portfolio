@@ -64,7 +64,7 @@ export const gridItems = [
     id: 2,
     title: "I can adapt my schedule to any time zone.",
     description: "Time zone in Philippines (UTC +08:00)",
-    className: "lg:col-span-2 md:col-span-4 md:row-span-2",
+    className: "lg:col-span-2 lg:row-span-4 lg:row-span-2 md:col-span-4 md:row-span-2",
     imgClassName: "",
     titleClassName: "justify-start",
     img: "",
@@ -75,76 +75,73 @@ export const gridItems = [
     id: 3,
     title: "My tech stack",
     description: "I am willing to learn and adapt",
-    className: "lg:col-span-2 md:col-span-4 md:row-span-2",
+    className: "lg:col-span-2 lg:row-span-5  md:col-span-4 md:row-span-2",
     imgClassName: "",
     titleClassName: "justify-center",
     img: "",
     spareImgClassName: "",
     spareImg: "",
   },
+
   {
     id: 4,
+    title: "My Computer Specifications",
+    description: "",
+    className: "lg:col-span-3 lg:row-span-8 md:col-span-3 md:row-span-2",
+    imgClassName: "absolute right-0 md:right-20 lg:right-0 w-40 md:hidden lg:block lg:w-80 -top-1",
+    titleClassName: "w-full flex md:text-center lg:text-start lg:-top-5",
+    img: "/svg/programming-animate.svg",
+    spareImgClassName: "object-cover object-center w-full h-full",
+    spareImg: "/svg/grid.svg",
+  },
+  {
+    id: 5,
     title: "Passionate about technology and development.",
     description: "",
-    className: "text-center md:text-start lg:col-span-2 md:col-span-3 md:row-span-1",
+    className: "text-center md:text-start lg:col-span-2 lg:row-span-5 md:col-span-3 md:row-span-1",
     imgClassName: "p-96",
     titleClassName: "justify-start",
     img: "/svg/grid.svg",
     spareImgClassName: "object-cover object-end w-48 h-48 md:w-40 md:h-40 lg:w-56 lg:h-56",
     spareImg: "/svg/innovation-animate.svg",
   },
-
-  {
-    id: 5,
-    title: "My Computer Specifications",
-    description: "",
-    className: "md:col-span-3 md:row-span-2",
-    imgClassName: "absolute right-0 md:right-20 lg:right-0 bottom-0 w-40 md:w-52 lg:w-96",
-    titleClassName: "justify-start md:justify-start lg:justify-start",
-    img: "/svg/programming-animate.svg",
-    spareImgClassName: "object-cover object-center w-full h-full",
-    spareImg: "/svg/grid.svg",
-  },
-  {
-    id: 6,
-    title: "Do you want to start a project together?",
-    description: "",
-    className: "lg:col-span-2 md:col-span-3 md:row-span-1",
-    imgClassName: "",
-    titleClassName: "justify-center md:max-w-full max-w-60 text-center",
-    img: "",
-    spareImgClassName: "",
-    spareImg: "",
-  },
 ];
 
 export const leftTechStack = [
     {
-        id:0,
+        id: 0,
         name: "React.js",
         svgpath:"/svg/reactjs.svg"
     },
     {
-        id:1,
+        id: 1,
         name:  "Next.js"
     },
     {
-        id:2,
+        id: 2,
         name: "Node.js"
     },
+    {
+      id: 3,
+      name:"HTML"
+    }
 ];
 
 export const rightTechStack = [
     {
-        id: 0,
-        name: "Tailwind CSS"
+      id: 0,
+      name: "CSS"
     },
     {
         id: 1,
-        name:  "MongoDB"
+        name: "Tailwind CSS"
     },
     {
         id: 2,
+        name:  "MongoDB"
+    },
+    {
+        id: 3,
         name: "MySQL"
     },
 ];
@@ -196,22 +193,6 @@ export const projects = [
     iconLists: ["/next.svg", "/tail.svg", "/ts.svg", "/stream.svg", "/c.svg"],
     link: "https://chat-moko.vercel.app",
   },
-  {
-    id: 3,
-    title: "AI Image SaaS - Canva Application",
-    des: "A REAL Software-as-a-Service app with AI features and a payments and credits system using the latest tech stack.",
-    img: "/svg/p3.svg",
-    iconLists: ["/re.svg", "/tail.svg", "/ts.svg", "/three.svg", "/c.svg"],
-    link: "https://github.com/adrianhajdin/ai_saas_app",
-  },
-  {
-    id: 4,
-    title: "Animated Apple Iphone 3D Website",
-    des: "Recreated the Apple iPhone 15 Pro website, combining GSAP animations and Three.js 3D effects..",
-    img: "/svg/p4.svg",
-    iconLists: ["/next.svg", "/tail.svg", "/ts.svg", "/three.svg", "/gsap.svg"],
-    link: "https://github.com/adrianhajdin/iphone",
-  },
 ];
 
 export const conferences = [
@@ -225,11 +206,10 @@ export const conferences = [
   },
   {
     id: 2,
-    title: "ChatMoko - Messaging Chat",
-    des: "Simplify your video conferencing experience with Yoom. Seamlessly connect with colleagues and friends.",
-    date: "",
+    title: "International Research Conference on Information Technology Education (IRCITE)",
+    des: "Invited for Poster Presentation by the PSITE-Central Luzon where we showcase our capstone project.",
+    date: "March 08, 2024",
     img: "/img/IRCITE.jpeg",
-  
     link: "https://chat-moko.vercel.app",
   },
 ];
