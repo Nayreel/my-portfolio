@@ -1,12 +1,6 @@
 "use client";
 import { cn } from "@/utils/cn";
-import { BackgroundGradientAnimation } from "./GradientBg";
 import { GlobeDemo } from "./GridGlobe";
-import Lottie from "react-lottie";
-import { useEffect, useState } from "react";
-import animationData from "@/data/confetti.json";
-import { CopyButton } from "../Buttons";
-import { IoCopyOutline } from "react-icons/io5";
 import { leftSpecs, leftTechStack, rightSpecs, rightTechStack } from "@/data";
 import Image from "next/image";
 
@@ -50,21 +44,6 @@ export const BentoGridItem = ({
   spareImgClassName?: string;
   spareImg?: string;
 }) => {
-  const [copied, setCopied] = useState(false);
-
-  const defaultOptions = {
-    loop: copied,
-    autoplay: copied,
-    animationData,
-    rendererSettings: {
-      preserveAspectRatio: "xMidYMid slice",
-    },
-  };
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText("leeryan307@gmail.com");
-    setCopied(true);
-  };
 
   return (
     <div
@@ -150,23 +129,23 @@ export const BentoGridItem = ({
           )}
 
           {id === 4 && (
-            <div className="flex flex-col md:flex-row lg:flex-row gap-2 md:gap-10 lg:gap-5 w-fit absolute left-3 top-16 md:top-20 lg:top-32 ">
-              <div className="flex text-center content-center h-auto md:flex-col lg:flex-col gap-3 md:gap-3 lg:gap-8">
+            <div className="flex flex-col md:flex-row lg:flex-col gap-2 md:gap-10 lg:gap-5 w-fit absolute left-3 top-16 md:top-14 lg:mt-20">
+              <div className="flex text-center content-center h-auto md:flex-col lg:flex-row gap-3 md:gap-2 lg:gap-2">
                 {leftSpecs.map((item) => (
                   <span
                     key={item.id}
-                    className="lg:py-4 lg:px-3 py-2 px-3 text-[10px] md:text-sm lg:text-base
+                    className="lg:py-4 md:px-10 lg:px-3 py-2 px-3 text-[10px] md:text-xs lg:text-base
                     lg:opacity-100 rounded-lg text-center text-white bg-[#10132E]"
                   >
                     {item.name}
                   </span>
                 ))}
               </div>
-              <div className="flex text-center content-center h-auto md:flex-col lg:flex-col gap-3 md:gap-3 lg:gap-8">
+              <div className="flex text-center content-center h-auto md:flex-col lg:flex-row gap-3 md:gap-2 lg:gap-2">
                 {rightSpecs.map((item) => (
                   <span
                     key={item.id}
-                    className="lg:py-4 lg:px-3 py-2 px-3 text-[10px] md:text-sm lg:text-base
+                    className="lg:py-4 lg:px-3 py-2 px-3 text-[10px] md:text-xs lg:text-base
                     lg:opacity-100 rounded-lg text-center text-white bg-[#10132E]"
                   >
                     {item.name}
