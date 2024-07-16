@@ -198,8 +198,8 @@ export const projects = [
 export const conferences = [
   {
     id: 1,
-    title: "Philippine Startup Challenge 8",
-    des: "Participated in the Regional Pitching Competition by the ICT Industry Development Bureau, where we pitched our capstone project.",
+    title: "Philippine Startup Challenge 8 (PSC8) - Regional Pitching Competition",
+    des: "Participated in the Regional Pitching Competition (RPC) by the ICT Industry Development Bureau, where we pitched our capstone project.",
     date: "October 04, 2023",
     img: "/img/PSC.jpeg",
     link: "https://feedbackfusion.online",

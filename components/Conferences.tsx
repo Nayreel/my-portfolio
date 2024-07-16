@@ -18,10 +18,10 @@ const Conferences = () => {
             <BackgroundGradient className="rounded-[22px] lg:max-w-lg p-10 lg:p-15 sm:p-10 bg-white dark:bg-zinc-900">
             <Image
               src={conference.img}
-              alt="jordans"
+              alt="conference"
               height="400"
               width="400"
-              className="object-contain justify-center flex content-center w-full"
+              className="cursor-pointer object-contain justify-center flex content-center w-auto h-auto"
             />
             <p className="text-base sm:text-xl text-black mt-4 mb-2 dark:text-neutral-200">
               {conference.title}
