@@ -3,11 +3,15 @@ import Grid from "@/components/Grid";
 import Hero from "@/components/Hero";
 import Projects from "@/components/Projects";
 import { FloatingNav } from "@/components/ui/FloatingNavbar";
+import { SocialMenuNav } from "@/components/SocialMenuNav";
 import { FaHome } from "react-icons/fa";
 import { IoPerson } from "react-icons/io5";
 import { CgWebsite } from "react-icons/cg";
 import Conferences from "@/components/Conferences";
 import { FaPeopleGroup } from "react-icons/fa6";
+import { FaGithub } from "react-icons/fa";
+import { FaLinkedin } from "react-icons/fa";
+import { FaFacebook } from "react-icons/fa";
 
 const navItems = [
   {
@@ -36,6 +40,24 @@ const navItems = [
   },
 ];
 
+const socialItems = [
+  {
+    name: "Github",
+    link: "https://github.com/Nayreel",
+    icon: <FaGithub className="h-10 w-10 text-neutral-500 dark:text-white" />,
+  },
+  {
+    name: "LinkedIn",
+    link: "https://www.linkedin.com/in/el015/",
+    icon: <FaLinkedin className="h-10 w-10 text-neutral-500 dark:text-white" />,
+  },
+  {
+    name: "Facebook",
+    link: "https://www.facebook.com/leeeeeeeryan/",
+    icon: <FaFacebook className="h-10 w-10 text-neutral-500 dark:text-white" />,
+  }
+]
+
 export default function Home() {
   return (
     <main className="relative bg-black-100 flex justify-center items-center flex-col overflow-hidden mx-auto sm:px-10 px-5">
@@ -45,6 +67,7 @@ export default function Home() {
         <Grid/>
         <Projects/>
         <Conferences/>
+        <SocialMenuNav navItems={socialItems}/>
       </div>
     </main>
   );
