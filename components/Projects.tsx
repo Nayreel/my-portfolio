@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const Projects = () => {
   return (
-    <section id="projects" className="project-container py-40">
+    <section id="projects" className="project-container pb-20 pt-36">
       <h1 className="heading text-white">
         These projects represent my
         <span className="text-blue-600"> dedication </span>
