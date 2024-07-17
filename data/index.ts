@@ -119,7 +119,7 @@ export const leftTechStack = [
     },
     {
         id: 2,
-        name: "Node.js"
+        name: "Git"
     },
     {
       id: 3,
