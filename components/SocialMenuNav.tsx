@@ -49,7 +49,7 @@ export const SocialMenuNav = ({
           x: 100,
         }}
         className={cn(
-          "socialmedia-container flex md:flex-row lg:flex-col w-5/12 sm:w-8/12 md:w-9/12 lg:w-20 h-auto mt-10 lg:mt-0 mb-5 lg:-ml-20 gap-5 lg:fixed md:bottom-[5vh] lg:bottom-[50vh] inset-x-0 lg:border rounded-full shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] z-[5000] py-3 lg:py-5  items-center justify-center border-white/[0.2] bg-black-100",
+          "socialmedia-container flex md:flex-row lg:flex-col w-5/12 sm:w-8/12 md:w-9/12 lg:w-20 h-auto mt-10 mb-5 lg:-ml-20 gap-5 lg:fixed md:bottom-[5vh] lg:bottom-[35vh] inset-x-0 lg:border rounded-full shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] z-[5000] py-3 lg:py-5  items-center justify-center border-white/[0.2] bg-black-100",
           className
         )}
       >
