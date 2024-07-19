@@ -44,7 +44,6 @@ export const BentoGridItem = ({
   spareImgClassName?: string;
   spareImg?: string;
 }) => {
-
   return (
     <div
       className={cn(
@@ -102,25 +101,39 @@ export const BentoGridItem = ({
           {id === 2 && <GlobeDemo />}
 
           {id === 3 && (
-            <div className="flex top-[8vh] md:top-10 left-[0vw] sm:left-[15vw] lg:left-28 xl:left-48 flex-col gap-3 md:flex-col lg:flex-row md:gap-10 lg:gap-5 w-fit absolute md:right-0 lg:top-20 xl:top-12 xl:-right-0">
-              <div className="flex flex-row ml-12 md:flex-row lg:flex-col gap-10 md:gap-3 lg:gap-8">
-                {leftTechStack.map((item) => ( 
+            <div className="flex flex-col lg:flex-row justify-center mt-5 gap-2 lg:gap-10">
+              <div className="flex flex-row md:flex-row lg:flex-col gap-1 md:gap-5 lg:gap-8">
+                {leftTechStack.map((item) => (
                   <span
                     key={item.id}
-                    className="lg:py-4 lg:px-3 py-2 px-3 text-xs lg:text-base opacity-50 
+                    className="flex gap-2 items-center lg:py-4 lg:px-3 py-2 px-3 text-[10px] md:text-xs lg:text-base opacity-50 
                     lg:opacity-100 rounded-lg text-center text-white bg-[#10132E]"
                   >
+                    <Image
+                      src={item.svgpath}
+                      alt="icon"
+                      height={30}
+                      width={30}
+                      className="w-5 lg:w-8 "
+                    />
                     {item.name}
                   </span>
                 ))}
               </div>
-              <div className="flex flex-row ml-5 md:flex-row lg:flex-col gap-10 md:gap-3 lg:gap-8">
+              <div className="flex flex-row md:flex-row lg:flex-col gap-1 md:gap-5 lg:gap-8">
                 {rightTechStack.map((item) => (
                   <span
                     key={item.id}
-                    className="lg:py-4 lg:px-3 py-2 px-3 text-xs lg:text-base opacity-50 
+                    className="flex gap-2 items-center lg:py-4 lg:px-3 py-2 px-3 text-[10px] md:text-xs lg:text-base opacity-50 
                     lg:opacity-100 rounded-lg text-center text-white bg-[#10132E]"
                   >
+                    <Image
+                      src={item.svgpath}
+                      alt="icon"
+                      height={30}
+                      width={30}
+                      className="w-5 lg:w-8 "
+                    />
                     {item.name}
                   </span>
                 ))}
@@ -129,7 +142,7 @@ export const BentoGridItem = ({
           )}
 
           {id === 4 && (
-            <div className="flex flex-col md:flex-row lg:flex-col gap-2 md:gap-10 lg:gap-5 w-fit absolute left-3 top-16 md:top-14 lg:mt-10">
+            <div className="flex flex-col md:flex-row lg:flex-col gap-2 md:gap-10 lg:gap-5 w-fit absolute left-3 top-16 md:top-14 lg:mt-16">
               <div className="flex text-center content-center h-auto md:flex-col lg:flex-row gap-3 md:gap-2 lg:gap-2">
                 {leftSpecs.map((item) => (
                   <span

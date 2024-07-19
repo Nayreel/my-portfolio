@@ -77,7 +77,7 @@ export const gridItems = [
     description: "Still willing to learn more",
     className: "lg:col-span-2 lg:row-span-5  md:col-span-4 md:row-span-2",
     imgClassName: "",
-    titleClassName: "lg:justify-start xl:justify-center",
+    titleClassName: "w-full items-center",
     img: "",
     spareImgClassName: "",
     spareImg: "",
@@ -115,34 +115,41 @@ export const leftTechStack = [
     },
     {
         id: 1,
-        name:  "Next.js"
+        name:  "Next.js",
+         svgpath:"/svg/next.svg"
     },
     {
         id: 2,
-        name: "Git"
+        name: "Git",
+         svgpath:"/svg/git.svg"
     },
     {
       id: 3,
-      name:"HTML"
+      name:"HTML",
+       svgpath:"/svg/html.svg"
     }
 ];
 
 export const rightTechStack = [
     {
       id: 0,
-      name: "CSS"
+      name: "CSS",
+       svgpath:"/svg/css.svg"
     },
     {
         id: 1,
-        name: "Tailwind CSS"
+        name: "Tailwind CSS",
+         svgpath:"/svg/tail.svg"
     },
     {
         id: 2,
-        name:  "MongoDB"
+        name:  "MongoDB",
+         svgpath:"/svg/mongodb.svg"
     },
     {
         id: 3,
-        name: "MySQL"
+        name: "MySQL",
+         svgpath:"/svg/mysql.svg"
     },
 ];
 
