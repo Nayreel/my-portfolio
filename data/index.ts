@@ -88,7 +88,7 @@ export const gridItems = [
     title: "My Computer Specifications",
     description: "",
     className: "lg:col-span-3 lg:row-span-8 md:col-span-3 md:row-span-2",
-    imgClassName: "absolute right-0 md:right-20 lg:right-0 w-40 md:hidden lg:block lg:w-60 xl:w-80 lg:top-10 xl:-top-1",
+    imgClassName: "absolute right-0 md:right-20 lg:right-0 w-28 md:hidden lg:block lg:w-60 xl:w-80 top-10 xl:top-10",
     titleClassName: "w-full flex md:text-center lg:text-start lg:-top-5",
     img: "/svg/programming-animate.svg",
     spareImgClassName: "object-cover object-center w-full h-full",
