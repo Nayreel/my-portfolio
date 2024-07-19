@@ -12,6 +12,8 @@ import { FaPeopleGroup } from "react-icons/fa6";
 import { FaGithub } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
+import { BsPersonWorkspace } from "react-icons/bs";
+import Experience from "@/components/Experience";
 
 const navItems = [
   {
@@ -26,14 +28,21 @@ const navItems = [
   },
   {
     name: "Projects",
-    link: "#projects",
+    link: "#project",
     icon: (
       <CgWebsite className="h-4 w-4 text-neutral-500 dark:text-white" />
     ),
   },
   {
+    name: "Experiences",
+    link: "#experience",
+    icon: (
+      <BsPersonWorkspace className="h-4 w-4 text-neutral-500 dark:text-white" />
+    ),
+  },
+  {
     name: "Conferences",
-    link: "#conferences",
+    link: "#conference",
     icon: (
       <FaPeopleGroup className="h-4 w-4 text-neutral-500 dark:text-white" />
     ),
@@ -66,6 +75,7 @@ export default function Home() {
         <Hero />
         <Grid/>
         <Projects/>
+        <Experience/>
         <Conferences/>
         <SocialMenuNav navItems={socialItems}/>
       </div>

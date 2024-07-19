@@ -250,31 +250,19 @@ export const conferences = [
 export const workExperience = [
   {
     id: 1,
-    title: "Frontend Engineer Intern",
-    desc: "Assisted in the development of a web-based platform using React.js, enhancing interactivity.",
+    title: "Frontend Developer",
+    company: "Hokei Subic Corporation (Feb. 2024 - July 2024)",
+    desc: "I create a fast and smooth user experience using Next.js, Tailwind CSS, and Socket.io, with REST API methods connecting to server-side machine learning components.",
     className: "md:col-span-2",
-    thumbnail: "/exp1.svg",
+    thumbnail: "/hokei.jfif",
   },
   {
     id: 2,
-    title: "Mobile App Dev - JSM Tech",
-    desc: "Designed and developed mobile app for both iOS & Android platforms using React Native.",
-    className: "md:col-span-2", // change to md:col-span-2
-    thumbnail: "/exp2.svg",
-  },
-  {
-    id: 3,
-    title: "Freelance App Dev Project",
-    desc: "Led the dev of a mobile app for a client, from initial concept to deployment on app stores.",
-    className: "md:col-span-2", // change to md:col-span-2
-    thumbnail: "/exp3.svg",
-  },
-  {
-    id: 4,
-    title: "Lead Frontend Developer",
-    desc: "Developed and maintained user-facing features using modern frontend technologies.",
+    title: "Intern",
+    company: "CJR Graphics & Printing (Oct. 2019 - Dec. 2019)",
+    desc: "Learned to use Adobe Photoshop for designing tarpaulins and ID lace sublimation for events like birthdays and christenings.",
     className: "md:col-span-2",
-    thumbnail: "/exp4.svg",
+    thumbnail: "/cjr.jpg",
   },
 ];
 
