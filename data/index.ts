@@ -262,7 +262,7 @@ export const workExperience = [
     company: "CJR Graphics & Printing (Oct. 2019 - Dec. 2019)",
     desc: "Learned to use Adobe Photoshop for designing tarpaulins and ID lace sublimation for events like birthdays and christenings.",
     className: "md:col-span-2",
-    thumbnail: "/cjr.jpg",
+    thumbnail: "/img/cjr.jpg",
   },
 ];
 
