@@ -142,7 +142,7 @@ export const BentoGridItem = ({
           )}
 
           {id === 4 && (
-            <div className="flex flex-col md:flex-row lg:flex-col gap-2 md:gap-10 lg:gap-5 w-fit absolute left-3 top-16 md:top-14 lg:mt-16">
+            <div className="flex flex-col md:flex-row lg:flex-col gap-2 md:gap-10 lg:gap-5 w-fit absolute left-3 top-16 md:top-14 lg:mt-28">
               <div className="flex text-center content-center h-auto md:flex-col lg:flex-row gap-3 md:gap-2 lg:gap-2">
                 {leftSpecs.map((item) => (
                   <span

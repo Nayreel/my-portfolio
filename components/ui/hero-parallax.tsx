@@ -107,17 +107,22 @@ export const HeroParallax = ({
 
 export const Header = () => {
   return (
-    <section id="conference" className="project-container -mt-28 pt-36">
-    <div className="max-w-7xl relative mx-auto py-20 md:py-40 px-4 w-full  left-0 top-0">
-      <h1 className="text-2xl md:text-7xl font-bold dark:text-white">
-        My journey through various compet
-        <span className="text-blue-600">IT</span>ions.
-      </h1>
-      <p className="max-w-2xl text-base md:text-xl mt-8 dark:text-neutral-200">
-      Our Capstone Project titled <b>"Empowering Feedback Management With Consumer Insights Using Tableau"</b>,
-      we proudly participated in various competitions throughout our college journey.
-      </p>
-    </div>
+    <section id="conference" className="project-container -mb-80">
+      <div className="max-w-7xl relative mx-auto py-20 md:py-40 px-4 w-full  left-0 top-0">
+        <h1 className="text-2xl md:text-7xl font-bold dark:text-white">
+          My journey through various compet
+          <span className="text-blue-600">IT</span>ions.
+        </h1>
+        <p className="max-w-2xl text-base md:text-xl mt-8 dark:text-neutral-200">
+          Our Capstone Project titled{" "}
+          <b>
+            "Empowering Feedback Management With Consumer Insights Using
+            Tableau"
+          </b>
+          , we proudly participated in various competitions throughout our
+          college journey.
+        </p>
+      </div>
     </section>
   );
 };
@@ -144,16 +149,16 @@ export const ConferenceCard = ({
       key={conference.title}
       className="group/product h-96 w-[30rem] relative flex-shrink-0"
     >
-        <Image
-          src={conference.img}
-          height="600"
-          width="600"
-          className="object-cover object-left-top absolute h-full w-full inset-0"
-          alt={conference.title}
-        />
+      <Image
+        src={conference.img}
+        height="600"
+        width="600"
+        className="object-cover object-left-top absolute h-full w-full inset-0"
+        alt={conference.title}
+      />
       <div className="absolute inset-0 h-full w-full opacity-0 group-hover/product:opacity-80 bg-black pointer-events-none"></div>
       <h1 className="absolute top-4 left-4 opacity-0 group-hover/product:opacity-100 text-white">
-      {conference.date}
+        {conference.date}
       </h1>
       <h2 className="absolute bottom-4 left-4 opacity-0 group-hover/product:opacity-100 text-white">
         {conference.title}
