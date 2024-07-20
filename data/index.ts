@@ -194,8 +194,8 @@ export const projects = [
   },
   {
     id: 2,
-    title: "ChatMoko - Messaging Chat",
-    des: "Simplify your video conferencing experience with Yoom. Seamlessly connect with colleagues and friends.",
+    title: "ChatMoko - Messaging Chat Web Application",
+    des: "ChatMoko is a web app for easy messaging. It has real-time chat, user login, and works on any device.",
     img: "/img/chatmoko.png",
     iconLists: ["/next.svg", "/tail.svg", "/ts.svg", "/stream.svg", "/c.svg"],
     link: "https://chat-moko.vercel.app",
