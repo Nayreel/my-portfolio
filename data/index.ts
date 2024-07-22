@@ -8,43 +8,53 @@ export const navItems = [
 export const words = [
   {
     text: "Hi!",
-    className: "mt-10 text-center md:tracking-wider text-blue-100 mb-1 text-lg md:text-lg lg:text-2xl"
+    className:
+      "mt-10 text-center md:tracking-wider text-blue-100 mb-1 text-lg md:text-lg lg:text-2xl",
   },
   {
     text: "I'm",
-     className: "text-center md:tracking-wider text-blue-100 mb-1 text-lg md:text-lg lg:text-2xl"
+    className:
+      "text-center md:tracking-wider text-blue-100 mb-1 text-lg md:text-lg lg:text-2xl",
   },
   {
     text: "Lee",
-     className: "text-center md:tracking-wider text-blue-100 mb-1 text-lg md:text-lg lg:text-2xl"
+    className:
+      "text-center md:tracking-wider text-blue-100 mb-1 text-lg md:text-lg lg:text-2xl",
   },
   {
     text: "Ryan",
-     className: "text-center md:tracking-wider text-blue-100 mb-1 text-lg md:text-lg lg:text-2xl"
+    className:
+      "text-center md:tracking-wider text-blue-100 mb-1 text-lg md:text-lg lg:text-2xl",
   },
   {
     text: "M.",
-     className: "text-center md:tracking-wider text-blue-100 mb-1 text-lg md:text-lg lg:text-2xl"
+    className:
+      "text-center md:tracking-wider text-blue-100 mb-1 text-lg md:text-lg lg:text-2xl",
   },
   {
     text: "Garcia,",
-     className: "text-center md:tracking-wider text-blue-100 mb-1 text-lg md:text-lg lg:text-2xl"
+    className:
+      "text-center md:tracking-wider text-blue-100 mb-1 text-lg md:text-lg lg:text-2xl",
   },
   {
     text: "Your",
-    className: "text-center md:tracking-wider text-blue-100 mb-1 text-lg md:text-lg lg:text-2xl",
+    className:
+      "text-center md:tracking-wider text-blue-100 mb-1 text-lg md:text-lg lg:text-2xl",
   },
   {
     text: "Future",
-    className: "text-center md:tracking-wider text-blue-100 mb-1 text-lg md:text-lg lg:text-2xl",
+    className:
+      "text-center md:tracking-wider text-blue-100 mb-1 text-lg md:text-lg lg:text-2xl",
   },
   {
     text: "<Frontend",
-    className: "text-center md:tracking-wider text-blue-600 dark:text-blue-600 mb-1 text-lg md:text-lg lg:text-2xl",
+    className:
+      "text-center md:tracking-wider text-blue-600 dark:text-blue-600 mb-1 text-lg md:text-lg lg:text-2xl",
   },
   {
     text: "Developer/>",
-    className: "text-center md:tracking-wider text-blue-600 dark:text-blue-600 mb-1 text-lg md:text-lg lg:text-2xl",
+    className:
+      "text-center md:tracking-wider text-blue-600 dark:text-blue-600 mb-1 text-lg md:text-lg lg:text-2xl",
   },
 ];
 
@@ -53,7 +63,8 @@ export const gridItems = [
     id: 1,
     title: "",
     description: "",
-    className: "lg:col-span-3 md:col-span-2 md:row-span-4 min-h-[30vh] lg:min-h-[60vh]",
+    className:
+      "lg:col-span-3 md:col-span-2 md:row-span-4 min-h-[30vh] lg:min-h-[60vh]",
     imgClassName: "w-full h-full",
     titleClassName: "justify-end",
     img: "/img/Barong.JPG",
@@ -64,7 +75,8 @@ export const gridItems = [
     id: 2,
     title: "I can adapt my schedule to any time zone.",
     description: "Time zone in Philippines (UTC +08:00)",
-    className: "lg:col-span-2 lg:row-span-4 lg:row-span-2 md:col-span-4 md:row-span-2",
+    className:
+      "lg:col-span-2 lg:row-span-4 lg:row-span-2 md:col-span-4 md:row-span-2",
     imgClassName: "",
     titleClassName: "justify-start",
     img: "",
@@ -98,89 +110,91 @@ export const gridItems = [
     id: 5,
     title: "Passionate about technology and development.",
     description: "",
-    className: "text-center md:justify-center md:text-start lg:col-span-2 lg:row-span-5 md:col-span-3 md:row-span-1",
+    className:
+      "text-center md:justify-center md:text-start lg:col-span-2 lg:row-span-5 md:col-span-3 md:row-span-1",
     imgClassName: "p-96",
     titleClassName: "justify-start",
     img: "/svg/grid.svg",
-    spareImgClassName: "object-cover object-end w-32 h-32 md:w-40 md:h-40 xl:w-56 xl:h-56",
+    spareImgClassName:
+      "object-cover object-end w-32 h-32 md:w-40 md:h-40 xl:w-56 xl:h-56",
     spareImg: "/svg/innovation-animate.svg",
   },
 ];
 
 export const leftTechStack = [
-    {
-        id: 0,
-        name: "React.js",
-        svgpath:"/svg/reactjs.svg"
-    },
-    {
-        id: 1,
-        name:  "Next.js",
-         svgpath:"/svg/next.svg"
-    },
-    {
-        id: 2,
-        name: "Git",
-         svgpath:"/svg/git.svg"
-    },
-    {
-      id: 3,
-      name:"HTML",
-       svgpath:"/svg/html.svg"
-    }
+  {
+    id: 0,
+    name: "React.js",
+    svgpath: "/svg/reactjs.svg",
+  },
+  {
+    id: 1,
+    name: "Next.js",
+    svgpath: "/svg/next.svg",
+  },
+  {
+    id: 2,
+    name: "Git",
+    svgpath: "/svg/git.svg",
+  },
+  {
+    id: 3,
+    name: "HTML",
+    svgpath: "/svg/html.svg",
+  },
 ];
 
 export const rightTechStack = [
-    {
-      id: 0,
-      name: "CSS",
-       svgpath:"/svg/css.svg"
-    },
-    {
-        id: 1,
-        name: "Tailwind CSS",
-         svgpath:"/svg/tail.svg"
-    },
-    {
-        id: 2,
-        name:  "MongoDB",
-         svgpath:"/svg/mongodb.svg"
-    },
-    {
-        id: 3,
-        name: "MySQL",
-         svgpath:"/svg/mysql.svg"
-    },
+  {
+    id: 0,
+    name: "CSS",
+    svgpath: "/svg/css.svg",
+  },
+  {
+    id: 1,
+    name: "Tailwind CSS",
+    svgpath: "/svg/tail.svg",
+  },
+  {
+    id: 2,
+    name: "MongoDB",
+    svgpath: "/svg/mongodb.svg",
+  },
+  {
+    id: 3,
+    name: "MySQL",
+    svgpath: "/svg/mysql.svg",
+  },
 ];
 
 export const leftSpecs = [
-    {
-        id:0,
-        name: "16GB RAM"
-    },
-    {
-        id:1,
-        name:  "Ryzen 5 5600G"
-    },
-    {
-        id:2,
-        name: "1TB SSD Storage"
-    },
+  {
+    id: 0,
+    name: "16GB RAM",
+  },
+  {
+    id: 1,
+    name: "Ryzen 5 5600G",
+  },
+  {
+    id: 2,
+    name: "1TB SSD Storage",
+  },
 ];
 
-export const rightSpecs= [
-    {
-        id: 0,
-        name: "B450M Steel Legend"
-    },
-    {
-        id: 1,
-        name:  "Dual Monitor"
-    },
-    {
-        id: 2,
-        name: "PLDT FIBR"
-    },
+export const rightSpecs = [
+  {
+    id: 0,
+    name: "B450M Steel Legend",
+  },
+  {
+    id: 1,
+    name: "Dual Monitor",
+  },
+  {
+    id: 2,
+    name: "PLDT FIBR",
+  },
 ];
 
 export const projects = [
@@ -200,47 +214,61 @@ export const projects = [
     iconLists: ["/next.svg", "/tail.svg", "/ts.svg", "/stream.svg", "/c.svg"],
     link: "https://chat-moko.vercel.app",
   },
+  {
+    id: 3,
+    title: "D-Leecious Tea - Milktea Website",
+    des: "Showcasing our delightful milk tea varieties with a sleek and engaging website.",
+    img: "/img/d-leecioustea.png",
+    iconLists: ["/next.svg", "/tail.svg", "/ts.svg", "/stream.svg", "/c.svg"],
+    link: "https://d-leecious-tea.vercel.app",
+  },
 ];
 
 export const conferences = [
   {
     id: 1,
-    title: "Philippine Startup Challenge 8 (PSC8) - Regional Pitching Competition",
+    title:
+      "Philippine Startup Challenge 8 (PSC8) - Regional Pitching Competition",
     des: "Participated in the Regional Pitching Competition (RPC) by the ICT Industry Development Bureau, where we pitched our capstone project.",
     date: "October 04, 2023",
     img: "/img/PSC.jpeg",
   },
   {
     id: 2,
-    title: "International Research Conference on Information Technology Education (IRCITE) - Poster Presentation",
+    title:
+      "International Research Conference on Information Technology Education (IRCITE) - Poster Presentation",
     des: "Invited for Poster Presentation by the PSITE-Central Luzon where we showcase our capstone project.",
     date: "March 08, 2024",
     img: "/img/IRCITE-1.jpeg",
   },
   {
     id: 3,
-    title: "Philippine Startup Challenge 8 (PSC8) - Regional Pitching Competition",
+    title:
+      "Philippine Startup Challenge 8 (PSC8) - Regional Pitching Competition",
     des: "Participated in the Regional Pitching Competition (RPC) by the ICT Industry Development Bureau, where we pitched our capstone project.",
     date: "October 04, 2023",
     img: "/img/PSC-1.jpeg",
   },
   {
     id: 4,
-    title: "International Research Conference on Information Technology Education (IRCITE) - Poster Presentation",
+    title:
+      "International Research Conference on Information Technology Education (IRCITE) - Poster Presentation",
     des: "Invited for Poster Presentation by the PSITE-Central Luzon where we showcase our capstone project.",
     date: "March 08, 2024",
     img: "/img/IRCITE.jpeg",
   },
   {
     id: 5,
-    title: "International Research Conference on Information Technology Education (IRCITE) - Poster Presentation",
+    title:
+      "International Research Conference on Information Technology Education (IRCITE) - Poster Presentation",
     des: "Invited for Poster Presentation by the PSITE-Central Luzon where we showcase our capstone project.",
     date: "March 08, 2024",
     img: "/img/PSC-3.jpeg",
   },
   {
     id: 6,
-    title: "International Research Conference on Information Technology Education (IRCITE) - Poster Presentation",
+    title:
+      "International Research Conference on Information Technology Education (IRCITE) - Poster Presentation",
     des: "Invited for Poster Presentation by the PSITE-Central Luzon where we showcase our capstone project.",
     date: "March 08, 2024",
     img: "/img/PSC-2.jpeg",
