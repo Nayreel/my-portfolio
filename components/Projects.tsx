@@ -13,7 +13,7 @@ const Projects = () => {
         <span className="text-blue-600"> hard work</span>
       </h1>
 
-      <div className="project-container flex text-white flex-wrap items-center justify-center lg:justify-between p-10 gap-40 lg:gap-7 lg:px-7 xl:px-32 mt-10">
+      <div className="project-container flex text-white flex-wrap items-center justify-center gap-40 lg:px-7 xl:px-32 mt-28 lg:mt-14">
         {projects.map((project) => (
           <div
             key={project.id}
@@ -50,7 +50,9 @@ const Projects = () => {
                     className="px-4 py-2 rounded-xl text-xs font-normal dark:text-white"
                   >
                     <a href={project.link}>
-                    <p className="cursor-pointer opacity-50 hover:opacity-100">Visit now →</p>
+                      <p className="cursor-pointer opacity-50 hover:opacity-100">
+                        Visit now →
+                      </p>
                     </a>
                   </CardItem>
                 </div>

@@ -100,8 +100,12 @@ export const gridItems = [
     title: "My Computer Specifications",
     description: "",
     className: "lg:col-span-3 lg:row-span-8 md:col-span-3 md:row-span-2",
+<<<<<<< HEAD
     imgClassName:
       "absolute right-0 md:right-20 lg:right-0 w-40 md:hidden lg:block lg:w-60 xl:w-80 lg:top-10 xl:-top-1",
+=======
+    imgClassName: "absolute right-0 md:right-20 lg:right-0 w-28 md:hidden lg:block lg:w-60 xl:w-80 top-10 xl:top-10",
+>>>>>>> 2d62f0a027a283972ca7bc65c58a09ad651f95ac
     titleClassName: "w-full flex md:text-center lg:text-start lg:-top-5",
     img: "/svg/programming-animate.svg",
     spareImgClassName: "object-cover object-center w-full h-full",
@@ -209,8 +213,8 @@ export const projects = [
   },
   {
     id: 2,
-    title: "ChatMoko - Messaging Chat",
-    des: "Simplify your video conferencing experience with Yoom. Seamlessly connect with colleagues and friends.",
+    title: "ChatMoko - Messaging Chat Web Application",
+    des: "ChatMoko is a web app for easy messaging. It has real-time chat, user login, and works on any device.",
     img: "/img/chatmoko.png",
     iconLists: ["/next.svg", "/tail.svg", "/ts.svg", "/stream.svg", "/c.svg"],
     link: "https://chat-moko.vercel.app",
