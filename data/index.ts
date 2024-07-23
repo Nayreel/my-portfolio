@@ -200,26 +200,26 @@ export const rightSpecs = [
 export const projects = [
   {
     id: 1,
-    title: "Feedback Fusion - Customer Feedback Management System",
+    title: "Feedback Fusion - Capstone Project",
     des: "Analyzes customer feedback sentiment and generates survey QR codes by business owners.",
     img: "/img/feedbackfusion.png",
-    iconLists: ["/re.svg", "/tail.svg", "/ts.svg", "/three.svg", "/fm.svg"],
+    iconLists: ["/svg/mongodb.svg", "/svg/expressjs.svg", "/svg/reactjs.svg", "/svg/nodejs.svg", "/svg/css.svg"],
     link: "https://feedbackfusion.online",
   },
   {
     id: 2,
-    title: "ChatMoko - Messaging Chat Web Application",
+    title: "ChatMoko - Personal Project with friend",
     des: "ChatMoko is a web app for easy messaging. It has real-time chat, user login, and works on any device.",
     img: "/img/chatmoko.png",
-    iconLists: ["/next.svg", "/tail.svg", "/ts.svg", "/stream.svg", "/c.svg"],
+    iconLists: ["/svg/next.svg", "/svg/tail.svg", "/svg/chakraui.svg", "/svg/mongodb.svg", "/svg/expressjs.svg", "/svg/nodejs.svg"],
     link: "https://chat-moko.vercel.app",
   },
   {
     id: 3,
-    title: "D-Leecious Tea - Milktea Website",
+    title: "D-Leecious Tea - Personal Project",
     des: "Showcasing our delightful milk tea varieties with a sleek and engaging website.",
     img: "/img/d-leecioustea.png",
-    iconLists: ["/next.svg", "/tail.svg", "/ts.svg", "/stream.svg", "/c.svg"],
+    iconLists: ["/svg/next.svg", "/svg/tail.svg"],
     link: "https://d-leecious-tea.vercel.app",
   },
 ];

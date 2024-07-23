@@ -43,7 +43,23 @@ const Projects = () => {
                     alt="project"
                   />
                 </CardItem>
-                <div className="flex justify-between items-center mt-20">
+                <CardItem translateZ="100" className="w-full mt-4">
+                  <div className="w-full flex justify-center items-center">
+                    {project.iconLists.map((icon, i) => (
+                      <div
+                      key={i}
+                      className="w-full rounded-full flex justify-center items-center"
+                      style={{
+                        transform: `translateX(-${5 * i + 2}px)`,
+                      }}
+                    >
+                      <Image src={icon} width='100' height='100' alt="icon5" className="p-2 h-14" />
+                    </div>
+                    ))}
+                  </div>
+                </CardItem>
+
+                <div className="flex justify-between items-center">
                   <CardItem
                     translateZ={20}
                     target="__blank"

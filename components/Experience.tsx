@@ -5,7 +5,7 @@ import Image from 'next/image'
 
 const Experience = () => {
   return (
-    <section id="experience" className="project-container pb-20 pt-36">
+    <section id="experience" className="project-container pb-20 pt-36 mb-20 lg:mb-96">
     <h1 className="heading text-white">
       My
       <span className="text-blue-600"> Work Experience</span>
