@@ -217,10 +217,18 @@ export const projects = [
   {
     id: 3,
     title: "D-Leecious Tea - Personal Project",
-    des: "Showcasing our delightful milk tea varieties with a sleek and engaging website.",
+    des: "Showcasing our delightful milk tea varieties with a modern and engaging website. View locations for each branch.",
     img: "/img/d-leecioustea.png",
     iconLists: ["/svg/next.svg", "/svg/tail.svg"],
     link: "https://d-leecious-tea.vercel.app",
+  },
+  {
+    id: 4,
+    title: "Squiz It- Project with client",
+    des: "Real-time quiz application enabling interactive and engaging quizzes. Features include live score updates, leaderboard, and countdown.",
+    img: "/img/squizit.png",
+    iconLists: ["/svg/mongodb.svg", "/svg/expressjs.svg", "/svg/reactjs.svg", "/svg/nodejs.svg", "/svg/css.svg"],
+    link: "https://squizit-chi.vercel.app/",
   },
 ];
 
