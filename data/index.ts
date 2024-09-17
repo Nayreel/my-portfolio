@@ -206,16 +206,16 @@ export const projects = [
     iconLists: ["/svg/mongodb.svg", "/svg/expressjs.svg", "/svg/reactjs.svg", "/svg/nodejs.svg", "/svg/css.svg"],
     link: "https://feedbackfusion.online",
   },
-  // {
-  //   id: 2,
-  //   title: "ChatMoko - Personal Project with friend",
-  //   des: "ChatMoko is a web app for easy messaging. It has real-time chat, user login, and works on any device.",
-  //   img: "/img/chatmoko.png",
-  //   iconLists: ["/svg/next.svg", "/svg/tail.svg", "/svg/chakraui.svg", "/svg/mongodb.svg", "/svg/expressjs.svg", "/svg/nodejs.svg"],
-  //   link: "https://chat-moko.vercel.app",
-  // },
   {
     id: 2,
+    title: "ChatMoko - Personal Project with friend",
+    des: "ChatMoko is a web app for easy messaging. It has real-time chat, user login, and works on any device.",
+    img: "/img/chatmoko.png",
+    iconLists: ["/svg/next.svg", "/svg/tail.svg", "/svg/chakraui.svg", "/svg/mongodb.svg", "/svg/expressjs.svg", "/svg/nodejs.svg"],
+    link: "https://chat-moko.vercel.app",
+  },
+  {
+    id: 3,
     title: "D-Leecious Tea - Personal Project",
     des: "Showcasing our delightful milk tea varieties with a modern and engaging website. View locations for each branch.",
     img: "/img/d-leecioustea.png",
@@ -223,7 +223,7 @@ export const projects = [
     link: "https://d-leecious-tea.vercel.app",
   },
   {
-    id: 3,
+    id: 4,
     title: "Squiz It- Project with client",
     des: "Real-time quiz application enabling interactive and engaging quizzes. Features include live score updates, leaderboard, and countdown.",
     img: "/img/squizit.png",
