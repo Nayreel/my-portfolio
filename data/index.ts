@@ -204,7 +204,7 @@ export const projects = [
     des: "Analyzes customer feedback sentiment and generates survey QR codes by business owners.",
     img: "/img/feedbackfusion.png",
     iconLists: ["/svg/mongodb.svg", "/svg/expressjs.svg", "/svg/reactjs.svg", "/svg/nodejs.svg", "/svg/css.svg"],
-    link: "https://feedbackfusion.online",
+    link: "https://feedbackfusion.vercel.app",
   },
   {
     id: 2,
@@ -290,7 +290,7 @@ export const workExperience = [
     company: "Hokei Subic Corporation (Feb. 2024 - July 2024)",
     desc: "I create a fast and smooth user experience using Next.js, Tailwind CSS, and Socket.io, with REST API methods connecting to server-side machine learning components.",
     className: "md:col-span-2",
-    thumbnail: "/hokei.jfif",
+    thumbnail: "/hokei.jpg",
   },
   {
     id: 2,
