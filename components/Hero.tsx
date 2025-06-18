@@ -8,7 +8,7 @@ import { words } from "@/data";
 
 const Hero = () => {
   return (
-    <section className="hero-container pb-20 pt-36">
+    <section className="hero-container pb-20 lg:pt-36">
       <div className="spotlight-container">
         {/* Spotlight effect */}
         <Spotlight
@@ -37,7 +37,7 @@ const Hero = () => {
             className="text-center text-[40px] md:text-5xl lg:text-6xl"
             words="Transforming ideas into interactive, responsive, and beautiful web applications."
           />
-          <TypewriterEffect words={words}/>
+          <TypewriterEffect words={words} />
           <DownloadButton icon={<FaDownload />} />
         </div>
       </div>
