@@ -100,7 +100,8 @@ export const gridItems = [
     title: "My Computer Specifications",
     description: "",
     className: "lg:col-span-3 lg:row-span-8 md:col-span-3 md:row-span-2",
-    imgClassName: "absolute right-0 md:right-20 lg:right-0 w-28 md:hidden lg:block lg:w-60 xl:w-80 top-10 xl:top-10",
+    imgClassName:
+      "absolute right-0 md:right-20 lg:right-0 w-28 md:hidden lg:block lg:w-60 xl:w-80 top-10 xl:top-10",
     titleClassName: "w-full flex md:text-center lg:text-start lg:-top-5",
     img: "/svg/programming-animate.svg",
     spareImgClassName: "object-cover object-center w-full h-full",
@@ -203,7 +204,13 @@ export const projects = [
     title: "Feedback Fusion - Capstone Project",
     des: "Analyzes customer feedback sentiment and generates survey QR codes by business owners.",
     img: "/img/feedbackfusion.png",
-    iconLists: ["/svg/mongodb.svg", "/svg/expressjs.svg", "/svg/reactjs.svg", "/svg/nodejs.svg", "/svg/css.svg"],
+    iconLists: [
+      "/svg/mongodb.svg",
+      "/svg/expressjs.svg",
+      "/svg/reactjs.svg",
+      "/svg/nodejs.svg",
+      "/svg/css.svg",
+    ],
     link: "https://feedbackfusion.vercel.app",
   },
   {
@@ -211,7 +218,14 @@ export const projects = [
     title: "ChatMoko - Personal Project with friend",
     des: "ChatMoko is a web app for easy messaging. It has real-time chat, user login, and works on any device.",
     img: "/img/chatmoko.png",
-    iconLists: ["/svg/next.svg", "/svg/tail.svg", "/svg/chakraui.svg", "/svg/mongodb.svg", "/svg/expressjs.svg", "/svg/nodejs.svg"],
+    iconLists: [
+      "/svg/next.svg",
+      "/svg/tail.svg",
+      "/svg/chakraui.svg",
+      "/svg/mongodb.svg",
+      "/svg/expressjs.svg",
+      "/svg/nodejs.svg",
+    ],
     link: "https://chat-moko.vercel.app",
   },
   {
@@ -227,8 +241,28 @@ export const projects = [
     title: "Squiz It- Project with client",
     des: "Real-time quiz application enabling interactive and engaging quizzes. Features include live score updates, leaderboard, and countdown.",
     img: "/img/squizit.png",
-    iconLists: ["/svg/mongodb.svg", "/svg/expressjs.svg", "/svg/reactjs.svg", "/svg/nodejs.svg", "/svg/css.svg"],
+    iconLists: [
+      "/svg/mongodb.svg",
+      "/svg/expressjs.svg",
+      "/svg/reactjs.svg",
+      "/svg/nodejs.svg",
+      "/svg/css.svg",
+    ],
     link: "https://squizit-chi.vercel.app/",
+  },
+  {
+    id: 5,
+    title: "Subic Spot - Personal Project",
+    des: "Tourism management system where you can find all tourists spot at Subic Bay! (STILL ON PROGRESS)",
+    img: "/img/subicspot.png",
+    iconLists: [
+      "/svg/next.svg",
+      "/svg/tail.svg",
+      "/svg/mongodb.svg",
+      "/svg/nodejs.svg",
+      "/svg/aceternity-ui.svg",
+    ],
+    link: "https://subicspot.vercel.app/",
   },
 ];
 
@@ -286,6 +320,14 @@ export const conferences = [
 export const workExperience = [
   {
     id: 1,
+    title: "CSR - Cloud Technical Support",
+    company: "Buwelo - An Exactstar Company (Oct. 2024 - Present)",
+    desc: "I provide remote tech support for cloud-based SaaS applications, resolving issues quickly using tools like Remote Desktop, Microsoft 365, Zendesk, and Azure. I troubleshoot network, software, and account problems to keep users productive.",
+    className: "md:col-span-2",
+    thumbnail: "/img/buwelo.png",
+  },
+  {
+    id: 2,
     title: "Frontend Developer",
     company: "Hokei Subic Corporation (Feb. 2024 - July 2024)",
     desc: "I create a fast and smooth user experience using Next.js, Tailwind CSS, and Socket.io, with REST API methods connecting to server-side machine learning components.",
@@ -293,7 +335,7 @@ export const workExperience = [
     thumbnail: "/hokei.jpg",
   },
   {
-    id: 2,
+    id: 3,
     title: "Intern",
     company: "CJR Graphics & Printing (Oct. 2019 - Dec. 2019)",
     desc: "Learned to use Adobe Photoshop for designing tarpaulins and ID lace sublimation for events like birthdays and christenings.",
