@@ -14,6 +14,7 @@ export const HeroParallax = ({
   conferences,
 }: {
   conferences: {
+    id: number;
     title: string;
     img: string;
     date: string;
@@ -78,7 +79,7 @@ export const HeroParallax = ({
             <ConferenceCard
               conference={conference}
               translate={translateXFirstRow}
-              key={conference.title}
+              key={conference.id}
             />
           ))}
         </motion.div>
@@ -87,7 +88,7 @@ export const HeroParallax = ({
             <ConferenceCard
               conference={conference}
               translate={translateXSecondRow}
-              key={conference.title}
+              key={conference.id}
             />
           ))}
         </motion.div>
@@ -96,7 +97,7 @@ export const HeroParallax = ({
             <ConferenceCard
               conference={conference}
               translate={translateThirdRow}
-              key={conference.title}
+              key={conference.id}
             />
           ))}
         </motion.div>
@@ -132,6 +133,7 @@ export const ConferenceCard = ({
   translate,
 }: {
   conference: {
+    id: number;
     title: string;
     img: string;
     date: string;
@@ -146,7 +148,7 @@ export const ConferenceCard = ({
       whileHover={{
         y: -20,
       }}
-      key={conference.title}
+      key={conference.id}
       className="group/product h-96 w-[30rem] relative flex-shrink-0"
     >
       <Image
