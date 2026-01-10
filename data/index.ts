@@ -143,6 +143,11 @@ export const leftTechStack = [
     name: "HTML",
     svgpath: "/svg/html.svg",
   },
+  {
+    id: 4,
+    name: "GraphQL",
+    svgpath: "/svg/graphql.svg",
+  },
 ];
 
 export const rightTechStack = [
@@ -165,6 +170,11 @@ export const rightTechStack = [
     id: 3,
     name: "MySQL",
     svgpath: "/svg/mysql.svg",
+  },
+  {
+    id: 4,
+    name: "n8n",
+    svgpath: "/svg/n8n.svg",
   },
 ];
 
@@ -361,27 +371,27 @@ export const conferences = [
 export const workExperience = [
   {
     id: 1,
+    title: " Software Engineer",
+    company: "JAV Resouce Corporation (Nov. 2025 - Present)",
+    desc: "I design and implement automated workflows using n8n to integrate Odoo, Next.js websites, and Strapi CRM, ensuring seamless data synchronization across platforms. I also develop with Next.js, building scalable solutions that enhance system reliability and business operations.",
+    className: "md:col-span-2",
+    thumbnail: "/img/jav.jfif",
+  },
+  {
+    id: 2,
     title: "CSR - Cloud Technical Support",
-    company: "Buwelo - An Exactstar Company (Oct. 2024 - Present)",
+    company: "Buwelo - An Exactstar Company (Oct. 2024 - Oct. 2025)",
     desc: "I provide remote tech support for cloud-based SaaS applications, resolving issues quickly using tools like Remote Desktop, Microsoft 365, Zendesk, and Azure. I troubleshoot network, software, and account problems to keep users productive.",
     className: "md:col-span-2",
     thumbnail: "/img/buwelo.png",
   },
   {
-    id: 2,
+    id: 3,
     title: "Frontend Developer",
     company: "Hokei Subic Corporation (Feb. 2024 - July 2024)",
     desc: "I create a fast and smooth user experience using Next.js, Tailwind CSS, and Socket.io, with REST API methods connecting to server-side machine learning components.",
     className: "md:col-span-2",
     thumbnail: "/hokei.jpg",
-  },
-  {
-    id: 3,
-    title: "Intern",
-    company: "CJR Graphics & Printing (Oct. 2019 - Dec. 2019)",
-    desc: "Learned to use Adobe Photoshop for designing tarpaulins and ID lace sublimation for events like birthdays and christenings.",
-    className: "md:col-span-2",
-    thumbnail: "/img/cjr.jpg",
   },
 ];
 
