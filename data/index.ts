@@ -210,6 +210,19 @@ export const rightSpecs = [
 
 export const projects = [
   {
+    id: 0,
+    title: "AI Energy Shop - Frontend Developer & Automation Engineer",
+    des: "AI Energy Shop is an Australian-based e-commerce company specializing in solar power systems, battery storage, and energy-efficient solutions, with custom automation workflows, and scalable web systems.",
+    img: "/img/aienergyshop.png",
+    iconLists: [
+      "/svg/next.svg",
+      "/svg/n8n.svg",
+      "/svg/tail.svg",
+      "/svg/redux.svg",
+    ],
+    link: "https://beta.aienergyshop.com.au",
+  },
+  {
     id: 1,
     title: "Feedback Fusion - Capstone Project",
     des: "Analyzes customer feedback sentiment and generates survey QR codes by business owners.",
@@ -226,7 +239,7 @@ export const projects = [
   {
     id: 2,
     title: "Iontana - Project with Client",
-    des: "Iontana specialize in creating modern, fast, and secure websites that serve as the foundation of your digital growth—systems engineered for performance, clarity, and long-term scalability.",
+    des: "Iontana builds modern, fast, and secure websites designed for scalability, with an AI Voice Support using n8n + VAPI for real-time automated website assistance.",
     img: "/img/iontana.png",
     iconLists: [
       "/svg/next.svg",
@@ -234,8 +247,7 @@ export const projects = [
       "/svg/mongodb.svg",
       "/svg/nodejs.svg",
       "/svg/shadcn.svg",
-      "/svg/stripe.svg",
-      "/svg/threejs.svg",
+      "/svg/n8n.svg",
     ],
     link: "https://www.iontana.com",
   },
@@ -312,6 +324,7 @@ export const projects = [
       "/svg/reactjs.svg",
       "/svg/nodejs.svg",
       "/svg/css.svg",
+      "/svg/socketio.svg",
     ],
     link: "https://squizit-chi.vercel.app/",
   },
