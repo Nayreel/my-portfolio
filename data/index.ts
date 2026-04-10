@@ -220,7 +220,7 @@ export const projects = [
       "/svg/tail.svg",
       "/svg/redux.svg",
     ],
-    link: "https://beta.aienergyshop.com.au",
+    link: "https://aienergyshop.com.au",
   },
   {
     id: 1,
