@@ -211,7 +211,7 @@ export const rightSpecs = [
 export const projects = [
   {
     id: 0,
-    title: "AI Energy Shop - Frontend Developer & Automation Engineer",
+    title: "AI Energy Shop - Software Engineer",
     des: "AI Energy Shop is an Australian-based e-commerce company specializing in solar power systems, battery storage, and energy-efficient solutions, with custom automation workflows, and scalable web systems.",
     img: "/img/aienergyshop.png",
     iconLists: [
