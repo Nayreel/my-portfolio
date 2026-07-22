@@ -385,7 +385,7 @@ export const workExperience = [
   {
     id: 1,
     title: " Software Engineer",
-    company: "JAV Resouce Corporation (Nov. 2025 - Present)",
+    company: "JAV Resource Corporation (Nov. 2025 - Present)",
     desc: "I design and implement automated workflows using n8n to integrate Odoo, Next.js websites, and Strapi CRM, ensuring seamless data synchronization across platforms. I also develop with Next.js, building scalable solutions that enhance system reliability and business operations.",
     className: "md:col-span-2",
     thumbnail: "/img/jav.png",
