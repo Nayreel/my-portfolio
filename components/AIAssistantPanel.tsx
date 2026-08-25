@@ -76,6 +76,58 @@ export function AIAssistantPanel({
     "init-2": true,
   });
 
+  // Resizable width state
+  const [panelWidth, setPanelWidth] = useState<number>(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("ai_assistant_panel_width");
+      if (saved) {
+        const parsed = Number(saved);
+        if (!isNaN(parsed) && parsed >= 280 && parsed <= 1200) {
+          return parsed;
+        }
+      }
+    }
+    return 390;
+  });
+  const [isDragging, setIsDragging] = useState(false);
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsDragging(true);
+  };
+
+  useEffect(() => {
+    if (!isDragging) return;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      // Panel is anchored to the right side of the window
+      const newWidth = window.innerWidth - e.clientX;
+      const minW = 280;
+      const maxW = Math.max(minW, Math.min(window.innerWidth - 320, 1000));
+      const clampedWidth = Math.min(Math.max(newWidth, minW), maxW);
+      setPanelWidth(clampedWidth);
+    };
+
+    const handleMouseUp = () => {
+      setIsDragging(false);
+      try {
+        localStorage.setItem("ai_assistant_panel_width", String(panelWidth));
+      } catch {}
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseup", handleMouseUp);
+    document.body.style.cursor = "col-resize";
+    document.body.style.userSelect = "none";
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseup", handleMouseUp);
+      document.body.style.cursor = "";
+      document.body.style.userSelect = "";
+    };
+  }, [isDragging, panelWidth]);
+
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: "init-1",
@@ -239,10 +291,31 @@ If you prefer another phrase like **"Ask Me Anything"** or **"Ask About Lee Ryan
   if (!isOpen) return null;
 
   return (
-    <div className="w-80 sm:w-[370px] lg:w-[390px] bg-[#141416] border-l border-[#27282e] flex flex-col h-full select-none text-xs text-[#d1d3dc] z-30 shrink-0 min-h-0 overflow-hidden font-sans">
+    <div
+      style={{ width: `${panelWidth}px` }}
+      className="relative bg-[#141416] border-l border-[#27282e] flex flex-col h-full select-none text-xs text-[#d1d3dc] z-30 shrink-0 min-h-0 overflow-hidden font-sans transition-[width] duration-0"
+    >
+      {/* Left Edge Drag Handle for Horizontal Resizing */}
+      <div
+        onMouseDown={handleMouseDown}
+        onDoubleClick={() => setPanelWidth(390)}
+        className={`absolute left-0 top-0 bottom-0 w-1.5 -ml-0.5 cursor-col-resize z-50 transition-colors group ${
+          isDragging ? "bg-sky-500" : "hover:bg-sky-500/50 bg-transparent"
+        }`}
+        title="Drag to resize panel (Double-click to reset width)"
+      >
+        <div
+          className={`w-full h-full transition-opacity ${
+            isDragging
+              ? "opacity-100 bg-sky-500"
+              : "opacity-0 group-hover:opacity-100 bg-sky-500/40"
+          }`}
+        />
+      </div>
+
       {/* Top Header Bar */}
       <div className="h-9 px-3 flex items-center justify-between border-b border-[#24252b] text-xs text-[#a0a2af] bg-[#141416] shrink-0">
-        <div className="flex items-center space-x-1.5 truncate max-w-[200px]">
+        <div className="flex items-center space-x-1.5 truncate flex-1 min-w-0 mr-2">
           <span className="font-normal text-xs text-[#e0e2ec] truncate">
             Fixing Motion Module Erro...
           </span>
