@@ -1,9 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     reactStrictMode: true,
-    images : {
-      domains : ['aceternity.com'] // <== Domain name
-    }
+    images: {
+      remotePatterns: [
+        {
+          protocol: 'https',
+          hostname: 'aceternity.com',
+        },
+      ],
+    },
 };
 
 export default nextConfig;
