@@ -1,4 +1,3 @@
-// data/profile.ts
 import { DeveloperProfile } from "./types";
 
 export const DEVELOPER_PROFILE: DeveloperProfile = {

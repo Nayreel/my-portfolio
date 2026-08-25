@@ -33,6 +33,10 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/toast";
+import {
+  ProfileDropdown,
+  ThemeOption,
+} from "@/components/profile/ProfileDropdown";
 
 interface TopMenuBarProps {
   activeFileName: string;
@@ -48,6 +52,11 @@ interface TopMenuBarProps {
   antigravityMode: boolean;
   setAntigravityMode: (active: boolean | ((prev: boolean) => boolean)) => void;
   onOpenLivePreviewTab: () => void;
+  onOpenResume?: () => void;
+  onOpenContact?: () => void;
+  openSettingsModal?: () => void;
+  activeTheme?: string;
+  onSelectTheme?: (theme: ThemeOption) => void;
 }
 
 export function TopMenuBar({
@@ -64,6 +73,11 @@ export function TopMenuBar({
   antigravityMode,
   setAntigravityMode,
   onOpenLivePreviewTab,
+  onOpenResume,
+  onOpenContact,
+  openSettingsModal,
+  activeTheme,
+  onSelectTheme,
 }: TopMenuBarProps) {
   const handleDownloadResume = () => {
     toast.success("Resume downloaded!", {
@@ -84,7 +98,7 @@ export function TopMenuBar({
             Δ
           </div>
           <span className="font-semibold text-xs tracking-tight text-white hidden sm:inline">
-            Antigravity
+            Portfolio
           </span>
         </div>
 
@@ -388,27 +402,16 @@ export function TopMenuBar({
           </Tooltip>
         </div>
 
-        {/* User Profile Badge */}
-        <Tooltip>
-          <TooltipTrigger
-            onClick={openCommandPalette}
-            className="flex items-center pl-1 cursor-pointer bg-transparent border-0 p-0 focus:outline-none"
-          >
-            <Badge
-              variant="outline"
-              className="bg-[#0078d4]/20 hover:bg-[#0078d4]/30 border-[#0078d4]/40 text-sky-300 px-2.5 py-0.5 rounded-full text-[11px] font-medium transition-all flex items-center space-x-1.5"
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse mr-1" />
-              <span>Lee Ryan Garcia</span>
-            </Badge>
-          </TooltipTrigger>
-          <TooltipContent
-            side="bottom"
-            className="text-xs bg-[#1f1f1f] text-zinc-200 border-[#3c3c3c]"
-          >
-            Staff Full-Stack & AI Systems Engineer • Available for Hire
-          </TooltipContent>
-        </Tooltip>
+        {/* Antigravity User Profile Dropdown with Themes */}
+        <ProfileDropdown
+          onOpenResume={onOpenResume}
+          onOpenContact={onOpenContact}
+          openSettingsModal={openSettingsModal}
+          antigravityMode={antigravityMode}
+          setAntigravityMode={setAntigravityMode}
+          activeTheme={activeTheme}
+          onSelectTheme={onSelectTheme}
+        />
 
         {/* Window controls styling */}
         <div className="hidden sm:flex items-center space-x-2 pl-2 text-[#777777]">

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { PORTFOLIO_FILES, PortfolioFile } from "@/data";
+import { PORTFOLIO_FILES, PortfolioFile, IDEThemeMode } from "@/data";
 import { TopMenuBar } from "@/components/TopMenuBar";
 import { ActivityBar, ActiveSidebarView } from "@/components/ActivityBar";
 import { SidebarExplorer } from "@/components/SidebarExplorer";
@@ -38,12 +38,13 @@ export default function AntigravityPortfolioApp() {
   const [isAIPanelOpen, setIsAIPanelOpen] = useState(true);
   const [viewMode, setViewMode] = useState<ViewMode>("preview"); // Default to Preview for instant portfolio showcase
 
-  // Modals & Extras
+  // Modals & Preferences
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [antigravityMode, setAntigravityMode] = useState(false);
   const [accentColor, setAccentColor] = useState("#38bdf8");
   const [fontSize, setFontSize] = useState(13);
+  const [ideThemeMode, setIdeThemeMode] = useState<IDEThemeMode>("nebula");
 
   // AI External prompt trigger
   const [externalAIPrompt, setExternalAIPrompt] = useState<string | null>(null);
@@ -105,6 +106,12 @@ export default function AntigravityPortfolioApp() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
+  // Synchronize CSS custom properties on document for immediate global theme & typography changes
+  useEffect(() => {
+    document.documentElement.style.setProperty("--accent-theme", accentColor);
+    document.documentElement.style.setProperty("--app-font-size", `${fontSize}px`);
+  }, [accentColor, fontSize]);
+
   const triggerRunCodeCelebration = () => {
     confetti({
       particleCount: 90,
@@ -115,7 +122,16 @@ export default function AntigravityPortfolioApp() {
   };
 
   return (
-    <div className="h-screen w-screen overflow-hidden flex flex-col bg-[#181818] text-[#cccccc] font-sans antialiased select-none">
+    <div
+      className={`h-screen w-screen overflow-hidden flex flex-col ide-theme-${ideThemeMode} bg-[#121316] text-[#cccccc] font-sans antialiased select-none transition-colors duration-300`}
+      style={
+        {
+          "--accent-theme": accentColor,
+          "--app-font-size": `${fontSize}px`,
+          fontSize: `${fontSize}px`,
+        } as React.CSSProperties
+      }
+    >
       {/* 1. Top Window & Menu Bar */}
       <TopMenuBar
         activeFileName={activeFile.name}
@@ -133,6 +149,25 @@ export default function AntigravityPortfolioApp() {
         onOpenLivePreviewTab={() => {
           handleSelectFile(PORTFOLIO_FILES[1]); // projects
           setViewMode("preview");
+        }}
+        onOpenResume={() => {
+          const resumeFile =
+            PORTFOLIO_FILES.find((f) => f.id === "resume.md") ||
+            PORTFOLIO_FILES[0];
+          handleSelectFile(resumeFile);
+          setViewMode("preview");
+        }}
+        onOpenContact={() => {
+          const contactFile =
+            PORTFOLIO_FILES.find((f) => f.id === "get-in-touch.tsx") ||
+            PORTFOLIO_FILES[0];
+          handleSelectFile(contactFile);
+          setViewMode("preview");
+        }}
+        openSettingsModal={() => setIsSettingsOpen(true)}
+        onSelectTheme={(theme) => {
+          setAccentColor(theme.color);
+          setIdeThemeMode(theme.mode);
         }}
       />
 
@@ -228,6 +263,7 @@ export default function AntigravityPortfolioApp() {
                       >
                         <CodeViewer
                           file={activeFile}
+                          fontSize={fontSize}
                           onRunPreview={() => setViewMode("preview")}
                           onAskAI={(prompt) => {
                             setIsAIPanelOpen(true);
@@ -348,6 +384,10 @@ export default function AntigravityPortfolioApp() {
         setAccentColor={setAccentColor}
         fontSize={fontSize}
         setFontSize={setFontSize}
+        ideThemeMode={ideThemeMode}
+        setIdeThemeMode={setIdeThemeMode}
+        antigravityMode={antigravityMode}
+        setAntigravityMode={setAntigravityMode}
       />
 
       {/* 6. Zero Gravity Floating Particles & Physics Overlay */}

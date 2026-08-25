@@ -69,7 +69,7 @@ export interface DeveloperProfile {
   phone: string;
   github: string;
   linkedin: string;
-  twitter: string;
+  twitter?: string;
   location: string;
   status: string;
   bio: string;

@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { Copy, Check, Cpu, Play } from "lucide-react";
-import { PortfolioFile } from "@/lib/portfolio-data";
+import { PortfolioFile } from "@/data";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -17,6 +17,7 @@ interface CodeViewerProps {
   onRunPreview: () => void;
   onAskAI: (prompt: string) => void;
   onCursorChange?: (line: number, col: number) => void;
+  fontSize?: number;
 }
 
 export function CodeViewer({
@@ -24,6 +25,7 @@ export function CodeViewer({
   onRunPreview,
   onAskAI,
   onCursorChange,
+  fontSize = 13,
 }: CodeViewerProps) {
   const [copied, setCopied] = useState(false);
   const [activeLine, setActiveLine] = useState<number>(4);
@@ -218,12 +220,18 @@ export function CodeViewer({
                   </td>
 
                   {/* Line Number */}
-                  <td className="w-12 pr-4 text-right text-[12px] text-[#5c6370] select-none group-hover:text-[#abb2bf] font-mono">
+                  <td
+                    style={{ fontSize: `${Math.max(10, fontSize - 1)}px` }}
+                    className="w-12 pr-4 text-right text-[#5c6370] select-none group-hover:text-[#abb2bf] font-mono"
+                  >
                     {lineNum}
                   </td>
 
                   {/* Code Line */}
-                  <td className="pr-12 whitespace-pre font-mono text-[13px] tracking-tight">
+                  <td
+                    style={{ fontSize: `${fontSize}px`, lineHeight: 1.6 }}
+                    className="pr-12 whitespace-pre font-mono tracking-tight"
+                  >
                     {renderHighlightedLine(line)}
                   </td>
                 </tr>

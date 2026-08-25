@@ -37,3 +37,5 @@ export interface TerminalCommandHelp {
 
 export type ActiveSidebarView = "explorer" | "search" | "source-control" | "debug" | "extensions" | "none";
 export type ViewMode = "preview" | "code" | "split";
+export type IDEThemeMode = "nebula" | "abyss" | "cyberpunk" | "matrix" | "solar";
+

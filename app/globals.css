@@ -23,6 +23,7 @@
 @theme inline {
   --font-heading: var(--font-sans);
   --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -64,41 +65,8 @@
 }
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
-}
-
-.dark {
+  --app-font-size: 13px;
+  --accent-theme: #38bdf8;
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
@@ -122,6 +90,7 @@
   --chart-3: oklch(0.439 0 0);
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
+  --radius: 0.625rem;
   --sidebar: oklch(0.205 0 0);
   --sidebar-foreground: oklch(0.985 0 0);
   --sidebar-primary: oklch(0.488 0.243 264.376);
@@ -132,14 +101,163 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+/* Antigravity IDE Theme Modes */
+.ide-theme-nebula {
+  --ide-bg-base: #121316;
+  --ide-bg-surface: #16171b;
+  --ide-bg-panel: #18191e;
+  --ide-bg-header: #141416;
+  --ide-bg-active: #20222a;
+  --ide-border: #272932;
+  --ide-card-bg: #16171b;
+  --ide-accent: var(--accent-theme, #38bdf8);
+}
+
+.ide-theme-abyss {
+  --ide-bg-base: #000000;
+  --ide-bg-surface: #070709;
+  --ide-bg-panel: #0a0a0d;
+  --ide-bg-header: #040406;
+  --ide-bg-active: #131317;
+  --ide-border: #1a1a22;
+  --ide-card-bg: #0c0c10;
+  --ide-accent: var(--accent-theme, #38bdf8);
+}
+
+.ide-theme-cyberpunk {
+  --ide-bg-base: #0b0713;
+  --ide-bg-surface: #130c21;
+  --ide-bg-panel: #170e28;
+  --ide-bg-header: #100a1c;
+  --ide-bg-active: #251341;
+  --ide-border: #3b1959;
+  --ide-card-bg: #180e2b;
+  --ide-accent: var(--accent-theme, #c084fc);
+}
+
+.ide-theme-matrix {
+  --ide-bg-base: #030d07;
+  --ide-bg-surface: #07150c;
+  --ide-bg-panel: #0b1e12;
+  --ide-bg-header: #05120a;
+  --ide-bg-active: #133320;
+  --ide-border: #134221;
+  --ide-card-bg: #091a10;
+  --ide-accent: var(--accent-theme, #34d399);
+}
+
+.ide-theme-solar {
+  --ide-bg-base: #120e06;
+  --ide-bg-surface: #1a1309;
+  --ide-bg-panel: #221a0c;
+  --ide-bg-header: #161007;
+  --ide-bg-active: #332611;
+  --ide-border: #423014;
+  --ide-card-bg: #1e1509;
+  --ide-accent: var(--accent-theme, #fbbf24);
+}
+
+/* Dynamic theme background hooks */
+.ide-theme-nebula,
+.ide-theme-abyss,
+.ide-theme-cyberpunk,
+.ide-theme-matrix,
+.ide-theme-solar {
+  background-color: var(--ide-bg-base);
+  color: #d1d3dc;
+}
+
+/* Theme accent text and border utility */
+.text-sky-400,
+.text-sky-300 {
+  color: var(--accent-theme, #38bdf8) !important;
+}
+
+.border-sky-500,
+.border-sky-400 {
+  border-color: var(--accent-theme, #38bdf8) !important;
+}
+
+.bg-sky-500 {
+  background-color: var(--accent-theme, #38bdf8) !important;
+}
+
+/* Deep Theme Mode Panel & Card Overrides */
+.ide-theme-abyss aside,
+.ide-theme-abyss header,
+.ide-theme-abyss .bg-\[\#181818\],
+.ide-theme-abyss .bg-\[\#141416\],
+.ide-theme-abyss .bg-\[\#121214\] {
+  background-color: #000000 !important;
+}
+.ide-theme-abyss .bg-\[\#16171b\],
+.ide-theme-abyss .bg-\[\#18191e\],
+.ide-theme-abyss .bg-\[\#1e1e1e\],
+.ide-theme-abyss .bg-\[\#252526\],
+.ide-theme-abyss .bg-\[\#1f1f1f\] {
+  background-color: #070709 !important;
+}
+
+.ide-theme-cyberpunk aside,
+.ide-theme-cyberpunk header,
+.ide-theme-cyberpunk .bg-\[\#181818\],
+.ide-theme-cyberpunk .bg-\[\#141416\],
+.ide-theme-cyberpunk .bg-\[\#121214\] {
+  background-color: #0b0713 !important;
+}
+.ide-theme-cyberpunk .bg-\[\#16171b\],
+.ide-theme-cyberpunk .bg-\[\#18191e\],
+.ide-theme-cyberpunk .bg-\[\#1e1e1e\],
+.ide-theme-cyberpunk .bg-\[\#252526\],
+.ide-theme-cyberpunk .bg-\[\#1f1f1f\] {
+  background-color: #150d24 !important;
+}
+
+.ide-theme-matrix aside,
+.ide-theme-matrix header,
+.ide-theme-matrix .bg-\[\#181818\],
+.ide-theme-matrix .bg-\[\#141416\],
+.ide-theme-matrix .bg-\[\#121214\] {
+  background-color: #030d07 !important;
+}
+.ide-theme-matrix .bg-\[\#16171b\],
+.ide-theme-matrix .bg-\[\#18191e\],
+.ide-theme-matrix .bg-\[\#1e1e1e\],
+.ide-theme-matrix .bg-\[\#252526\],
+.ide-theme-matrix .bg-\[\#1f1f1f\] {
+  background-color: #08170d !important;
+}
+
+.ide-theme-solar aside,
+.ide-theme-solar header,
+.ide-theme-solar .bg-\[\#181818\],
+.ide-theme-solar .bg-\[\#141416\],
+.ide-theme-solar .bg-\[\#121214\] {
+  background-color: #120e06 !important;
+}
+.ide-theme-solar .bg-\[\#16171b\],
+.ide-theme-solar .bg-\[\#18191e\],
+.ide-theme-solar .bg-\[\#1e1e1e\],
+.ide-theme-solar .bg-\[\#252526\],
+.ide-theme-solar .bg-\[\#1f1f1f\] {
+  background-color: #1c1509 !important;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
   html {
     @apply font-sans;
+  }
+  code, pre, kbd, .font-mono {
+    font-family: var(--font-mono), ui-monospace, "JetBrains Mono", "Fira Code", monospace !important;
+    font-feature-settings: "calt" 1, "liga" 1, "zero" 1, "ss01" 1;
   }
 }
