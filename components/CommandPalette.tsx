@@ -21,7 +21,6 @@ import {
 } from "@/lib/portfolio-data";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { toast } from "@/components/ui/toast";
 import confetti from "canvas-confetti";
 
@@ -209,11 +208,11 @@ export function CommandPalette({
       onClick={handleClose}
     >
       <div
-        className="w-full max-w-xl bg-[#252526] border border-[#454545] rounded-xl shadow-2xl overflow-hidden text-xs text-[#cccccc]"
+        className="w-full max-w-xl bg-[#252526] border border-[#454545] rounded-xl shadow-2xl overflow-hidden text-xs text-[#cccccc] flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Search Bar Input */}
-        <div className="p-3 border-b border-[#333333] flex items-center space-x-2.5 bg-[#1f1f1f]">
+        <div className="p-3 border-b border-[#333333] flex items-center space-x-2.5 bg-[#1f1f1f] shrink-0">
           <Search className="w-4 h-4 text-sky-400 shrink-0" />
           <Input
             ref={inputRef}
@@ -232,77 +231,87 @@ export function CommandPalette({
           </kbd>
         </div>
 
-        {/* Results List with ScrollArea */}
-        <ScrollArea className="max-h-80 p-1.5">
-          <div className="space-y-0.5">
-            {filtered.length === 0 ? (
-              <div className="p-4 text-center text-[#777777]">
-                No matching files or commands found.
-              </div>
-            ) : (
-              filtered.map((item, idx) => {
-                const isSelected = idx === selectedIndex;
-                const Icon = item.icon;
-                return (
-                  <div
-                    key={item.id}
-                    onClick={() => {
-                      item.action();
-                      onClose();
-                    }}
-                    onMouseEnter={() => setSelectedIndex(idx)}
-                    className={`px-3 py-2 rounded-lg flex items-center justify-between cursor-pointer transition-colors ${
-                      isSelected
-                        ? "bg-[#094771] text-white"
-                        : "hover:bg-[#2a2d2e] text-[#cccccc]"
-                    }`}
-                  >
-                    <div className="flex items-center space-x-3 truncate">
-                      <Icon
-                        className={`w-4 h-4 shrink-0 ${
-                          isSelected ? "text-white" : "text-sky-400"
+        {/* Results List */}
+        <div className="max-h-80 overflow-y-auto p-1.5 space-y-0.5 overscroll-contain">
+          {filtered.length === 0 ? (
+            <div className="p-6 text-center text-[#777777]">
+              No matching files or commands found.
+            </div>
+          ) : (
+            filtered.map((item, idx) => {
+              const isSelected = idx === selectedIndex;
+              const Icon = item.icon;
+              return (
+                <div
+                  key={item.id}
+                  onClick={() => {
+                    item.action();
+                    onClose();
+                  }}
+                  onMouseEnter={() => setSelectedIndex(idx)}
+                  className={`px-3 py-2 rounded-lg flex items-center justify-between cursor-pointer transition-colors ${
+                    isSelected
+                      ? "bg-[#094771] text-white"
+                      : "hover:bg-[#2a2d2e] text-[#cccccc]"
+                  }`}
+                >
+                  <div className="flex items-center space-x-3 truncate">
+                    <Icon
+                      className={`w-4 h-4 shrink-0 ${
+                        isSelected ? "text-white" : "text-sky-400"
+                      }`}
+                    />
+                    <div className="truncate">
+                      <div className="font-medium text-xs truncate">
+                        {item.title}
+                      </div>
+                      <div
+                        className={`text-[11px] truncate ${
+                          isSelected ? "text-sky-200" : "text-[#888888]"
                         }`}
-                      />
-                      <div className="truncate">
-                        <div className="font-medium text-xs truncate">
-                          {item.title}
-                        </div>
-                        <div
-                          className={`text-[11px] truncate ${
-                            isSelected ? "text-sky-200" : "text-[#888888]"
-                          }`}
-                        >
-                          {item.subtitle}
-                        </div>
+                      >
+                        {item.subtitle}
                       </div>
                     </div>
-                    <Badge
-                      variant="outline"
-                      className={`text-[10px] font-mono shrink-0 ml-2 border-0 ${
-                        isSelected
-                          ? "bg-sky-400/20 text-white"
-                          : "bg-[#2a2a2a] text-[#888888]"
-                      }`}
-                    >
-                      {item.category}
-                    </Badge>
                   </div>
-                );
-              })
-            )}
-          </div>
-        </ScrollArea>
+                  <Badge
+                    variant="outline"
+                    className={`text-[10px] font-mono shrink-0 ml-2 border-0 ${
+                      isSelected
+                        ? "bg-sky-400/20 text-white"
+                        : "bg-[#2a2a2a] text-[#888888]"
+                    }`}
+                  >
+                    {item.category}
+                  </Badge>
+                </div>
+              );
+            })
+          )}
+        </div>
 
         {/* Footer shortcuts helper */}
-        <div className="px-3 py-2 bg-[#1b1b1b] border-t border-[#333333] flex items-center justify-between text-[10px] text-[#777777]">
-          <div className="flex items-center space-x-3">
-            <span>↑↓ Navigate</span>
-            <span>↵ Select</span>
-            <span>ESC Close</span>
+        <div className="px-3.5 py-2.5 bg-[#181818] border-t border-[#333333] flex items-center justify-between text-[11px] text-[#888888] shrink-0 select-none">
+          <div className="flex items-center space-x-3 text-[11px]">
+            <span className="inline-flex items-center space-x-1">
+              <kbd className="px-1.5 py-0.5 text-[10px] font-mono bg-[#2a2a2a] text-[#cccccc] border border-[#3c3c3c] rounded">
+                ↑↓
+              </kbd>
+              <span>Navigate</span>
+            </span>
+            <span className="inline-flex items-center space-x-1">
+              <kbd className="px-1.5 py-0.5 text-[10px] font-mono bg-[#2a2a2a] text-[#cccccc] border border-[#3c3c3c] rounded">
+                ↵
+              </kbd>
+              <span>Select</span>
+            </span>
+            <span className="inline-flex items-center space-x-1">
+              <kbd className="px-1.5 py-0.5 text-[10px] font-mono bg-[#2a2a2a] text-[#cccccc] border border-[#3c3c3c] rounded">
+                esc
+              </kbd>
+              <span>Close</span>
+            </span>
           </div>
-          <span className="text-sky-400 font-mono">
-            Antigravity Command Engine
-          </span>
         </div>
       </div>
     </div>
