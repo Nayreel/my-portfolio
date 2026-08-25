@@ -21,6 +21,7 @@ import {
 } from "@/lib/portfolio-data";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { toast } from "@/components/ui/toast";
 import confetti from "canvas-confetti";
 
@@ -46,6 +47,7 @@ export function CommandPalette({
   const [query, setQuery] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
+  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     if (isOpen) {
@@ -53,6 +55,15 @@ export function CommandPalette({
       return () => clearTimeout(timer);
     }
   }, [isOpen]);
+
+  useEffect(() => {
+    if (itemRefs.current[selectedIndex]) {
+      itemRefs.current[selectedIndex]?.scrollIntoView({
+        block: "nearest",
+        behavior: "smooth",
+      });
+    }
+  }, [selectedIndex]);
 
   const handleClose = () => {
     setQuery("");
@@ -232,63 +243,68 @@ export function CommandPalette({
         </div>
 
         {/* Results List */}
-        <div className="max-h-80 overflow-y-auto p-1.5 space-y-0.5 overscroll-contain">
-          {filtered.length === 0 ? (
-            <div className="p-6 text-center text-[#777777]">
-              No matching files or commands found.
-            </div>
-          ) : (
-            filtered.map((item, idx) => {
-              const isSelected = idx === selectedIndex;
-              const Icon = item.icon;
-              return (
-                <div
-                  key={item.id}
-                  onClick={() => {
-                    item.action();
-                    onClose();
-                  }}
-                  onMouseEnter={() => setSelectedIndex(idx)}
-                  className={`px-3 py-2 rounded-lg flex items-center justify-between cursor-pointer transition-colors ${
-                    isSelected
-                      ? "bg-[#094771] text-white"
-                      : "hover:bg-[#2a2d2e] text-[#cccccc]"
-                  }`}
-                >
-                  <div className="flex items-center space-x-3 truncate">
-                    <Icon
-                      className={`w-4 h-4 shrink-0 ${
-                        isSelected ? "text-white" : "text-sky-400"
-                      }`}
-                    />
-                    <div className="truncate">
-                      <div className="font-medium text-xs truncate">
-                        {item.title}
-                      </div>
-                      <div
-                        className={`text-[11px] truncate ${
-                          isSelected ? "text-sky-200" : "text-[#888888]"
-                        }`}
-                      >
-                        {item.subtitle}
-                      </div>
-                    </div>
-                  </div>
-                  <Badge
-                    variant="outline"
-                    className={`text-[10px] font-mono shrink-0 ml-2 border-0 ${
+        <ScrollArea className="max-h-80 p-1.5 min-h-0">
+          <div className="space-y-0.5">
+            {filtered.length === 0 ? (
+              <div className="p-6 text-center text-[#777777]">
+                No matching files or commands found.
+              </div>
+            ) : (
+              filtered.map((item, idx) => {
+                const isSelected = idx === selectedIndex;
+                const Icon = item.icon;
+                return (
+                  <div
+                    key={item.id}
+                    ref={(el) => {
+                      itemRefs.current[idx] = el;
+                    }}
+                    onClick={() => {
+                      item.action();
+                      onClose();
+                    }}
+                    onMouseEnter={() => setSelectedIndex(idx)}
+                    className={`px-3 py-2 rounded-lg flex items-center justify-between cursor-pointer transition-colors ${
                       isSelected
-                        ? "bg-sky-400/20 text-white"
-                        : "bg-[#2a2a2a] text-[#888888]"
+                        ? "bg-[#094771] text-white"
+                        : "hover:bg-[#2a2d2e] text-[#cccccc]"
                     }`}
                   >
-                    {item.category}
-                  </Badge>
-                </div>
-              );
-            })
-          )}
-        </div>
+                    <div className="flex items-center space-x-3 truncate">
+                      <Icon
+                        className={`w-4 h-4 shrink-0 ${
+                          isSelected ? "text-white" : "text-sky-400"
+                        }`}
+                      />
+                      <div className="truncate">
+                        <div className="font-medium text-xs truncate">
+                          {item.title}
+                        </div>
+                        <div
+                          className={`text-[11px] truncate ${
+                            isSelected ? "text-sky-200" : "text-[#888888]"
+                          }`}
+                        >
+                          {item.subtitle}
+                        </div>
+                      </div>
+                    </div>
+                    <Badge
+                      variant="outline"
+                      className={`text-[10px] font-mono shrink-0 ml-2 border-0 ${
+                        isSelected
+                          ? "bg-sky-400/20 text-white"
+                          : "bg-[#2a2a2a] text-[#888888]"
+                      }`}
+                    >
+                      {item.category}
+                    </Badge>
+                  </div>
+                );
+              })
+            )}
+          </div>
+        </ScrollArea>
 
         {/* Footer shortcuts helper */}
         <div className="px-3.5 py-2.5 bg-[#181818] border-t border-[#333333] flex items-center justify-between text-[11px] text-[#888888] shrink-0 select-none">

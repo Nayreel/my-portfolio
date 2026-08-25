@@ -14,6 +14,11 @@ import { StatusBar } from "@/components/StatusBar";
 import { CommandPalette } from "@/components/CommandPalette";
 import { SettingsModal } from "@/components/SettingsModal";
 import { AntigravityPhysics } from "@/components/AntigravityPhysics";
+import {
+  ResizableHandle,
+  ResizablePanel,
+  ResizablePanelGroup,
+} from "@/components/ui/resizable";
 import confetti from "canvas-confetti";
 
 export default function AntigravityPortfolioApp() {
@@ -166,100 +171,152 @@ export default function AntigravityPortfolioApp() {
           />
         )}
 
-        {/* Central Editor + Bottom Panel Container */}
-        <div className="flex-1 flex flex-col min-w-0 overflow-hidden bg-[#1e1e1e]">
-          {/* Multi-Tab Bar and Breadcrumb */}
-          <EditorTabs
-            openTabs={openTabs}
-            activeFileId={activeFileId}
-            onSelectTab={(f) => setActiveFileId(f.id)}
-            onCloseTab={handleCloseTab}
-            viewMode={viewMode}
-            setViewMode={setViewMode}
-            onAskAIAboutFile={() => {
-              setIsAIPanelOpen(true);
-              setExternalAIPrompt(
-                `Can you explain the architecture and key concepts in ${activeFile.name}?`,
-              );
-            }}
-            onRunActiveFile={() => {
-              setViewMode("preview");
-              triggerRunCodeCelebration();
-            }}
-          />
-
-          {/* Central Content Area (Code, Rendered Preview, or Split) */}
-          <div className="flex-1 flex overflow-hidden relative">
-            {/* Split / Code Mode: Code Editor */}
-            {(viewMode === "code" || viewMode === "split") && (
-              <div
-                className={`h-full flex flex-col ${
-                  viewMode === "split"
-                    ? "w-1/2 border-r border-[#2d2d2d]"
-                    : "w-full"
-                }`}
+        {/* Horizontal Resizable Area (Main Workspace + AI Assistant Panel) */}
+        <ResizablePanelGroup
+          key={`h-group-${isAIPanelOpen}`}
+          orientation="horizontal"
+          className="flex-1 h-full min-w-0 overflow-hidden"
+        >
+          {/* Main Central Workspace: Vertical Resizable Area (Editor Tabs/Preview + Bottom Terminal) */}
+          <ResizablePanel
+            id="editor-main-panel"
+            defaultSize={isAIPanelOpen ? 70 : 100}
+            minSize={8}
+          >
+            <ResizablePanelGroup
+              key={`v-group-${isBottomPanelOpen}`}
+              orientation="vertical"
+              className="h-full w-full min-h-0 overflow-hidden"
+            >
+              {/* Top Editor Content Area */}
+              <ResizablePanel
+                id="editor-content-panel"
+                defaultSize={isBottomPanelOpen ? 65 : 100}
+                minSize={8}
               >
-                <CodeViewer
-                  file={activeFile}
-                  onRunPreview={() => setViewMode("preview")}
-                  onAskAI={(prompt) => {
-                    setIsAIPanelOpen(true);
-                    setExternalAIPrompt(prompt);
-                  }}
-                  onCursorChange={(line, col) => setCursorPos({ line, col })}
-                />
-              </div>
-            )}
+                <div className="h-full w-full flex flex-col min-w-0 overflow-hidden bg-[#1e1e1e]">
+                  {/* Multi-Tab Bar and Breadcrumb */}
+                  <EditorTabs
+                    openTabs={openTabs}
+                    activeFileId={activeFileId}
+                    onSelectTab={(f) => setActiveFileId(f.id)}
+                    onCloseTab={handleCloseTab}
+                    viewMode={viewMode}
+                    setViewMode={setViewMode}
+                    onAskAIAboutFile={() => {
+                      setIsAIPanelOpen(true);
+                      setExternalAIPrompt(
+                        `Can you explain the architecture and key concepts in ${activeFile.name}?`,
+                      );
+                    }}
+                    onRunActiveFile={() => {
+                      setViewMode("preview");
+                      triggerRunCodeCelebration();
+                    }}
+                  />
 
-            {/* Split / Preview Mode: Interactive Rendered Portfolio */}
-            {(viewMode === "preview" || viewMode === "split") && (
-              <div
-                className={`h-full flex flex-col ${
-                  viewMode === "split" ? "w-1/2" : "w-full"
-                }`}
+                  {/* Central Content Area (Code, Rendered Preview, or Split) */}
+                  <div className="flex-1 flex overflow-hidden relative">
+                    {/* Split / Code Mode: Code Editor */}
+                    {(viewMode === "code" || viewMode === "split") && (
+                      <div
+                        className={`h-full flex flex-col ${
+                          viewMode === "split"
+                            ? "w-1/2 border-r border-[#2d2d2d]"
+                            : "w-full"
+                        }`}
+                      >
+                        <CodeViewer
+                          file={activeFile}
+                          onRunPreview={() => setViewMode("preview")}
+                          onAskAI={(prompt) => {
+                            setIsAIPanelOpen(true);
+                            setExternalAIPrompt(prompt);
+                          }}
+                          onCursorChange={(line, col) =>
+                            setCursorPos({ line, col })
+                          }
+                        />
+                      </div>
+                    )}
+
+                    {/* Split / Preview Mode: Interactive Rendered Portfolio */}
+                    {(viewMode === "preview" || viewMode === "split") && (
+                      <div
+                        className={`h-full flex flex-col ${
+                          viewMode === "split" ? "w-1/2" : "w-full"
+                        }`}
+                      >
+                        <RenderedPreview
+                          activeFile={activeFile}
+                          onSwitchToFile={(fileId) => {
+                            const target = PORTFOLIO_FILES.find(
+                              (f) => f.id === fileId,
+                            );
+                            if (target) handleSelectFile(target);
+                          }}
+                          onOpenAIQuery={(query) => {
+                            setIsAIPanelOpen(true);
+                            setExternalAIPrompt(query);
+                          }}
+                          antigravityMode={antigravityMode}
+                          setAntigravityMode={setAntigravityMode}
+                        />
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </ResizablePanel>
+
+              {/* Bottom Integrated Panel (Terminal / Problems / Console) */}
+              {isBottomPanelOpen && (
+                <>
+                  <ResizableHandle withHandle className="bg-[#2d2d2d] hover:bg-sky-500 active:bg-sky-400 transition-colors" />
+                  <ResizablePanel
+                    id="terminal-bottom-panel"
+                    defaultSize={35}
+                    minSize={8}
+                  >
+                    <BottomPanel
+                      isOpen={isBottomPanelOpen}
+                      onClose={() => setIsBottomPanelOpen(false)}
+                      onSelectFile={(fileId) => {
+                        const f = PORTFOLIO_FILES.find((x) => x.id === fileId);
+                        if (f) handleSelectFile(f);
+                      }}
+                      antigravityMode={antigravityMode}
+                      setAntigravityMode={setAntigravityMode}
+                    />
+                  </ResizablePanel>
+                </>
+              )}
+            </ResizablePanelGroup>
+          </ResizablePanel>
+
+          {/* Right Secondary Sidebar: Antigravity AI / Gemini 3.7 Copilot */}
+          {isAIPanelOpen && (
+            <>
+              <ResizableHandle withHandle className="bg-[#282930] hover:bg-sky-500 active:bg-sky-400 transition-colors" />
+              <ResizablePanel
+                id="ai-assistant-panel"
+                defaultSize={30}
+                minSize={8}
               >
-                <RenderedPreview
+                <AIAssistantPanel
+                  isOpen={isAIPanelOpen}
+                  onClose={() => setIsAIPanelOpen(false)}
                   activeFile={activeFile}
-                  onSwitchToFile={(fileId) => {
-                    const target = PORTFOLIO_FILES.find((f) => f.id === fileId);
-                    if (target) handleSelectFile(target);
+                  onSelectFile={(fileId) => {
+                    const f = PORTFOLIO_FILES.find((x) => x.id === fileId);
+                    if (f) handleSelectFile(f);
                   }}
-                  onOpenAIQuery={(query) => {
-                    setIsAIPanelOpen(true);
-                    setExternalAIPrompt(query);
-                  }}
-                  antigravityMode={antigravityMode}
-                  setAntigravityMode={setAntigravityMode}
+                  externalPrompt={externalAIPrompt}
+                  clearExternalPrompt={() => setExternalAIPrompt(null)}
                 />
-              </div>
-            )}
-          </div>
-
-          {/* Bottom Integrated Panel (Terminal / Problems / Console) */}
-          <BottomPanel
-            isOpen={isBottomPanelOpen}
-            onClose={() => setIsBottomPanelOpen(false)}
-            onSelectFile={(fileId) => {
-              const f = PORTFOLIO_FILES.find((x) => x.id === fileId);
-              if (f) handleSelectFile(f);
-            }}
-            antigravityMode={antigravityMode}
-            setAntigravityMode={setAntigravityMode}
-          />
-        </div>
-
-        {/* Right Secondary Sidebar: Antigravity AI / Gemini 3.7 Copilot */}
-        <AIAssistantPanel
-          isOpen={isAIPanelOpen}
-          onClose={() => setIsAIPanelOpen(false)}
-          activeFile={activeFile}
-          onSelectFile={(fileId) => {
-            const f = PORTFOLIO_FILES.find((x) => x.id === fileId);
-            if (f) handleSelectFile(f);
-          }}
-          externalPrompt={externalAIPrompt}
-          clearExternalPrompt={() => setExternalAIPrompt(null)}
-        />
+              </ResizablePanel>
+            </>
+          )}
+        </ResizablePanelGroup>
       </div>
 
       {/* 3. Bottom Status Bar */}

@@ -119,7 +119,7 @@ export function AntigravityPhysics({
       >
         <span className="w-2.5 h-2.5 rounded-full bg-amber-400 animate-ping" />
         <span className="font-mono font-bold">
-          🚀 ZERO GRAVITY PHYSICS ACTIVATED
+          ZERO GRAVITY PHYSICS ACTIVATED
         </span>
         <button
           onClick={onDeactivate}

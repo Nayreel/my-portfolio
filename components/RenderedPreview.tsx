@@ -121,7 +121,7 @@ export function RenderedPreview({
   // 1. BIO PREVIEW
   if (activeFile.id === "bio.tsx") {
     return (
-      <ScrollArea className="flex-1 bg-[#121214] text-white">
+      <ScrollArea className="flex-1 w-full bg-[#121214] text-white min-h-0">
         <div className="max-w-4xl mx-auto space-y-10 p-6 lg:p-10">
           {/* Top Hero Card */}
           <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#1c1d22] via-[#16171b] to-[#121316] border border-[#2d3039] p-6 lg:p-8 shadow-2xl">
@@ -310,7 +310,7 @@ export function RenderedPreview({
         : PROJECTS.filter((p) => p.category === selectedCategory);
 
     return (
-      <ScrollArea className="flex-1 bg-[#121214] text-white">
+      <ScrollArea className="flex-1 w-full bg-[#121214] text-white min-h-0">
         <div className="max-w-5xl mx-auto space-y-8 p-6 lg:p-10">
           {/* Header */}
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -513,7 +513,7 @@ export function RenderedPreview({
   // 3. EXPERIENCE PREVIEW
   if (activeFile.id === "experience.tsx") {
     return (
-      <ScrollArea className="flex-1 bg-[#121214] text-white">
+      <ScrollArea className="flex-1 w-full bg-[#121214] text-white min-h-0">
         <div className="max-w-4xl mx-auto space-y-8 p-6 lg:p-10">
           <div>
             <div className="inline-flex items-center space-x-1.5 text-xs text-sky-400 font-mono uppercase tracking-wider mb-1">
@@ -617,7 +617,7 @@ export function RenderedPreview({
   // 4. SKILLS PREVIEW (tech-stack.json)
   if (activeFile.id === "tech-stack.json") {
     return (
-      <ScrollArea className="flex-1 bg-[#121214] text-white">
+      <ScrollArea className="flex-1 w-full bg-[#121214] text-white min-h-0">
         <div className="max-w-4xl mx-auto space-y-8 p-6 lg:p-10">
           <div>
             <div className="inline-flex items-center space-x-1.5 text-xs text-amber-400 font-mono uppercase tracking-wider mb-1">
@@ -681,7 +681,7 @@ export function RenderedPreview({
   // 5. CONTACT PREVIEW
   if (activeFile.id === "get-in-touch.tsx") {
     return (
-      <ScrollArea className="flex-1 bg-[#121214] text-white">
+      <ScrollArea className="flex-1 w-full bg-[#121214] text-white min-h-0">
         <div className="max-w-2xl mx-auto space-y-8 p-6 lg:p-10">
           <div>
             <div className="inline-flex items-center space-x-1.5 text-xs text-sky-400 font-mono uppercase tracking-wider mb-1">
@@ -689,7 +689,7 @@ export function RenderedPreview({
               <span>Direct Dispatch</span>
             </div>
             <h1 className="text-3xl font-extrabold tracking-tight">
-              Get in Touch with Alex
+              Get in Touch with Lee Ryan
             </h1>
             <p className="text-xs sm:text-sm text-zinc-400 mt-2">
               Interested in hiring me for a senior full-stack/AI role,
@@ -855,7 +855,7 @@ export function RenderedPreview({
   // 6. RESUME PREVIEW
   if (activeFile.id === "resume.md") {
     return (
-      <ScrollArea className="flex-1 bg-[#121214] text-white">
+      <ScrollArea className="flex-1 w-full bg-[#121214] text-white min-h-0">
         <div className="max-w-3xl mx-auto space-y-6 p-6 lg:p-10">
           <Card className="bg-[#16171b] border-[#272930] p-6 lg:p-10 shadow-2xl text-white">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#2a2c35] pb-6">
@@ -950,7 +950,7 @@ export function RenderedPreview({
   // 7. PLAYGROUND PREVIEW
   if (activeFile.id === "playground.tsx") {
     return (
-      <ScrollArea className="flex-1 bg-[#121214] text-white">
+      <ScrollArea className="flex-1 w-full bg-[#121214] text-white min-h-0">
         <div className="max-w-3xl mx-auto space-y-8 p-6 lg:p-10">
           <div>
             <div className="inline-flex items-center space-x-1.5 text-xs text-amber-400 font-mono uppercase tracking-wider mb-1">
@@ -1038,24 +1038,26 @@ export function RenderedPreview({
 
   // DEFAULT PREVIEW (package.json / config)
   return (
-    <div className="flex-1 bg-[#121214] p-6 lg:p-10 text-white flex items-center justify-center">
-      <Card className="max-w-md bg-[#16171b] border-[#272930] text-center p-6 space-y-4 text-white">
-        <div className="w-12 h-12 rounded-2xl bg-sky-500/20 text-sky-400 flex items-center justify-center mx-auto">
-          <Code2 className="w-6 h-6" />
-        </div>
-        <CardTitle className="text-xl font-bold text-white">
-          {activeFile.name}
-        </CardTitle>
-        <p className="text-xs text-zinc-400 leading-relaxed">
-          {activeFile.description}
-        </p>
-        <Button
-          onClick={() => onSwitchToFile("bio.tsx")}
-          className="bg-sky-500 hover:bg-sky-400 text-black font-semibold text-xs"
-        >
-          Return to Developer Bio
-        </Button>
-      </Card>
-    </div>
+    <ScrollArea className="flex-1 w-full bg-[#121214] text-white min-h-0">
+      <div className="min-h-full p-6 lg:p-10 flex items-center justify-center">
+        <Card className="max-w-md bg-[#16171b] border-[#272930] text-center p-6 space-y-4 text-white">
+          <div className="w-12 h-12 rounded-2xl bg-sky-500/20 text-sky-400 flex items-center justify-center mx-auto">
+            <Code2 className="w-6 h-6" />
+          </div>
+          <CardTitle className="text-xl font-bold text-white">
+            {activeFile.name}
+          </CardTitle>
+          <p className="text-xs text-zinc-400 leading-relaxed">
+            {activeFile.description}
+          </p>
+          <Button
+            onClick={() => onSwitchToFile("bio.tsx")}
+            className="bg-sky-500 hover:bg-sky-400 text-black font-semibold text-xs"
+          >
+            Return to Developer Bio
+          </Button>
+        </Card>
+      </div>
+    </ScrollArea>
   );
 }

@@ -81,7 +81,7 @@ export function BottomPanel({
       ...terminalLogs,
       {
         type: "input" as const,
-        text: `PS C:\\Portfolio\\AlexVance> ${rawCmd}`,
+        text: `PS C:\\Portfolio\\LeeRyanGarcia> ${rawCmd}`,
       },
     ];
     const cmd = rawCmd.toLowerCase();
@@ -242,11 +242,7 @@ Route (app)                              Size     First Load JS
   if (!isOpen) return null;
 
   return (
-    <div
-      className={`bg-[#181818] border-t border-[#2d2d2d] flex flex-col select-none text-xs text-[#cccccc] z-20 shrink-0 min-h-0 overflow-hidden transition-all ${
-        isExpanded ? "h-96" : "h-48 sm:h-56"
-      }`}
-    >
+    <div className="w-full h-full bg-[#181818] flex flex-col select-none text-xs text-[#cccccc] min-h-0 overflow-hidden">
       {/* Panel Header Strip */}
       <div className="h-8 px-2 flex items-center justify-between border-b border-[#282828] bg-[#181818] text-[11px] shrink-0">
         {/* Panel Tabs */}
@@ -349,7 +345,7 @@ Route (app)                              Size     First Load JS
               side="top"
               className="text-xs bg-[#1f1f1f] text-zinc-200 border-[#3c3c3c]"
             >
-              {isExpanded ? "Restore Panel Size" : "Maximize Panel"}
+              {isExpanded ? "Restore Panel Height" : "Maximize Panel Height"}
             </TooltipContent>
           </Tooltip>
 
@@ -371,11 +367,11 @@ Route (app)                              Size     First Load JS
       </div>
 
       {/* Tab Body */}
-      <ScrollArea className="flex-1 bg-[#141414] font-mono text-xs p-3">
+      <ScrollArea className="flex-1 bg-[#141414] font-mono text-xs p-3 min-h-0">
         {/* 1. Terminal View */}
         {activeTab === "terminal" && (
           <div
-            className="h-full flex flex-col space-y-1"
+            className="min-h-full flex flex-col space-y-1"
             onClick={() => inputRef.current?.focus()}
           >
             {terminalLogs.map((log, i) => (
@@ -399,7 +395,7 @@ Route (app)                              Size     First Load JS
               className="flex items-center space-x-2 pt-1"
             >
               <span className="text-emerald-400 font-bold shrink-0 select-none">
-                PS C:\Portfolio\AlexVance&gt;
+                PS C:\Portfolio\LeeRyanGarcia&gt;
               </span>
               <input
                 ref={inputRef}
