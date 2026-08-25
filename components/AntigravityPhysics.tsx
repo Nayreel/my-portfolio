@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Zap, Flame, Rocket, Atom } from "lucide-react";

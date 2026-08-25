@@ -1,4 +1,3 @@
-// components/antigravity/SettingsModal.tsx
 "use client";
 
 import React from "react";

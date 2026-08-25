@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { PORTFOLIO_FILES, PortfolioFile } from "@/lib/portfolio-data";
+import { PORTFOLIO_FILES, PortfolioFile } from "@/data";
 import { TopMenuBar } from "@/components/TopMenuBar";
 import { ActivityBar, ActiveSidebarView } from "@/components/ActivityBar";
 import { SidebarExplorer } from "@/components/SidebarExplorer";

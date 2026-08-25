@@ -1,4 +1,3 @@
-// components/antigravity/SidebarExplorer.tsx
 "use client";
 
 import React, { useState } from "react";
@@ -13,7 +12,7 @@ import {
   GitCommit,
   X,
 } from "lucide-react";
-import { PortfolioFile } from "@/lib/portfolio-data";
+import { PortfolioFile } from "@/data";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -101,41 +100,43 @@ export function SidebarExplorer({
   // Outline symbols
   const outlineItems: Record<string, string[]> = {
     "bio.tsx": [
-      "AlexVanceProfile",
+      "LeeRyanProfile",
       "EngineeringPhilosophy",
       "AboutHero()",
       "DeveloperStats()",
     ],
     "projects.tsx": [
       "FlagshipProjects[]",
-      "ProjectRenderer()",
-      "MetricsCard()",
-      "CodeSnippetModal()",
+      "ProjectCard()",
+      "MetricsBanner()",
+      "CodeInspectionModal()",
     ],
     "experience.tsx": [
       "CareerTimeline[]",
-      "AetherAILabsRecord",
-      "VeloceCloudRecord",
-      "NexusInteractiveRecord",
+      "JAVResourceRecord",
+      "BuweloSupportRecord",
+      "HokeiSubicRecord",
+      "GordonCollegeEducation",
     ],
     "tech-stack.json": [
       "developer",
-      "languages[]",
-      "ai_and_agents[]",
       "frontend[]",
-      "backend_and_cloud[]",
+      "backend_and_databases[]",
+      "automation_and_integrations[]",
+      "devops_cloud_and_tools[]",
     ],
     "get-in-touch.tsx": [
       "ContactModule()",
       "handleSubmit()",
       "SocialLinks()",
-      "CalendarBooking()",
+      "DirectDispatch()",
     ],
     "resume.md": [
-      "Executive Summary",
+      "Professional Summary",
       "Work Experience",
-      "Education",
-      "Core Competencies",
+      "Education (Cum Laude)",
+      "Conferences & Competitions",
+      "Skills & Tech Stack",
     ],
     "playground.tsx": [
       "activateAntigravityMode()",
@@ -155,7 +156,7 @@ export function SidebarExplorer({
       {/* Sidebar Header */}
       <div className="h-9 px-3 flex items-center justify-between border-b border-[#2d2d2d] text-[11px] font-bold tracking-wider text-[#999999] uppercase">
         <span className="flex items-center space-x-1.5">
-          <span>EXPLORER: PORTFOLIO-V2.5</span>
+          <span>EXPLORER: PORTFOLIO-V2</span>
         </span>
         <div className="flex items-center space-x-1">
           <Tooltip>
@@ -258,7 +259,7 @@ export function SidebarExplorer({
             <div className="flex items-center px-2 py-1 text-[11px] font-semibold text-[#aaaaaa] hover:text-white cursor-pointer group">
               <ChevronDown className="w-3.5 h-3.5 mr-1 text-[#888888]" />
               <FolderOpen className="w-3.5 h-3.5 mr-1.5 text-sky-400" />
-              <span className="truncate">portfolio-v2.5</span>
+              <span className="truncate">portfolio-v2</span>
               <Badge
                 variant="secondary"
                 className="ml-auto text-[9px] bg-emerald-950/60 text-emerald-400 border border-emerald-500/30 px-1 py-0 font-mono"

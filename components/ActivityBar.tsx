@@ -1,4 +1,3 @@
-// components/antigravity/ActivityBar.tsx
 "use client";
 
 import React from "react";
@@ -47,31 +46,31 @@ export function ActivityBar({
     {
       id: "explorer" as ActiveSidebarView,
       icon: Files,
-      label: "Explorer (⇧⌘E)",
+      label: "Explorer",
       badge: null,
     },
     {
       id: "search" as ActiveSidebarView,
       icon: Search,
-      label: "Search Files & Symbols (⇧⌘F)",
+      label: "Search Files & Symbols",
       badge: null,
     },
     {
       id: "git" as ActiveSidebarView,
       icon: GitBranch,
-      label: "Source Control (⌃⇧G) • 3 Modified",
+      label: "Source Control • 3 Modified",
       badge: "3",
     },
     {
       id: "debug" as ActiveSidebarView,
       icon: PlayCircle,
-      label: "Run & Debug (⇧⌘D)",
+      label: "Run & Debug",
       badge: null,
     },
     {
       id: "extensions" as ActiveSidebarView,
       icon: Puzzle,
-      label: "Extensions (⇧⌘X)",
+      label: "Extensions",
       badge: null,
     },
   ];
@@ -138,7 +137,7 @@ export function ActivityBar({
           >
             <Avatar className="w-6 h-6 ring-1 ring-sky-500/40">
               <AvatarFallback className="bg-gradient-to-tr from-sky-500 to-indigo-600 text-[10px] font-bold text-white">
-                AV
+                LG
               </AvatarFallback>
             </Avatar>
           </TooltipTrigger>

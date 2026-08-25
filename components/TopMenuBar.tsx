@@ -1,4 +1,3 @@
-// components/antigravity/TopMenuBar.tsx
 "use client";
 
 import React from "react";
@@ -68,7 +67,7 @@ export function TopMenuBar({
 }: TopMenuBarProps) {
   const handleDownloadResume = () => {
     toast.success("Resume downloaded!", {
-      description: "Alex_Vance_Staff_Software_Engineer.pdf has been prepared.",
+      description: "Lee_Ryan_Garcia_Resume.pdf has been prepared.",
     });
   };
 
@@ -106,9 +105,6 @@ export function TopMenuBar({
               >
                 <FileCode className="w-3.5 h-3.5 mr-2 text-sky-400" />
                 <span>Quick Open...</span>
-                <DropdownMenuShortcut className="text-[#888888]">
-                  ⌘P
-                </DropdownMenuShortcut>
               </DropdownMenuItem>
               <DropdownMenuItem
                 onClick={() => setIsBottomPanelOpen(true)}
@@ -116,9 +112,6 @@ export function TopMenuBar({
               >
                 <Terminal className="w-3.5 h-3.5 mr-2 text-emerald-400" />
                 <span>Open Terminal</span>
-                <DropdownMenuShortcut className="text-[#888888]">
-                  ⌃`
-                </DropdownMenuShortcut>
               </DropdownMenuItem>
               <DropdownMenuItem
                 onClick={() => setIsAIPanelOpen((p) => !p)}
@@ -126,9 +119,6 @@ export function TopMenuBar({
               >
                 <Sidebar className="w-3.5 h-3.5 mr-2 text-amber-400 scale-x-[-1]" />
                 <span>Toggle AI Assistant</span>
-                <DropdownMenuShortcut className="text-[#888888]">
-                  ⌘L
-                </DropdownMenuShortcut>
               </DropdownMenuItem>
               <DropdownMenuSeparator className="bg-[#3c3c3c]" />
               <DropdownMenuItem
@@ -155,18 +145,12 @@ export function TopMenuBar({
                 className="text-xs cursor-pointer hover:bg-[#094771] hover:text-white focus:bg-[#094771] focus:text-white"
               >
                 <span>Find in Workspace</span>
-                <DropdownMenuShortcut className="text-[#888888]">
-                  ⌘F
-                </DropdownMenuShortcut>
               </DropdownMenuItem>
               <DropdownMenuItem
                 onClick={() => toast.info("Clipboard copied")}
                 className="text-xs cursor-pointer hover:bg-[#094771] hover:text-white focus:bg-[#094771] focus:text-white"
               >
                 <span>Copy Current File Path</span>
-                <DropdownMenuShortcut className="text-[#888888]">
-                  ⌥⌘C
-                </DropdownMenuShortcut>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -186,9 +170,6 @@ export function TopMenuBar({
               >
                 <Sidebar className="w-3.5 h-3.5 mr-2 text-sky-400" />
                 <span>Toggle Primary Sidebar</span>
-                <DropdownMenuShortcut className="text-[#888888]">
-                  ⌘B
-                </DropdownMenuShortcut>
               </DropdownMenuItem>
               <DropdownMenuItem
                 onClick={() => setIsBottomPanelOpen((p) => !p)}
@@ -196,9 +177,6 @@ export function TopMenuBar({
               >
                 <PanelBottom className="w-3.5 h-3.5 mr-2 text-emerald-400" />
                 <span>Toggle Terminal Panel</span>
-                <DropdownMenuShortcut className="text-[#888888]">
-                  ⌃`
-                </DropdownMenuShortcut>
               </DropdownMenuItem>
               <DropdownMenuItem
                 onClick={() => setIsAIPanelOpen((p) => !p)}
@@ -206,9 +184,6 @@ export function TopMenuBar({
               >
                 <Sidebar className="w-3.5 h-3.5 mr-2 text-amber-400 scale-x-[-1]" />
                 <span>Toggle Antigravity AI</span>
-                <DropdownMenuShortcut className="text-[#888888]">
-                  ⌘L
-                </DropdownMenuShortcut>
               </DropdownMenuItem>
               <DropdownMenuSeparator className="bg-[#3c3c3c]" />
               <DropdownMenuItem
@@ -236,9 +211,6 @@ export function TopMenuBar({
               >
                 <FolderTree className="w-3.5 h-3.5 mr-2 text-sky-400" />
                 <span>Go to File...</span>
-                <DropdownMenuShortcut className="text-[#888888]">
-                  ⌘P
-                </DropdownMenuShortcut>
               </DropdownMenuItem>
               <DropdownMenuItem
                 onClick={onOpenLivePreviewTab}
@@ -271,18 +243,12 @@ export function TopMenuBar({
                 className="text-xs cursor-pointer hover:bg-[#094771] hover:text-white focus:bg-[#094771] focus:text-white"
               >
                 <span>Start Dev Preview Build</span>
-                <DropdownMenuShortcut className="text-[#888888]">
-                  F5
-                </DropdownMenuShortcut>
               </DropdownMenuItem>
               <DropdownMenuItem
                 onClick={onRunCode}
                 className="text-xs cursor-pointer hover:bg-[#094771] hover:text-white focus:bg-[#094771] focus:text-white"
               >
                 <span>Run Portfolio Unit Tests</span>
-                <DropdownMenuShortcut className="text-[#888888]">
-                  ⌃F5
-                </DropdownMenuShortcut>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -298,7 +264,7 @@ export function TopMenuBar({
             >
               <DropdownMenuItem
                 onClick={() =>
-                  toast.success("Antigravity IDE v2.5", {
+                  toast.success("Antigravity IDE v2", {
                     description:
                       "Built with Next.js 15, Tailwind CSS v4, and Gemini 3.7 Flash.",
                   })
@@ -383,7 +349,7 @@ export function TopMenuBar({
               side="bottom"
               className="text-xs bg-[#1f1f1f] text-zinc-200 border-[#3c3c3c]"
             >
-              Toggle Primary Explorer (⌘B)
+              Toggle Primary Explorer
             </TooltipContent>
           </Tooltip>
 
@@ -400,7 +366,7 @@ export function TopMenuBar({
               side="bottom"
               className="text-xs bg-[#1f1f1f] text-zinc-200 border-[#3c3c3c]"
             >
-              Toggle Terminal & Output Panel (⌃`)
+              Toggle Terminal & Output Panel
             </TooltipContent>
           </Tooltip>
 
@@ -417,7 +383,7 @@ export function TopMenuBar({
               side="bottom"
               className="text-xs bg-[#1f1f1f] text-zinc-200 border-[#3c3c3c]"
             >
-              Toggle Antigravity AI Copilot (⌘L)
+              Toggle Antigravity AI Copilot
             </TooltipContent>
           </Tooltip>
         </div>

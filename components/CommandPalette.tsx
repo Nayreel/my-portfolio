@@ -1,4 +1,3 @@
-// components/antigravity/CommandPalette.tsx
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
@@ -15,10 +14,13 @@ import {
   Copy,
 } from "lucide-react";
 import {
-  PortfolioFile,
   PORTFOLIO_FILES,
+  PROJECTS,
+  EXPERIENCES,
+  SKILL_CATEGORIES,
   DEVELOPER_PROFILE,
-} from "@/lib/portfolio-data";
+  PortfolioFile,
+} from "@/data";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -88,7 +90,7 @@ export function CommandPalette({
     {
       id: "file-projects",
       title: "Open featured-projects.tsx",
-      subtitle: "Antigravity OS, NeuralFlow, HyperScale DB & more",
+      subtitle: "AI Energy Shop, Feedback Fusion, Iontana, Narra Tree & more",
       icon: Rocket,
       category: "Files",
       action: () => {
@@ -99,7 +101,7 @@ export function CommandPalette({
     {
       id: "file-experience",
       title: "Open career-history.tsx",
-      subtitle: "Lead Software Engineer at Aether AI Labs & Veloce",
+      subtitle: "Software Engineer at JAV Resource, Buwelo & Hokei Subic",
       icon: Briefcase,
       category: "Files",
       action: () => {
@@ -110,7 +112,8 @@ export function CommandPalette({
     {
       id: "file-skills",
       title: "Open tech-stack.json",
-      subtitle: "TypeScript, Next.js, Go, Python, Gemini 3.7 proficiencies",
+      subtitle:
+        "Next.js, TypeScript, n8n, MongoDB, PostgreSQL, Tailwind proficiencies",
       icon: Cpu,
       category: "Files",
       action: () => {
@@ -243,7 +246,7 @@ export function CommandPalette({
         </div>
 
         {/* Results List */}
-        <ScrollArea className="max-h-80 p-1.5 min-h-0">
+        <ScrollArea className="h-72 w-full p-1.5 min-h-0">
           <div className="space-y-0.5">
             {filtered.length === 0 ? (
               <div className="p-6 text-center text-[#777777]">
@@ -307,7 +310,7 @@ export function CommandPalette({
         </ScrollArea>
 
         {/* Footer shortcuts helper */}
-        <div className="px-3.5 py-2.5 bg-[#181818] border-t border-[#333333] flex items-center justify-between text-[11px] text-[#888888] shrink-0 select-none">
+        <div className="px-3.5 py-2.5 bg-[#181818] border-t border-[#333333] flex items-center justify-between text-[11px] text-[#888888] shrink-0 select-none z-10">
           <div className="flex items-center space-x-3 text-[11px]">
             <span className="inline-flex items-center space-x-1">
               <kbd className="px-1.5 py-0.5 text-[10px] font-mono bg-[#2a2a2a] text-[#cccccc] border border-[#3c3c3c] rounded">
@@ -327,6 +330,10 @@ export function CommandPalette({
               </kbd>
               <span>Close</span>
             </span>
+          </div>
+
+          <div className="text-[10px] text-zinc-500 font-mono">
+            {filtered.length} {filtered.length === 1 ? "result" : "results"}
           </div>
         </div>
       </div>

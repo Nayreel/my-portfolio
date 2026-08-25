@@ -1,4 +1,3 @@
-// components/antigravity/BottomPanel.tsx
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
@@ -16,10 +15,10 @@ import {
   PROJECTS,
   EXPERIENCES,
   SKILL_CATEGORIES,
+  CONFERENCES,
   TERMINAL_COMMANDS_HELP,
-} from "@/lib/portfolio-data";
+} from "@/data";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   Tooltip,
@@ -37,6 +36,11 @@ interface BottomPanelProps {
 
 export type PanelTab = "problems" | "output" | "debug" | "terminal" | "ports";
 
+interface TerminalLog {
+  type: "input" | "output" | "system";
+  text: string;
+}
+
 export function BottomPanel({
   isOpen,
   onClose,
@@ -46,17 +50,13 @@ export function BottomPanel({
 }: BottomPanelProps) {
   const [activeTab, setActiveTab] = useState<PanelTab>("terminal");
   const [isExpanded, setIsExpanded] = useState(false);
-
-  // Terminal state
   const [commandInput, setCommandInput] = useState("");
   const [historyIndex, setHistoryIndex] = useState<number>(-1);
   const [commandHistory, setCommandHistory] = useState<string[]>([]);
-  const [terminalLogs, setTerminalLogs] = useState<
-    { type: "input" | "output" | "system"; text: string; link?: string }[]
-  >([
+  const [terminalLogs, setTerminalLogs] = useState<TerminalLog[]>([
     {
       type: "system",
-      text: '⚡ Google Antigravity IDE [Version 2.5.0-preview]\n(c) 2026 Lee Ryan Garcia. All systems operational.\nType "help" for a list of interactive commands or "projects" to view flagships.',
+      text: '⚡ Google Antigravity IDE [Version 2.0.0]\n(c) 2026 Lee Ryan Garcia. All systems operational.\nType "help" for a list of interactive commands or "projects" to view flagships.',
     },
   ]);
 
@@ -77,10 +77,10 @@ export function BottomPanel({
     setCommandHistory((prev) => [...prev, rawCmd]);
     setHistoryIndex(-1);
 
-    const nextLogs = [
+    const nextLogs: TerminalLog[] = [
       ...terminalLogs,
       {
-        type: "input" as const,
+        type: "input",
         text: `PS C:\\Portfolio\\LeeRyanGarcia> ${rawCmd}`,
       },
     ];
@@ -103,7 +103,7 @@ export function BottomPanel({
     } else if (cmd === "projects") {
       const pList = PROJECTS.map(
         (p) =>
-          `🚀 ${p.title} (${p.category})\n   ${p.tagline}\n   Tech: ${p.tags.join(", ")}\n   Stars: ★ ${p.stars} | Forks: ${p.forks}`,
+          `🚀 ${p.title} (${p.category})\n   ${p.tagline}\n   Tech: ${p.tags.join(", ")}\n   Live: ${p.liveUrl}`,
       ).join("\n\n");
       nextLogs.push({
         type: "output",
@@ -131,10 +131,19 @@ export function BottomPanel({
         text: `Career Timeline:\n\n${eList}`,
       });
       if (onSelectFile) onSelectFile("experience.tsx");
+    } else if (cmd === "conferences") {
+      const cList = CONFERENCES.map(
+        (c) => `🏆 ${c.title}\n   📅 ${c.date}\n   ${c.des}`,
+      ).join("\n\n");
+      nextLogs.push({
+        type: "output",
+        text: `Conferences & Pitching Competitions:\n\n${cList}`,
+      });
+      if (onSelectFile) onSelectFile("resume.md");
     } else if (cmd === "contact") {
       nextLogs.push({
         type: "output",
-        text: `📬 Email: ${DEVELOPER_PROFILE.email}\n🌐 GitHub: ${DEVELOPER_PROFILE.github}\n💼 LinkedIn: ${DEVELOPER_PROFILE.linkedin}\n💬 Message form available in get-in-touch.tsx`,
+        text: `📬 Email: ${DEVELOPER_PROFILE.email}\n📞 Phone: ${DEVELOPER_PROFILE.phone}\n🌐 GitHub: ${DEVELOPER_PROFILE.github}\n💼 LinkedIn: ${DEVELOPER_PROFILE.linkedin}\n📍 Location: ${DEVELOPER_PROFILE.location}\n💬 Message form available in get-in-touch.tsx`,
       });
       if (onSelectFile) onSelectFile("get-in-touch.tsx");
     } else if (cmd === "cat resume.md" || cmd === "resume") {
@@ -160,49 +169,18 @@ export function BottomPanel({
     } else if (cmd === "neofetch") {
       nextLogs.push({
         type: "output",
-        text: `
-      /\\        OS: Google Antigravity OS v2.5 x86_64
-     /  \\       Host: Next.js 15.4.9 App Router + V8 Turbopack
-    / /\\ \\      Kernel: TypeScript 5.9.3 & React 19
-   / /  \\ \\     Uptime: 7 Years Engineering Experience
-  / /_/\\_\\ \\    Packages: Gemini 3.7 Flash, Tailwind CSS v4, Motion
- /________/ \\   Memory: 99.99% Reliability (Zero Leaks)
-                Shell: Antigravity Shell 2.5 (zsh/pwsh)`,
+        text: `\n      /\\        OS: Google Antigravity IDE v2\n     /  \\       Host: Next.js App Router + React 19\n    / /\\ \\      Developer: Lee Ryan M. Garcia\n   / /  \\ \\     Role: Software Engineer | Full-Stack & Automation\n  / /_/\\_\\ \\    Stack: Next.js, n8n, MongoDB, PostgreSQL, Tailwind\n /________/ \\   Honors: Cum Laude (Gordon College)\n                Shell: Antigravity Terminal (pwsh/bash)`,
       });
     } else if (cmd === "npm run build" || cmd === "build") {
       confetti({ particleCount: 120, spread: 90 });
       nextLogs.push({
         type: "output",
-        text: `> alex-vance-portfolio@2.5.0 build
-> next build
-
-▲ Next.js 15.4.9
-   Creating an optimized production build ...
- ✓ Compiled successfully in 420ms
- ✓ Linting and checking validity of types ...
- ✓ Collecting page data ...
- ✓ Generating static pages (10/10)
- ✓ Finalizing page optimization ...
-
-Route (app)                              Size     First Load JS
-┌ ○ /                                    5.4 kB         89.2 kB
-├ ○ /api/gemini/chat                     0 B                0 B
-└ ○ /resume                              2.1 kB         85.9 kB
-+ First Load JS shared by all            83.8 kB
-
-✓ Build complete! Ready for deployment.`,
+        text: `> lee-ryan-garcia-portfolio@2.0.0 build\n> next build\n\n▲ Next.js 16.3.2\n   Creating an optimized production build ...\n ✓ Compiled successfully in 380ms\n ✓ Linting and checking validity of types ...\n ✓ Collecting page data ...\n ✓ Generating static pages (10/10)\n ✓ Finalizing page optimization ...\n\n✓ Build complete! Ready for deployment.`,
       });
     } else if (cmd === "npm run test" || cmd === "npm test" || cmd === "test") {
       nextLogs.push({
         type: "output",
-        text: `> vitest run
- ✓ test/agent-reasoning.spec.ts (4 tests) 18ms
- ✓ test/sub-ms-cache.spec.ts (8 tests) 42ms
- ✓ test/fullstack-ssr.spec.ts (6 tests) 24ms
-
- Test Files  3 passed (3)
-      Tests  18 passed (18)
-   Duration  142ms (transform 12ms, setup 0ms, collect 22ms, tests 84ms)`,
+        text: `> vitest run\n ✓ test/n8n-workflows.spec.ts (4 tests) 18ms\n ✓ test/nextjs-ecommerce.spec.ts (8 tests) 42ms\n ✓ test/sentiment-analysis.spec.ts (5 tests) 29ms\n\nTest Files  3 passed (3)\n     Tests  17 passed (17)\n  Duration  142ms`,
       });
     } else {
       nextLogs.push({
@@ -242,10 +220,13 @@ Route (app)                              Size     First Load JS
   if (!isOpen) return null;
 
   return (
-    <div className="w-full h-full bg-[#181818] flex flex-col select-none text-xs text-[#cccccc] min-h-0 overflow-hidden">
-      {/* Panel Header Strip */}
-      <div className="h-8 px-2 flex items-center justify-between border-b border-[#282828] bg-[#181818] text-[11px] shrink-0">
-        {/* Panel Tabs */}
+    <div
+      className={`w-full bg-[#181818] border-t border-[#2d2d2d] flex flex-col select-none transition-all duration-200 z-20 ${
+        isExpanded ? "h-[85vh]" : "h-full"
+      }`}
+    >
+      {/* Tab Navigation Header */}
+      <div className="h-9 px-3 flex items-center justify-between border-b border-[#242526] text-xs bg-[#1f1f1f] shrink-0">
         <div className="flex items-center space-x-1">
           <button
             onClick={() => setActiveTab("problems")}
@@ -258,7 +239,7 @@ Route (app)                              Size     First Load JS
             <span>Problems</span>
             <Badge
               variant="outline"
-              className="text-[9px] px-1 py-0 bg-[#2d2d2d] text-zinc-400 border-none"
+              className="text-[10px] px-1 py-0 border-zinc-700"
             >
               0
             </Badge>
@@ -273,17 +254,6 @@ Route (app)                              Size     First Load JS
             }`}
           >
             <span>Output</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab("debug")}
-            className={`px-2.5 py-1 rounded-sm flex items-center space-x-1.5 transition-colors ${
-              activeTab === "debug"
-                ? "bg-[#252526] text-white border-b-2 border-sky-400 font-medium"
-                : "text-[#888888] hover:text-[#cccccc]"
-            }`}
-          >
-            <span>Debug Console</span>
           </button>
 
           <button
@@ -368,7 +338,6 @@ Route (app)                              Size     First Load JS
 
       {/* Tab Body */}
       <ScrollArea className="flex-1 bg-[#141414] font-mono text-xs p-3 min-h-0">
-        {/* 1. Terminal View */}
         {activeTab === "terminal" && (
           <div
             className="min-h-full flex flex-col space-y-1"
@@ -389,7 +358,6 @@ Route (app)                              Size     First Load JS
               </div>
             ))}
 
-            {/* Prompt input line */}
             <form
               onSubmit={handleCommandSubmit}
               className="flex items-center space-x-2 pt-1"
@@ -411,31 +379,19 @@ Route (app)                              Size     First Load JS
           </div>
         )}
 
-        {/* 2. Output View */}
         {activeTab === "output" && (
           <div className="space-y-1 text-[#aaaaaa] font-mono text-[11px] leading-relaxed">
             <div className="text-zinc-500">
               [Next.js Dev Server Running on Port 3000]
             </div>
-            <div>
-              GET /api/portfolio/stats 200 in 107ms (next.js: 10ms, proxy.ts:
-              4ms)
-            </div>
-            <div>GET /manifest.webmanifest 200 in 11ms (next.js: 5ms)</div>
+            <div>GET /api/portfolio/stats 200 in 107ms</div>
             <div className="text-emerald-400 font-medium">
-              ✓ Compiled in 609ms
+              ✓ Compiled in 380ms
             </div>
-            <div>
-              GET /api/gemini/health 200 in 144ms (next.js: 21ms, model:
-              gemini-3.7-flash)
-            </div>
-            <div>GET /assets/antigravity-ast.json 200 in 14ms</div>
-            <div className="text-emerald-400 font-medium">✓ Ready in 346ms</div>
-            <div>GET /projects/antigravity-os 200 in 190ms (cache: HIT)</div>
+            <div className="text-emerald-400 font-medium">✓ Ready</div>
           </div>
         )}
 
-        {/* 3. Problems View */}
         {activeTab === "problems" && (
           <div className="flex flex-col items-center justify-center h-full text-zinc-500 space-y-2 py-8">
             <CheckCircle className="w-8 h-8 text-emerald-500" />
@@ -445,7 +401,6 @@ Route (app)                              Size     First Load JS
           </div>
         )}
 
-        {/* 4. Debug Console */}
         {activeTab === "debug" && (
           <div className="space-y-1 text-zinc-400">
             <div>
@@ -454,13 +409,9 @@ Route (app)                              Size     First Load JS
             <div className="text-sky-400">
               ✓ V8 Profiler initialized. Breakpoints: 0 active.
             </div>
-            <div className="text-zinc-500">
-              &gt; Antigravity runtime evaluation engine ready.
-            </div>
           </div>
         )}
 
-        {/* 5. Ports View */}
         {activeTab === "ports" && (
           <div className="space-y-2">
             <table className="w-full text-left text-[11px]">
@@ -468,7 +419,6 @@ Route (app)                              Size     First Load JS
                 <tr className="text-zinc-500 border-b border-zinc-800">
                   <th className="pb-1 font-semibold">Port</th>
                   <th className="pb-1 font-semibold">Process</th>
-                  <th className="pb-1 font-semibold">Address</th>
                   <th className="pb-1 font-semibold">Status</th>
                 </tr>
               </thead>
@@ -476,14 +426,7 @@ Route (app)                              Size     First Load JS
                 <tr className="border-b border-zinc-900">
                   <td className="py-1 font-mono text-sky-400">3000</td>
                   <td className="py-1 font-mono">next-server</td>
-                  <td className="py-1 font-mono">http://localhost:3000</td>
                   <td className="py-1 text-emerald-400">● Forwarded / Open</td>
-                </tr>
-                <tr>
-                  <td className="py-1 font-mono text-sky-400">9229</td>
-                  <td className="py-1 font-mono">node-inspect</td>
-                  <td className="py-1 font-mono">127.0.0.1:9229</td>
-                  <td className="py-1 text-emerald-400">● Running</td>
                 </tr>
               </tbody>
             </table>

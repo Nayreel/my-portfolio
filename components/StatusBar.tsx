@@ -1,4 +1,3 @@
-// components/antigravity/StatusBar.tsx
 "use client";
 
 import React from "react";

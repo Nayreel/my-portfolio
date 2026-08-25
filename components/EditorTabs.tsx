@@ -193,7 +193,7 @@ export function EditorTabs({
       {/* Breadcrumbs Bar */}
       <div className="h-6 bg-[#1e1e1e] px-3 flex items-center justify-between text-[11px] font-mono text-[#888888] border-t border-[#252526]">
         <div className="flex items-center space-x-1.5 truncate">
-          <span className="text-[#666666]">portfolio-v2.5</span>
+          <span className="text-[#666666]">portfolio-v2</span>
           <ChevronRight className="w-3 h-3 text-[#555555]" />
           <span>{activeFile?.folder || "root"}</span>
           <ChevronRight className="w-3 h-3 text-[#555555]" />
