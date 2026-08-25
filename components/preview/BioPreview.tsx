@@ -1,20 +1,15 @@
 "use client";
 
 import React from "react";
-import {
-  Rocket,
-  Mail,
-  Copy,
-  Cpu,
-  MapPin,
-  Phone,
-} from "lucide-react";
+import { Rocket, Mail, Copy, Cpu, MapPin, Phone } from "lucide-react";
 import { DEVELOPER_PROFILE } from "@/data";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { toast } from "@/components/ui/toast";
+
+import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 
 interface BioPreviewProps {
   onSwitchToFile: (fileId: string) => void;
@@ -74,20 +69,6 @@ export function BioPreview({ onSwitchToFile, onOpenAIQuery }: BioPreviewProps) {
                 </span>
               </div>
             </div>
-
-            {/* Avatar badge */}
-            <div className="flex flex-col items-center shrink-0">
-              <div className="w-28 h-28 rounded-2xl bg-gradient-to-tr from-sky-500 via-indigo-600 to-purple-600 p-[2px] shadow-xl">
-                <div className="w-full h-full rounded-2xl bg-[#18191e] flex flex-col items-center justify-center p-3 text-center">
-                  <span className="text-3xl font-extrabold bg-gradient-to-br from-sky-400 to-indigo-300 bg-clip-text text-transparent">
-                    LG
-                  </span>
-                  <span className="text-[10px] text-zinc-400 mt-1 font-mono">
-                    PH • Available
-                  </span>
-                </div>
-              </div>
-            </div>
           </div>
 
           {/* Quick Action CTAs */}
@@ -142,7 +123,7 @@ export function BioPreview({ onSwitchToFile, onOpenAIQuery }: BioPreviewProps) {
             >
               <CardContent className="p-4">
                 <div className="text-2xl sm:text-3xl font-extrabold text-white font-mono">
-                  {stat.value}
+                  <AnimatedCounter value={stat.value} />
                 </div>
                 <div className="text-xs text-zinc-400 mt-1">{stat.label}</div>
               </CardContent>
@@ -187,7 +168,8 @@ export function BioPreview({ onSwitchToFile, onOpenAIQuery }: BioPreviewProps) {
               <CardContent className="p-5 pt-0">
                 <p className="text-xs text-zinc-400 leading-relaxed">
                   Building responsive, scalable web platforms and e-commerce
-                  systems with modern UI/UX, TypeScript, and robust state architecture.
+                  systems with modern UI/UX, TypeScript, and robust state
+                  architecture.
                 </p>
               </CardContent>
             </Card>
@@ -203,8 +185,8 @@ export function BioPreview({ onSwitchToFile, onOpenAIQuery }: BioPreviewProps) {
               </CardHeader>
               <CardContent className="p-5 pt-0">
                 <p className="text-xs text-zinc-400 leading-relaxed">
-                  Extensive technical troubleshooting across Azure, M365,
-                  Docker containers, and real-time Socket.io communication channels.
+                  Extensive technical troubleshooting across Azure, M365, Docker
+                  containers, and real-time Socket.io communication channels.
                 </p>
               </CardContent>
             </Card>

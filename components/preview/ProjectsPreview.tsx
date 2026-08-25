@@ -43,8 +43,11 @@ interface ProjectsPreviewProps {
 }
 
 export function ProjectsPreview({ onOpenAIQuery }: ProjectsPreviewProps) {
-  const [selectedCategory, setSelectedCategory] = useState<ProjectCategory>("All");
-  const [activeProjectModal, setActiveProjectModal] = useState<Project | null>(null);
+  const [selectedCategory, setSelectedCategory] =
+    useState<ProjectCategory>("All");
+  const [activeProjectModal, setActiveProjectModal] = useState<Project | null>(
+    null,
+  );
 
   const categories: ProjectCategory[] = [
     "All",
@@ -77,7 +80,7 @@ export function ProjectsPreview({ onOpenAIQuery }: ProjectsPreviewProps) {
               <span>Featured Engineering Portfolio</span>
             </div>
             <h1 className="text-3xl font-extrabold tracking-tight">
-              Production Systems & Flagship Work
+              My Projects
             </h1>
           </div>
 
@@ -118,16 +121,6 @@ export function ProjectsPreview({ onOpenAIQuery }: ProjectsPreviewProps) {
                   >
                     {project.category}
                   </Badge>
-                  <div className="flex items-center space-x-3 text-xs text-zinc-400 font-mono">
-                    <span className="flex items-center space-x-1">
-                      <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
-                      <span>{project.stars}</span>
-                    </span>
-                    <span className="flex items-center space-x-1">
-                      <GitFork className="w-3.5 h-3.5 text-zinc-400" />
-                      <span>{project.forks}</span>
-                    </span>
-                  </div>
                 </div>
 
                 <div>
@@ -145,20 +138,6 @@ export function ProjectsPreview({ onOpenAIQuery }: ProjectsPreviewProps) {
                   {project.description}
                 </p>
 
-                {/* Metrics Banner */}
-                <div className="grid grid-cols-3 gap-2 py-2 border-y border-[#252830]">
-                  {project.metrics.map((m, i) => (
-                    <div key={i} className="text-center">
-                      <div className="text-xs sm:text-sm font-bold text-white font-mono">
-                        {m.value}
-                      </div>
-                      <div className="text-[10px] text-zinc-400">
-                        {m.label}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
                 {/* Tech Tags */}
                 <div className="flex flex-wrap gap-1.5 pt-1">
                   {project.tags.map((tag) => (
@@ -175,15 +154,6 @@ export function ProjectsPreview({ onOpenAIQuery }: ProjectsPreviewProps) {
 
               {/* Card Footer Actions */}
               <CardFooter className="p-6 pt-4 border-t border-[#252830] flex items-center justify-between relative z-10">
-                <Button
-                  variant="link"
-                  onClick={() => setActiveProjectModal(project)}
-                  className="p-0 h-auto text-xs text-sky-400 hover:text-sky-300 font-mono flex items-center space-x-1"
-                >
-                  <Code2 className="w-3.5 h-3.5 mr-1" />
-                  <span>Inspect Code</span>
-                </Button>
-
                 <div className="flex items-center space-x-2">
                   <Tooltip>
                     <TooltipTrigger
