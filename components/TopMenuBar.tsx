@@ -3,7 +3,6 @@
 
 import React from "react";
 import {
-  Search,
   Sidebar,
   PanelBottom,
   Zap,
@@ -321,31 +320,17 @@ export function TopMenuBar({
         </div>
       </div>
 
-      {/* Center section: Quick Search & Title Bar */}
-      <div className="flex-1 max-w-xl mx-2 flex items-center justify-center">
-        <Tooltip>
-          <TooltipTrigger
-            onClick={openCommandPalette}
-            className="w-full max-w-md h-6 bg-[#252526] hover:bg-[#2d2d2d] border border-[#333333] hover:border-[#444444] rounded flex items-center justify-between px-2.5 text-xs text-[#999999] transition-all group shadow-inner cursor-pointer"
-          >
-            <div className="flex items-center space-x-2 truncate">
-              <Search className="w-3.5 h-3.5 text-[#777777] group-hover:text-sky-400 transition-colors" />
-              <span className="truncate text-xs font-mono">
-                portfolio-v2.5 <span className="text-[#555555]">-</span>{" "}
-                {activeFilePath}
-              </span>
-            </div>
-            <kbd className="text-[10px] bg-[#1e1e1e] border border-[#3c3c3c] text-[#888888] px-1.5 py-0.5 rounded font-mono">
-              ⌘K
-            </kbd>
-          </TooltipTrigger>
-          <TooltipContent
-            side="bottom"
-            className="text-xs bg-[#1f1f1f] text-zinc-200 border-[#3c3c3c]"
-          >
-            Search files, run actions, or query skills (⌘K)
-          </TooltipContent>
-        </Tooltip>
+      {/* Center section: Window Title Bar */}
+      <div className="flex-1 mx-2 flex items-center justify-center min-w-0">
+        <button
+          onClick={openCommandPalette}
+          className="text-xs text-[#9d9d9d] hover:text-[#d4d4d4] transition-colors truncate max-w-full font-normal cursor-pointer select-none px-2 py-0.5 rounded hover:bg-[#252526]/60"
+          title="my-portfolio - Antigravity IDE (Click for Command Palette ⌘K)"
+        >
+          <span className="truncate">
+            my-portfolio - Antigravity IDE - {activeFileName}
+          </span>
+        </button>
       </div>
 
       {/* Right section: Layout Toggles, Zero-G button, User Profile */}
