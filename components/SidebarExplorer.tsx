@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { PortfolioFile } from "@/data";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import {
@@ -205,12 +206,15 @@ export function SidebarExplorer({
             className="h-7 bg-[#1f1f1f] border-[#333333] pl-8 pr-6 text-xs text-[#dddddd] placeholder-[#666666] focus-visible:ring-sky-500 focus-visible:ring-1"
           />
           {searchQuery && (
-            <button
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon-xs"
               onClick={() => setSearchQuery("")}
-              className="absolute right-2 top-1.5 text-[#888888] hover:text-white"
+              className="absolute right-1 top-1 text-[#888888] hover:text-white hover:bg-transparent h-5 w-5 p-0 cursor-pointer"
             >
               <X className="w-3.5 h-3.5" />
-            </button>
+            </Button>
           )}
         </div>
       </div>
@@ -225,13 +229,16 @@ export function SidebarExplorer({
             {filteredFiles.map((file) => {
               const isSelected = file.id === activeFileId;
               return (
-                <button
+                <Button
                   key={file.id}
+                  type="button"
+                  variant="ghost"
+                  size="xs"
                   onClick={() => onSelectFile(file)}
-                  className={`w-full flex items-center justify-between px-2 py-1 rounded text-left transition-colors ${
+                  className={`w-full flex items-center justify-between px-2 py-1 h-auto rounded text-left transition-colors font-normal cursor-pointer ${
                     isSelected
-                      ? "bg-[#094771] text-white font-medium"
-                      : "hover:bg-[#2a2d2e] text-[#cccccc]"
+                      ? "bg-[#094771] text-white font-medium hover:bg-[#094771] hover:text-white"
+                      : "hover:bg-[#2a2d2e] text-[#cccccc] hover:text-white"
                   }`}
                 >
                   <div className="flex items-center space-x-1.5 truncate">
@@ -240,11 +247,11 @@ export function SidebarExplorer({
                   </div>
                   <Badge
                     variant="outline"
-                    className="text-[9px] py-0 px-1 text-[#888888] border-[#3c3c3c] font-mono"
+                    className="text-[9px] py-0 px-1 text-[#888888] border-[#3c3c3c] font-mono pointer-events-none"
                   >
                     {file.folder}
                   </Badge>
-                </button>
+                </Button>
               );
             })}
           </div>
@@ -279,25 +286,28 @@ export function SidebarExplorer({
               return (
                 <div key={folderKey} className="pl-2">
                   {/* Folder Header */}
-                  <button
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="xs"
                     onClick={() => toggleFolder(folderKey)}
-                    className="w-full flex items-center px-2 py-1 rounded hover:bg-[#222222] text-[#bbbbbb] hover:text-white text-left transition-colors group"
+                    className="w-full flex items-center px-2 py-1 h-auto rounded hover:bg-[#222222] text-[#bbbbbb] hover:text-white text-left transition-colors font-normal group cursor-pointer justify-start"
                   >
                     {isOpen ? (
-                      <ChevronDown className="w-3 h-3 mr-1 text-[#777777] group-hover:text-white" />
+                      <ChevronDown className="w-3 h-3 mr-1 text-[#777777] group-hover:text-white shrink-0" />
                     ) : (
-                      <ChevronRight className="w-3 h-3 mr-1 text-[#777777] group-hover:text-white" />
+                      <ChevronRight className="w-3 h-3 mr-1 text-[#777777] group-hover:text-white shrink-0" />
                     )}
                     {isOpen ? (
-                      <FolderOpen className="w-3.5 h-3.5 mr-1.5 text-amber-400/90" />
+                      <FolderOpen className="w-3.5 h-3.5 mr-1.5 text-amber-400/90 shrink-0" />
                     ) : (
-                      <Folder className="w-3.5 h-3.5 mr-1.5 text-amber-400/80" />
+                      <Folder className="w-3.5 h-3.5 mr-1.5 text-amber-400/80 shrink-0" />
                     )}
                     <span className="truncate capitalize">{folderKey}</span>
                     <span className="ml-auto text-[10px] text-[#666666]">
                       {folderFiles.length}
                     </span>
-                  </button>
+                  </Button>
 
                   {/* Folder Children Files */}
                   {isOpen && (
@@ -305,12 +315,15 @@ export function SidebarExplorer({
                       {folderFiles.map((file) => {
                         const isSelected = file.id === activeFileId;
                         return (
-                          <button
+                          <Button
                             key={file.id}
+                            type="button"
+                            variant="ghost"
+                            size="xs"
                             onClick={() => onSelectFile(file)}
-                            className={`w-full flex items-center justify-between px-2 py-1 rounded-sm text-left transition-colors group ${
+                            className={`w-full flex items-center justify-between px-2 py-1 h-auto rounded-sm text-left transition-colors font-normal group cursor-pointer ${
                               isSelected
-                                ? "bg-[#04395e] text-white font-medium border-l-2 border-sky-400"
+                                ? "bg-[#04395e] text-white font-medium border-l-2 border-sky-400 hover:bg-[#04395e] hover:text-white"
                                 : "hover:bg-[#252526] text-[#cccccc] hover:text-white"
                             }`}
                           >
@@ -321,7 +334,7 @@ export function SidebarExplorer({
                             <span className="text-[10px] font-mono text-amber-400/80">
                               M
                             </span>
-                          </button>
+                          </Button>
                         );
                       })}
                     </div>
@@ -335,12 +348,15 @@ export function SidebarExplorer({
               {(groupedFiles["root"] || []).map((file) => {
                 const isSelected = file.id === activeFileId;
                 return (
-                  <button
+                  <Button
                     key={file.id}
+                    type="button"
+                    variant="ghost"
+                    size="xs"
                     onClick={() => onSelectFile(file)}
-                    className={`w-full flex items-center justify-between px-2 py-1 rounded text-left transition-colors ${
+                    className={`w-full flex items-center justify-between px-2 py-1 h-auto rounded text-left transition-colors font-normal cursor-pointer ${
                       isSelected
-                        ? "bg-[#04395e] text-white font-medium border-l-2 border-sky-400"
+                        ? "bg-[#04395e] text-white font-medium border-l-2 border-sky-400 hover:bg-[#04395e] hover:text-white"
                         : "hover:bg-[#252526] text-[#cccccc] hover:text-white"
                     }`}
                   >
@@ -348,7 +364,7 @@ export function SidebarExplorer({
                       {getFileIcon(file.name)}
                       <span className="truncate">{file.name}</span>
                     </div>
-                  </button>
+                  </Button>
                 );
               })}
             </div>
@@ -358,9 +374,12 @@ export function SidebarExplorer({
 
       {/* Collapsible Outline Section */}
       <div className="border-t border-[#2d2d2d]">
-        <button
+        <Button
+          type="button"
+          variant="ghost"
+          size="xs"
           onClick={() => setIsOutlineOpen(!isOutlineOpen)}
-          className="w-full px-3 py-1.5 flex items-center justify-between text-[11px] font-semibold text-[#888888] hover:text-[#cccccc] hover:bg-[#202020] transition-colors"
+          className="w-full px-3 py-1.5 h-auto flex items-center justify-between text-[11px] font-semibold text-[#888888] hover:text-[#cccccc] hover:bg-[#202020] transition-colors rounded-none cursor-pointer"
         >
           <div className="flex items-center space-x-1">
             {isOutlineOpen ? (
@@ -370,10 +389,10 @@ export function SidebarExplorer({
             )}
             <span className="uppercase tracking-wider">OUTLINE</span>
           </div>
-          <span className="text-[10px] text-[#666666] font-mono">
+          <span className="text-[10px] text-[#666666] font-mono font-normal">
             {activeFile?.name}
           </span>
-        </button>
+        </Button>
 
         {isOutlineOpen && activeFile && (
           <div className="px-4 py-1.5 space-y-1 text-[11px] text-[#999999] bg-[#141414] max-h-32 overflow-y-auto custom-scrollbar">
@@ -396,9 +415,12 @@ export function SidebarExplorer({
 
       {/* Collapsible Timeline / Git Section */}
       <div className="border-t border-[#2d2d2d]">
-        <button
+        <Button
+          type="button"
+          variant="ghost"
+          size="xs"
           onClick={() => setIsTimelineOpen(!isTimelineOpen)}
-          className="w-full px-3 py-1.5 flex items-center justify-between text-[11px] font-semibold text-[#888888] hover:text-[#cccccc] hover:bg-[#202020] transition-colors"
+          className="w-full px-3 py-1.5 h-auto flex items-center justify-between text-[11px] font-semibold text-[#888888] hover:text-[#cccccc] hover:bg-[#202020] transition-colors rounded-none cursor-pointer"
         >
           <div className="flex items-center space-x-1">
             {isTimelineOpen ? (
@@ -409,7 +431,7 @@ export function SidebarExplorer({
             <span className="uppercase tracking-wider">TIMELINE (GIT)</span>
           </div>
           <GitCommit className="w-3 h-3 text-emerald-400" />
-        </button>
+        </Button>
 
         {isTimelineOpen && (
           <div className="px-3 py-1.5 space-y-1.5 text-[11px] text-[#888888] bg-[#141414] max-h-28 overflow-y-auto custom-scrollbar">

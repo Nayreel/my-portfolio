@@ -19,6 +19,7 @@ import {
   TERMINAL_COMMANDS_HELP,
 } from "@/data";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   Tooltip,
@@ -240,57 +241,69 @@ export function BottomPanel({
       {/* Tab Navigation Header */}
       <div className="h-9 px-3 flex items-center justify-between border-b border-[#242526] text-xs bg-[#1f1f1f] shrink-0">
         <div className="flex items-center space-x-1">
-          <button
+          <Button
+            type="button"
+            variant="ghost"
+            size="xs"
             onClick={() => setActiveTab("problems")}
-            className={`px-2.5 py-1 rounded-sm flex items-center space-x-1.5 transition-colors ${
+            className={`px-2.5 py-1 h-auto rounded-sm flex items-center space-x-1.5 transition-colors cursor-pointer ${
               activeTab === "problems"
-                ? "bg-[#252526] text-white border-b-2 border-sky-400 font-medium"
-                : "text-[#888888] hover:text-[#cccccc]"
+                ? "bg-[#252526] text-white border-b-2 border-sky-400 font-medium hover:bg-[#252526] hover:text-white"
+                : "text-[#888888] hover:text-[#cccccc] hover:bg-transparent"
             }`}
           >
             <span>Problems</span>
             <Badge
               variant="outline"
-              className="text-[10px] px-1 py-0 border-zinc-700"
+              className="text-[10px] px-1 py-0 border-zinc-700 pointer-events-none"
             >
               0
             </Badge>
-          </button>
+          </Button>
 
-          <button
+          <Button
+            type="button"
+            variant="ghost"
+            size="xs"
             onClick={() => setActiveTab("output")}
-            className={`px-2.5 py-1 rounded-sm flex items-center space-x-1.5 transition-colors ${
+            className={`px-2.5 py-1 h-auto rounded-sm flex items-center space-x-1.5 transition-colors cursor-pointer ${
               activeTab === "output"
-                ? "bg-[#252526] text-white border-b-2 border-sky-400 font-medium"
-                : "text-[#888888] hover:text-[#cccccc]"
+                ? "bg-[#252526] text-white border-b-2 border-sky-400 font-medium hover:bg-[#252526] hover:text-white"
+                : "text-[#888888] hover:text-[#cccccc] hover:bg-transparent"
             }`}
           >
             <span>Output</span>
-          </button>
+          </Button>
 
-          <button
+          <Button
+            type="button"
+            variant="ghost"
+            size="xs"
             onClick={() => setActiveTab("terminal")}
-            className={`px-2.5 py-1 rounded-sm flex items-center space-x-1.5 transition-colors ${
+            className={`px-2.5 py-1 h-auto rounded-sm flex items-center space-x-1.5 transition-colors cursor-pointer ${
               activeTab === "terminal"
-                ? "bg-[#252526] text-white border-b-2 border-sky-400 font-medium"
-                : "text-[#888888] hover:text-[#cccccc]"
+                ? "bg-[#252526] text-white border-b-2 border-sky-400 font-medium hover:bg-[#252526] hover:text-white"
+                : "text-[#888888] hover:text-[#cccccc] hover:bg-transparent"
             }`}
           >
             <Terminal className="w-3 h-3 text-sky-400" />
             <span>Terminal</span>
-          </button>
+          </Button>
 
-          <button
+          <Button
+            type="button"
+            variant="ghost"
+            size="xs"
             onClick={() => setActiveTab("ports")}
-            className={`px-2.5 py-1 rounded-sm flex items-center space-x-1.5 transition-colors ${
+            className={`px-2.5 py-1 h-auto rounded-sm flex items-center space-x-1.5 transition-colors cursor-pointer ${
               activeTab === "ports"
-                ? "bg-[#252526] text-white border-b-2 border-sky-400 font-medium"
-                : "text-[#888888] hover:text-[#cccccc]"
+                ? "bg-[#252526] text-white border-b-2 border-sky-400 font-medium hover:bg-[#252526] hover:text-white"
+                : "text-[#888888] hover:text-[#cccccc] hover:bg-transparent"
             }`}
           >
             <span>Ports</span>
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-          </button>
+          </Button>
         </div>
 
         {/* Panel Action Controls */}

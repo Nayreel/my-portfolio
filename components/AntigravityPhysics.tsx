@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Zap, Flame, Rocket, Atom } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface AntigravityPhysicsProps {
   active: boolean;
@@ -119,12 +120,15 @@ export function AntigravityPhysics({
         <span className="font-mono font-bold">
           ZERO GRAVITY PHYSICS ACTIVATED
         </span>
-        <button
+        <Button
+          type="button"
+          variant="ghost"
+          size="xs"
           onClick={onDeactivate}
-          className="px-2.5 py-0.5 rounded-full bg-amber-500 hover:bg-amber-400 text-black font-bold text-[11px] transition-colors ml-2"
+          className="px-2.5 py-0.5 h-auto rounded-full bg-amber-500 hover:bg-amber-400 text-black font-bold text-[11px] transition-colors ml-2 cursor-pointer shadow-sm"
         >
           Restore Gravity
-        </button>
+        </Button>
       </motion.div>
     </div>
   );

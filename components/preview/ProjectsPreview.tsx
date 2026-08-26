@@ -4,10 +4,7 @@ import React, { useState } from "react";
 import {
   Rocket,
   ExternalLink,
-  Code2,
   Cpu,
-  Star,
-  GitFork,
   Copy,
 } from "lucide-react";
 import confetti from "canvas-confetti";
@@ -87,17 +84,19 @@ export function ProjectsPreview({ onOpenAIQuery }: ProjectsPreviewProps) {
           {/* Category Filter Pills */}
           <div className="flex flex-wrap gap-1.5 bg-[#18191e] p-1 rounded-xl border border-[#2a2c35]">
             {categories.map((cat) => (
-              <button
+              <Button
                 key={cat}
+                variant="ghost"
+                size="xs"
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-3 py-1 rounded-lg text-xs font-medium transition-colors ${
+                className={`h-auto px-3 py-1 rounded-lg text-xs font-medium transition-colors cursor-pointer ${
                   selectedCategory === cat
-                    ? "bg-sky-500 text-black font-semibold shadow-sm"
+                    ? "bg-sky-500 text-black font-semibold shadow-sm hover:bg-sky-400 hover:text-black"
                     : "text-zinc-400 hover:text-white hover:bg-[#252830]"
                 }`}
               >
                 {cat}
-              </button>
+              </Button>
             ))}
           </div>
         </div>

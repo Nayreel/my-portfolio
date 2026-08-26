@@ -320,13 +320,16 @@ export function ContactPreview() {
 
         {/* Social Quick Links */}
         <div className="flex flex-wrap items-center justify-center gap-6 text-xs text-zinc-400 pt-2">
-          <button
+          <Button
+            type="button"
+            variant="ghost"
+            size="xs"
             onClick={handleCopyEmail}
-            className="flex items-center space-x-1 hover:text-sky-400 transition-colors cursor-pointer"
+            className="flex items-center space-x-1 hover:text-sky-400 hover:bg-transparent p-0 h-auto font-normal text-xs text-zinc-400 transition-colors cursor-pointer"
           >
             <Mail className="w-3.5 h-3.5" />
             <span>{DEVELOPER_PROFILE.email}</span>
-          </button>
+          </Button>
           <a
             href="https://github.com/Nayreel"
             target="_blank"

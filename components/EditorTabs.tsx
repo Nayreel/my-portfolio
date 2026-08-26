@@ -94,12 +94,15 @@ export function EditorTabs({
                 {/* Modified dot / close button */}
                 <div className="flex items-center ml-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-amber-400/80 mr-1 group-hover:hidden" />
-                  <button
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="icon-xs"
                     onClick={(e) => onCloseTab(file.id, e)}
-                    className="p-0.5 rounded hover:bg-[#333333] text-[#888888] hover:text-white hidden group-hover:block transition-colors"
+                    className="p-0.5 h-4 w-4 rounded hover:bg-[#333333] text-[#888888] hover:text-white hidden group-hover:inline-flex transition-colors cursor-pointer"
                   >
                     <X className="w-3 h-3" />
-                  </button>
+                  </Button>
                 </div>
               </div>
             );

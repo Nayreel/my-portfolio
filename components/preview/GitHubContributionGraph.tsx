@@ -43,14 +43,12 @@ interface WeekColumn {
 }
 
 export function GitHubContributionGraph() {
-  const [selectedYear, setSelectedYear] = useState<string>("last");
+  const [selectedYear] = useState<string>("last");
   const [data, setData] = useState<GitHubContributionsResponse | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const availableYears = ["2026", "2025", "2024", "2023", "2022"];
 
   useEffect(() => {
     let isMounted = true;
-    setIsLoading(true);
 
     const fetchContributions = async () => {
       try {
@@ -136,7 +134,7 @@ export function GitHubContributionGraph() {
 
     // Assign month labels across weeks logically
     let prevMonth = -1;
-    cols.forEach((col, idx) => {
+    cols.forEach((col) => {
       const firstValidDay = col.days.find((d) => d !== null);
       if (firstValidDay) {
         const d = new Date(firstValidDay.date);

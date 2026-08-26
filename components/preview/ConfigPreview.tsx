@@ -124,12 +124,15 @@ export function ConfigPreview({ onSwitchToFile, onOpenAIQuery }: ConfigPreviewPr
             </div>
             <div className="bg-[#12131a]/80 p-3 rounded-lg border border-white/5">
               <span className="text-zinc-500 block text-[11px]">Code Base Meta</span>
-              <button
+              <Button
+                type="button"
+                variant="link"
+                size="xs"
                 onClick={() => onSwitchToFile && onSwitchToFile("package.json")}
-                className="text-sky-400 hover:text-sky-300 font-semibold flex items-center gap-1.5 mt-0.5 underline transition-colors"
+                className="text-sky-400 hover:text-sky-300 font-semibold flex items-center gap-1.5 mt-0.5 p-0 h-auto underline transition-colors cursor-pointer"
               >
                 <FileCode className="w-3.5 h-3.5" /> package.json &rarr;
-              </button>
+              </Button>
             </div>
           </div>
         </div>
@@ -224,10 +227,13 @@ export function ConfigPreview({ onSwitchToFile, onOpenAIQuery }: ConfigPreviewPr
                 </span>
                 <div className="flex items-center gap-2">
                   {ACCENT_COLORS.map((accent) => (
-                    <button
+                    <Button
                       key={accent.hex}
+                      type="button"
+                      variant="ghost"
+                      size="xs"
                       onClick={() => handleAccentChange(accent.hex, accent.name)}
-                      className={`h-8 flex-1 rounded-lg border transition-all flex items-center justify-center ${
+                      className={`h-8 flex-1 p-0 rounded-lg border transition-all flex items-center justify-center cursor-pointer ${
                         selectedAccent === accent.hex
                           ? "border-white ring-2 ring-white/30 scale-105"
                           : "border-zinc-800 opacity-70 hover:opacity-100"
@@ -255,16 +261,19 @@ export function ConfigPreview({ onSwitchToFile, onOpenAIQuery }: ConfigPreviewPr
                     <span className="text-white block font-medium">Minimap Preview</span>
                     <span className="text-[11px] text-zinc-500">Render miniature code outline</span>
                   </div>
-                  <button
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="xs"
                     onClick={() => setMinimapEnabled(!minimapEnabled)}
-                    className={`px-2.5 py-1 rounded text-[11px] font-semibold transition-colors ${
+                    className={`px-2.5 py-1 h-auto rounded text-[11px] font-semibold transition-colors cursor-pointer ${
                       minimapEnabled
-                        ? "bg-sky-500 text-black"
-                        : "bg-zinc-800 text-zinc-400"
+                        ? "bg-sky-500 text-black hover:bg-sky-400 hover:text-black"
+                        : "bg-zinc-800 text-zinc-400 hover:bg-zinc-700 hover:text-white"
                     }`}
                   >
                     {minimapEnabled ? "Enabled" : "Disabled"}
-                  </button>
+                  </Button>
                 </div>
 
                 <div className="flex items-center justify-between p-2.5 rounded-lg bg-[#161722] border border-zinc-800">
@@ -272,16 +281,19 @@ export function ConfigPreview({ onSwitchToFile, onOpenAIQuery }: ConfigPreviewPr
                     <span className="text-white block font-medium">Bracket Pair Colorization</span>
                     <span className="text-[11px] text-zinc-500">Highlight matching bracket pairs</span>
                   </div>
-                  <button
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="xs"
                     onClick={() => setBracketPairColor(!bracketPairColor)}
-                    className={`px-2.5 py-1 rounded text-[11px] font-semibold transition-colors ${
+                    className={`px-2.5 py-1 h-auto rounded text-[11px] font-semibold transition-colors cursor-pointer ${
                       bracketPairColor
-                        ? "bg-purple-500 text-white"
-                        : "bg-zinc-800 text-zinc-400"
+                        ? "bg-purple-500 text-white hover:bg-purple-400 hover:text-white"
+                        : "bg-zinc-800 text-zinc-400 hover:bg-zinc-700 hover:text-white"
                     }`}
                   >
                     {bracketPairColor ? "Enabled" : "Disabled"}
-                  </button>
+                  </Button>
                 </div>
               </div>
             </CardContent>
@@ -351,18 +363,24 @@ export function ConfigPreview({ onSwitchToFile, onOpenAIQuery }: ConfigPreviewPr
             {onOpenAIQuery && (
               <div className="pt-2 flex flex-wrap items-center gap-2">
                 <span className="text-xs text-zinc-400">Try quick questions:</span>
-                <button
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="xs"
                   onClick={() => onOpenAIQuery("Tell me about Lee Ryan's experience building automated workflows")}
-                  className="px-2.5 py-1 rounded-md bg-[#1a1c2a] hover:bg-[#202236] border border-purple-500/30 text-purple-300 text-xs transition-colors"
+                  className="px-2.5 py-1 h-auto rounded-md bg-[#1a1c2a] hover:bg-[#202236] border border-purple-500/30 text-purple-300 text-xs transition-colors cursor-pointer"
                 >
                   &ldquo;Tell me about workflow automations&rdquo; &rarr;
-                </button>
-                <button
+                </Button>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="xs"
                   onClick={() => onOpenAIQuery("What flagship projects has Lee Ryan deployed to production?")}
-                  className="px-2.5 py-1 rounded-md bg-[#1a1c2a] hover:bg-[#202236] border border-sky-500/30 text-sky-300 text-xs transition-colors"
+                  className="px-2.5 py-1 h-auto rounded-md bg-[#1a1c2a] hover:bg-[#202236] border border-sky-500/30 text-sky-300 text-xs transition-colors cursor-pointer"
                 >
                   &ldquo;What flagship projects are deployed?&rdquo; &rarr;
-                </button>
+                </Button>
               </div>
             )}
           </CardContent>

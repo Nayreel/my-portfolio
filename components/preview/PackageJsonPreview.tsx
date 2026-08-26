@@ -225,12 +225,15 @@ export function PackageJsonPreview({ onSwitchToFile }: PackageJsonPreviewProps) 
             </div>
             <div className="bg-[#12131a]/80 p-3 rounded-lg border border-white/5">
               <span className="text-zinc-500 block text-[11px]">Workspace Config</span>
-              <button
+              <Button
+                type="button"
+                variant="link"
+                size="xs"
                 onClick={() => onSwitchToFile && onSwitchToFile("config.ts")}
-                className="text-sky-400 hover:text-sky-300 font-semibold flex items-center gap-1.5 mt-0.5 underline transition-colors"
+                className="text-sky-400 hover:text-sky-300 font-semibold flex items-center gap-1.5 mt-0.5 p-0 h-auto underline transition-colors cursor-pointer"
               >
                 <Code2 className="w-3.5 h-3.5" /> config.ts &rarr;
-              </button>
+              </Button>
             </div>
           </div>
         </div>
@@ -238,38 +241,50 @@ export function PackageJsonPreview({ onSwitchToFile }: PackageJsonPreviewProps) 
         {/* Tab Selection and Filter */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-zinc-800 pb-3">
           <div className="flex items-center space-x-1.5 bg-[#14151b] p-1 rounded-lg border border-zinc-800 text-xs">
-            <button
+            <Button
+              type="button"
+              variant="ghost"
+              size="xs"
               onClick={() => setActiveTab("all")}
-              className={`px-3 py-1 rounded-md transition-colors ${
-                activeTab === "all" ? "bg-sky-500 text-black font-semibold" : "text-zinc-400 hover:text-white"
+              className={`px-3 py-1 h-auto rounded-md transition-colors cursor-pointer ${
+                activeTab === "all" ? "bg-sky-500 text-black font-semibold hover:bg-sky-400 hover:text-black" : "text-zinc-400 hover:text-white hover:bg-zinc-800/60"
               }`}
             >
               Overview
-            </button>
-            <button
+            </Button>
+            <Button
+              type="button"
+              variant="ghost"
+              size="xs"
               onClick={() => setActiveTab("dependencies")}
-              className={`px-3 py-1 rounded-md transition-colors ${
-                activeTab === "dependencies" ? "bg-sky-500 text-black font-semibold" : "text-zinc-400 hover:text-white"
+              className={`px-3 py-1 h-auto rounded-md transition-colors cursor-pointer ${
+                activeTab === "dependencies" ? "bg-sky-500 text-black font-semibold hover:bg-sky-400 hover:text-black" : "text-zinc-400 hover:text-white hover:bg-zinc-800/60"
               }`}
             >
               Dependencies ({DEPENDENCIES.length})
-            </button>
-            <button
+            </Button>
+            <Button
+              type="button"
+              variant="ghost"
+              size="xs"
               onClick={() => setActiveTab("scripts")}
-              className={`px-3 py-1 rounded-md transition-colors ${
-                activeTab === "scripts" ? "bg-sky-500 text-black font-semibold" : "text-zinc-400 hover:text-white"
+              className={`px-3 py-1 h-auto rounded-md transition-colors cursor-pointer ${
+                activeTab === "scripts" ? "bg-sky-500 text-black font-semibold hover:bg-sky-400 hover:text-black" : "text-zinc-400 hover:text-white hover:bg-zinc-800/60"
               }`}
             >
               Scripts ({SCRIPTS.length})
-            </button>
-            <button
+            </Button>
+            <Button
+              type="button"
+              variant="ghost"
+              size="xs"
               onClick={() => setActiveTab("devDeps")}
-              className={`px-3 py-1 rounded-md transition-colors ${
-                activeTab === "devDeps" ? "bg-sky-500 text-black font-semibold" : "text-zinc-400 hover:text-white"
+              className={`px-3 py-1 h-auto rounded-md transition-colors cursor-pointer ${
+                activeTab === "devDeps" ? "bg-sky-500 text-black font-semibold hover:bg-sky-400 hover:text-black" : "text-zinc-400 hover:text-white hover:bg-zinc-800/60"
               }`}
             >
               Dev Tools ({DEV_DEPENDENCIES.length})
-            </button>
+            </Button>
           </div>
 
           <div className="relative w-full sm:w-64">

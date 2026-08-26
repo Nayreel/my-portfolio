@@ -11,6 +11,7 @@ import {
   FileText,
 } from "lucide-react";
 import { ChatMessage } from "@/types/ai";
+import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/toast";
 
 interface ChatMessageItemProps {
@@ -47,13 +48,16 @@ export function ChatMessageItem({ msg }: ChatMessageItemProps) {
   return (
     <div className="space-y-2.5 pt-1 text-[12.5px]">
       {msg.duration && (
-        <button
+        <Button
+          type="button"
+          variant="ghost"
+          size="xs"
           onClick={() => setIsWorkedExpanded(!isWorkedExpanded)}
-          className="flex items-center space-x-1 text-[11.5px] text-[#828490] hover:text-[#c4c6d2] transition-colors group cursor-pointer"
+          className="flex items-center space-x-1 text-[11.5px] text-[#828490] hover:text-[#c4c6d2] hover:bg-transparent p-0 h-auto font-normal transition-colors group cursor-pointer"
         >
           <span>{msg.duration}</span>
           <ChevronRight className="w-3 h-3 text-[#6c6e7a] group-hover:translate-x-0.5 transition-transform" />
-        </button>
+        </Button>
       )}
 
       {/* Main Response Content */}
@@ -70,16 +74,19 @@ export function ChatMessageItem({ msg }: ChatMessageItemProps) {
                   <span className="font-mono text-[10.5px]">tsx</span>
                   <div className="flex items-center space-x-2">
                     <AtSign className="w-3 h-3 cursor-pointer hover:text-white" />
-                    <button
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="icon-xs"
                       onClick={() => handleCopyText(cleanCode, "c-" + pIdx)}
-                      className="cursor-pointer hover:text-white transition-colors"
+                      className="cursor-pointer hover:text-white hover:bg-transparent p-0 h-4 w-4 transition-colors text-[#8b8d98]"
                     >
                       {copiedId === "c-" + pIdx ? (
                         <Check className="w-3 h-3 text-emerald-400" />
                       ) : (
                         <Copy className="w-3 h-3" />
                       )}
-                    </button>
+                    </Button>
                   </div>
                 </div>
                 <div className="p-3 font-mono text-[11px] text-zinc-300 overflow-x-auto leading-relaxed bg-[#111215]">
@@ -126,21 +133,27 @@ export function ChatMessageItem({ msg }: ChatMessageItemProps) {
             <ChevronRight className="w-3 h-3 text-[#6b6d79]" />
           </div>
 
-          <button
+          <Button
+            type="button"
+            variant="ghost"
+            size="xs"
             onClick={() => toast.success("Reviewing modified file changes")}
-            className="px-2.5 py-1 rounded-lg bg-[#22242c] hover:bg-[#2c2e38] border border-[#31333e] text-[11px] text-[#e0e2ec] flex items-center space-x-1.5 transition-colors cursor-pointer font-medium"
+            className="px-2.5 py-1 h-auto rounded-lg bg-[#22242c] hover:bg-[#2c2e38] border border-[#31333e] text-[11px] text-[#e0e2ec] hover:text-white flex items-center space-x-1.5 transition-colors cursor-pointer font-medium"
           >
             <FileText className="w-3 h-3 text-[#8e909e]" />
             <span>Review</span>
-          </button>
+          </Button>
         </div>
       )}
 
       {/* Action Icons */}
-      <div className="flex items-center justify-end space-x-2.5 pt-1 text-[#6e707e]">
-        <button
+      <div className="flex items-center justify-end space-x-1.5 pt-1 text-[#6e707e]">
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon-xs"
           onClick={() => handleCopyText(msg.content, msg.id)}
-          className="p-1 hover:text-white transition-colors cursor-pointer"
+          className="p-1 h-6 w-6 rounded hover:text-white hover:bg-[#202127] transition-colors cursor-pointer text-[#6e707e]"
           title="Copy message"
         >
           {copiedId === msg.id ? (
@@ -148,27 +161,33 @@ export function ChatMessageItem({ msg }: ChatMessageItemProps) {
           ) : (
             <Copy className="w-3.5 h-3.5" />
           )}
-        </button>
+        </Button>
 
-        <button
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon-xs"
           onClick={() => handleFeedback(true)}
-          className={`p-1 hover:text-white transition-colors cursor-pointer ${
-            isLiked === true ? "text-sky-400" : ""
+          className={`p-1 h-6 w-6 rounded hover:text-white hover:bg-[#202127] transition-colors cursor-pointer ${
+            isLiked === true ? "text-sky-400" : "text-[#6e707e]"
           }`}
           title="Good response"
         >
           <ThumbsUp className="w-3.5 h-3.5" />
-        </button>
+        </Button>
 
-        <button
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon-xs"
           onClick={() => handleFeedback(false)}
-          className={`p-1 hover:text-white transition-colors cursor-pointer ${
-            isLiked === false ? "text-rose-400" : ""
+          className={`p-1 h-6 w-6 rounded hover:text-white hover:bg-[#202127] transition-colors cursor-pointer ${
+            isLiked === false ? "text-rose-400" : "text-[#6e707e]"
           }`}
           title="Bad response"
         >
           <ThumbsDown className="w-3.5 h-3.5" />
-        </button>
+        </Button>
       </div>
     </div>
   );

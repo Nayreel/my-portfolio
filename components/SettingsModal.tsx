@@ -83,9 +83,14 @@ export function SettingsModal({
     },
   ];
 
+  React.useEffect(() => {
+    if (ideThemeMode) {
+      document.documentElement.className = `dark ide-theme-${ideThemeMode}`;
+    }
+  }, [ideThemeMode]);
+
   const handleSelectMode = (mode: (typeof backgroundModes)[0]) => {
     if (setIdeThemeMode) setIdeThemeMode(mode.id);
-    document.documentElement.className = `dark ide-theme-${mode.id}`;
     toast.success(`Theme switched to ${mode.name}`, {
       description: mode.desc,
     });
@@ -119,16 +124,19 @@ export function SettingsModal({
                 {backgroundModes.map((mode) => {
                   const isSelected = ideThemeMode === mode.id;
                   return (
-                    <button
+                    <Button
                       key={mode.id}
+                      type="button"
+                      variant="ghost"
+                      size="default"
                       onClick={() => handleSelectMode(mode)}
-                      className={`p-3 rounded-xl border text-left transition-all cursor-pointer ${
+                      className={`h-auto p-3 rounded-xl border text-left transition-all cursor-pointer flex-col items-stretch justify-start ${
                         isSelected
-                          ? "bg-[#252834] border-sky-400 text-white shadow-md shadow-sky-500/10"
-                          : "bg-[#141518] border-[#272932] hover:bg-[#1e2027] text-zinc-300"
+                          ? "bg-[#252834] border-sky-400 text-white shadow-md shadow-sky-500/10 hover:bg-[#2c303f] hover:text-white"
+                          : "bg-[#141518] border-[#272932] hover:bg-[#1e2027] text-zinc-300 hover:text-white"
                       }`}
                     >
-                      <div className="flex items-center justify-between">
+                      <div className="flex items-center justify-between w-full">
                         <span className="font-bold text-xs text-white">
                           {mode.name}
                         </span>
@@ -136,10 +144,10 @@ export function SettingsModal({
                           <Check className="w-3.5 h-3.5 text-sky-400" />
                         )}
                       </div>
-                      <p className="text-[11px] text-zinc-400 mt-1 leading-snug">
+                      <p className="text-[11px] text-zinc-400 mt-1 leading-snug font-normal text-left">
                         {mode.desc}
                       </p>
-                    </button>
+                    </Button>
                   );
                 })}
               </div>
@@ -154,8 +162,11 @@ export function SettingsModal({
 
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                 {colorOptions.map((opt) => (
-                  <button
+                  <Button
                     key={opt.hex}
+                    type="button"
+                    variant="ghost"
+                    size="default"
                     onClick={() => {
                       setAccentColor(opt.hex);
                       document.documentElement.style.setProperty(
@@ -164,10 +175,10 @@ export function SettingsModal({
                       );
                       toast.success(`Accent color set to ${opt.name}`);
                     }}
-                    className={`px-3 py-2.5 rounded-xl flex items-center justify-between border transition-all text-xs cursor-pointer ${
+                    className={`h-auto px-3 py-2.5 rounded-xl flex items-center justify-between border transition-all text-xs cursor-pointer ${
                       accentColor === opt.hex
-                        ? "bg-[#252834] border-sky-400 text-white shadow-sm"
-                        : "bg-[#141518] border-[#272932] hover:bg-[#1e2027] text-zinc-300"
+                        ? "bg-[#252834] border-sky-400 text-white shadow-sm hover:bg-[#2c303f] hover:text-white"
+                        : "bg-[#141518] border-[#272932] hover:bg-[#1e2027] text-zinc-300 hover:text-white"
                     }`}
                   >
                     <div className="flex items-center space-x-2.5 truncate">
@@ -182,7 +193,7 @@ export function SettingsModal({
                     {accentColor === opt.hex && (
                       <Check className="w-3.5 h-3.5 text-sky-400 shrink-0 ml-1" />
                     )}
-                  </button>
+                  </Button>
                 ))}
               </div>
             </div>

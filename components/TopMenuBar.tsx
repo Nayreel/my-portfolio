@@ -302,15 +302,18 @@ export function TopMenuBar({
 
       {/* Center section: Window Title Bar */}
       <div className="flex-1 mx-2 flex items-center justify-center min-w-0">
-        <button
+        <Button
+          type="button"
+          variant="ghost"
+          size="xs"
           onClick={openCommandPalette}
-          className="text-xs text-[#9d9d9d] hover:text-[#d4d4d4] transition-colors truncate max-w-full font-normal cursor-pointer select-none px-2 py-0.5 rounded hover:bg-[#252526]/60"
+          className="text-xs text-[#9d9d9d] hover:text-[#d4d4d4] transition-colors truncate max-w-full font-normal cursor-pointer select-none px-2 py-0.5 h-auto rounded hover:bg-[#252526]/60"
           title="my-portfolio - Portfolio IDE (Click for Command Palette ⌘K)"
         >
           <span className="truncate">
             my-portfolio - Portfolio IDE - {activeFileName}
           </span>
-        </button>
+        </Button>
       </div>
 
       {/* Right section: Layout Toggles, Zero-G button, User Profile */}
@@ -414,25 +417,34 @@ export function TopMenuBar({
         />
 
         {/* Window controls styling */}
-        <div className="hidden sm:flex items-center space-x-2 pl-2 text-[#777777]">
-          <button
-            className="hover:text-white transition-colors"
+        <div className="hidden sm:flex items-center space-x-1 pl-2 text-[#777777]">
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon-xs"
+            className="hover:text-white hover:bg-transparent h-5 w-5 p-0 transition-colors cursor-pointer"
             title="Minimize"
           >
             <Minus className="w-3 h-3" />
-          </button>
-          <button
-            className="hover:text-white transition-colors"
+          </Button>
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon-xs"
+            className="hover:text-white hover:bg-transparent h-5 w-5 p-0 transition-colors cursor-pointer"
             title="Maximize"
           >
             <Square className="w-2.5 h-2.5" />
-          </button>
-          <button
-            className="hover:text-red-400 transition-colors"
+          </Button>
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon-xs"
+            className="hover:text-red-400 hover:bg-transparent h-5 w-5 p-0 transition-colors cursor-pointer"
             title="Close"
           >
             <X className="w-3 h-3" />
-          </button>
+          </Button>
         </div>
       </div>
     </header>

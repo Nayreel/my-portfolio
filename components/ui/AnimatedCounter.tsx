@@ -17,12 +17,8 @@ export function AnimatedCounter({ value, duration = 1200 }: AnimatedCounterProps
   const [count, setCount] = useState(targetNumber !== null ? 0 : value);
 
   useEffect(() => {
-    if (targetNumber === null) {
-      setCount(value);
-      return;
-    }
+    if (targetNumber === null) return;
 
-    let start = 0;
     const startTime = performance.now();
 
     const updateCounter = (currentTime: number) => {
@@ -43,7 +39,7 @@ export function AnimatedCounter({ value, duration = 1200 }: AnimatedCounterProps
 
     const animFrame = requestAnimationFrame(updateCounter);
     return () => cancelAnimationFrame(animFrame);
-  }, [targetNumber, duration, value]);
+  }, [targetNumber, duration]);
 
   if (targetNumber === null) {
     return <span>{value}</span>;

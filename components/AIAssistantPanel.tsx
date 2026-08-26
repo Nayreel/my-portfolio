@@ -14,6 +14,7 @@ import {
 import { PortfolioFile } from "@/data";
 import { ChatMessage } from "@/types/ai";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Button } from "@/components/ui/button";
 import {
   Tooltip,
   TooltipContent,
@@ -278,15 +279,18 @@ If you prefer another phrase like **"Ask Me Anything"** or **"Ask About Lee Ryan
           </span>
         </div>
 
-        <button
+        <Button
+          type="button"
+          variant="ghost"
+          size="xs"
           onClick={() =>
             toast.info("No uncommitted changes in current working tree")
           }
-          className="px-2 py-0.5 rounded-md bg-[#1f2026] hover:bg-[#282a32] border border-[#2c2d36] text-[10.5px] text-[#c0c2cf] flex items-center space-x-1 transition-colors cursor-pointer"
+          className="px-2 py-0.5 h-auto rounded-md bg-[#1f2026] hover:bg-[#282a32] border border-[#2c2d36] text-[10.5px] text-[#c0c2cf] hover:text-white flex items-center space-x-1 transition-colors cursor-pointer font-normal"
         >
           <FileText className="w-3 h-3 text-[#7f8190]" />
           <span>Review Changes</span>
-        </button>
+        </Button>
       </div>
 
       {/* Chat Input Area */}
