@@ -5,15 +5,15 @@ import { cn } from "@/lib/utils";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "@/components/ui/toast";
 
-const geist = Geist({
+const geistSans = Geist({
   subsets: ["latin"],
-  variable: "--font-sans",
+  variable: "--font-geist-sans",
   display: "swap",
 });
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
-  variable: "--font-mono",
+  variable: "--font-geist-mono",
   display: "swap",
 });
 
@@ -46,12 +46,12 @@ export default function RootLayout({
       className={cn(
         "dark",
         "font-sans",
-        geist.variable,
+        geistSans.variable,
         jetbrainsMono.variable,
       )}
     >
       <body
-        className="bg-[#181818] text-[#cccccc] antialiased overflow-hidden selection:bg-sky-500/30 selection:text-white font-sans"
+        className="bg-[#181818] text-[#cccccc] antialiased overflow-hidden selection:bg-sky-500/30 selection:text-white font-sans text-[13px]"
         suppressHydrationWarning
       >
         <TooltipProvider delay={200}>

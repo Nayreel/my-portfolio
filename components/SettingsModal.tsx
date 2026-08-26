@@ -85,7 +85,15 @@ export function SettingsModal({
 
   React.useEffect(() => {
     if (ideThemeMode) {
-      document.documentElement.className = `dark ide-theme-${ideThemeMode}`;
+      const root = document.documentElement;
+      root.classList.remove(
+        "ide-theme-nebula",
+        "ide-theme-abyss",
+        "ide-theme-cyberpunk",
+        "ide-theme-matrix",
+        "ide-theme-solar"
+      );
+      root.classList.add(`ide-theme-${ideThemeMode}`);
     }
   }, [ideThemeMode]);
 
