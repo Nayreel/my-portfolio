@@ -23,7 +23,7 @@ export const HeroParallax = ({
   const firstRow = conferences.slice(0, 6);
   const secondRow = conferences.slice(0, 6);
   const thirdRow = conferences.slice(0, 6);
-  const ref = React.useRef(null);
+  const ref = React.useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
