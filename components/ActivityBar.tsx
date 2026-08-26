@@ -76,7 +76,7 @@ export function ActivityBar({
   ];
 
   return (
-    <aside className="w-12 bg-[#181818] border-r border-[#2d2d2d] flex flex-col justify-between items-center py-2 select-none z-30 shrink-0">
+    <aside className="w-10 sm:w-12 bg-[#181818] border-r border-[#2d2d2d] flex flex-col justify-between items-center py-2 select-none z-30 shrink-0">
       {/* Top Activity Buttons with shadcn Tooltips */}
       <div className="flex flex-col items-center space-y-1.5 w-full">
         {topButtons.map((btn) => {

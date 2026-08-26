@@ -28,6 +28,7 @@ interface SidebarExplorerProps {
   activeFileId: string;
   onSelectFile: (file: PortfolioFile) => void;
   openCommandPalette: () => void;
+  onClose?: () => void;
 }
 
 export function SidebarExplorer({
@@ -35,6 +36,7 @@ export function SidebarExplorer({
   activeFileId,
   onSelectFile,
   openCommandPalette,
+  onClose,
 }: SidebarExplorerProps) {
   const [openFolders, setOpenFolders] = useState<Record<string, boolean>>({
     about: true,
@@ -155,7 +157,7 @@ export function SidebarExplorer({
   };
 
   return (
-    <div className="w-64 bg-[#181818] border-r border-[#2d2d2d] flex flex-col h-full select-none text-xs text-[#cccccc]">
+    <div className="w-full bg-[#181818] border-r border-[#2d2d2d] flex flex-col h-full select-none text-xs text-[#cccccc]">
       {/* Sidebar Header */}
       <div className="h-9 px-4 flex items-center justify-between border-b border-[#2d2d2d] text-[11px] font-semibold tracking-wider text-[#cccccc] select-none">
         <span className="uppercase tracking-wider font-semibold text-[#bbbbbb] text-[11px]">
@@ -198,6 +200,23 @@ export function SidebarExplorer({
               Quick Search (⌘P)
             </TooltipContent>
           </Tooltip>
+
+          {onClose && (
+            <Tooltip>
+              <TooltipTrigger
+                onClick={onClose}
+                className="p-1 hover:bg-[#2a2d2e] rounded text-[#858585] hover:text-white transition-colors cursor-pointer"
+              >
+                <X className="w-3.5 h-3.5" />
+              </TooltipTrigger>
+              <TooltipContent
+                side="bottom"
+                className="text-xs bg-[#1f1f1f] text-zinc-200 border-[#3c3c3c]"
+              >
+                Close Explorer
+              </TooltipContent>
+            </Tooltip>
+          )}
         </div>
       </div>
 

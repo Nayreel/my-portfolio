@@ -155,6 +155,7 @@ export const TERMINAL_COMMANDS_HELP: TerminalCommandHelp[] = [
   { cmd: "conferences", desc: "View research conferences & PSC8 pitch events" },
   { cmd: "contact", desc: "Get email, phone, GitHub, LinkedIn info" },
   { cmd: "cat resume.md", desc: "Print formal CV markdown to terminal" },
+  { cmd: "download-resume", desc: "Download Lee_Ryan_Garcia_Resume.pdf from public" },
   { cmd: "cat package.json", desc: "Display dependencies & scripts" },
   { cmd: "cat config.ts", desc: "Display IDE & AI assistant settings" },
   { cmd: "fly", desc: "Toggle zero-gravity floating physics mode" },

@@ -4,6 +4,7 @@ import React from "react";
 import { Download } from "lucide-react";
 import confetti from "canvas-confetti";
 import { DEVELOPER_PROFILE, EXPERIENCES } from "@/data";
+import { downloadResumePdf } from "@/lib/download";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
@@ -11,6 +12,9 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { toast } from "@/components/ui/toast";
 
 export function ResumePreview() {
+  const resumeUrl = DEVELOPER_PROFILE.resumePdfUrl || "/Lee_Ryan_Garcia_Resume.pdf";
+  const resumeFilename = resumeUrl.split("/").pop() || "Lee_Ryan_Garcia_Resume.pdf";
+
   const handleDownload = () => {
     confetti({
       particleCount: 100,
@@ -18,32 +22,32 @@ export function ResumePreview() {
       origin: { y: 0.5 },
       colors: ["#38bdf8", "#818cf8", "#34d399", "#f59e0b"],
     });
-    toast.success("Resume downloaded!", {
-      description: "Lee_Ryan_Garcia_Resume.pdf",
+    toast.success("Downloading CV...", {
+      description: resumeFilename,
     });
-    window.print();
+    downloadResumePdf(resumeUrl, resumeFilename);
   };
 
   return (
     <ScrollArea className="flex-1 w-full bg-[#121214] text-white min-h-0">
-      <div className="max-w-3xl mx-auto space-y-6 p-6 lg:p-10">
-        <Card className="bg-[#16171b] border-[#272930] p-6 lg:p-10 shadow-2xl text-white">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#2a2c35] pb-6">
+      <div className="max-w-3xl mx-auto space-y-4 sm:space-y-6 p-3.5 sm:p-6 lg:p-10">
+        <Card className="bg-[#16171b] border-[#272930] p-4 sm:p-6 lg:p-10 shadow-2xl text-white">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#2a2c35] pb-5 sm:pb-6">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-extrabold text-white">
+              <h1 className="text-xl sm:text-3xl font-extrabold text-white">
                 {DEVELOPER_PROFILE.name}
               </h1>
-              <p className="text-sky-400 font-mono text-sm mt-0.5">
+              <p className="text-sky-400 font-mono text-xs sm:text-sm mt-0.5">
                 {DEVELOPER_PROFILE.title}
               </p>
-              <p className="text-xs text-zinc-400 mt-1">
+              <p className="text-[11px] sm:text-xs text-zinc-400 mt-1">
                 📍 {DEVELOPER_PROFILE.location} • 📞 {DEVELOPER_PROFILE.phone} • ✉️ {DEVELOPER_PROFILE.email}
               </p>
             </div>
 
             <Button
               onClick={handleDownload}
-              className="bg-sky-500 hover:bg-sky-400 text-black font-bold text-xs shadow-md shrink-0"
+              className="bg-sky-500 hover:bg-sky-400 text-black font-bold text-xs shadow-md shrink-0 cursor-pointer w-full sm:w-auto"
             >
               <Download className="w-3.5 h-3.5 mr-1.5" />
               <span>Download CV (PDF)</span>

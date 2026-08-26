@@ -74,14 +74,14 @@ export function EditorTabs({
       {/* Upper Tab Strip */}
       <div className="h-9 flex items-center justify-between bg-[#181818] overflow-hidden">
         {/* Scrollable Tabs Container */}
-        <div className="flex-1 min-w-0 h-full flex items-center overflow-x-auto custom-scrollbar">
+        <div className="flex-1 min-w-0 h-full flex items-center overflow-x-auto custom-scrollbar touch-pan-x">
           {openTabs.map((file) => {
             const isActive = file.id === activeFileId;
             return (
               <div
                 key={file.id}
                 onClick={() => onSelectTab(file)}
-                className={`h-full shrink-0 flex items-center px-3.5 space-x-2 border-r border-[#2d2d2d] cursor-pointer text-xs font-mono transition-all group ${
+                className={`h-full shrink-0 flex items-center px-2.5 sm:px-3.5 space-x-1.5 sm:space-x-2 border-r border-[#2d2d2d] cursor-pointer text-xs font-mono transition-all group ${
                   isActive
                     ? "bg-[#1e1e1e] text-white border-t-2 border-t-sky-400 font-medium"
                     : "bg-[#181818] text-[#888888] hover:bg-[#1f1f1f] hover:text-[#cccccc]"
@@ -89,7 +89,7 @@ export function EditorTabs({
               >
                 <div className="flex items-center">
                   {getTabIcon(file.name)}
-                  <span className="truncate max-w-[140px]">{file.name}</span>
+                  <span className="truncate max-w-[100px] sm:max-w-[140px]">{file.name}</span>
                 </div>
 
                 {/* Modified dot / close button */}
@@ -111,13 +111,13 @@ export function EditorTabs({
         </div>
 
         {/* Right Tab Controls: Fixed Mode Switcher & Actions */}
-        <div className="flex items-center space-x-1.5 px-2 shrink-0 bg-[#181818] h-full z-10 border-l border-[#2d2d2d] shadow-[-6px_0_12px_rgba(0,0,0,0.3)]">
+        <div className="flex items-center space-x-1 sm:space-x-1.5 px-1.5 sm:px-2 shrink-0 bg-[#181818] h-full z-10 border-l border-[#2d2d2d] shadow-[-6px_0_12px_rgba(0,0,0,0.3)]">
           {/* Mode Switcher Buttons */}
           <div className="flex items-center bg-[#252526] p-0.5 rounded-md border border-[#333333]">
             <Tooltip>
               <TooltipTrigger
                 onClick={() => setViewMode("code")}
-                className={`flex items-center space-x-1 px-2 py-0.5 rounded text-xs transition-colors cursor-pointer ${
+                className={`flex items-center space-x-1 px-1.5 sm:px-2 py-0.5 rounded text-xs transition-colors cursor-pointer ${
                   viewMode === "code"
                     ? "bg-[#094771] text-white font-medium shadow-sm"
                     : "text-[#999999] hover:text-white"
@@ -134,30 +134,33 @@ export function EditorTabs({
               </TooltipContent>
             </Tooltip>
 
-            <Tooltip>
-              <TooltipTrigger
-                onClick={() => setViewMode("split")}
-                className={`flex items-center space-x-1 px-2 py-0.5 rounded text-xs transition-colors cursor-pointer ${
-                  viewMode === "split"
-                    ? "bg-[#094771] text-white font-medium shadow-sm"
-                    : "text-[#999999] hover:text-white"
-                }`}
-              >
-                <Columns className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline text-[11px]">Split</span>
-              </TooltipTrigger>
-              <TooltipContent
-                side="bottom"
-                className="text-xs bg-[#1f1f1f] text-zinc-200 border-[#3c3c3c]"
-              >
-                Side-by-side Code + Live Component
-              </TooltipContent>
-            </Tooltip>
+            {/* Split Mode - Desktop/Tablet Landscape only */}
+            <div className="hidden md:inline-flex">
+              <Tooltip>
+                <TooltipTrigger
+                  onClick={() => setViewMode("split")}
+                  className={`flex items-center space-x-1 px-1.5 sm:px-2 py-0.5 rounded text-xs transition-colors cursor-pointer ${
+                    viewMode === "split"
+                      ? "bg-[#094771] text-white font-medium shadow-sm"
+                      : "text-[#999999] hover:text-white"
+                  }`}
+                >
+                  <Columns className="w-3.5 h-3.5" />
+                  <span className="hidden sm:inline text-[11px]">Split</span>
+                </TooltipTrigger>
+                <TooltipContent
+                  side="bottom"
+                  className="text-xs bg-[#1f1f1f] text-zinc-200 border-[#3c3c3c]"
+                >
+                  Side-by-side Code + Live Component
+                </TooltipContent>
+              </Tooltip>
+            </div>
 
             <Tooltip>
               <TooltipTrigger
                 onClick={() => setViewMode("preview")}
-                className={`flex items-center space-x-1 px-2 py-0.5 rounded text-xs transition-colors cursor-pointer ${
+                className={`flex items-center space-x-1 px-1.5 sm:px-2 py-0.5 rounded text-xs transition-colors cursor-pointer ${
                   viewMode === "preview"
                     ? "bg-[#094771] text-white font-medium shadow-sm"
                     : "text-[#999999] hover:text-white"

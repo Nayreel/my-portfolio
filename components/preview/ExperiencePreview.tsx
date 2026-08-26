@@ -50,26 +50,26 @@ export function ExperiencePreview() {
       ref={containerRef}
       className="flex-1 w-full bg-[#121214] text-white min-h-0"
     >
-      <div className="max-w-4xl mx-auto space-y-10 p-6 lg:p-10">
+      <div className="max-w-4xl mx-auto space-y-6 sm:space-y-10 p-3.5 sm:p-6 lg:p-10">
         <div>
           <div className="inline-flex items-center space-x-1.5 text-xs text-sky-400 font-mono uppercase tracking-wider mb-1">
             <Briefcase className="w-3.5 h-3.5" />
             <span>Career Milestones</span>
           </div>
-          <h1 className="text-3xl font-extrabold tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
             Work Experience & Impact
           </h1>
         </div>
 
         {/* Scroll-Enhanced Timeline */}
-        <div ref={timelineRef} className="relative pl-10 space-y-8 select-none">
-          {/* Base Neutral Vertical Track Line (centered at 20px) */}
-          <div className="absolute left-5 top-6 bottom-6 w-[2px] -translate-x-1/2 bg-[#262833] rounded-full" />
+        <div ref={timelineRef} className="relative pl-7 sm:pl-10 space-y-6 sm:space-y-8 select-none">
+          {/* Base Neutral Vertical Track Line */}
+          <div className="absolute left-3.5 sm:left-5 top-6 bottom-6 w-[2px] -translate-x-1/2 bg-[#262833] rounded-full" />
 
-          {/* Dynamic Illuminated Scroll Highlight Beam (centered at 20px) */}
+          {/* Dynamic Illuminated Scroll Highlight Beam */}
           <div
             style={{ height: `${Math.max(0, Math.min(100, scrollProgress * 100))}%` }}
-            className="absolute left-5 top-6 w-[2px] -translate-x-1/2 bg-gradient-to-b from-sky-400 via-indigo-500 to-sky-300 rounded-full shadow-[0_0_12px_rgba(56,189,248,0.8)] z-0 origin-top transition-all duration-100 ease-out"
+            className="absolute left-3.5 sm:left-5 top-6 w-[2px] -translate-x-1/2 bg-gradient-to-b from-sky-400 via-indigo-500 to-sky-300 rounded-full shadow-[0_0_12px_rgba(56,189,248,0.8)] z-0 origin-top transition-all duration-100 ease-out"
           />
 
           {EXPERIENCES.map((exp, idx) => {
@@ -79,17 +79,17 @@ export function ExperiencePreview() {
 
             return (
               <div key={idx} className="relative group">
-                {/* Centered Node Circle - 40px flex wrapper centered exactly at 20px */}
-                <div className="absolute -left-10 top-7 w-10 flex items-center justify-center z-10 pointer-events-none">
+                {/* Centered Node Circle */}
+                <div className="absolute -left-7 sm:-left-10 top-6 sm:top-7 w-7 sm:w-10 flex items-center justify-center z-10 pointer-events-none">
                   <div
-                    className={`w-4 h-4 rounded-full flex items-center justify-center transition-all duration-300 ${
+                    className={`w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full flex items-center justify-center transition-all duration-300 ${
                       isPassed
                         ? "bg-[#121214] border-2 border-sky-400 shadow-[0_0_12px_rgba(56,189,248,0.7)] scale-110"
                         : "bg-[#16171b] border-2 border-[#383b48]"
                     } group-hover:scale-125`}
                   >
                     <div
-                      className={`w-1.5 h-1.5 rounded-full transition-colors duration-300 ${
+                      className={`w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full transition-colors duration-300 ${
                         isPassed ? "bg-sky-400 shadow-[0_0_6px_#38bdf8]" : "bg-zinc-600"
                       } group-hover:bg-white`}
                     />
@@ -98,7 +98,7 @@ export function ExperiencePreview() {
 
                 {/* Experience Card */}
                 <Card
-                  className={`bg-[#16171b] p-6 space-y-4 transition-all duration-300 text-white rounded-xl ${
+                  className={`bg-[#16171b] p-4 sm:p-6 space-y-3 sm:space-y-4 transition-all duration-300 text-white rounded-xl ${
                     isPassed
                       ? "border-[#384155] shadow-lg shadow-sky-500/5"
                       : "border-[#272930]"
@@ -165,8 +165,8 @@ export function ExperiencePreview() {
         </div>
 
         {/* Education Card */}
-        <Card className="bg-[#16171b] border-[#272930] p-6 space-y-4 text-white rounded-xl">
-          <h2 className="text-lg font-bold flex items-center space-x-2 text-white">
+        <Card className="bg-[#16171b] border-[#272930] p-4 sm:p-6 space-y-3 sm:space-y-4 text-white rounded-xl">
+          <h2 className="text-base sm:text-lg font-bold flex items-center space-x-2 text-white">
             <GraduationCap className="w-5 h-5 text-indigo-400" />
             <span>Education</span>
           </h2>
@@ -198,7 +198,7 @@ export function ExperiencePreview() {
         </Card>
 
         {/* Conferences & Competitions Card */}
-        <Card className="bg-[#16171b] border-[#272930] p-6 space-y-4 text-white rounded-xl">
+        <Card className="bg-[#16171b] border-[#272930] p-4 sm:p-6 space-y-3 sm:space-y-4 text-white rounded-xl">
           <h2 className="text-lg font-bold flex items-center space-x-2 text-white">
             <Award className="w-5 h-5 text-amber-400" />
             <span>Conferences & Pitching Competitions</span>

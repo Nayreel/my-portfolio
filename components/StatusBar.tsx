@@ -166,7 +166,7 @@ export function StatusBar({
         </Tooltip>
 
         {/* Prettier status */}
-        <span className="flex items-center space-x-0.5 text-white/90">
+        <span className="hidden xs:flex sm:flex items-center space-x-0.5 text-white/90">
           <Check className="w-3 h-3" />
           <span>Prettier</span>
         </span>

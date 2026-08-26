@@ -11,10 +11,12 @@ import {
   Check,
   ChevronRight,
   ExternalLink,
+  Download,
 } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/icons";
 import confetti from "canvas-confetti";
 import { DEVELOPER_PROFILE } from "@/data";
+import { downloadResumePdf } from "@/lib/download";
 import { Badge } from "@/components/ui/badge";
 import {
   DropdownMenu,
@@ -139,19 +141,20 @@ export function ProfileDropdown({
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="flex items-center pl-1 cursor-pointer bg-transparent border-0 p-0 focus:outline-none select-none">
+      <DropdownMenuTrigger className="flex items-center pl-1 cursor-pointer bg-transparent border-0 p-0 focus:outline-none select-none shrink-0">
         <Badge
           variant="outline"
-          className="bg-[#0078d4]/20 hover:bg-[#0078d4]/30 border-[#0078d4]/40 text-sky-300 px-2.5 py-0.5 rounded-full text-[11px] font-medium transition-all flex items-center space-x-1.5 cursor-pointer shadow-sm hover:shadow-sky-500/20"
+          className="bg-[#0078d4]/20 hover:bg-[#0078d4]/30 border-[#0078d4]/40 text-sky-300 px-2 sm:px-2.5 py-0.5 rounded-full text-[11px] font-medium transition-all flex items-center space-x-1.5 cursor-pointer shadow-sm hover:shadow-sky-500/20 max-w-[150px] truncate"
         >
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse mr-1" />
-          <span className="font-sans">{DEVELOPER_PROFILE.name}</span>
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+          <span className="font-sans truncate hidden sm:inline">{DEVELOPER_PROFILE.name}</span>
+          <span className="font-sans font-mono font-bold sm:hidden">LG</span>
         </Badge>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent
         align="end"
-        className="w-72 bg-[#1e1f24] border-[#31333e] text-[#cccccc] p-1.5 shadow-2xl rounded-2xl z-50 text-xs"
+        className="w-72 max-w-[calc(100vw-1.5rem)] bg-[#1e1f24] border-[#31333e] text-[#cccccc] p-1.5 shadow-2xl rounded-2xl z-50 text-xs"
       >
         {/* Profile Card Header */}
         <div className="p-3 bg-[#15161a] rounded-xl border border-[#262831] mb-1.5 space-y-2">
@@ -265,6 +268,27 @@ export function ProfileDropdown({
               <span>View Formal CV (resume.md)</span>
             </DropdownMenuItem>
           )}
+
+          <DropdownMenuItem
+            onClick={() => {
+              const filename =
+                (DEVELOPER_PROFILE.resumePdfUrl || "/Lee_Ryan_Garcia_Resume.pdf")
+                  .split("/")
+                  .pop() || "Lee_Ryan_Garcia_Resume.pdf";
+              confetti({ particleCount: 60, spread: 70 });
+              toast.success("Downloading CV...", {
+                description: filename,
+              });
+              downloadResumePdf(
+                DEVELOPER_PROFILE.resumePdfUrl || "/Lee_Ryan_Garcia_Resume.pdf",
+                filename
+              );
+            }}
+            className="text-xs cursor-pointer py-2 px-2.5 rounded-lg hover:bg-[#272932] hover:text-white focus:bg-[#272932] focus:text-white flex items-center space-x-2"
+          >
+            <Download className="w-3.5 h-3.5 text-sky-400" />
+            <span>Download CV (PDF)</span>
+          </DropdownMenuItem>
 
           {onOpenContact && (
             <DropdownMenuItem

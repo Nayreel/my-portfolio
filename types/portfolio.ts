@@ -72,6 +72,7 @@ export interface DeveloperProfile {
   location: string;
   status: string;
   bio: string;
+  resumePdfUrl?: string;
   stats: { label: string; value: string }[];
   education: EducationItem[];
   philosophy?: DeveloperPhilosophy;

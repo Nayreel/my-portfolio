@@ -68,7 +68,7 @@ export function ProjectsPreview({ onOpenAIQuery }: ProjectsPreviewProps) {
 
   return (
     <ScrollArea className="flex-1 w-full bg-[#121214] text-white min-h-0">
-      <div className="max-w-5xl mx-auto space-y-8 p-6 lg:p-10">
+      <div className="max-w-5xl mx-auto space-y-6 sm:space-y-8 p-3.5 sm:p-6 lg:p-10">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
@@ -76,20 +76,20 @@ export function ProjectsPreview({ onOpenAIQuery }: ProjectsPreviewProps) {
               <Rocket className="w-3.5 h-3.5" />
               <span>Featured Engineering Portfolio</span>
             </div>
-            <h1 className="text-3xl font-extrabold tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
               My Projects
             </h1>
           </div>
 
           {/* Category Filter Pills */}
-          <div className="flex flex-wrap gap-1.5 bg-[#18191e] p-1 rounded-xl border border-[#2a2c35]">
+          <div className="flex overflow-x-auto custom-scrollbar touch-pan-x gap-1 bg-[#18191e] p-1 rounded-xl border border-[#2a2c35] max-w-full shrink-0">
             {categories.map((cat) => (
               <Button
                 key={cat}
                 variant="ghost"
                 size="xs"
                 onClick={() => setSelectedCategory(cat)}
-                className={`h-auto px-3 py-1 rounded-lg text-xs font-medium transition-colors cursor-pointer ${
+                className={`h-auto px-2.5 sm:px-3 py-1 rounded-lg text-xs font-medium transition-colors shrink-0 cursor-pointer ${
                   selectedCategory === cat
                     ? "bg-sky-500 text-black font-semibold shadow-sm hover:bg-sky-400 hover:text-black"
                     : "text-zinc-400 hover:text-white hover:bg-[#252830]"
@@ -112,7 +112,7 @@ export function ProjectsPreview({ onOpenAIQuery }: ProjectsPreviewProps) {
                 className={`absolute top-0 right-0 w-48 h-48 bg-gradient-to-br ${project.imageColor} blur-3xl opacity-30 group-hover:opacity-60 transition-opacity pointer-events-none`}
               />
 
-              <CardHeader className="p-6 pb-3 space-y-3 relative z-10">
+              <CardHeader className="p-4 sm:p-6 pb-2 sm:pb-3 space-y-2.5 sm:space-y-3 relative z-10">
                 <div className="flex items-center justify-between">
                   <Badge
                     variant="outline"
@@ -123,16 +123,16 @@ export function ProjectsPreview({ onOpenAIQuery }: ProjectsPreviewProps) {
                 </div>
 
                 <div>
-                  <CardTitle className="text-xl font-bold text-white group-hover:text-sky-300 transition-colors">
+                  <CardTitle className="text-lg sm:text-xl font-bold text-white group-hover:text-sky-300 transition-colors">
                     {project.title}
                   </CardTitle>
-                  <CardDescription className="text-xs text-sky-400/90 font-mono mt-1">
+                  <CardDescription className="text-xs text-sky-400/90 font-mono mt-0.5 sm:mt-1">
                     {project.tagline}
                   </CardDescription>
                 </div>
               </CardHeader>
 
-              <CardContent className="p-6 pt-0 space-y-4 relative z-10">
+              <CardContent className="p-4 sm:p-6 pt-0 space-y-3 sm:space-y-4 relative z-10">
                 <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
                   {project.description}
                 </p>
@@ -152,7 +152,7 @@ export function ProjectsPreview({ onOpenAIQuery }: ProjectsPreviewProps) {
               </CardContent>
 
               {/* Card Footer Actions */}
-              <CardFooter className="p-6 pt-4 border-t border-[#252830] flex items-center justify-between relative z-10">
+              <CardFooter className="p-4 sm:p-6 pt-3 sm:pt-4 border-t border-[#252830] flex flex-wrap items-center justify-between gap-2 relative z-10">
                 <div className="flex items-center space-x-2">
                   <Tooltip>
                     <TooltipTrigger
@@ -194,9 +194,9 @@ export function ProjectsPreview({ onOpenAIQuery }: ProjectsPreviewProps) {
           open={!!activeProjectModal}
           onOpenChange={(open) => !open && setActiveProjectModal(null)}
         >
-          <DialogContent className="bg-[#18191e] border-[#333333] max-w-2xl text-white">
+          <DialogContent className="bg-[#18191e] border-[#333333] max-w-2xl w-[92vw] sm:w-full max-h-[85dvh] overflow-y-auto text-white p-4 sm:p-6">
             <DialogHeader>
-              <DialogTitle className="font-bold text-lg text-white">
+              <DialogTitle className="font-bold text-base sm:text-lg text-white">
                 {activeProjectModal?.title}
               </DialogTitle>
               <DialogDescription className="text-xs text-zinc-400 font-mono">
@@ -204,16 +204,16 @@ export function ProjectsPreview({ onOpenAIQuery }: ProjectsPreviewProps) {
               </DialogDescription>
             </DialogHeader>
 
-            <pre className="bg-[#121214] p-4 rounded-xl text-xs font-mono text-emerald-400 overflow-x-auto border border-[#2a2c35] max-h-80">
+            <pre className="bg-[#121214] p-3 sm:p-4 rounded-xl text-xs font-mono text-emerald-400 overflow-x-auto border border-[#2a2c35] max-h-60 sm:max-h-80">
               <code>{activeProjectModal?.highlightCode}</code>
             </pre>
 
-            <DialogFooter className="flex items-center justify-between sm:justify-between w-full">
+            <DialogFooter className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 sm:gap-4 w-full pt-2">
               <a
                 href={activeProjectModal?.liveUrl || activeProjectModal?.link}
                 target="_blank"
                 rel="noreferrer"
-                className="text-xs text-sky-400 hover:text-sky-300 font-mono flex items-center space-x-1"
+                className="text-xs text-sky-400 hover:text-sky-300 font-mono flex items-center justify-center sm:justify-start space-x-1 py-1"
               >
                 <span>Open Live Application</span>
                 <ExternalLink className="w-3 h-3 ml-1" />
@@ -229,7 +229,7 @@ export function ProjectsPreview({ onOpenAIQuery }: ProjectsPreviewProps) {
                     triggerConfetti();
                   }
                 }}
-                className="bg-sky-500 hover:bg-sky-400 text-black font-semibold text-xs"
+                className="bg-sky-500 hover:bg-sky-400 text-black font-semibold text-xs cursor-pointer w-full sm:w-auto"
               >
                 <Copy className="w-3.5 h-3.5 mr-1.5" />
                 Copy Snippet

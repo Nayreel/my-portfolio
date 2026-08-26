@@ -11,6 +11,7 @@ export const DEVELOPER_PROFILE: DeveloperProfile = {
   twitter: "https://x.com",
   location: "Olongapo City, Zambales, Philippines",
   status: "Available for Software Engineering & Automation Opportunities",
+  resumePdfUrl: "/Lee_Ryan_Garcia_Resume.pdf",
   bio: "Software Engineer specializing in scalable web development with Next.js, workflow automation with n8n, CRM/ERP integrations (Odoo, Strapi), and high-performance full-stack applications. Passionate about developer tooling, AI integrations, and intuitive UI/UX.",
   stats: [
     { label: "Production Projects", value: "10" },

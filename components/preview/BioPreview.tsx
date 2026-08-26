@@ -60,69 +60,69 @@ export function BioPreview({ onSwitchToFile, onOpenAIQuery }: BioPreviewProps) {
 
   return (
     <ScrollArea className="flex-1 w-full bg-[#121214] text-white min-h-0">
-      <div className="max-w-4xl mx-auto space-y-10 p-6 lg:p-10">
+      <div className="max-w-4xl mx-auto space-y-6 sm:space-y-10 p-3 sm:p-6 lg:p-10 w-full min-w-0">
         {/* Top Hero Card */}
-        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#1c1d22] via-[#16171b] to-[#121316] border border-[#2d3039] p-6 lg:p-8 shadow-2xl">
+        <div className="relative overflow-hidden rounded-xl sm:rounded-2xl bg-gradient-to-br from-[#1c1d22] via-[#16171b] to-[#121316] border border-[#2d3039] p-3.5 sm:p-6 lg:p-8 shadow-2xl w-full min-w-0">
           <div className="absolute -top-24 -right-24 w-72 h-72 bg-sky-500/10 rounded-full blur-3xl pointer-events-none" />
           <div className="absolute -bottom-24 -left-24 w-72 h-72 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
 
-          <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-            <div className="space-y-3">
-              <div className="flex flex-wrap items-center gap-2">
+          <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 sm:gap-6 min-w-0">
+            <div className="space-y-2 sm:space-y-3 min-w-0 w-full">
+              <div className="flex flex-wrap items-center gap-2 max-w-full">
                 <Badge
                   variant="outline"
-                  className="bg-sky-500/10 border-sky-500/30 text-sky-300 px-3 py-1 font-mono text-xs"
+                  className="bg-sky-500/10 border-sky-500/30 text-sky-300 px-2.5 sm:px-3 py-1 font-mono text-[11px] sm:text-xs h-auto whitespace-normal break-words max-w-full text-left leading-relaxed"
                 >
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse mr-2" />
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse mr-1.5 sm:mr-2 shrink-0" />
                   <span>{DEVELOPER_PROFILE.status}</span>
                 </Badge>
               </div>
 
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight bg-gradient-to-r from-white via-[#f0f0f0] to-[#999999] bg-clip-text text-transparent">
+              <h1 className="text-xl sm:text-3xl lg:text-5xl font-extrabold tracking-tight bg-gradient-to-r from-white via-[#f0f0f0] to-[#999999] bg-clip-text text-transparent break-words">
                 {DEVELOPER_PROFILE.name}
               </h1>
 
-              <p className="text-base sm:text-lg text-sky-400 font-medium font-mono">
+              <p className="text-xs sm:text-base lg:text-lg text-sky-400 font-medium font-mono break-words leading-snug">
                 {DEVELOPER_PROFILE.title}
               </p>
 
-              <p className="text-sm sm:text-base text-[#a0a5b5] max-w-2xl leading-relaxed">
+              <p className="text-xs sm:text-base text-[#a0a5b5] max-w-2xl leading-relaxed break-words">
                 {DEVELOPER_PROFILE.bio}
               </p>
 
-              <div className="flex flex-wrap items-center gap-4 text-xs text-zinc-400 font-mono pt-1">
-                <span className="flex items-center space-x-1 text-zinc-300">
-                  <MapPin className="w-3.5 h-3.5 text-sky-400" />
-                  <span>{DEVELOPER_PROFILE.location}</span>
+              <div className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-2 sm:gap-4 text-xs text-zinc-400 font-mono pt-1 w-full min-w-0">
+                <span className="flex items-center space-x-1 text-zinc-300 max-w-full">
+                  <MapPin className="w-3.5 h-3.5 text-sky-400 shrink-0" />
+                  <span className="break-words">{DEVELOPER_PROFILE.location}</span>
                 </span>
-                <span className="flex items-center space-x-1 text-zinc-300">
-                  <Phone className="w-3.5 h-3.5 text-emerald-400" />
-                  <span>{DEVELOPER_PROFILE.phone}</span>
+                <span className="flex items-center space-x-1 text-zinc-300 max-w-full">
+                  <Phone className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                  <span className="break-words">{DEVELOPER_PROFILE.phone}</span>
                 </span>
-                <span className="flex items-center space-x-1 text-zinc-300">
-                  <Mail className="w-3.5 h-3.5 text-amber-400" />
-                  <span>{DEVELOPER_PROFILE.email}</span>
+                <span className="flex items-center space-x-1 text-zinc-300 max-w-full">
+                  <Mail className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                  <span className="break-all">{DEVELOPER_PROFILE.email}</span>
                 </span>
               </div>
             </div>
           </div>
 
           {/* Quick Action CTAs */}
-          <div className="mt-8 pt-6 border-t border-[#2a2c35] flex flex-wrap items-center gap-2.5">
+          <div className="mt-6 pt-5 sm:mt-8 sm:pt-6 border-t border-[#2a2c35] flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-2 sm:gap-2.5 w-full">
             <Button
               onClick={() => onSwitchToFile("projects.tsx")}
-              className="h-8.5 px-3.5 cursor-pointer bg-sky-500 hover:bg-sky-400 text-black font-semibold text-xs shadow-md shadow-sky-500/20 rounded-lg flex items-center gap-1.5 transition-all hover:scale-[1.02] active:scale-[0.98]"
+              className="h-8.5 px-3.5 cursor-pointer bg-sky-500 hover:bg-sky-400 text-black font-semibold text-xs shadow-md shadow-sky-500/20 rounded-lg flex items-center justify-center gap-1.5 transition-all hover:scale-[1.02] active:scale-[0.98] w-full sm:w-auto"
             >
-              <FolderGit2 className="w-3.5 h-3.5" />
+              <FolderGit2 className="w-3.5 h-3.5 shrink-0" />
               <span>Explore Featured Projects</span>
             </Button>
 
             <Button
               variant="outline"
               onClick={() => onSwitchToFile("get-in-touch.tsx")}
-              className="h-8.5 px-3.5 cursor-pointer bg-[#252830] hover:bg-[#2e323d] border-[#3c4150] hover:border-sky-500/40 text-white text-xs font-medium rounded-lg flex items-center gap-1.5 transition-all hover:scale-[1.02] active:scale-[0.98]"
+              className="h-8.5 px-3.5 cursor-pointer bg-[#252830] hover:bg-[#2e323d] border-[#3c4150] hover:border-sky-500/40 text-white text-xs font-medium rounded-lg flex items-center justify-center gap-1.5 transition-all hover:scale-[1.02] active:scale-[0.98] w-full sm:w-auto"
             >
-              <Mail className="w-3.5 h-3.5 text-sky-400" />
+              <Mail className="w-3.5 h-3.5 text-sky-400 shrink-0" />
               <span>Contact / Hire Me</span>
             </Button>
 
@@ -131,19 +131,19 @@ export function BioPreview({ onSwitchToFile, onOpenAIQuery }: BioPreviewProps) {
               onClick={() =>
                 window.open("https://github.com/Nayreel", "_blank")
               }
-              className="h-8.5 px-3.5 cursor-pointer bg-[#252830] hover:bg-[#2e323d] border-[#3c4150] hover:border-zinc-500 text-zinc-300 hover:text-white text-xs font-medium rounded-lg flex items-center gap-1.5 transition-all hover:scale-[1.02] active:scale-[0.98]"
+              className="h-8.5 px-3.5 cursor-pointer bg-[#252830] hover:bg-[#2e323d] border-[#3c4150] hover:border-zinc-500 text-zinc-300 hover:text-white text-xs font-medium rounded-lg flex items-center justify-center gap-1.5 transition-all hover:scale-[1.02] active:scale-[0.98] w-full sm:w-auto"
             >
-              <GithubIcon className="w-3.5 h-3.5 text-zinc-400" />
+              <GithubIcon className="w-3.5 h-3.5 text-zinc-400 shrink-0" />
               <span>GitHub Profile</span>
             </Button>
 
             <Button
               variant="outline"
               onClick={handleCopyEmail}
-              className="h-8.5 px-3.5 cursor-pointer bg-[#252830] hover:bg-[#2e323d] border-[#3c4150] hover:border-zinc-500 text-zinc-300 hover:text-white text-xs font-medium rounded-lg flex items-center gap-1.5 transition-all hover:scale-[1.02] active:scale-[0.98]"
+              className="h-8.5 px-3.5 cursor-pointer bg-[#252830] hover:bg-[#2e323d] border-[#3c4150] hover:border-zinc-500 text-zinc-300 hover:text-white text-xs font-medium rounded-lg flex items-center justify-center gap-1.5 transition-all hover:scale-[1.02] active:scale-[0.98] w-full sm:w-auto"
             >
-              <Copy className="w-3.5 h-3.5 text-zinc-400" />
-              <span>{DEVELOPER_PROFILE.email}</span>
+              <Copy className="w-3.5 h-3.5 text-zinc-400 shrink-0" />
+              <span className="truncate max-w-[200px]">{DEVELOPER_PROFILE.email}</span>
             </Button>
 
             <Button
@@ -153,9 +153,9 @@ export function BioPreview({ onSwitchToFile, onOpenAIQuery }: BioPreviewProps) {
                   "Give me a summary of Lee Ryan Garcia's projects, experience, and skills.",
                 )
               }
-              className="h-8.5 px-3.5 cursor-pointer bg-indigo-500/15 hover:bg-indigo-500/25 border-indigo-500/40 hover:border-indigo-400 text-indigo-300 text-xs font-mono rounded-lg flex items-center gap-1.5 transition-all hover:scale-[1.02] active:scale-[0.98]"
+              className="h-8.5 px-3.5 cursor-pointer bg-indigo-500/15 hover:bg-indigo-500/25 border-indigo-500/40 hover:border-indigo-400 text-indigo-300 text-xs font-mono rounded-lg flex items-center justify-center gap-1.5 transition-all hover:scale-[1.02] active:scale-[0.98] w-full sm:w-auto"
             >
-              <Bot className="w-3.5 h-3.5 text-indigo-400" />
+              <Bot className="w-3.5 h-3.5 text-indigo-400 shrink-0" />
               <span>Ask AI Assistant</span>
             </Button>
           </div>

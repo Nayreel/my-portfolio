@@ -120,13 +120,13 @@ export function ContactPreview() {
 
   return (
     <ScrollArea className="flex-1 w-full bg-[#121214] text-white min-h-0">
-      <div className="max-w-2xl mx-auto space-y-8 p-6 lg:p-10">
+      <div className="max-w-2xl mx-auto space-y-6 sm:space-y-8 p-3.5 sm:p-6 lg:p-10">
         <div>
           <div className="inline-flex items-center space-x-1.5 text-xs text-sky-400 font-mono uppercase tracking-wider mb-1">
             <Mail className="w-3.5 h-3.5" />
             <span>Direct Dispatch</span>
           </div>
-          <h1 className="text-3xl font-extrabold tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
             Get in Touch with Lee Ryan
           </h1>
           <p className="text-xs sm:text-sm text-zinc-400 mt-2">
@@ -164,7 +164,7 @@ export function ContactPreview() {
             </Button>
           </Card>
         ) : (
-          <Card className="bg-[#16171b] border-[#272930] p-6 lg:p-8 shadow-xl text-white">
+          <Card className="bg-[#16171b] border-[#272930] p-4 sm:p-6 lg:p-8 shadow-xl text-white">
             <form onSubmit={handleFormSubmit} className="space-y-5" noValidate>
               {/* Invisible Honeypot Spam Trap */}
               <div className="hidden" aria-hidden="true">

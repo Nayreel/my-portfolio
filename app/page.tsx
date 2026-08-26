@@ -33,10 +33,34 @@ export default function AntigravityPortfolioApp() {
   // Layout states
   const [activeSidebarView, setActiveSidebarView] =
     useState<ActiveSidebarView>("explorer");
-  const [isLeftSidebarOpen, setIsLeftSidebarOpen] = useState(true);
-  const [isBottomPanelOpen, setIsBottomPanelOpen] = useState(true);
-  const [isAIPanelOpen, setIsAIPanelOpen] = useState(true);
+  const [isLeftSidebarOpen, setIsLeftSidebarOpen] = useState(false);
+  const [isBottomPanelOpen, setIsBottomPanelOpen] = useState(false);
+  const [isAIPanelOpen, setIsAIPanelOpen] = useState(false);
   const [viewMode, setViewMode] = useState<ViewMode>("preview"); // Default to Preview for instant portfolio showcase
+  const [isMobile, setIsMobile] = useState(false);
+  const [isTablet, setIsTablet] = useState(false);
+
+  // Detect responsive screen size & set appropriate defaults
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+      const mobile = width < 768;
+      const tablet = width < 1024;
+      setIsMobile(mobile);
+      setIsTablet(tablet);
+    };
+
+    handleResize();
+    // Default open on desktop
+    if (window.innerWidth >= 1024) {
+      setIsLeftSidebarOpen(true);
+      setIsAIPanelOpen(false);
+      setIsBottomPanelOpen(false);
+    }
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   // Modals & Preferences
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
@@ -123,7 +147,7 @@ export default function AntigravityPortfolioApp() {
 
   return (
     <div
-      className={`h-screen w-screen overflow-hidden flex flex-col ide-theme-${ideThemeMode} bg-[#121316] text-[#cccccc] font-sans antialiased select-none transition-colors duration-300`}
+      className={`h-[100dvh] w-full max-w-full overflow-hidden flex flex-col ide-theme-${ideThemeMode} bg-[#121316] text-[#cccccc] font-sans antialiased select-none transition-colors duration-300 relative`}
       style={
         {
           "--accent-theme": accentColor,
@@ -151,17 +175,13 @@ export default function AntigravityPortfolioApp() {
           setViewMode("preview");
         }}
         onOpenResume={() => {
-          const resumeFile =
-            PORTFOLIO_FILES.find((f) => f.id === "resume.md") ||
-            PORTFOLIO_FILES[0];
-          handleSelectFile(resumeFile);
+          const file = PORTFOLIO_FILES.find((f) => f.id === "resume.md") || PORTFOLIO_FILES[0];
+          handleSelectFile(file);
           setViewMode("preview");
         }}
         onOpenContact={() => {
-          const contactFile =
-            PORTFOLIO_FILES.find((f) => f.id === "get-in-touch.tsx") ||
-            PORTFOLIO_FILES[0];
-          handleSelectFile(contactFile);
+          const file = PORTFOLIO_FILES.find((f) => f.id === "get-in-touch.tsx") || PORTFOLIO_FILES[0];
+          handleSelectFile(file);
           setViewMode("preview");
         }}
         openSettingsModal={() => setIsSettingsOpen(true)}
@@ -172,61 +192,90 @@ export default function AntigravityPortfolioApp() {
       />
 
       {/* 2. Main Workspace Layout */}
-      <div className="flex-1 flex overflow-hidden relative">
-        {/* Far-Left Activity Bar */}
-        <ActivityBar
-          activeView={activeSidebarView}
-          setActiveView={(view) => {
-            setActiveSidebarView(view);
-            if (view === "none") {
-              setIsLeftSidebarOpen(false);
-            } else {
-              setIsLeftSidebarOpen(true);
-            }
-          }}
-          isAIPanelOpen={isAIPanelOpen}
-          setIsAIPanelOpen={setIsAIPanelOpen}
-          openSettingsModal={() => setIsSettingsOpen(true)}
-          openContactTab={() => {
-            handleSelectFile(
-              PORTFOLIO_FILES.find((f) => f.id === "get-in-touch.tsx") ||
-                PORTFOLIO_FILES[0],
-            );
-            setViewMode("preview");
-          }}
-        />
-
-        {/* Primary Sidebar (Explorer / Search) */}
-        {isLeftSidebarOpen && activeSidebarView !== "none" && (
-          <SidebarExplorer
-            files={PORTFOLIO_FILES}
-            activeFileId={activeFileId}
-            onSelectFile={handleSelectFile}
-            openCommandPalette={() => setIsCommandPaletteOpen(true)}
+      <div className="flex-1 flex overflow-hidden relative min-h-0">
+        {/* Far-Left Activity Bar (Desktop & Tablet only; Mobile uses TopMenuBar Hamburger) */}
+        <div className="hidden sm:flex shrink-0 h-full">
+          <ActivityBar
+            activeView={activeSidebarView}
+            setActiveView={(view) => {
+              setActiveSidebarView(view);
+              if (view === "none") {
+                setIsLeftSidebarOpen(false);
+              } else {
+                setIsLeftSidebarOpen(true);
+              }
+            }}
+            isAIPanelOpen={isAIPanelOpen}
+            setIsAIPanelOpen={setIsAIPanelOpen}
+            openSettingsModal={() => setIsSettingsOpen(true)}
+            openContactTab={() => {
+              handleSelectFile(
+                PORTFOLIO_FILES.find((f) => f.id === "get-in-touch.tsx") ||
+                  PORTFOLIO_FILES[0],
+              );
+              setViewMode("preview");
+            }}
           />
+        </div>
+
+        {/* Primary Sidebar (Explorer / Search) on Desktop */}
+        {!isTablet && isLeftSidebarOpen && activeSidebarView !== "none" && (
+          <div className="w-64 shrink-0 h-full">
+            <SidebarExplorer
+              files={PORTFOLIO_FILES}
+              activeFileId={activeFileId}
+              onSelectFile={handleSelectFile}
+              openCommandPalette={() => setIsCommandPaletteOpen(true)}
+            />
+          </div>
+        )}
+
+        {/* Primary Sidebar Overlay Drawer on Tablet/Mobile */}
+        {isTablet && isLeftSidebarOpen && activeSidebarView !== "none" && (
+          <>
+            <div
+              onClick={() => setIsLeftSidebarOpen(false)}
+              className="fixed inset-0 bg-black/60 backdrop-blur-xs z-35"
+            />
+            <div className="fixed inset-y-9 left-0 sm:left-12 z-40 w-72 max-w-[85vw] sm:max-w-[calc(100vw-3.25rem)] shadow-2xl border-r border-[#2d2d2d] bg-[#181818] flex flex-col">
+              <SidebarExplorer
+                files={PORTFOLIO_FILES}
+                activeFileId={activeFileId}
+                onSelectFile={(f) => {
+                  handleSelectFile(f);
+                  if (isMobile) setIsLeftSidebarOpen(false);
+                }}
+                openCommandPalette={() => {
+                  setIsLeftSidebarOpen(false);
+                  setIsCommandPaletteOpen(true);
+                }}
+                onClose={() => setIsLeftSidebarOpen(false)}
+              />
+            </div>
+          </>
         )}
 
         {/* Horizontal Resizable Area (Main Workspace + AI Assistant Panel) */}
         <ResizablePanelGroup
-          key={`h-group-${isAIPanelOpen}`}
+          key={`h-group-${!isTablet && isAIPanelOpen}`}
           orientation="horizontal"
           className="flex-1 h-full min-w-0 overflow-hidden"
         >
-          {/* Main Central Workspace: Vertical Resizable Area (Editor Tabs/Preview + Bottom Terminal) */}
+          {/* Main Central Workspace */}
           <ResizablePanel
             id="editor-main-panel"
-            defaultSize={isAIPanelOpen ? 70 : 100}
+            defaultSize={!isTablet && isAIPanelOpen ? 70 : 100}
             minSize={8}
           >
             <ResizablePanelGroup
-              key={`v-group-${isBottomPanelOpen}`}
+              key={`v-group-${!isMobile && isBottomPanelOpen}`}
               orientation="vertical"
               className="h-full w-full min-h-0 overflow-hidden"
             >
               {/* Top Editor Content Area */}
               <ResizablePanel
                 id="editor-content-panel"
-                defaultSize={isBottomPanelOpen ? 65 : 100}
+                defaultSize={!isMobile && isBottomPanelOpen ? 65 : 100}
                 minSize={8}
               >
                 <div className="h-full w-full flex flex-col min-w-0 overflow-hidden bg-[#1e1e1e]">
@@ -236,7 +285,7 @@ export default function AntigravityPortfolioApp() {
                     activeFileId={activeFileId}
                     onSelectTab={(f) => setActiveFileId(f.id)}
                     onCloseTab={handleCloseTab}
-                    viewMode={viewMode}
+                    viewMode={isMobile && viewMode === "split" ? "preview" : viewMode}
                     setViewMode={setViewMode}
                     onAskAIAboutFile={() => {
                       setIsAIPanelOpen(true);
@@ -251,12 +300,12 @@ export default function AntigravityPortfolioApp() {
                   />
 
                   {/* Central Content Area (Code, Rendered Preview, or Split) */}
-                  <div className="flex-1 flex overflow-hidden relative">
+                  <div className="flex-1 flex overflow-hidden relative min-h-0">
                     {/* Split / Code Mode: Code Editor */}
-                    {(viewMode === "code" || viewMode === "split") && (
+                    {(viewMode === "code" || (!isMobile && viewMode === "split")) && (
                       <div
                         className={`h-full flex flex-col ${
-                          viewMode === "split"
+                          !isMobile && viewMode === "split"
                             ? "w-1/2 border-r border-[#2d2d2d]"
                             : "w-full"
                         }`}
@@ -277,10 +326,10 @@ export default function AntigravityPortfolioApp() {
                     )}
 
                     {/* Split / Preview Mode: Interactive Rendered Portfolio */}
-                    {(viewMode === "preview" || viewMode === "split") && (
+                    {(viewMode === "preview" || (!isMobile && viewMode === "split") || (isMobile && viewMode !== "code")) && (
                       <div
                         className={`h-full flex flex-col ${
-                          viewMode === "split" ? "w-1/2" : "w-full"
+                          !isMobile && viewMode === "split" ? "w-1/2" : "w-full"
                         }`}
                       >
                         <RenderedPreview
@@ -304,8 +353,8 @@ export default function AntigravityPortfolioApp() {
                 </div>
               </ResizablePanel>
 
-              {/* Bottom Integrated Panel (Terminal / Problems / Console) */}
-              {isBottomPanelOpen && (
+              {/* Bottom Integrated Panel on Desktop */}
+              {!isMobile && isBottomPanelOpen && (
                 <>
                   <ResizableHandle withHandle className="bg-[#2d2d2d] hover:bg-sky-500 active:bg-sky-400 transition-colors" />
                   <ResizablePanel
@@ -329,8 +378,8 @@ export default function AntigravityPortfolioApp() {
             </ResizablePanelGroup>
           </ResizablePanel>
 
-          {/* Right Secondary Sidebar: Antigravity AI / Gemini 3.7 Copilot */}
-          {isAIPanelOpen && (
+          {/* Right Secondary Sidebar on Desktop */}
+          {!isTablet && isAIPanelOpen && (
             <>
               <ResizableHandle withHandle className="bg-[#282930] hover:bg-sky-500 active:bg-sky-400 transition-colors" />
               <ResizablePanel
@@ -353,6 +402,53 @@ export default function AntigravityPortfolioApp() {
             </>
           )}
         </ResizablePanelGroup>
+
+        {/* AI Copilot Drawer on Tablet / Mobile */}
+        {isTablet && isAIPanelOpen && (
+          <>
+            <div
+              onClick={() => setIsAIPanelOpen(false)}
+              className="fixed inset-0 bg-black/60 backdrop-blur-xs z-35"
+            />
+            <div className="fixed inset-y-9 right-0 z-40 w-full sm:w-96 max-w-full shadow-2xl border-l border-[#2d2d2d] bg-[#181818] flex flex-col">
+              <AIAssistantPanel
+                isOpen={isAIPanelOpen}
+                onClose={() => setIsAIPanelOpen(false)}
+                activeFile={activeFile}
+                onSelectFile={(fileId) => {
+                  const f = PORTFOLIO_FILES.find((x) => x.id === fileId);
+                  if (f) handleSelectFile(f);
+                  if (isMobile) setIsAIPanelOpen(false);
+                }}
+                externalPrompt={externalAIPrompt}
+                clearExternalPrompt={() => setExternalAIPrompt(null)}
+              />
+            </div>
+          </>
+        )}
+
+        {/* Bottom Terminal Drawer on Mobile */}
+        {isMobile && isBottomPanelOpen && (
+          <>
+            <div
+              onClick={() => setIsBottomPanelOpen(false)}
+              className="fixed inset-0 bg-black/60 backdrop-blur-xs z-35"
+            />
+            <div className="fixed bottom-6 inset-x-0 z-40 h-80 max-h-[70dvh] shadow-2xl border-t border-[#2d2d2d] bg-[#181818] flex flex-col">
+              <BottomPanel
+                isOpen={isBottomPanelOpen}
+                onClose={() => setIsBottomPanelOpen(false)}
+                onSelectFile={(fileId) => {
+                  const f = PORTFOLIO_FILES.find((x) => x.id === fileId);
+                  if (f) handleSelectFile(f);
+                  setIsBottomPanelOpen(false);
+                }}
+                antigravityMode={antigravityMode}
+                setAntigravityMode={setAntigravityMode}
+              />
+            </div>
+          </>
+        )}
       </div>
 
       {/* 3. Bottom Status Bar */}

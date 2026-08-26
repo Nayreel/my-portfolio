@@ -18,6 +18,7 @@ import {
   CONFERENCES,
   TERMINAL_COMMANDS_HELP,
 } from "@/data";
+import { downloadResumePdf } from "@/lib/download";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -150,9 +151,23 @@ export function BottomPanel({
     } else if (cmd === "cat resume.md" || cmd === "resume") {
       nextLogs.push({
         type: "output",
-        text: `📄 Opening Lee Ryan Garcia Formal Curriculum Vitae...`,
+        text: `📄 Opening Lee Ryan Garcia Formal Curriculum Vitae (resume.md)...`,
       });
       if (onSelectFile) onSelectFile("resume.md");
+    } else if (
+      cmd === "download-resume" ||
+      cmd === "download resume" ||
+      cmd === "download cv" ||
+      cmd === "get resume"
+    ) {
+      const fileUrl = DEVELOPER_PROFILE.resumePdfUrl || "/Lee_Ryan_Garcia_Resume.pdf";
+      const fileName = fileUrl.split("/").pop() || "Lee_Ryan_Garcia_Resume.pdf";
+      downloadResumePdf(fileUrl, fileName);
+      confetti({ particleCount: 80, spread: 70 });
+      nextLogs.push({
+        type: "output",
+        text: `📥 Initiating download for ${fileName} from public folder...`,
+      });
     } else if (cmd === "cat package.json" || cmd === "package" || cmd === "packages") {
       nextLogs.push({
         type: "output",
@@ -239,8 +254,8 @@ export function BottomPanel({
       }`}
     >
       {/* Tab Navigation Header */}
-      <div className="h-9 px-3 flex items-center justify-between border-b border-[#242526] text-xs bg-[#1f1f1f] shrink-0">
-        <div className="flex items-center space-x-1">
+      <div className="h-9 px-2 sm:px-3 flex items-center justify-between border-b border-[#242526] text-xs bg-[#1f1f1f] shrink-0">
+        <div className="flex items-center space-x-0.5 sm:space-x-1 overflow-x-auto custom-scrollbar touch-pan-x min-w-0 mr-2">
           <Button
             type="button"
             variant="ghost"

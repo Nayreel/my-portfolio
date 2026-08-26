@@ -55,17 +55,17 @@ export function SkillsPreview() {
 
   return (
     <ScrollArea className="flex-1 w-full bg-[#121214] text-white min-h-0">
-      <div className="max-w-5xl mx-auto space-y-8 p-6 lg:p-10">
+      <div className="max-w-5xl mx-auto space-y-6 sm:space-y-8 p-3.5 sm:p-6 lg:p-10">
         {/* Header section */}
-        <div className="space-y-3">
+        <div className="space-y-2 sm:space-y-3">
           <div className="inline-flex items-center space-x-1.5 text-xs text-amber-400 font-mono uppercase tracking-wider">
             <Cpu className="w-3.5 h-3.5" />
             <span>Engineering Matrix</span>
           </div>
-          <h1 className="text-3xl lg:text-4xl font-extrabold tracking-tight text-zinc-100">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-zinc-100">
             Engineering Stack
           </h1>
-          <p className="text-sm text-zinc-400 max-w-2xl leading-relaxed">
+          <p className="text-xs sm:text-sm text-zinc-400 max-w-2xl leading-relaxed">
             Technologies I use to design, build, integrate, and deploy reliable,
             full-stack web applications.
           </p>

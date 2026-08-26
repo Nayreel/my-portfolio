@@ -8,6 +8,7 @@ import {
   Minus,
   Square,
   X,
+  Menu,
   FileCode,
   Terminal,
   FolderTree,
@@ -33,6 +34,8 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/toast";
+import { DEVELOPER_PROFILE } from "@/data";
+import { downloadResumePdf } from "@/lib/download";
 import {
   ProfileDropdown,
   ThemeOption,
@@ -79,16 +82,36 @@ export function TopMenuBar({
   activeTheme,
   onSelectTheme,
 }: TopMenuBarProps) {
+  const resumeUrl = DEVELOPER_PROFILE.resumePdfUrl || "/Lee_Ryan_Garcia_Resume.pdf";
+  const resumeFilename = resumeUrl.split("/").pop() || "Lee_Ryan_Garcia_Resume.pdf";
+
   const handleDownloadResume = () => {
-    toast.success("Resume downloaded!", {
-      description: "Lee_Ryan_Garcia_Resume.pdf has been prepared.",
+    toast.success("Downloading Resume...", {
+      description: resumeFilename,
     });
+    downloadResumePdf(resumeUrl, resumeFilename);
   };
 
   return (
     <header className="h-9 bg-[#181818] border-b border-[#2d2d2d] flex items-center justify-between px-2 select-none text-[13px] text-[#cccccc] relative z-40">
       {/* Left section: App Icon & Shadcn Dropdown Menus */}
       <div className="flex items-center space-x-1">
+        {/* Mobile Hamburger Menu Button */}
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon-xs"
+          onClick={() => setIsLeftSidebarOpen((prev) => !prev)}
+          className="sm:hidden p-1 h-7 w-7 text-zinc-300 hover:text-white hover:bg-[#2a2d2e] rounded-md transition-colors cursor-pointer mr-0.5"
+          aria-label="Toggle navigation menu"
+        >
+          {isLeftSidebarOpen ? (
+            <X className="w-4 h-4 text-sky-400" />
+          ) : (
+            <Menu className="w-4 h-4" />
+          )}
+        </Button>
+
         {/* Antigravity IDE logo */}
         <div
           onClick={openCommandPalette}
@@ -301,17 +324,18 @@ export function TopMenuBar({
       </div>
 
       {/* Center section: Window Title Bar */}
-      <div className="flex-1 mx-2 flex items-center justify-center min-w-0">
+      <div className="flex-1 mx-1 sm:mx-2 flex items-center justify-center min-w-0">
         <Button
           type="button"
           variant="ghost"
           size="xs"
           onClick={openCommandPalette}
-          className="text-xs text-[#9d9d9d] hover:text-[#d4d4d4] transition-colors truncate max-w-full font-normal cursor-pointer select-none px-2 py-0.5 h-auto rounded hover:bg-[#252526]/60"
-          title="my-portfolio - Portfolio IDE (Click for Command Palette ⌘K)"
+          className="text-xs text-[#9d9d9d] hover:text-[#d4d4d4] transition-colors truncate max-w-full font-normal cursor-pointer select-none px-1.5 sm:px-2 py-0.5 h-auto rounded hover:bg-[#252526]/60"
+          title="Portfolio IDE (Click for Command Palette ⌘K)"
         >
           <span className="truncate">
-            my-portfolio - Portfolio IDE - {activeFileName}
+            <span className="hidden md:inline">my-portfolio - Portfolio IDE - </span>
+            <span className="text-sky-300 sm:text-inherit font-mono sm:font-sans">{activeFileName}</span>
           </span>
         </Button>
       </div>

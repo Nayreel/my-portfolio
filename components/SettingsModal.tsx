@@ -106,11 +106,11 @@ export function SettingsModal({
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="bg-[#18191e] border-[#2f313c] sm:max-w-2xl w-full text-white shadow-2xl rounded-2xl p-6">
+      <DialogContent className="bg-[#18191e] border-[#2f313c] sm:max-w-2xl w-[92vw] sm:w-full max-h-[85dvh] text-white shadow-2xl rounded-2xl p-4 sm:p-6 flex flex-col">
         <DialogHeader className="pb-2">
           <div className="flex items-center space-x-2">
             <Settings className="w-5 h-5 text-sky-400" />
-            <DialogTitle className="text-white text-lg font-bold">
+            <DialogTitle className="text-white text-base sm:text-lg font-bold">
               Portfolio IDE Preferences
             </DialogTitle>
           </div>
@@ -119,7 +119,7 @@ export function SettingsModal({
           </DialogDescription>
         </DialogHeader>
 
-        <ScrollArea className="h-[60vh] pr-4 -mr-2">
+        <ScrollArea className="max-h-[55dvh] sm:max-h-[60vh] pr-2 sm:pr-4 -mr-2">
           <div className="space-y-6 py-2">
             {/* Background Theme Modes */}
             <div className="space-y-2.5">

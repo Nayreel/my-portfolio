@@ -12,7 +12,9 @@ import {
   Terminal,
   Zap,
   Copy,
+  Download,
 } from "lucide-react";
+import { downloadResumePdf } from "@/lib/download";
 import {
   PORTFOLIO_FILES,
   PROJECTS,
@@ -188,6 +190,22 @@ export function CommandPalette({
         });
       },
     },
+    {
+      id: "act-download-resume",
+      title: "Download CV / Resume (PDF)",
+      subtitle: "Download official Lee_Ryan_Garcia_Resume.pdf from public folder",
+      icon: Download,
+      category: "Actions",
+      action: () => {
+        const fileUrl = DEVELOPER_PROFILE.resumePdfUrl || "/Lee_Ryan_Garcia_Resume.pdf";
+        const fileName = fileUrl.split("/").pop() || "Lee_Ryan_Garcia_Resume.pdf";
+        confetti({ particleCount: 80, spread: 70 });
+        toast.success("Downloading Resume...", {
+          description: fileName,
+        });
+        downloadResumePdf(fileUrl, fileName);
+      },
+    },
   ];
 
   const filtered = actions.filter(
@@ -218,11 +236,11 @@ export function CommandPalette({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4 bg-black/60 backdrop-blur-sm select-none"
+      className="fixed inset-0 z-50 flex items-start justify-center pt-8 sm:pt-20 px-2 sm:px-4 bg-black/60 backdrop-blur-sm select-none"
       onClick={handleClose}
     >
       <div
-        className="w-full max-w-xl bg-[#252526] border border-[#454545] rounded-xl shadow-2xl overflow-hidden text-xs text-[#cccccc] flex flex-col"
+        className="w-full max-w-xl max-h-[85dvh] bg-[#252526] border border-[#454545] rounded-xl shadow-2xl overflow-hidden text-xs text-[#cccccc] flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Search Bar Input */}

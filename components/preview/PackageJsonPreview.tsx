@@ -170,9 +170,9 @@ export function PackageJsonPreview({ onSwitchToFile }: PackageJsonPreviewProps) 
 
   return (
     <ScrollArea className="flex-1 w-full bg-[#0d0e12] text-zinc-200 min-h-0">
-      <div className="max-w-5xl mx-auto p-4 sm:p-6 lg:p-8 space-y-6">
+      <div className="max-w-5xl mx-auto p-3.5 sm:p-6 lg:p-8 space-y-4 sm:space-y-6">
         {/* Header Module */}
-        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-blue-950/40 via-purple-950/20 to-slate-900/60 border border-blue-500/20 p-6 shadow-2xl backdrop-blur-sm">
+        <div className="relative overflow-hidden rounded-xl sm:rounded-2xl bg-gradient-to-r from-blue-950/40 via-purple-950/20 to-slate-900/60 border border-blue-500/20 p-4 sm:p-6 shadow-2xl backdrop-blur-sm">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div className="space-y-2">
               <div className="flex items-center space-x-2">
@@ -180,7 +180,7 @@ export function PackageJsonPreview({ onSwitchToFile }: PackageJsonPreviewProps) 
                   <Package className="w-5 h-5" />
                 </div>
                 <div>
-                  <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight flex items-center gap-2">
+                  <h1 className="text-lg sm:text-2xl font-bold text-white tracking-tight flex items-center gap-2">
                     lee-ryan-garcia-portfolio
                     <Badge variant="outline" className="border-emerald-500/40 text-emerald-400 bg-emerald-500/10 text-xs font-mono">
                       v2.0.0
@@ -245,14 +245,14 @@ export function PackageJsonPreview({ onSwitchToFile }: PackageJsonPreviewProps) 
         </div>
 
         {/* Tab Selection and Filter */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-zinc-800 pb-3">
-          <div className="flex items-center space-x-1.5 bg-[#14151b] p-1 rounded-lg border border-zinc-800 text-xs">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 border-b border-zinc-800 pb-3">
+          <div className="flex items-center space-x-1.5 bg-[#14151b] p-1 rounded-lg border border-zinc-800 text-xs overflow-x-auto custom-scrollbar touch-pan-x max-w-full shrink-0">
             <Button
               type="button"
               variant="ghost"
               size="xs"
               onClick={() => setActiveTab("all")}
-              className={`px-3 py-1 h-auto rounded-md transition-colors cursor-pointer ${
+              className={`px-3 py-1 h-auto rounded-md transition-colors shrink-0 cursor-pointer ${
                 activeTab === "all" ? "bg-sky-500 text-black font-semibold hover:bg-sky-400 hover:text-black" : "text-zinc-400 hover:text-white hover:bg-zinc-800/60"
               }`}
             >
@@ -263,7 +263,7 @@ export function PackageJsonPreview({ onSwitchToFile }: PackageJsonPreviewProps) 
               variant="ghost"
               size="xs"
               onClick={() => setActiveTab("dependencies")}
-              className={`px-3 py-1 h-auto rounded-md transition-colors cursor-pointer ${
+              className={`px-3 py-1 h-auto rounded-md transition-colors shrink-0 cursor-pointer ${
                 activeTab === "dependencies" ? "bg-sky-500 text-black font-semibold hover:bg-sky-400 hover:text-black" : "text-zinc-400 hover:text-white hover:bg-zinc-800/60"
               }`}
             >
@@ -274,7 +274,7 @@ export function PackageJsonPreview({ onSwitchToFile }: PackageJsonPreviewProps) 
               variant="ghost"
               size="xs"
               onClick={() => setActiveTab("scripts")}
-              className={`px-3 py-1 h-auto rounded-md transition-colors cursor-pointer ${
+              className={`px-3 py-1 h-auto rounded-md transition-colors shrink-0 cursor-pointer ${
                 activeTab === "scripts" ? "bg-sky-500 text-black font-semibold hover:bg-sky-400 hover:text-black" : "text-zinc-400 hover:text-white hover:bg-zinc-800/60"
               }`}
             >
@@ -285,7 +285,7 @@ export function PackageJsonPreview({ onSwitchToFile }: PackageJsonPreviewProps) 
               variant="ghost"
               size="xs"
               onClick={() => setActiveTab("devDeps")}
-              className={`px-3 py-1 h-auto rounded-md transition-colors cursor-pointer ${
+              className={`px-3 py-1 h-auto rounded-md transition-colors shrink-0 cursor-pointer ${
                 activeTab === "devDeps" ? "bg-sky-500 text-black font-semibold hover:bg-sky-400 hover:text-black" : "text-zinc-400 hover:text-white hover:bg-zinc-800/60"
               }`}
             >
