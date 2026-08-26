@@ -19,7 +19,7 @@ const baseToastManager = ToastPrimitive.createToastManager();
 interface ToastOptions {
   description?: React.ReactNode;
   timeout?: number;
-  [key: string]: any;
+  [key: string]: React.ReactNode | number | boolean | undefined | Record<string, unknown>;
 }
 
 type ToastFn = {
