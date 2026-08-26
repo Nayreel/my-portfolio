@@ -13,7 +13,7 @@ export const DEVELOPER_PROFILE: DeveloperProfile = {
   status: "Available for Software Engineering & Automation Opportunities",
   bio: "Software Engineer specializing in scalable web development with Next.js, workflow automation with n8n, CRM/ERP integrations (Odoo, Strapi), and high-performance full-stack applications. Passionate about developer tooling, AI integrations, and intuitive UI/UX.",
   stats: [
-    { label: "Production Projects", value: "9" },
+    { label: "Production Projects", value: "10" },
     { label: "Client & SaaS Systems", value: "6+" },
     { label: "Degree & Course", value: "BSIT" },
     { label: "Graduation Honors", value: "Cum Laude" },

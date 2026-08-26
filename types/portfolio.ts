@@ -4,8 +4,7 @@ export type ProjectCategory =
   | "All"
   | "AI & Automation"
   | "Client Work"
-  | "Personal & Capstone"
-  | "Full-Stack Web";
+  | "Personal & Capstone";
 
 export interface ProjectMetric {
   label: string;

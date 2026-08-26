@@ -1,15 +1,27 @@
 "use client";
 
-import React from "react";
-import { Rocket, Mail, Copy, Cpu, MapPin, Phone } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import {
+  FolderGit2,
+  Mail,
+  Copy,
+  Sparkles,
+  Cpu,
+  MapPin,
+  Phone,
+  GitCommit,
+  ArrowUpRight,
+} from "lucide-react";
+import { GithubIcon } from "@/components/icons";
 import { DEVELOPER_PROFILE } from "@/data";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { toast } from "@/components/ui/toast";
-
 import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
+import { GitHubContributionGraph } from "@/components/preview/GitHubContributionGraph";
+import { GitHubCommit } from "@/types/github";
 
 interface BioPreviewProps {
   onSwitchToFile: (fileId: string) => void;
@@ -17,6 +29,30 @@ interface BioPreviewProps {
 }
 
 export function BioPreview({ onSwitchToFile, onOpenAIQuery }: BioPreviewProps) {
+  const [latestCommit, setLatestCommit] = useState<GitHubCommit | null>(null);
+
+  useEffect(() => {
+    let isMounted = true;
+    const fetchLatestCommit = async () => {
+      try {
+        const res = await fetch("/api/github/commits");
+        if (!res.ok) return;
+        const contentType = res.headers.get("content-type");
+        if (!contentType || !contentType.includes("application/json")) return;
+        const data = await res.json();
+        if (isMounted && data?.latestCommit) {
+          setLatestCommit(data.latestCommit);
+        }
+      } catch (err) {
+        console.error("Error loading latest commit:", err);
+      }
+    };
+    fetchLatestCommit();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(DEVELOPER_PROFILE.email);
     toast.success("Email copied to clipboard", {
@@ -34,13 +70,15 @@ export function BioPreview({ onSwitchToFile, onOpenAIQuery }: BioPreviewProps) {
 
           <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div className="space-y-3">
-              <Badge
-                variant="outline"
-                className="bg-sky-500/10 border-sky-500/30 text-sky-300 px-3 py-1 font-mono text-xs"
-              >
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse mr-2" />
-                <span>{DEVELOPER_PROFILE.status}</span>
-              </Badge>
+              <div className="flex flex-wrap items-center gap-2">
+                <Badge
+                  variant="outline"
+                  className="bg-sky-500/10 border-sky-500/30 text-sky-300 px-3 py-1 font-mono text-xs"
+                >
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse mr-2" />
+                  <span>{DEVELOPER_PROFILE.status}</span>
+                </Badge>
+              </div>
 
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight bg-gradient-to-r from-white via-[#f0f0f0] to-[#999999] bg-clip-text text-transparent">
                 {DEVELOPER_PROFILE.name}
@@ -72,30 +110,41 @@ export function BioPreview({ onSwitchToFile, onOpenAIQuery }: BioPreviewProps) {
           </div>
 
           {/* Quick Action CTAs */}
-          <div className="mt-8 pt-6 border-t border-[#2a2c35] flex flex-wrap items-center gap-3">
+          <div className="mt-8 pt-6 border-t border-[#2a2c35] flex flex-wrap items-center gap-2.5">
             <Button
               onClick={() => onSwitchToFile("projects.tsx")}
-              className="bg-sky-500 hover:bg-sky-400 text-black font-semibold text-xs shadow-md shadow-sky-500/20"
+              className="h-8.5 px-3.5 cursor-pointer bg-sky-500 hover:bg-sky-400 text-black font-semibold text-xs shadow-md shadow-sky-500/20 rounded-lg flex items-center gap-1.5 transition-all hover:scale-[1.02] active:scale-[0.98]"
             >
-              <Rocket className="w-3.5 h-3.5 mr-1.5" />
+              <FolderGit2 className="w-3.5 h-3.5" />
               <span>Explore Featured Projects</span>
             </Button>
 
             <Button
               variant="outline"
               onClick={() => onSwitchToFile("get-in-touch.tsx")}
-              className="bg-[#252830] hover:bg-[#2e323d] border-[#3c4150] text-white text-xs font-medium"
+              className="h-8.5 px-3.5 cursor-pointer bg-[#252830] hover:bg-[#2e323d] border-[#3c4150] hover:border-sky-500/40 text-white text-xs font-medium rounded-lg flex items-center gap-1.5 transition-all hover:scale-[1.02] active:scale-[0.98]"
             >
-              <Mail className="w-3.5 h-3.5 mr-1.5 text-sky-400" />
+              <Mail className="w-3.5 h-3.5 text-sky-400" />
               <span>Contact / Hire Me</span>
             </Button>
 
             <Button
               variant="outline"
-              onClick={handleCopyEmail}
-              className="bg-[#252830] hover:bg-[#2e323d] border-[#3c4150] text-zinc-300 text-xs font-medium"
+              onClick={() =>
+                window.open("https://github.com/Nayreel", "_blank")
+              }
+              className="h-8.5 px-3.5 cursor-pointer bg-[#252830] hover:bg-[#2e323d] border-[#3c4150] hover:border-zinc-500 text-zinc-300 hover:text-white text-xs font-medium rounded-lg flex items-center gap-1.5 transition-all hover:scale-[1.02] active:scale-[0.98]"
             >
-              <Copy className="w-3.5 h-3.5 mr-1.5 text-zinc-400" />
+              <GithubIcon className="w-3.5 h-3.5 text-zinc-400" />
+              <span>GitHub Profile</span>
+            </Button>
+
+            <Button
+              variant="outline"
+              onClick={handleCopyEmail}
+              className="h-8.5 px-3.5 cursor-pointer bg-[#252830] hover:bg-[#2e323d] border-[#3c4150] hover:border-zinc-500 text-zinc-300 hover:text-white text-xs font-medium rounded-lg flex items-center gap-1.5 transition-all hover:scale-[1.02] active:scale-[0.98]"
+            >
+              <Copy className="w-3.5 h-3.5 text-zinc-400" />
               <span>{DEVELOPER_PROFILE.email}</span>
             </Button>
 
@@ -106,10 +155,10 @@ export function BioPreview({ onSwitchToFile, onOpenAIQuery }: BioPreviewProps) {
                   "Give me a summary of Lee Ryan Garcia's projects, experience, and skills.",
                 )
               }
-              className="bg-indigo-500/15 hover:bg-indigo-500/25 border-indigo-500/40 text-indigo-300 text-xs font-mono ml-auto"
+              className="h-8.5 px-3.5 cursor-pointer bg-indigo-500/15 hover:bg-indigo-500/25 border-indigo-500/40 hover:border-indigo-400 text-indigo-300 text-xs font-mono rounded-lg flex items-center gap-1.5 transition-all hover:scale-[1.02] active:scale-[0.98]"
             >
-              <Cpu className="w-3.5 h-3.5 mr-1.5 text-indigo-400" />
-              <span>Ask Copilot</span>
+              <Sparkles className="w-3.5 h-3.5 text-indigo-400 animate-pulse" />
+              <span>Ask AI Assistant</span>
             </Button>
           </div>
         </div>
@@ -129,6 +178,11 @@ export function BioPreview({ onSwitchToFile, onOpenAIQuery }: BioPreviewProps) {
               </CardContent>
             </Card>
           ))}
+        </div>
+
+        {/* Live GitHub Contributions & Commits Section */}
+        <div className="space-y-6">
+          <GitHubContributionGraph />
         </div>
 
         {/* Engineering Philosophy */}
@@ -151,7 +205,7 @@ export function BioPreview({ onSwitchToFile, onOpenAIQuery }: BioPreviewProps) {
               <CardContent className="p-5 pt-0">
                 <p className="text-xs text-zinc-400 leading-relaxed">
                   Designing end-to-end automated pipelines integrating Odoo ERP,
-                  Strapi CRM, and Next.js applications with zero data drift.
+                  Strapi CRM, and Next.js applications.
                 </p>
               </CardContent>
             </Card>

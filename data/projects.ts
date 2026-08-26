@@ -199,8 +199,7 @@ export function initNarraTreeAnimations() {
   {
     id: 4,
     title: "Silk Route Sav - Project with Client",
-    tagline:
-      "Fine dining and authentic culinary showcase in Savannah, Georgia",
+    tagline: "Fine dining and authentic culinary showcase in Savannah, Georgia",
     description:
       "SILK ROUTE is the best restaurant in Savannah, GA, offering exceptional fine dining, outstanding service, and unforgettable culinary experiences.",
     des: "SILK ROUTE is the best restaurant in Savannah, GA, offering exceptional fine dining, outstanding service, and unforgettable culinary experiences.",
@@ -287,7 +286,8 @@ export async function getSpotsByDistance(lat: number, lng: number) {
   {
     id: 6,
     title: "ByteMe - Personal Project",
-    tagline: "Modern, responsive restaurant platform & Point-of-Sale (POS) system",
+    tagline:
+      "Modern, responsive restaurant platform & Point-of-Sale (POS) system",
     description:
       "ByteMe is a sample restaurant platform built to showcase a modern POS system; fast, responsive, and designed for real-world efficiency.",
     des: "ByteMe is a sample restaurant platform built to showcase a modern POS system; fast, responsive, and designed for real-world efficiency.",
@@ -399,6 +399,61 @@ io.on('connection', (socket) => {
     io.to(roomId).emit('leaderboard_update', getLeaderboard(roomId));
   });
 });`,
+  },
+  {
+    id: 9,
+    title: "SIPAT - Tactical Radar & Citizen Recon Network",
+    tagline:
+      "Community-driven real-time geospatial radar & tactical sightings network",
+    description:
+      "A community-driven real-time radar and sightings platform (inspired by Spidey Tracker) where citizens report, discover, and track live neighborhood events, road hazards, lost pets, weather alerts, and public safety updates around them in real time.",
+    des: "Community-driven real-time radar & sightings platform to report, discover, and track live neighborhood events, road hazards, and public safety in real time.",
+    category: "Personal & Capstone",
+    tags: [
+      "Next.js 16",
+      "NestJS",
+      "GraphQL",
+      "Socket.io",
+      "Leaflet",
+      "PostgreSQL",
+      "Prisma",
+      "Web Audio API",
+      "TypeScript",
+    ],
+    metrics: [
+      { label: "Live Telemetry", value: "Socket.io + Leaflet" },
+      { label: "Data Layer", value: "GraphQL + PostgreSQL" },
+      { label: "Audio Synthesis", value: "Web Audio API" },
+    ],
+    featured: true,
+    githubUrl: "https://github.com/Nayreel",
+    liveUrl: "https://sipat-eta.vercel.app/",
+    link: "https://sipat-eta.vercel.app/",
+    img: "/img/sipat.png",
+    iconLists: [
+      "/svg/next.svg",
+      "/svg/nodejs.svg",
+      "/svg/socketio.svg",
+      "/svg/tail.svg",
+    ],
+    stars: 145,
+    forks: 22,
+    imageColor: "from-amber-500/30 via-yellow-600/20 to-orange-500/30",
+    accent: "#f59e0b",
+    highlightCode: `// Socket.io Tactical Radar Sighting Broadcast Gateway
+@WebSocketGateway({ cors: { origin: '*' } })
+export class SightingsGateway {
+  @WebSocketServer() server: Server;
+
+  @SubscribeMessage('sighting:create')
+  handleNewSighting(@MessageBody() payload: CreateSightingDto) {
+    this.server.emit('sighting:broadcast', {
+      ...payload,
+      coordinates: [payload.lat, payload.lng],
+      timestamp: new Date().toISOString(),
+    });
+  }
+}`,
   },
 ];
 

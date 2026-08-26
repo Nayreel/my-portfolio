@@ -7,3 +7,4 @@ export * from "@/types/portfolio";
 export * from "@/types/career";
 export * from "@/types/skills";
 export * from "@/types/ide";
+export * from "@/types/github";

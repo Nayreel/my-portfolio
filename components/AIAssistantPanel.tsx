@@ -107,7 +107,11 @@ If you prefer another phrase like **"Ask Me Anything"** or **"Ask About Lee Ryan
           body: JSON.stringify({ userMessage: text }),
         });
 
-        const data = await res.json();
+        let data: { text?: string; duration?: string } = {};
+        if (res.ok && res.headers.get("content-type")?.includes("application/json")) {
+          data = await res.json();
+        }
+
         const aiResponseId = "ai-" + Date.now();
 
         setMessages((prev) => [

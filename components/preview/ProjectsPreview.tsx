@@ -170,7 +170,7 @@ export function ProjectsPreview({ onOpenAIQuery }: ProjectsPreviewProps) {
                       side="top"
                       className="text-xs bg-[#1f1f1f] text-zinc-200 border-[#3c3c3c]"
                     >
-                      Ask Copilot about {project.title}
+                      Ask AI Assistant about {project.title}
                     </TooltipContent>
                   </Tooltip>
 
