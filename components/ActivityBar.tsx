@@ -160,7 +160,7 @@ export function ActivityBar({
             side="right"
             className="bg-[#1f1f1f] text-zinc-200 border-[#3c3c3c] text-xs"
           >
-            Antigravity IDE Preferences & Theme
+            Portfolio IDE Preferences & Theme
           </TooltipContent>
         </Tooltip>
       </div>

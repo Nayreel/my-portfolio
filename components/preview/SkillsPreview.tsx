@@ -9,7 +9,6 @@ import {
   Wrench,
   Search,
   Star,
-  Sparkles,
 } from "lucide-react";
 import { SKILL_CATEGORIES } from "@/data";
 import { SkillLevel } from "@/types/skills";
@@ -130,7 +129,7 @@ export function SkillsPreview() {
         {/* Categories Grid */}
         {filteredCategories.length === 0 ? (
           <div className="text-center py-16 border border-dashed border-[#272930] rounded-xl space-y-3">
-            <Sparkles className="w-8 h-8 text-zinc-600 mx-auto" />
+            <Search className="w-8 h-8 text-zinc-600 mx-auto" />
             <p className="text-zinc-400 text-sm">
               No matching technologies found for &quot;{searchQuery}&quot;
             </p>

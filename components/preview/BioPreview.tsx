@@ -5,7 +5,7 @@ import {
   FolderGit2,
   Mail,
   Copy,
-  Sparkles,
+  Bot,
   Cpu,
   MapPin,
   Phone,
@@ -157,7 +157,7 @@ export function BioPreview({ onSwitchToFile, onOpenAIQuery }: BioPreviewProps) {
               }
               className="h-8.5 px-3.5 cursor-pointer bg-indigo-500/15 hover:bg-indigo-500/25 border-indigo-500/40 hover:border-indigo-400 text-indigo-300 text-xs font-mono rounded-lg flex items-center gap-1.5 transition-all hover:scale-[1.02] active:scale-[0.98]"
             >
-              <Sparkles className="w-3.5 h-3.5 text-indigo-400 animate-pulse" />
+              <Bot className="w-3.5 h-3.5 text-indigo-400" />
               <span>Ask AI Assistant</span>
             </Button>
           </div>

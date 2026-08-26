@@ -2,9 +2,7 @@
 
 import React, { useState } from "react";
 import {
-  User,
   Palette,
-  Sparkles,
   Flame,
   FileText,
   Mail,
@@ -205,7 +203,7 @@ export function ProfileDropdown({
 
             <DropdownMenuSubContent className="w-56 bg-[#1e1f24] border-[#31333e] text-[#cccccc] p-1.5 rounded-xl shadow-2xl">
               <DropdownMenuLabel className="text-[10px] text-zinc-400 font-mono uppercase px-2 py-1">
-                Antigravity IDE Themes
+                IDE Workspace Themes
               </DropdownMenuLabel>
               {THEME_OPTIONS.map((theme) => (
                 <DropdownMenuItem

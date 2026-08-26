@@ -8,6 +8,8 @@ import { ExperiencePreview } from "@/components/preview/ExperiencePreview";
 import { SkillsPreview } from "@/components/preview/SkillsPreview";
 import { ContactPreview } from "@/components/preview/ContactPreview";
 import { ResumePreview } from "@/components/preview/ResumePreview";
+import { PackageJsonPreview } from "@/components/preview/PackageJsonPreview";
+import { ConfigPreview } from "@/components/preview/ConfigPreview";
 import { DefaultFilePreview } from "@/components/preview/DefaultFilePreview";
 
 interface RenderedPreviewProps {
@@ -48,6 +50,17 @@ export function RenderedPreview({
 
     case "resume.md":
       return <ResumePreview />;
+
+    case "package.json":
+      return <PackageJsonPreview onSwitchToFile={onSwitchToFile} />;
+
+    case "config.ts":
+      return (
+        <ConfigPreview
+          onSwitchToFile={onSwitchToFile}
+          onOpenAIQuery={onOpenAIQuery}
+        />
+      );
 
     default:
       return (

@@ -56,7 +56,7 @@ export function BottomPanel({
   const [terminalLogs, setTerminalLogs] = useState<TerminalLog[]>([
     {
       type: "system",
-      text: '⚡ Google Antigravity IDE [Version 2.0.0]\n(c) 2026 Lee Ryan Garcia. All systems operational.\nType "help" for a list of interactive commands or "projects" to view flagships.',
+      text: '⚡ Portfolio IDE [Version 2.4.0]\n(c) 2026 Lee Ryan Garcia. All systems operational.\nType "help" for a list of interactive commands or "projects" to view flagships.',
     },
   ]);
 
@@ -92,7 +92,7 @@ export function BottomPanel({
       ).join("\n");
       nextLogs.push({
         type: "output",
-        text: `Available Antigravity Portfolio Commands:\n${helpText}`,
+        text: `Available IDE Portfolio Commands:\n${helpText}`,
       });
     } else if (cmd === "bio") {
       nextLogs.push({
@@ -152,15 +152,27 @@ export function BottomPanel({
         text: `📄 Opening Lee Ryan Garcia Formal Curriculum Vitae...`,
       });
       if (onSelectFile) onSelectFile("resume.md");
-    } else if (cmd.includes("antigravity") || cmd.includes("fly")) {
+    } else if (cmd === "cat package.json" || cmd === "package" || cmd === "packages") {
+      nextLogs.push({
+        type: "output",
+        text: `📦 Opening package.json (Next.js 16, React 19 dependencies & scripts)...`,
+      });
+      if (onSelectFile) onSelectFile("package.json");
+    } else if (cmd === "cat config.ts" || cmd === "config" || cmd === "settings") {
+      nextLogs.push({
+        type: "output",
+        text: `⚙️ Opening config.ts (IDE workspace parameters & Gemini AI settings)...`,
+      });
+      if (onSelectFile) onSelectFile("config.ts");
+    } else if (cmd.includes("fly") || cmd.includes("zero-g") || cmd.includes("gravity")) {
       const nextMode = !antigravityMode;
       setAntigravityMode(nextMode);
       confetti({ particleCount: 90, spread: 80 });
       nextLogs.push({
         type: "output",
         text: nextMode
-          ? "🚀 Antigravity Zero-G Physics: IGNITED! Watch elements float!"
-          : "🛬 Antigravity Zero-G Physics: DEACTIVATED. Gravity restored.",
+          ? "🚀 Zero-G Physics: IGNITED! Watch elements float!"
+          : "🛬 Zero-G Physics: DEACTIVATED. Gravity restored.",
       });
     } else if (cmd === "clear" || cmd === "cls") {
       setTerminalLogs([]);
@@ -169,7 +181,7 @@ export function BottomPanel({
     } else if (cmd === "neofetch") {
       nextLogs.push({
         type: "output",
-        text: `\n      /\\        OS: Google Antigravity IDE v2\n     /  \\       Host: Next.js App Router + React 19\n    / /\\ \\      Developer: Lee Ryan M. Garcia\n   / /  \\ \\     Role: Software Engineer | Full-Stack & Automation\n  / /_/\\_\\ \\    Stack: Next.js, n8n, MongoDB, PostgreSQL, Tailwind\n /________/ \\   Honors: Cum Laude (Gordon College)\n                Shell: Antigravity Terminal (pwsh/bash)`,
+        text: `\n      /\\        OS: Developer Portfolio IDE v2\n     /  \\       Host: Next.js App Router + React 19\n    / /\\ \\      Developer: Lee Ryan M. Garcia\n   / /  \\ \\     Role: Software Engineer | Full-Stack & Automation\n  / /_/\\_\\ \\    Stack: Next.js, n8n, MongoDB, PostgreSQL, Tailwind\n /________/ \\   Honors: Cum Laude (Gordon College)\n                Shell: IDE Terminal (pwsh/bash)`,
       });
     } else if (cmd === "npm run build" || cmd === "build") {
       confetti({ particleCount: 120, spread: 90 });
@@ -371,7 +383,7 @@ export function BottomPanel({
                 value={commandInput}
                 onChange={(e) => setCommandInput(e.target.value)}
                 onKeyDown={handleKeyDown}
-                placeholder="type command (e.g. 'help', 'projects', 'antigravity --fly')..."
+                placeholder="type command (e.g. 'help', 'projects', 'fly', 'config', 'package')..."
                 className="flex-1 bg-transparent text-white focus:outline-none font-mono text-xs"
               />
             </form>

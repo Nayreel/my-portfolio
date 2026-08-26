@@ -98,7 +98,7 @@ export function SettingsModal({
           <div className="flex items-center space-x-2">
             <Settings className="w-5 h-5 text-sky-400" />
             <DialogTitle className="text-white text-lg font-bold">
-              Antigravity IDE Preferences
+              Portfolio IDE Preferences
             </DialogTitle>
           </div>
           <DialogDescription className="text-xs text-zinc-400">

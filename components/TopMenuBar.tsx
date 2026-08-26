@@ -197,7 +197,7 @@ export function TopMenuBar({
                 className="text-xs cursor-pointer hover:bg-[#094771] hover:text-white focus:bg-[#094771] focus:text-white"
               >
                 <Sidebar className="w-3.5 h-3.5 mr-2 text-amber-400 scale-x-[-1]" />
-                <span>Toggle Antigravity AI</span>
+                <span>Toggle AI Copilot</span>
               </DropdownMenuItem>
               <DropdownMenuSeparator className="bg-[#3c3c3c]" />
               <DropdownMenuItem
@@ -278,15 +278,15 @@ export function TopMenuBar({
             >
               <DropdownMenuItem
                 onClick={() =>
-                  toast.success("Antigravity IDE v2", {
+                  toast.success("Portfolio IDE v2.4", {
                     description:
-                      "Built with Next.js 15, Tailwind CSS v4, and Gemini 3.7 Flash.",
+                      "Built with Next.js 16, React 19, Tailwind CSS, and Gemini 3.7 Flash.",
                   })
                 }
                 className="text-xs cursor-pointer hover:bg-[#094771] hover:text-white focus:bg-[#094771] focus:text-white"
               >
                 <Info className="w-3.5 h-3.5 mr-2 text-sky-400" />
-                <span>About Antigravity IDE</span>
+                <span>About Portfolio IDE</span>
               </DropdownMenuItem>
               <DropdownMenuItem
                 onClick={openCommandPalette}
@@ -305,10 +305,10 @@ export function TopMenuBar({
         <button
           onClick={openCommandPalette}
           className="text-xs text-[#9d9d9d] hover:text-[#d4d4d4] transition-colors truncate max-w-full font-normal cursor-pointer select-none px-2 py-0.5 rounded hover:bg-[#252526]/60"
-          title="my-portfolio - Antigravity IDE (Click for Command Palette ⌘K)"
+          title="my-portfolio - Portfolio IDE (Click for Command Palette ⌘K)"
         >
           <span className="truncate">
-            my-portfolio - Antigravity IDE - {activeFileName}
+            my-portfolio - Portfolio IDE - {activeFileName}
           </span>
         </button>
       </div>

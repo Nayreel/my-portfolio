@@ -48,7 +48,7 @@ export default function AboutHero() {
         Building Scalable Web Applications & Automated Workflows
       </h1>
       <p className="text-zinc-400 leading-relaxed text-base">
-        Welcome to my interactive portfolio styled after the Google Antigravity IDE. 
+        Welcome to my interactive developer portfolio styled as a full-featured IDE. 
         Explore my production projects, inspect the source code, run commands in the terminal, 
         or chat with my Gemini AI Assistant!
       </p>
@@ -326,7 +326,7 @@ Software Engineer with strong experience in building scalable web applications w
 - **Backend & Databases:** MongoDB, MySQL, PostgreSQL, Prisma, Node.js, NestJS, Express.js, Socket.io
 - **APIs & Integrations:** GraphQL, REST API, Shopify, n8n, Cloudinary, VAPI
 - **DevOps & Infrastructure:** Docker, Git, GitHub Actions, Microsoft Azure, Vercel, Railway, Render, DigitalOcean
-- **Tools & Software:** Visual Studio Code, Antigravity, GitHub, Postman, MongoDB Compass, Trello, Figma, Docker Desktop
+- **Tools & Software:** Visual Studio Code, Cursor, GitHub, Postman, MongoDB Compass, Trello, Figma, Docker Desktop
 - **Languages:** English, Tagalog`,
   },
   {
@@ -338,21 +338,23 @@ Software Engineer with strong experience in building scalable web applications w
     language: "json",
     description: "Project metadata, dependencies, and execution scripts",
     previewType: "package",
-    metadata: { lines: 36, size: "1.2 KB", lastModified: "Today" },
+    metadata: { lines: 42, size: "1.4 KB", lastModified: "Today" },
     code: `{
   "name": "lee-ryan-garcia-portfolio",
   "version": "2.0.0",
   "private": true,
-  "description": "Google Antigravity IDE Themed Next.js Developer Portfolio for Lee Ryan M. Garcia",
+  "description": "Interactive IDE-themed developer portfolio for Lee Ryan M. Garcia built with Next.js 16 and React 19.",
   "author": "Lee Ryan M. Garcia <leeryan307@gmail.com>",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "canvas-confetti": "^1.9.4",
+    "clsx": "^2.1.1",
     "lucide-react": "^1.34.0",
     "motion": "^13.1.1",
     "next": "16.3.2",
@@ -360,43 +362,116 @@ Software Engineer with strong experience in building scalable web applications w
     "react-dom": "19.2.8",
     "react-resizable-panels": "^4.12.3",
     "shadcn": "^4.19.0",
+    "sonner": "^2.0.7",
     "tailwind-merge": "^3.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "eslint": "^9.0.0",
+    "eslint-config-next": "16.3.2",
+    "tailwindcss": "^4.0.0",
+    "typescript": "^5.9.3"
   }
 }`,
   },
   {
-    id: "antigravity.config.ts",
-    name: "antigravity.config.ts",
-    path: "antigravity.config.ts",
+    id: "config.ts",
+    name: "config.ts",
+    path: "config.ts",
     folder: "root",
     icon: "Settings",
     language: "typescript",
-    description: "Antigravity IDE theme, model settings, and layout parameters",
+    description: "Portfolio IDE workspace settings, developer profile configuration, and AI assistant parameters",
     previewType: "config",
-    metadata: { lines: 30, size: "1.0 KB", lastModified: "Today" },
-    code: `export const antigravityConfig = {
-  ideName: "Antigravity IDE",
-  engineVersion: "v2.0.0-production",
-  developer: "Lee Ryan M. Garcia",
+    metadata: { lines: 45, size: "1.5 KB", lastModified: "Today" },
+    code: `export interface IDEConfig {
+  workspace: {
+    name: string;
+    version: string;
+    developer: string;
+    role: string;
+    environment: "production" | "development";
+    liveUrl: string;
+    repository: string;
+  };
   theme: {
-    mode: "dark-nebula",
-    accentColor: "#38bdf8", // Cyan-400
-    editorFont: "JetBrains Mono, Fira Code, monospace",
-    lineHeight: 1.6,
-    minimap: true,
-    bracketPairColorization: true,
+    defaultMode: string;
+    accentColors: Record<string, string>;
+    editor: {
+      fontFamily: string;
+      fontSize: number;
+      lineHeight: number;
+      tabSize: number;
+      minimap: boolean;
+      bracketPairColorization: boolean;
+      smoothScrolling: boolean;
+    };
+  };
+  features: {
+    terminal: boolean;
+    aiAssistant: boolean;
+    gravityPhysics: boolean;
+    gitStats: boolean;
+    soundEffects: boolean;
+  };
+  aiAssistant: {
+    provider: string;
+    model: string;
+    temperature: number;
+    capabilities: string[];
+  };
+}
+
+export const portfolioConfig: IDEConfig = {
+  workspace: {
+    name: "Portfolio IDE",
+    version: "2.4.0-production",
+    developer: "Lee Ryan M. Garcia",
+    role: "Full-Stack Developer & Automation Engineer",
+    environment: "production",
+    liveUrl: "https://leeryan.dev",
+    repository: "https://github.com/Nayreel/my-portfolio",
+  },
+  theme: {
+    defaultMode: "dark-nebula",
+    accentColors: {
+      cyan: "#38bdf8",
+      emerald: "#10b981",
+      purple: "#a855f7",
+      amber: "#f59e0b",
+      rose: "#f43f5e",
+    },
+    editor: {
+      fontFamily: "JetBrains Mono, Fira Code, monospace",
+      fontSize: 13,
+      lineHeight: 1.6,
+      tabSize: 2,
+      minimap: true,
+      bracketPairColorization: true,
+      smoothScrolling: true,
+    },
+  },
+  features: {
+    terminal: true,
+    aiAssistant: true,
+    gravityPhysics: true,
+    gitStats: true,
+    soundEffects: false,
   },
   aiAssistant: {
-    defaultModel: "gemini-3.7-flash",
+    provider: "Google AI",
+    model: "gemini-3.7-flash",
     temperature: 0.7,
-    streamTokens: true,
     capabilities: [
       "code-explanation",
       "project-deepdive",
-      "workflow-automation",
-      "resume-query"
-    ]
-  }
+      "tech-stack-analysis",
+      "interactive-qa",
+      "resume-query",
+    ],
+  },
 };`,
   },
 ];
@@ -410,9 +485,11 @@ export const TERMINAL_COMMANDS_HELP: TerminalCommandHelp[] = [
   { cmd: "conferences", desc: "View research conferences & PSC8 pitch events" },
   { cmd: "contact", desc: "Get email, phone, GitHub, LinkedIn info" },
   { cmd: "cat resume.md", desc: "Print formal CV markdown to terminal" },
+  { cmd: "cat package.json", desc: "Display dependencies & scripts" },
+  { cmd: "cat config.ts", desc: "Display IDE & AI assistant settings" },
   {
-    cmd: "antigravity --fly",
-    desc: "Toggle zero-gravity floating elements mode",
+    cmd: "fly",
+    desc: "Toggle zero-gravity floating physics mode",
   },
   { cmd: "theme [cyan|emerald|purple|amber]", desc: "Switch IDE accent color" },
   { cmd: "neofetch", desc: "Display developer system specs and stats" },

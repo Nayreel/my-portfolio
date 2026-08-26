@@ -138,9 +138,10 @@ export function SidebarExplorer({
       "Skills & Tech Stack",
     ],
     "package.json": ["dependencies", "devDependencies", "scripts"],
-    "antigravity.config.ts": [
-      "antigravityConfig",
+    "config.ts": [
+      "portfolioConfig",
       "themeSettings",
+      "editorConfig",
       "aiAssistantConfig",
     ],
   };
@@ -329,7 +330,7 @@ export function SidebarExplorer({
               );
             })}
 
-            {/* Root files (package.json, antigravity.config.ts) */}
+            {/* Root files (package.json, config.ts) */}
             <div className="pl-3.5 space-y-0.5 mt-1 border-t border-[#252526] pt-1">
               {(groupedFiles["root"] || []).map((file) => {
                 const isSelected = file.id === activeFileId;
@@ -414,7 +415,7 @@ export function SidebarExplorer({
           <div className="px-3 py-1.5 space-y-1.5 text-[11px] text-[#888888] bg-[#141414] max-h-28 overflow-y-auto custom-scrollbar">
             <div className="flex flex-col">
               <span className="text-[#bbbbbb] font-medium truncate">
-                feat: add antigravity AI copilot
+                feat: add AI copilot &amp; interactive previews
               </span>
               <span className="text-[10px] text-[#666666]">
                 Lee Ryan Garcia • 2 hours ago
@@ -430,7 +431,7 @@ export function SidebarExplorer({
             </div>
             <div className="flex flex-col">
               <span className="text-[#bbbbbb] font-medium truncate">
-                initial: architect Antigravity IDE layout
+                initial: architect Developer IDE layout
               </span>
               <span className="text-[10px] text-[#666666]">
                 Lee Ryan Garcia • 1 week ago
