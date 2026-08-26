@@ -3,8 +3,7 @@
 import React, { useState } from "react";
 import { Copy, Check, Cpu, Play } from "lucide-react";
 import { PortfolioFile } from "@/data";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+
 import {
   Tooltip,
   TooltipContent,

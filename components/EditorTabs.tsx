@@ -72,15 +72,16 @@ export function EditorTabs({
   return (
     <div className="bg-[#1e1e1e] border-b border-[#2d2d2d] flex flex-col select-none z-20">
       {/* Upper Tab Strip */}
-      <div className="h-9 flex items-center justify-between overflow-x-auto custom-scrollbar bg-[#181818]">
-        <div className="flex items-center h-full">
+      <div className="h-9 flex items-center justify-between bg-[#181818] overflow-hidden">
+        {/* Scrollable Tabs Container */}
+        <div className="flex-1 min-w-0 h-full flex items-center overflow-x-auto custom-scrollbar">
           {openTabs.map((file) => {
             const isActive = file.id === activeFileId;
             return (
               <div
                 key={file.id}
                 onClick={() => onSelectTab(file)}
-                className={`h-full flex items-center px-3.5 space-x-2 border-r border-[#2d2d2d] cursor-pointer text-xs font-mono transition-all group ${
+                className={`h-full shrink-0 flex items-center px-3.5 space-x-2 border-r border-[#2d2d2d] cursor-pointer text-xs font-mono transition-all group ${
                   isActive
                     ? "bg-[#1e1e1e] text-white border-t-2 border-t-sky-400 font-medium"
                     : "bg-[#181818] text-[#888888] hover:bg-[#1f1f1f] hover:text-[#cccccc]"
@@ -109,8 +110,8 @@ export function EditorTabs({
           })}
         </div>
 
-        {/* Right Tab Controls: Mode Switcher & Actions */}
-        <div className="flex items-center space-x-1.5 px-2 shrink-0">
+        {/* Right Tab Controls: Fixed Mode Switcher & Actions */}
+        <div className="flex items-center space-x-1.5 px-2 shrink-0 bg-[#181818] h-full z-10 border-l border-[#2d2d2d] shadow-[-6px_0_12px_rgba(0,0,0,0.3)]">
           {/* Mode Switcher Buttons */}
           <div className="flex items-center bg-[#252526] p-0.5 rounded-md border border-[#333333]">
             <Tooltip>

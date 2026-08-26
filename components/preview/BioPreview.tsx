@@ -9,8 +9,6 @@ import {
   Cpu,
   MapPin,
   Phone,
-  GitCommit,
-  ArrowUpRight,
 } from "lucide-react";
 import { GithubIcon } from "@/components/icons";
 import { DEVELOPER_PROFILE } from "@/data";

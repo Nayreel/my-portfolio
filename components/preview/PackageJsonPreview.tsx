@@ -126,6 +126,12 @@ const DEPENDENCIES: DependencyItem[] = [
     category: "Utilities",
   },
   {
+    name: "zod",
+    version: "^4.4.3",
+    description: "TypeScript-first schema declaration and data validation library",
+    category: "Utilities",
+  },
+  {
     name: "sonner",
     version: "^2.0.7",
     description: "Minimalist, stackable notification toast system",
