@@ -1,4 +1,3 @@
-// data/conferences.ts
 import { Conference } from "./types";
 
 export const CONFERENCES: Conference[] = [

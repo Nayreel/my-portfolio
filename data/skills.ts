@@ -1,4 +1,3 @@
-// data/skills.ts
 import { SkillCategory } from "./types";
 
 export const SKILL_CATEGORIES: SkillCategory[] = [

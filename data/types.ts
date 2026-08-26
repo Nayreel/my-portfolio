@@ -1,4 +1,3 @@
-// data/types.ts
 /**
  * Shared types are organized in the dedicated types/ directory as per AGENTS.md.
  * Re-exporting here for convenient data access.

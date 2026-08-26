@@ -1,4 +1,3 @@
-// data/socials.ts
 import { SocialMedia } from "./types";
 
 export const SOCIAL_MEDIA: SocialMedia[] = [

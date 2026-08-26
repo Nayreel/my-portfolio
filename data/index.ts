@@ -1,4 +1,3 @@
-// data/index.ts
 /**
  * Central Data Export Hub
  * All static portfolio data is organized in this folder for easy maintenance and editing.

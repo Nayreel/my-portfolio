@@ -1,4 +1,3 @@
-// data/experience.ts
 import { Experience } from "./types";
 
 export const EXPERIENCES: Experience[] = [

@@ -1,4 +1,3 @@
-// data/files.ts
 import { PortfolioFile, TerminalCommandHelp } from "./types";
 
 export const PORTFOLIO_FILES: PortfolioFile[] = [
@@ -121,7 +120,8 @@ export function ProjectCard({ project }: { project: Project }) {
     folder: "experience",
     icon: "Briefcase",
     language: "typescript",
-    description: "Professional timeline at JAV Resource Corp, Buwelo, and Hokei Subic",
+    description:
+      "Professional timeline at JAV Resource Corp, Buwelo, and Hokei Subic",
     previewType: "experience",
     metadata: { lines: 85, size: "3.8 KB", lastModified: "Today" },
     code: `import { ExperienceRecord } from '@/types/career';
@@ -430,7 +430,10 @@ export const TERMINAL_COMMANDS_HELP: TerminalCommandHelp[] = [
   { cmd: "conferences", desc: "View research conferences & PSC8 pitch events" },
   { cmd: "contact", desc: "Get email, phone, GitHub, LinkedIn info" },
   { cmd: "cat resume.md", desc: "Print formal CV markdown to terminal" },
-  { cmd: "antigravity --fly", desc: "Toggle zero-gravity floating elements mode" },
+  {
+    cmd: "antigravity --fly",
+    desc: "Toggle zero-gravity floating elements mode",
+  },
   { cmd: "theme [cyan|emerald|purple|amber]", desc: "Switch IDE accent color" },
   { cmd: "neofetch", desc: "Display developer system specs and stats" },
   { cmd: "clear", desc: "Clear terminal buffer" },
