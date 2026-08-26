@@ -21,7 +21,7 @@ export const DEVELOPER_PROFILE: DeveloperProfile = {
   education: [
     {
       degree: "Bachelor of Science in Information Technology (BSIT)",
-      school: "Gordon College",
+      school: "Gordon College (2020-2024)",
       location: "Olongapo City, Philippines",
       period: "Graduated July 2024",
       honors: "Cum Laude, Dean’s Lister",
