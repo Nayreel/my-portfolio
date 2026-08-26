@@ -165,52 +165,56 @@ export const CareerTimeline: ExperienceRecord[] = [
     icon: "FileJson",
     language: "json",
     description:
-      "Proficiencies in Next.js, TypeScript, n8n, MongoDB, PostgreSQL, and tools",
+      "Engineering stack in Next.js, TypeScript, PostgreSQL, NestJS, n8n, and Docker",
     previewType: "skills",
-    metadata: { lines: 58, size: "2.1 KB", lastModified: "Today" },
+    metadata: { lines: 52, size: "1.9 KB", lastModified: "Today" },
     code: `{
   "developer": "Lee Ryan M. Garcia",
   "title": "Software Engineer",
-  "skillMatrix": {
+  "engineeringStack": {
     "frontend": [
-      "HTML5",
-      "CSS3",
-      "JavaScript (ES6+)",
-      "TypeScript",
-      "React.js",
       "Next.js (App Router)",
+      "React",
+      "TypeScript",
+      "JavaScript (ES6+)",
       "Tailwind CSS",
+      "shadcn/ui",
       "GSAP Animations",
-      "Shadcn UI",
       "Aceternity UI",
+      "HTML5 & CSS3",
       "Redux"
     ],
-    "backend_and_databases": [
+    "backendAndData": [
       "Node.js",
       "Express.js",
       "NestJS",
-      "MongoDB & MongoDB Compass",
-      "MySQL",
       "PostgreSQL",
       "Prisma ORM",
-      "Socket.io (WebSockets)"
+      "MongoDB",
+      "MySQL",
+      "Socket.io (WebSockets)",
+      "Redis"
     ],
-    "automation_and_integrations": [
+    "apisAndAutomation": [
+      "REST APIs",
+      "GraphQL",
       "n8n Workflow Automation",
-      "Odoo ERP Integration",
-      "Strapi CRM Integration",
-      "REST APIs & GraphQL",
+      "Webhooks & Event Streams",
+      "Odoo ERP",
+      "Strapi CRM",
+      "VAPI AI Voice",
       "Shopify API",
-      "Cloudinary",
-      "VAPI (AI Voice Assistant)"
+      "Cloudinary"
     ],
-    "devops_cloud_and_tools": [
-      "Docker & Docker Desktop",
-      "Git & GitHub Actions (CI/CD)",
-      "Microsoft Azure & M365",
-      "Vercel, Railway, Render, DigitalOcean",
-      "Visual Studio Code & Antigravity IDE",
-      "Postman, Figma, Trello"
+    "infrastructureAndDevOps": [
+      "Git & GitHub",
+      "GitHub Actions (CI/CD)",
+      "Docker",
+      "Vercel",
+      "Railway",
+      "Render",
+      "Microsoft Azure",
+      "Postman"
     ]
   }
 }`,

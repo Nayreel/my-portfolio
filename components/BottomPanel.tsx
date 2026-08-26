@@ -114,11 +114,11 @@ export function BottomPanel({
       const sList = SKILL_CATEGORIES.map(
         (c) =>
           `[${c.category}]\n  ` +
-          c.skills.map((s) => `${s.name} (${s.experience})`).join(", "),
+          c.skills.map((s) => `${s.name} [${s.level}]`).join(", "),
       ).join("\n\n");
       nextLogs.push({
         type: "output",
-        text: `Skills & Proficiencies:\n\n${sList}`,
+        text: `Engineering Stack:\n\n${sList}`,
       });
       if (onSelectFile) onSelectFile("tech-stack.json");
     } else if (cmd === "experience") {

@@ -1,10 +1,23 @@
 // types/skills.ts
 
+export type SkillLevel =
+  | "Core"
+  | "Production"
+  | "Advanced"
+  | "Working"
+  | "Integration";
+
 export interface SkillItem {
   name: string;
-  level: number; // 1 - 100
-  experience: string;
+  level: SkillLevel;
   favorite?: boolean;
+}
+
+export interface SkillLevelConfig {
+  label: string;
+  badgeClass: string;
+  dotClass: string;
+  description: string;
 }
 
 export interface SkillCategory {
@@ -12,3 +25,5 @@ export interface SkillCategory {
   icon: string;
   skills: SkillItem[];
 }
+
+
