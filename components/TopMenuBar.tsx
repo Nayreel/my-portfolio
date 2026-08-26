@@ -96,13 +96,13 @@ export function TopMenuBar({
     <header className="h-9 bg-[#181818] border-b border-[#2d2d2d] flex items-center justify-between px-2 select-none text-[13px] text-[#cccccc] relative z-40">
       {/* Left section: App Icon & Shadcn Dropdown Menus */}
       <div className="flex items-center space-x-1">
-        {/* Mobile Hamburger Menu Button */}
+        {/* Mobile & Tablet Hamburger Menu Button */}
         <Button
           type="button"
           variant="ghost"
           size="icon-xs"
           onClick={() => setIsLeftSidebarOpen((prev) => !prev)}
-          className="sm:hidden p-1 h-7 w-7 text-zinc-300 hover:text-white hover:bg-[#2a2d2e] rounded-md transition-colors cursor-pointer mr-0.5"
+          className="lg:hidden p-1 h-7 w-7 text-zinc-300 hover:text-white hover:bg-[#2a2d2e] rounded-md transition-colors cursor-pointer mr-0.5"
           aria-label="Toggle navigation menu"
         >
           {isLeftSidebarOpen ? (
@@ -126,7 +126,7 @@ export function TopMenuBar({
         </div>
 
         {/* Desktop Menu items with shadcn DropdownMenu */}
-        <div className="hidden md:flex items-center space-x-0.5">
+        <div className="hidden lg:flex items-center space-x-0.5">
           {/* File Menu */}
           <DropdownMenu>
             <DropdownMenuTrigger className="px-2 py-0.5 rounded text-xs text-[#b8b8b8] hover:bg-[#2a2d2e] hover:text-white transition-colors focus:outline-none data-[state=open]:bg-[#2a2d2e] data-[state=open]:text-white cursor-pointer">

@@ -193,8 +193,8 @@ export default function AntigravityPortfolioApp() {
 
       {/* 2. Main Workspace Layout */}
       <div className="flex-1 flex overflow-hidden relative min-h-0">
-        {/* Far-Left Activity Bar (Desktop & Tablet only; Mobile uses TopMenuBar Hamburger) */}
-        <div className="hidden sm:flex shrink-0 h-full">
+        {/* Far-Left Activity Bar (Desktop only; Mobile & Tablet use TopMenuBar Hamburger) */}
+        <div className="hidden lg:flex shrink-0 h-full">
           <ActivityBar
             activeView={activeSidebarView}
             setActiveView={(view) => {
@@ -237,13 +237,13 @@ export default function AntigravityPortfolioApp() {
               onClick={() => setIsLeftSidebarOpen(false)}
               className="fixed inset-0 bg-black/60 backdrop-blur-xs z-35"
             />
-            <div className="fixed inset-y-9 left-0 sm:left-12 z-40 w-72 max-w-[85vw] sm:max-w-[calc(100vw-3.25rem)] shadow-2xl border-r border-[#2d2d2d] bg-[#181818] flex flex-col">
+            <div className="fixed inset-y-9 left-0 z-40 w-72 max-w-[85vw] shadow-2xl border-r border-[#2d2d2d] bg-[#181818] flex flex-col">
               <SidebarExplorer
                 files={PORTFOLIO_FILES}
                 activeFileId={activeFileId}
                 onSelectFile={(f) => {
                   handleSelectFile(f);
-                  if (isMobile) setIsLeftSidebarOpen(false);
+                  if (isTablet) setIsLeftSidebarOpen(false);
                 }}
                 openCommandPalette={() => {
                   setIsLeftSidebarOpen(false);
