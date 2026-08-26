@@ -2,14 +2,14 @@
 import { useEffect, useRef, useState } from "react";
 import { Color, Scene, Fog, PerspectiveCamera, Vector3 } from "three";
 import ThreeGlobe from "three-globe";
-import { useThree, Object3DNode, Canvas, extend } from "@react-three/fiber";
+import { useThree, Canvas, extend, ThreeElement } from "@react-three/fiber";
 import { useMemo } from "react";
 
 import { OrbitControls } from "@react-three/drei";
 import countries from "@/data/globe.json";
 declare module "@react-three/fiber" {
   interface ThreeElements {
-    threeGlobe: Object3DNode<ThreeGlobe, typeof ThreeGlobe>;
+    threeGlobe: ThreeElement<typeof ThreeGlobe>;
   }
 }
 
@@ -109,10 +109,16 @@ export function Globe({ globeConfig, data }: WorldProps) {
       emissiveIntensity: number;
       shininess: number;
     };
-    globeMaterial.color = new Color(globeConfig.globeColor);
-    globeMaterial.emissive = new Color(globeConfig.emissive);
-    globeMaterial.emissiveIntensity = globeConfig.emissiveIntensity || 0.1;
-    globeMaterial.shininess = globeConfig.shininess || 0.9;
+    globeMaterial.color = new Color(
+      globeConfig.globeColor || defaultProps.globeColor
+    );
+    globeMaterial.emissive = new Color(
+      globeConfig.emissive || defaultProps.emissive
+    );
+    globeMaterial.emissiveIntensity =
+      globeConfig.emissiveIntensity ?? defaultProps.emissiveIntensity;
+    globeMaterial.shininess =
+      globeConfig.shininess ?? defaultProps.shininess;
   };
 
   const _buildData = () => {
@@ -120,7 +126,7 @@ export function Globe({ globeConfig, data }: WorldProps) {
     let points = [];
     for (let i = 0; i < arcs.length; i++) {
       const arc = arcs[i];
-      const rgb = hexToRgb(arc.color) as { r: number; g: number; b: number };
+      const rgb = hexToRgb(arc.color) || { r: 255, g: 255, b: 255 };
       points.push({
         size: defaultProps.pointSize,
         order: arc.order,
@@ -142,9 +148,9 @@ export function Globe({ globeConfig, data }: WorldProps) {
       (v, i, a) =>
         a.findIndex((v2) =>
           ["lat", "lng"].every(
-            (k) => v2[k as "lat" | "lng"] === v[k as "lat" | "lng"]
-          )
-        ) === i
+            (k) => v2[k as "lat" | "lng"] === v[k as "lat" | "lng"],
+          ),
+        ) === i,
     );
 
     setGlobeData(filteredPoints);
@@ -189,19 +195,22 @@ export function Globe({ globeConfig, data }: WorldProps) {
 
     globeRef.current
       .pointsData(globeData)
-
-      .pointColor((e) => (e as { color: string }).color)
+      .pointColor((e: any) =>
+        typeof e.color === "function" ? e.color(0) : (e.color || "#ffffff")
+      )
       .pointsMerge(true)
       .pointAltitude(0.0)
       .pointRadius(2);
 
     globeRef.current
       .ringsData([])
-      .ringColor((e: any) => (t: any) => e.color(t))
+      .ringColor((e: any) => (t: any) =>
+        typeof e.color === "function" ? e.color(t) : (e.color || "#ffffff")
+      )
       .ringMaxRadius(defaultProps.maxRings)
       .ringPropagationSpeed(RING_PROPAGATION_SPEED)
       .ringRepeatPeriod(
-        (defaultProps.arcTime * defaultProps.arcLength) / defaultProps.rings
+        (defaultProps.arcTime * defaultProps.arcLength) / defaultProps.rings,
       );
   };
 
@@ -213,11 +222,11 @@ export function Globe({ globeConfig, data }: WorldProps) {
       numbersOfRings = genRandomNumbers(
         0,
         data.length,
-        Math.floor((data.length * 4) / 5)
+        Math.floor((data.length * 4) / 5),
       );
 
       globeRef.current.ringsData(
-        globeData.filter((d, i) => numbersOfRings.includes(i))
+        globeData.filter((d, i) => numbersOfRings.includes(i)),
       );
     }, 2000);
 
