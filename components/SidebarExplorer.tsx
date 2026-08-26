@@ -40,7 +40,6 @@ export function SidebarExplorer({
     projects: true,
     skills: true,
     contact: true,
-    playground: true,
     resume: true,
     root: true,
   });
@@ -137,11 +136,6 @@ export function SidebarExplorer({
       "Education (Cum Laude)",
       "Conferences & Competitions",
       "Skills & Tech Stack",
-    ],
-    "playground.tsx": [
-      "activateAntigravityMode()",
-      "PhysicsRunner()",
-      "MiniGameRunner()",
     ],
     "package.json": ["dependencies", "devDependencies", "scripts"],
     "antigravity.config.ts": [
@@ -275,7 +269,6 @@ export function SidebarExplorer({
               "experience",
               "skills",
               "contact",
-              "playground",
               "resume",
             ].map((folderKey) => {
               const folderFiles = groupedFiles[folderKey] || [];

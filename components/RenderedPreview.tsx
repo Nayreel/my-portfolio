@@ -8,7 +8,6 @@ import { ExperiencePreview } from "@/components/preview/ExperiencePreview";
 import { SkillsPreview } from "@/components/preview/SkillsPreview";
 import { ContactPreview } from "@/components/preview/ContactPreview";
 import { ResumePreview } from "@/components/preview/ResumePreview";
-import { PlaygroundPreview } from "@/components/preview/PlaygroundPreview";
 import { DefaultFilePreview } from "@/components/preview/DefaultFilePreview";
 
 interface RenderedPreviewProps {
@@ -50,20 +49,9 @@ export function RenderedPreview({
     case "resume.md":
       return <ResumePreview />;
 
-    case "playground.tsx":
-      return (
-        <PlaygroundPreview
-          antigravityMode={antigravityMode}
-          setAntigravityMode={setAntigravityMode}
-        />
-      );
-
     default:
       return (
-        <DefaultFilePreview
-          file={activeFile}
-          onSwitchToFile={onSwitchToFile}
-        />
+        <DefaultFilePreview file={activeFile} onSwitchToFile={onSwitchToFile} />
       );
   }
 }

@@ -330,30 +330,6 @@ Software Engineer with strong experience in building scalable web applications w
 - **Languages:** English, Tagalog`,
   },
   {
-    id: "playground.tsx",
-    name: "interactive-playground.tsx",
-    path: "playground/interactive-playground.tsx",
-    folder: "playground",
-    icon: "Zap",
-    language: "typescript",
-    description:
-      "Interactive code runner, zero-g physics switch, and bug hunter minigame",
-    previewType: "playground",
-    metadata: { lines: 75, size: "3.2 KB", lastModified: "Just now" },
-    code: `// Google Antigravity IDE Interactive Playground
-export interface PlaygroundFeatures {
-  zeroGravityPhysics: boolean;
-  liveCodeEvaluator: boolean;
-  geminiLiveCopilot: boolean;
-  terminalCommandRunner: boolean;
-}
-
-export function activateAntigravityMode() {
-  console.log("🚀 Anti-Gravity engine ignited! Float away...");
-  window.dispatchEvent(new CustomEvent('toggle-antigravity'));
-}`,
-  },
-  {
     id: "package.json",
     name: "package.json",
     path: "package.json",

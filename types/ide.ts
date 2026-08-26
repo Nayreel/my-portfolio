@@ -8,7 +8,6 @@ export type PreviewType =
   | "contact"
   | "resume"
   | "config"
-  | "playground"
   | "package";
 
 export interface PortfolioFileMetadata {
@@ -35,7 +34,17 @@ export interface TerminalCommandHelp {
   desc: string;
 }
 
-export type ActiveSidebarView = "explorer" | "search" | "source-control" | "debug" | "extensions" | "none";
+export type ActiveSidebarView =
+  | "explorer"
+  | "search"
+  | "source-control"
+  | "debug"
+  | "extensions"
+  | "none";
 export type ViewMode = "preview" | "code" | "split";
-export type IDEThemeMode = "nebula" | "abyss" | "cyberpunk" | "matrix" | "solar";
-
+export type IDEThemeMode =
+  | "nebula"
+  | "abyss"
+  | "cyberpunk"
+  | "matrix"
+  | "solar";
