@@ -49,7 +49,6 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-<<<<<<< HEAD
     <html
       lang="en"
       className={cn(
@@ -64,16 +63,6 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <TooltipProvider delay={200}>
-=======
-    <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
->>>>>>> 105e9e1026b8d8b245a3527e3f7b988436b48de3
           {children}
           <Toaster />
         </TooltipProvider>
