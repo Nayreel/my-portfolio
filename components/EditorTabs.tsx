@@ -47,27 +47,58 @@ export function EditorTabs({
   const getTabIcon = (fileName: string) => {
     if (fileName.endsWith(".tsx") || fileName.endsWith(".ts")) {
       return (
-        <span className="text-sky-400 font-mono text-[11px] font-bold mr-1.5">
+        <span className="text-sky-400 font-mono text-[11px] font-bold mr-1.5 shrink-0">
           ⚛
         </span>
       );
     }
     if (fileName.endsWith(".json")) {
       return (
-        <span className="text-amber-400 font-mono text-[11px] font-bold mr-1.5">
+        <span className="text-amber-400 font-mono text-[11px] font-bold mr-1.5 shrink-0">
           &#123;&#125;
         </span>
       );
     }
     if (fileName.endsWith(".md")) {
       return (
-        <span className="text-blue-400 font-mono text-[11px] font-bold mr-1.5">
+        <span className="text-blue-400 font-mono text-[11px] font-bold mr-1.5 shrink-0">
           M↓
         </span>
       );
     }
-    return <FileCode2 className="w-3.5 h-3.5 text-sky-400 mr-1.5" />;
+    return <FileCode2 className="w-3.5 h-3.5 text-sky-400 mr-1.5 shrink-0" />;
   };
+
+  const getLanguageInfo = (fileName: string = "") => {
+    if (fileName.endsWith(".tsx") || fileName.endsWith(".ts")) {
+      return {
+        short: "TSX",
+        full: "TypeScript JSX",
+        color: "text-emerald-400 border-emerald-500/30 bg-emerald-950/20",
+      };
+    }
+    if (fileName.endsWith(".json")) {
+      return {
+        short: "JSON",
+        full: "JSON Data",
+        color: "text-amber-400 border-amber-500/30 bg-amber-950/20",
+      };
+    }
+    if (fileName.endsWith(".md")) {
+      return {
+        short: "MD",
+        full: "Markdown",
+        color: "text-blue-400 border-blue-500/30 bg-blue-950/20",
+      };
+    }
+    return {
+      short: "TXT",
+      full: "Plain Text",
+      color: "text-zinc-400 border-zinc-500/30 bg-zinc-950/20",
+    };
+  };
+
+  const langInfo = getLanguageInfo(activeFile?.name);
 
   return (
     <div className="bg-[#1e1e1e] border-b border-[#2d2d2d] flex flex-col select-none z-20">
@@ -81,19 +112,21 @@ export function EditorTabs({
               <div
                 key={file.id}
                 onClick={() => onSelectTab(file)}
-                className={`h-full shrink-0 flex items-center px-2.5 sm:px-3.5 space-x-1.5 sm:space-x-2 border-r border-[#2d2d2d] cursor-pointer text-xs font-mono transition-all group ${
+                className={`h-full shrink-0 flex items-center px-2 sm:px-3.5 space-x-1 sm:space-x-2 border-r border-[#2d2d2d] cursor-pointer text-xs font-mono transition-all group ${
                   isActive
                     ? "bg-[#1e1e1e] text-white border-t-2 border-t-sky-400 font-medium"
                     : "bg-[#181818] text-[#888888] hover:bg-[#1f1f1f] hover:text-[#cccccc]"
                 }`}
               >
-                <div className="flex items-center">
+                <div className="flex items-center min-w-0">
                   {getTabIcon(file.name)}
-                  <span className="truncate max-w-[100px] sm:max-w-[140px]">{file.name}</span>
+                  <span className="truncate max-w-[70px] xs:max-w-[100px] sm:max-w-[140px]">
+                    {file.name}
+                  </span>
                 </div>
 
                 {/* Modified dot / close button */}
-                <div className="flex items-center ml-1">
+                <div className="flex items-center ml-0.5 sm:ml-1 shrink-0">
                   <span className="w-1.5 h-1.5 rounded-full bg-amber-400/80 mr-1 group-hover:hidden" />
                   <Button
                     type="button"
@@ -111,7 +144,7 @@ export function EditorTabs({
         </div>
 
         {/* Right Tab Controls: Fixed Mode Switcher & Actions */}
-        <div className="flex items-center space-x-1 sm:space-x-1.5 px-1.5 sm:px-2 shrink-0 bg-[#181818] h-full z-10 border-l border-[#2d2d2d] shadow-[-6px_0_12px_rgba(0,0,0,0.3)]">
+        <div className="flex items-center space-x-1 sm:space-x-1.5 px-1 sm:px-2 shrink-0 bg-[#181818] h-full z-10 border-l border-[#2d2d2d] shadow-[-6px_0_12px_rgba(0,0,0,0.3)]">
           {/* Mode Switcher Buttons */}
           <div className="flex items-center bg-[#252526] p-0.5 rounded-md border border-[#333333]">
             <Tooltip>
@@ -182,9 +215,9 @@ export function EditorTabs({
           <Tooltip>
             <TooltipTrigger
               onClick={onAskAIAboutFile}
-              className="h-6 px-2 text-[11px] bg-sky-500/10 hover:bg-sky-500/20 text-sky-300 border border-sky-500/30 font-medium rounded-md inline-flex items-center justify-center cursor-pointer transition-colors"
+              className="h-6 px-1.5 sm:px-2 text-[11px] bg-sky-500/10 hover:bg-sky-500/20 text-sky-300 border border-sky-500/30 font-medium rounded-md inline-flex items-center justify-center cursor-pointer transition-colors"
             >
-              <Cpu className="w-3 h-3 mr-1 text-sky-400" />
+              <Cpu className="w-3 h-3 sm:mr-1 text-sky-400 shrink-0" />
               <span className="hidden md:inline">Explain File</span>
             </TooltipTrigger>
             <TooltipContent
@@ -198,24 +231,25 @@ export function EditorTabs({
       </div>
 
       {/* Breadcrumbs Bar */}
-      <div className="h-6 bg-[#1e1e1e] px-3 flex items-center justify-between text-[11px] font-mono text-[#888888] border-t border-[#252526]">
-        <div className="flex items-center space-x-1.5 truncate">
-          <span className="text-[#666666]">portfolio-v2</span>
-          <ChevronRight className="w-3 h-3 text-[#555555]" />
-          <span>{activeFile?.folder || "root"}</span>
-          <ChevronRight className="w-3 h-3 text-[#555555]" />
-          <span className="text-[#cccccc] font-medium">{activeFile?.name}</span>
-          <ChevronRight className="w-3 h-3 text-[#555555]" />
-          <span className="text-amber-400/90">[e] export default</span>
+      <div className="h-6 bg-[#1e1e1e] px-2 sm:px-3 flex items-center justify-between text-[11px] font-mono text-[#888888] border-t border-[#252526] gap-2 overflow-hidden">
+        <div className="flex items-center space-x-1 sm:space-x-1.5 flex-1 min-w-0 truncate">
+          <span className="text-[#666666] hidden sm:inline shrink-0">portfolio-v2</span>
+          <ChevronRight className="w-3 h-3 text-[#555555] hidden sm:inline shrink-0" />
+          <span className="truncate shrink-0 max-w-[80px] sm:max-w-none">{activeFile?.folder || "root"}</span>
+          <ChevronRight className="w-3 h-3 text-[#555555] shrink-0" />
+          <span className="text-[#cccccc] font-medium truncate">{activeFile?.name}</span>
+          <ChevronRight className="w-3 h-3 text-[#555555] hidden md:inline shrink-0" />
+          <span className="text-amber-400/90 hidden md:inline truncate">[e] export default</span>
         </div>
 
-        <div className="flex items-center space-x-2 text-[10px] text-[#777777]">
-          <span>{activeFile?.metadata?.lines || 50} lines</span>
+        <div className="flex items-center space-x-1.5 sm:space-x-2 text-[10px] text-[#777777] shrink-0">
+          <span className="hidden xs:inline whitespace-nowrap">{activeFile?.metadata?.lines || 50} lines</span>
           <Badge
             variant="outline"
-            className="text-[9px] py-0 px-1 text-emerald-400 border-emerald-500/30 bg-emerald-950/20"
+            className={`text-[9px] py-0 px-1 whitespace-nowrap ${langInfo.color}`}
           >
-            TypeScript JSX
+            <span className="sm:hidden">{langInfo.short}</span>
+            <span className="hidden sm:inline">{langInfo.full}</span>
           </Badge>
         </div>
       </div>
