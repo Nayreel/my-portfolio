@@ -10,6 +10,7 @@ import {
   Settings,
   Check,
   ChevronRight,
+  ChevronDown,
   ExternalLink,
   Download,
 } from "lucide-react";
@@ -18,6 +19,7 @@ import confetti from "canvas-confetti";
 import { DEVELOPER_PROFILE } from "@/data";
 import { downloadResumePdf } from "@/lib/download";
 import { Badge } from "@/components/ui/badge";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -113,7 +115,11 @@ export function ProfileDropdown({
   activeTheme = "cyan",
   onSelectTheme,
 }: ProfileDropdownProps) {
-  const [selectedThemeId, setSelectedThemeId] = useState<string>(activeTheme);
+  const [internalThemeId, setInternalThemeId] = useState<string>(activeTheme);
+  const selectedThemeId = activeTheme || internalThemeId;
+
+  const currentTheme =
+    THEME_OPTIONS.find((t) => t.id === selectedThemeId) || THEME_OPTIONS[0];
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(DEVELOPER_PROFILE.email);
@@ -123,7 +129,7 @@ export function ProfileDropdown({
   };
 
   const handleThemeChange = (theme: ThemeOption) => {
-    setSelectedThemeId(theme.id);
+    setInternalThemeId(theme.id);
     document.documentElement.style.setProperty("--accent-theme", theme.color);
     if (onSelectTheme) onSelectTheme(theme);
     toast.success(`Theme switched to ${theme.name}`, {
@@ -141,15 +147,21 @@ export function ProfileDropdown({
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="flex items-center pl-1 cursor-pointer bg-transparent border-0 p-0 focus:outline-none select-none shrink-0">
-        <Badge
-          variant="outline"
-          className="bg-[#0078d4]/20 hover:bg-[#0078d4]/30 border-[#0078d4]/40 text-sky-300 px-2 sm:px-2.5 py-0.5 rounded-full text-[11px] font-medium transition-all flex items-center space-x-1.5 cursor-pointer shadow-sm hover:shadow-sky-500/20 max-w-[150px] truncate"
-        >
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shrink-0" />
-          <span className="font-sans truncate hidden sm:inline">{DEVELOPER_PROFILE.name}</span>
-          <span className="font-sans font-mono font-bold sm:hidden">LG</span>
-        </Badge>
+      <DropdownMenuTrigger className="group flex items-center space-x-1 p-1 rounded hover:bg-white/10 transition-colors cursor-pointer bg-transparent border-0 focus:outline-none select-none shrink-0">
+        <Avatar className="w-5 h-5 shrink-0 rounded-full border border-white/10">
+          <AvatarImage
+            src={DEVELOPER_PROFILE.avatarUrl || "/avatar.png"}
+            alt={DEVELOPER_PROFILE.name}
+            className="object-cover rounded-full"
+          />
+          <AvatarFallback
+            className="text-[10px] font-bold text-white flex items-center justify-center transition-colors shadow-inner"
+            style={{ backgroundColor: currentTheme.color }}
+          >
+            L
+          </AvatarFallback>
+        </Avatar>
+        <ChevronDown className="w-3 h-3 text-zinc-400 group-hover:text-zinc-200 transition-transform duration-200 group-data-[state=open]:rotate-180" />
       </DropdownMenuTrigger>
 
       <DropdownMenuContent
@@ -159,10 +171,25 @@ export function ProfileDropdown({
         {/* Profile Card Header */}
         <div className="p-3 bg-[#15161a] rounded-xl border border-[#262831] mb-1.5 space-y-2">
           <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-500 via-indigo-500 to-purple-600 p-[1.5px] shrink-0 shadow-md">
-              <div className="w-full h-full bg-[#18191e] rounded-[10px] flex items-center justify-center font-bold text-sky-300 font-mono text-xs">
-                LG
-              </div>
+            <div
+              className="w-10 h-10 rounded-xl p-[1.5px] shrink-0 shadow-md transition-all"
+              style={{
+                background: `linear-gradient(135deg, ${currentTheme.color}, #6366f1)`,
+              }}
+            >
+              <Avatar className="w-full h-full rounded-[10px]">
+                <AvatarImage
+                  src={DEVELOPER_PROFILE.avatarUrl || "/avatar.png"}
+                  alt={DEVELOPER_PROFILE.name}
+                  className="rounded-[10px] object-cover"
+                />
+                <AvatarFallback
+                  className="w-full h-full bg-[#18191e] rounded-[10px] flex items-center justify-center font-bold font-mono text-xs transition-colors"
+                  style={{ color: currentTheme.color }}
+                >
+                  LG
+                </AvatarFallback>
+              </Avatar>
             </div>
             <div className="truncate min-w-0">
               <div className="font-bold text-white text-xs truncate">
@@ -177,7 +204,7 @@ export function ProfileDropdown({
           <div className="flex items-center justify-between text-[10.5px] text-zinc-400 pt-1 border-t border-[#22242c]">
             <span className="flex items-center space-x-1">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-              <span>Available for Hire</span>
+              <span>Available</span>
             </span>
             <span className="font-mono text-zinc-500">PH (GMT+8)</span>
           </div>
@@ -237,7 +264,9 @@ export function ProfileDropdown({
             <div className="flex items-center space-x-2">
               <Flame
                 className={`w-3.5 h-3.5 ${
-                  antigravityMode ? "text-amber-400 animate-pulse" : "text-zinc-400"
+                  antigravityMode
+                    ? "text-amber-400 animate-pulse"
+                    : "text-zinc-400"
                 }`}
               />
               <span>Zero-Gravity Mode</span>
@@ -272,7 +301,10 @@ export function ProfileDropdown({
           <DropdownMenuItem
             onClick={() => {
               const filename =
-                (DEVELOPER_PROFILE.resumePdfUrl || "/Lee_Ryan_Garcia_Resume.pdf")
+                (
+                  DEVELOPER_PROFILE.resumePdfUrl ||
+                  "/Lee_Ryan_Garcia_Resume.pdf"
+                )
                   .split("/")
                   .pop() || "Lee_Ryan_Garcia_Resume.pdf";
               confetti({ particleCount: 60, spread: 70 });
@@ -281,7 +313,7 @@ export function ProfileDropdown({
               });
               downloadResumePdf(
                 DEVELOPER_PROFILE.resumePdfUrl || "/Lee_Ryan_Garcia_Resume.pdf",
-                filename
+                filename,
               );
             }}
             className="text-xs cursor-pointer py-2 px-2.5 rounded-lg hover:bg-[#272932] hover:text-white focus:bg-[#272932] focus:text-white flex items-center space-x-2"

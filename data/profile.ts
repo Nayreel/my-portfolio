@@ -12,6 +12,7 @@ export const DEVELOPER_PROFILE: DeveloperProfile = {
   location: "Olongapo City, Zambales, Philippines",
   status: "Available for Software Engineering & Automation Opportunities",
   resumePdfUrl: "/Lee_Ryan_Garcia_Resume.pdf",
+  avatarUrl: "/profile.png",
   bio: "Full-stack developer building production-ready web applications, automation workflows, and business systems with Next.js, React, TypeScript, and n8n. I focus on turning complex business processes into reliable, scalable software.",
   stats: [
     { label: "Projects Shipped", value: "10+" },

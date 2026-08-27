@@ -93,6 +93,7 @@ export interface DeveloperProfile {
   status: string;
   bio: string;
   resumePdfUrl?: string;
+  avatarUrl?: string;
   stats: { label: string; value: string }[];
   education: EducationItem[];
   philosophy?: DeveloperPhilosophy;

@@ -339,7 +339,7 @@ export function TopMenuBar({
         >
           <span className="truncate">
             <span className="hidden md:inline">
-              my-portfolio - Portfolio IDE -{" "}
+              Lee Ryan Garcia - Portfolio -{" "}
             </span>
             <span className="text-sky-300 sm:text-inherit font-mono sm:font-sans">
               {activeFileName}
