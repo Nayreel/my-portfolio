@@ -37,6 +37,7 @@ export interface TerminalCommandHelp {
 export type ActiveSidebarView =
   | "explorer"
   | "search"
+  | "git"
   | "source-control"
   | "debug"
   | "extensions"

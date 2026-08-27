@@ -56,7 +56,9 @@ export function GitHubContributionGraph() {
 
     const fetchContributions = async () => {
       try {
-        const res = await fetch(`/api/github/contributions?year=${selectedYear}`);
+        const res = await fetch(
+          `/api/github/contributions?year=${selectedYear}`,
+        );
         if (!res.ok) {
           if (isMounted) setIsLoading(false);
           return;
@@ -253,8 +255,7 @@ export function GitHubContributionGraph() {
                           );
                         }
 
-                        const colorClass =
-                          COLOR_MAP[day.level] || COLOR_MAP[0];
+                        const colorClass = COLOR_MAP[day.level] || COLOR_MAP[0];
                         const dateFormatted = new Date(
                           day.date,
                         ).toLocaleDateString("en-US", {

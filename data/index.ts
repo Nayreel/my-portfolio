@@ -11,3 +11,4 @@ export * from "./skills";
 export * from "./conferences";
 export * from "./socials";
 export * from "./files";
+export * from "./sidebarData";

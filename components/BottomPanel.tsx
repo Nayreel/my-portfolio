@@ -34,6 +34,9 @@ interface BottomPanelProps {
   onSelectFile?: (fileId: string) => void;
   antigravityMode: boolean;
   setAntigravityMode: (active: boolean | ((prev: boolean) => boolean)) => void;
+  activeTab?: PanelTab;
+  setActiveTab?: (tab: PanelTab) => void;
+  debugLogMessage?: string | null;
 }
 
 export type PanelTab = "problems" | "output" | "debug" | "terminal" | "ports";
@@ -49,8 +52,14 @@ export function BottomPanel({
   onSelectFile,
   antigravityMode,
   setAntigravityMode,
+  activeTab: controlledActiveTab,
+  setActiveTab: setControlledActiveTab,
+  debugLogMessage,
 }: BottomPanelProps) {
-  const [activeTab, setActiveTab] = useState<PanelTab>("terminal");
+  const [internalActiveTab, setInternalActiveTab] = useState<PanelTab>("terminal");
+  const activeTab = controlledActiveTab ?? internalActiveTab;
+  const setActiveTab = setControlledActiveTab ?? setInternalActiveTab;
+
   const [isExpanded, setIsExpanded] = useState(false);
   const [commandInput, setCommandInput] = useState("");
   const [historyIndex, setHistoryIndex] = useState<number>(-1);
@@ -89,119 +98,52 @@ export function BottomPanel({
     const cmd = rawCmd.toLowerCase();
 
     if (cmd === "help") {
-      const helpText = TERMINAL_COMMANDS_HELP.map(
-        (h) => `  ${h.cmd.padEnd(20)} - ${h.desc}`,
-      ).join("\n");
-      nextLogs.push({
-        type: "output",
-        text: `Available IDE Portfolio Commands:\n${helpText}`,
-      });
+      const helpText = TERMINAL_COMMANDS_HELP.map((h) => `  ${h.cmd.padEnd(20)} - ${h.desc}`).join("\n");
+      nextLogs.push({ type: "output", text: `Available IDE Portfolio Commands:\n${helpText}` });
     } else if (cmd === "bio") {
-      nextLogs.push({
-        type: "output",
-        text: `👤 ${DEVELOPER_PROFILE.name} - ${DEVELOPER_PROFILE.title}\n📍 ${DEVELOPER_PROFILE.location}\n✉️ ${DEVELOPER_PROFILE.email}\n${DEVELOPER_PROFILE.bio}`,
-      });
+      nextLogs.push({ type: "output", text: `👤 ${DEVELOPER_PROFILE.name} - ${DEVELOPER_PROFILE.title}\n📍 ${DEVELOPER_PROFILE.location}\n✉️ ${DEVELOPER_PROFILE.email}\n${DEVELOPER_PROFILE.bio}` });
       if (onSelectFile) onSelectFile("bio.tsx");
     } else if (cmd === "projects") {
-      const pList = PROJECTS.map(
-        (p) =>
-          `🚀 ${p.title} (${p.category})\n   ${p.tagline}\n   Tech: ${p.tags.join(", ")}\n   Live: ${p.liveUrl}`,
-      ).join("\n\n");
-      nextLogs.push({
-        type: "output",
-        text: `Projects:\n\n${pList}`,
-      });
+      const pList = PROJECTS.map((p) => `🚀 ${p.title} (${p.category})\n   ${p.tagline}\n   Tech: ${p.tags.join(", ")}\n   Live: ${p.liveUrl}`).join("\n\n");
+      nextLogs.push({ type: "output", text: `Projects:\n\n${pList}` });
       if (onSelectFile) onSelectFile("projects.tsx");
     } else if (cmd === "skills") {
-      const sList = SKILL_CATEGORIES.map(
-        (c) =>
-          `[${c.category}]\n  ` +
-          c.skills.map((s) => `${s.name} [${s.level}]`).join(", "),
-      ).join("\n\n");
-      nextLogs.push({
-        type: "output",
-        text: `Engineering Stack:\n\n${sList}`,
-      });
+      const sList = SKILL_CATEGORIES.map((c) => `[${c.category}]\n  ` + c.skills.map((s) => `${s.name} [${s.level}]`).join(", ")).join("\n\n");
+      nextLogs.push({ type: "output", text: `Engineering Stack:\n\n${sList}` });
       if (onSelectFile) onSelectFile("tech-stack.json");
     } else if (cmd === "experience") {
-      const eList = EXPERIENCES.map(
-        (e) =>
-          `💼 ${e.role} @ ${e.company} (${e.period})\n   ${e.highlights[0]}`,
-      ).join("\n\n");
-      nextLogs.push({
-        type: "output",
-        text: `Career Timeline:\n\n${eList}`,
-      });
+      const eList = EXPERIENCES.map((e) => `💼 ${e.role} @ ${e.company} (${e.period})\n   ${e.highlights[0]}`).join("\n\n");
+      nextLogs.push({ type: "output", text: `Career Timeline:\n\n${eList}` });
       if (onSelectFile) onSelectFile("experience.tsx");
     } else if (cmd === "conferences") {
-      const cList = CONFERENCES.map(
-        (c) => `🏆 ${c.title}\n   📅 ${c.date}\n   ${c.des}`,
-      ).join("\n\n");
-      nextLogs.push({
-        type: "output",
-        text: `Conferences & Pitching Competitions:\n\n${cList}`,
-      });
+      const cList = CONFERENCES.map((c) => `🏆 ${c.title}\n   📅 ${c.date}\n   ${c.des}`).join("\n\n");
+      nextLogs.push({ type: "output", text: `Conferences & Pitching Competitions:\n\n${cList}` });
       if (onSelectFile) onSelectFile("resume.md");
     } else if (cmd === "contact") {
-      nextLogs.push({
-        type: "output",
-        text: `📬 Email: ${DEVELOPER_PROFILE.email}\n📞 Phone: ${DEVELOPER_PROFILE.phone}\n🌐 GitHub: ${DEVELOPER_PROFILE.github}\n💼 LinkedIn: ${DEVELOPER_PROFILE.linkedin}\n📍 Location: ${DEVELOPER_PROFILE.location}\n💬 Message form available in get-in-touch.tsx`,
-      });
+      nextLogs.push({ type: "output", text: `📬 Email: ${DEVELOPER_PROFILE.email}\n📞 Phone: ${DEVELOPER_PROFILE.phone}\n🌐 GitHub: ${DEVELOPER_PROFILE.github}\n💼 LinkedIn: ${DEVELOPER_PROFILE.linkedin}\n📍 Location: ${DEVELOPER_PROFILE.location}` });
       if (onSelectFile) onSelectFile("get-in-touch.tsx");
     } else if (cmd === "cat resume.md" || cmd === "resume") {
-      nextLogs.push({
-        type: "output",
-        text: `📄 Opening Lee Ryan Garcia Formal Curriculum Vitae (resume.md)...`,
-      });
+      nextLogs.push({ type: "output", text: `📄 Opening Lee Ryan Garcia Formal Curriculum Vitae (resume.md)...` });
       if (onSelectFile) onSelectFile("resume.md");
-    } else if (
-      cmd === "download-resume" ||
-      cmd === "download resume" ||
-      cmd === "download cv" ||
-      cmd === "get resume"
-    ) {
-      const fileUrl =
-        DEVELOPER_PROFILE.resumePdfUrl || "/Lee_Ryan_Garcia_Resume.pdf";
+    } else if (cmd.startsWith("download") && (cmd.includes("resume") || cmd.includes("cv"))) {
+      const fileUrl = DEVELOPER_PROFILE.resumePdfUrl || "/Lee_Ryan_Garcia_Resume.pdf";
       const fileName = fileUrl.split("/").pop() || "Lee_Ryan_Garcia_Resume.pdf";
       downloadResumePdf(fileUrl, fileName);
       confetti({ particleCount: 80, spread: 70 });
-      nextLogs.push({
-        type: "output",
-        text: `📥 Initiating download for ${fileName} from public folder...`,
-      });
-    } else if (
-      cmd === "cat package.json" ||
-      cmd === "package" ||
-      cmd === "packages"
-    ) {
-      nextLogs.push({
-        type: "output",
-        text: `📦 Opening package.json (Next.js 16, React 19 dependencies & scripts)...`,
-      });
+      nextLogs.push({ type: "output", text: `📥 Initiating download for ${fileName}...` });
+    } else if (cmd === "cat package.json" || cmd === "package" || cmd === "packages") {
+      nextLogs.push({ type: "output", text: `📦 Opening package.json...` });
       if (onSelectFile) onSelectFile("package.json");
-    } else if (
-      cmd === "cat config.ts" ||
-      cmd === "config" ||
-      cmd === "settings"
-    ) {
-      nextLogs.push({
-        type: "output",
-        text: `⚙️ Opening config.ts (IDE workspace parameters & Gemini AI settings)...`,
-      });
+    } else if (cmd === "cat config.ts" || cmd === "config" || cmd === "settings") {
+      nextLogs.push({ type: "output", text: `⚙️ Opening config.ts...` });
       if (onSelectFile) onSelectFile("config.ts");
-    } else if (
-      cmd.includes("fly") ||
-      cmd.includes("zero-g") ||
-      cmd.includes("gravity")
-    ) {
+    } else if (cmd.includes("fly") || cmd.includes("zero-g") || cmd.includes("gravity")) {
       const nextMode = !antigravityMode;
       setAntigravityMode(nextMode);
       confetti({ particleCount: 90, spread: 80 });
       nextLogs.push({
         type: "output",
-        text: nextMode
-          ? "🚀 Zero-G Physics: IGNITED! Watch elements float!"
-          : "🛬 Zero-G Physics: DEACTIVATED. Gravity restored.",
+        text: nextMode ? "🚀 Zero-G Physics: IGNITED!" : "🛬 Zero-G Physics: DEACTIVATED.",
       });
     } else if (cmd === "clear" || cmd === "cls") {
       setTerminalLogs([]);
@@ -216,12 +158,12 @@ export function BottomPanel({
       confetti({ particleCount: 120, spread: 90 });
       nextLogs.push({
         type: "output",
-        text: `> lee-ryan-garcia-portfolio@2.0.0 build\n> next build\n\n▲ Next.js 16.3.2\n   Creating an optimized production build ...\n ✓ Compiled successfully in 380ms\n ✓ Linting and checking validity of types ...\n ✓ Collecting page data ...\n ✓ Generating static pages (10/10)\n ✓ Finalizing page optimization ...\n\n✓ Build complete! Ready for deployment.`,
+        text: `> next build\n✓ Compiled successfully in 380ms\n✓ Linting and checking validity of types ...\n✓ Build complete! Ready for deployment.`,
       });
     } else if (cmd === "npm run test" || cmd === "npm test" || cmd === "test") {
       nextLogs.push({
         type: "output",
-        text: `> vitest run\n ✓ test/n8n-workflows.spec.ts (4 tests) 18ms\n ✓ test/nextjs-ecommerce.spec.ts (8 tests) 42ms\n ✓ test/sentiment-analysis.spec.ts (5 tests) 29ms\n\nTest Files  3 passed (3)\n     Tests  17 passed (17)\n  Duration  142ms`,
+        text: `> vitest run\n✓ test/portfolio.spec.ts (17 tests) 142ms\nTest Files  3 passed (3)\n     Tests  17 passed (17)`,
       });
     } else {
       nextLogs.push({
@@ -460,7 +402,15 @@ export function BottomPanel({
               [Debugger connected to ws://127.0.0.1:9229/antigravity-node]
             </div>
             <div className="text-sky-400">
-              ✓ V8 Profiler initialized. Breakpoints: 0 active.
+              ✓ V8 Profiler initialized. Breakpoints: 2 active.
+            </div>
+            {debugLogMessage && (
+              <div className="text-emerald-400 font-mono text-[11px] pt-1 bg-emerald-950/20 border border-emerald-900/40 p-2 rounded">
+                ▶ {debugLogMessage}
+              </div>
+            )}
+            <div className="text-zinc-500 font-mono text-[10px] pt-1">
+              [Info] Application state inspected: Lee Ryan Garcia (Full-Stack Engineer)
             </div>
           </div>
         )}

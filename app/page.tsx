@@ -4,12 +4,12 @@ import React, { useState, useEffect } from "react";
 import { PORTFOLIO_FILES, PortfolioFile, IDEThemeMode } from "@/data";
 import { TopMenuBar } from "@/components/TopMenuBar";
 import { ActivityBar, ActiveSidebarView } from "@/components/ActivityBar";
-import { SidebarExplorer } from "@/components/SidebarExplorer";
+import { SidebarViewSwitcher } from "@/components/sidebar/SidebarViewSwitcher";
 import { EditorTabs, ViewMode } from "@/components/EditorTabs";
 import { CodeViewer } from "@/components/CodeViewer";
 import { RenderedPreview } from "@/components/RenderedPreview";
 import { AIAssistantPanel } from "@/components/AIAssistantPanel";
-import { BottomPanel } from "@/components/BottomPanel";
+import { BottomPanel, PanelTab } from "@/components/BottomPanel";
 import { StatusBar } from "@/components/StatusBar";
 import { CommandPalette } from "@/components/CommandPalette";
 import { SettingsModal } from "@/components/SettingsModal";
@@ -36,6 +36,8 @@ export default function AntigravityPortfolioApp() {
     useState<ActiveSidebarView>("explorer");
   const [isLeftSidebarOpen, setIsLeftSidebarOpen] = useState(false);
   const [isBottomPanelOpen, setIsBottomPanelOpen] = useState(false);
+  const [bottomPanelTab, setBottomPanelTab] = useState<PanelTab>("terminal");
+  const [debugLogMessage, setDebugLogMessage] = useState<string | null>(null);
   const [isAIPanelOpen, setIsAIPanelOpen] = useState(false);
   const [viewMode, setViewMode] = useState<ViewMode>("preview"); // Default to Preview for instant portfolio showcase
   const [isMobile, setIsMobile] = useState(false);
@@ -149,12 +151,18 @@ export default function AntigravityPortfolioApp() {
     document.documentElement.style.setProperty("--app-font-size", `${fontSize}px`);
   }, [accentColor, fontSize]);
 
+  const handleGitCommitSuccess = (msg: string, hash: string) => {
+    confetti({ particleCount: 50, spread: 60 });
+  };
+
+  const handleStartDebug = (cfg: string) => {
+    setIsBottomPanelOpen(true);
+    setBottomPanelTab("debug");
+    setDebugLogMessage(`[Active Session] ${cfg} initialized at ${new Date().toLocaleTimeString()}`);
+  };
+
   const triggerRunCodeCelebration = () => {
-    confetti({
-      particleCount: 90,
-      spread: 70,
-      origin: { y: 0.6 },
-    });
+    confetti({ particleCount: 90, spread: 70, origin: { y: 0.6 } });
     setIsBottomPanelOpen(true);
   };
 
@@ -183,26 +191,12 @@ export default function AntigravityPortfolioApp() {
         onRunCode={triggerRunCodeCelebration}
         antigravityMode={antigravityMode}
         setAntigravityMode={setAntigravityMode}
-        onOpenLivePreviewTab={() => {
-          handleSelectFile(PORTFOLIO_FILES[1]);
-          setViewMode("preview");
-        }}
-        onOpenResume={() => {
-          const file = PORTFOLIO_FILES.find((f) => f.id === "resume.md") || PORTFOLIO_FILES[0];
-          handleSelectFile(file);
-          setViewMode("preview");
-        }}
-        onOpenContact={() => {
-          const file = PORTFOLIO_FILES.find((f) => f.id === "get-in-touch.tsx") || PORTFOLIO_FILES[0];
-          handleSelectFile(file);
-          setViewMode("preview");
-        }}
+        onOpenLivePreviewTab={() => { handleSelectFile(PORTFOLIO_FILES[1]); setViewMode("preview"); }}
+        onOpenResume={() => { handleSelectFile(PORTFOLIO_FILES.find((f) => f.id === "resume.md") || PORTFOLIO_FILES[0]); setViewMode("preview"); }}
+        onOpenContact={() => { handleSelectFile(PORTFOLIO_FILES.find((f) => f.id === "get-in-touch.tsx") || PORTFOLIO_FILES[0]); setViewMode("preview"); }}
         openSettingsModal={() => setIsSettingsOpen(true)}
         openShortcutsModal={() => setIsShortcutsOpen(true)}
-        onSelectTheme={(theme) => {
-          setAccentColor(theme.color);
-          setIdeThemeMode(theme.mode);
-        }}
+        onSelectTheme={(theme) => { setAccentColor(theme.color); setIdeThemeMode(theme.mode); }}
       />
 
       {/* 2. Main Workspace Layout */}
@@ -226,14 +220,19 @@ export default function AntigravityPortfolioApp() {
           />
         </div>
 
-        {/* Primary Sidebar (Explorer / Search) on Desktop */}
+        {/* Primary Sidebar on Desktop */}
         {!isTablet && isLeftSidebarOpen && activeSidebarView !== "none" && (
           <div className="w-64 shrink-0 h-full">
-            <SidebarExplorer
+            <SidebarViewSwitcher
+              activeView={activeSidebarView}
               files={PORTFOLIO_FILES}
               activeFileId={activeFileId}
               onSelectFile={handleSelectFile}
               openCommandPalette={() => setIsCommandPaletteOpen(true)}
+              antigravityMode={antigravityMode}
+              setAntigravityMode={setAntigravityMode}
+              onCommitSuccess={handleGitCommitSuccess}
+              onStartDebug={handleStartDebug}
             />
           </div>
         )}
@@ -243,18 +242,17 @@ export default function AntigravityPortfolioApp() {
           <>
             <div onClick={() => setIsLeftSidebarOpen(false)} className="fixed inset-0 bg-black/60 backdrop-blur-xs z-35" />
             <div className="fixed inset-y-9 left-0 z-40 w-72 max-w-[85vw] shadow-2xl border-r border-[#2d2d2d] bg-[#181818] flex flex-col">
-              <SidebarExplorer
+              <SidebarViewSwitcher
+                activeView={activeSidebarView}
                 files={PORTFOLIO_FILES}
                 activeFileId={activeFileId}
-                onSelectFile={(f) => {
-                  handleSelectFile(f);
-                  if (isTablet) setIsLeftSidebarOpen(false);
-                }}
-                openCommandPalette={() => {
-                  setIsLeftSidebarOpen(false);
-                  setIsCommandPaletteOpen(true);
-                }}
+                onSelectFile={(f) => { handleSelectFile(f); if (isTablet) setIsLeftSidebarOpen(false); }}
+                openCommandPalette={() => { setIsLeftSidebarOpen(false); setIsCommandPaletteOpen(true); }}
                 onClose={() => setIsLeftSidebarOpen(false)}
+                antigravityMode={antigravityMode}
+                setAntigravityMode={setAntigravityMode}
+                onCommitSuccess={handleGitCommitSuccess}
+                onStartDebug={handleStartDebug}
               />
             </div>
           </>
@@ -362,14 +360,13 @@ export default function AntigravityPortfolioApp() {
               {!isMobile && isBottomPanelOpen && (
                 <>
                   <ResizableHandle withHandle className="bg-[#2d2d2d] hover:bg-sky-500 active:bg-sky-400 transition-colors" />
-                  <ResizablePanel
-                    id="terminal-bottom-panel"
-                    defaultSize={35}
-                    minSize={8}
-                  >
+                  <ResizablePanel id="terminal-bottom-panel" defaultSize={35} minSize={8}>
                     <BottomPanel
                       isOpen={isBottomPanelOpen}
                       onClose={() => setIsBottomPanelOpen(false)}
+                      activeTab={bottomPanelTab}
+                      setActiveTab={setBottomPanelTab}
+                      debugLogMessage={debugLogMessage}
                       onSelectFile={(fileId) => {
                         const f = PORTFOLIO_FILES.find((x) => x.id === fileId);
                         if (f) handleSelectFile(f);
@@ -387,11 +384,7 @@ export default function AntigravityPortfolioApp() {
           {!isTablet && isAIPanelOpen && (
             <>
               <ResizableHandle withHandle className="bg-[#282930] hover:bg-sky-500 active:bg-sky-400 transition-colors" />
-              <ResizablePanel
-                id="ai-assistant-panel"
-                defaultSize={30}
-                minSize={8}
-              >
+              <ResizablePanel id="ai-assistant-panel" defaultSize={30} minSize={8}>
                 <AIAssistantPanel
                   isOpen={isAIPanelOpen}
                   onClose={() => setIsAIPanelOpen(false)}
@@ -437,6 +430,9 @@ export default function AntigravityPortfolioApp() {
               <BottomPanel
                 isOpen={isBottomPanelOpen}
                 onClose={() => setIsBottomPanelOpen(false)}
+                activeTab={bottomPanelTab}
+                setActiveTab={setBottomPanelTab}
+                debugLogMessage={debugLogMessage}
                 onSelectFile={(fileId) => {
                   const f = PORTFOLIO_FILES.find((x) => x.id === fileId);
                   if (f) handleSelectFile(f);
@@ -494,10 +490,7 @@ export default function AntigravityPortfolioApp() {
       />
 
       {/* 7. Zero Gravity Floating Particles & Physics Overlay */}
-      <AntigravityPhysics
-        active={antigravityMode}
-        onDeactivate={() => setAntigravityMode(false)}
-      />
+      <AntigravityPhysics active={antigravityMode} onDeactivate={() => setAntigravityMode(false)} />
     </div>
   );
 }
