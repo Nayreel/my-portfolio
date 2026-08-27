@@ -11,8 +11,10 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { toast } from "@/components/ui/toast";
 
 export function ResumePreview() {
-  const resumeUrl = DEVELOPER_PROFILE.resumePdfUrl || "/Lee_Ryan_Garcia_Resume.pdf";
-  const resumeFilename = resumeUrl.split("/").pop() || "Lee_Ryan_Garcia_Resume.pdf";
+  const resumeUrl =
+    DEVELOPER_PROFILE.resumePdfUrl || "/Lee_Ryan_Garcia_Resume.pdf";
+  const resumeFilename =
+    resumeUrl.split("/").pop() || "Lee_Ryan_Garcia_Resume.pdf";
 
   const handleDownload = () => {
     confetti({
@@ -29,7 +31,7 @@ export function ResumePreview() {
 
   return (
     <ScrollArea className="flex-1 w-full bg-[#121214] text-white min-h-0">
-      <div className="max-w-3xl mx-auto space-y-4 sm:space-y-6 p-3.5 sm:p-6 lg:p-10">
+      <div className="max-w-4xl mx-auto space-y-4 sm:space-y-6 p-3.5 sm:p-6 lg:p-10">
         <Card className="bg-[#16171b] border-[#272930] p-4 sm:p-6 lg:p-10 shadow-2xl text-white">
           {/* Header */}
           <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 border-b border-[#2a2c35] pb-5 sm:pb-6">
@@ -97,9 +99,9 @@ export function ResumePreview() {
                 </div>
                 <ul className="list-disc list-outside ml-4 space-y-1 text-xs text-zinc-300 pt-1">
                   <li>
-                    Design and implement automated workflows with n8n to integrate
-                    Odoo and Strapi CRM, ensuring seamless data synchronization
-                    across platforms.
+                    Design and implement automated workflows with n8n to
+                    integrate Odoo and Strapi CRM, ensuring seamless data
+                    synchronization across platforms.
                   </li>
                   <li>
                     Help develop and maintain a scalable Next.js e-commerce
@@ -135,10 +137,10 @@ export function ResumePreview() {
                 </div>
                 <ul className="list-disc list-outside ml-4 space-y-1 text-xs text-zinc-300 pt-1">
                   <li>
-                    Assists customers via phone call by fixing different technical
-                    problems through remote access, using tools like Remote
-                    Desktop, Microsoft 365, Zendesk, and Azure for cloud-based
-                    applications.
+                    Assists customers via phone call by fixing different
+                    technical problems through remote access, using tools like
+                    Remote Desktop, Microsoft 365, Zendesk, and Azure for
+                    cloud-based applications.
                   </li>
                   <li>
                     Applied problem-solving and logical thinking to fix issues
@@ -168,8 +170,8 @@ export function ResumePreview() {
                 </div>
                 <ul className="list-disc list-outside ml-4 space-y-1 text-xs text-zinc-300 pt-1">
                   <li>
-                    Developed responsive web applications using Next.js, Tailwind
-                    CSS, and Socket.io with REST API methods.
+                    Developed responsive web applications using Next.js,
+                    Tailwind CSS, and Socket.io with REST API methods.
                   </li>
                   <li>
                     Promoted from intern to full-time frontend developer by
@@ -187,9 +189,9 @@ export function ResumePreview() {
               </h2>
               <div className="space-y-2 text-xs text-zinc-300">
                 <p>
-                  <strong className="text-white">Tools & Software:</strong> Visual
-                  Studio Code, Antigravity, GitHub, Postman, MongoDB Compass,
-                  Trello, Figma, Docker Desktop
+                  <strong className="text-white">Tools & Software:</strong>{" "}
+                  Visual Studio Code, Antigravity, GitHub, Postman, MongoDB
+                  Compass, Trello, Figma, Docker Desktop
                 </p>
                 <div>
                   <strong className="text-white">Tech Stack:</strong>
@@ -199,19 +201,27 @@ export function ResumePreview() {
                       CSS, JavaScript, React, Next.js, TypeScript, Tailwind CSS
                     </li>
                     <li>
-                      <strong className="text-zinc-200">Backend & Databases:</strong>{" "}
+                      <strong className="text-zinc-200">
+                        Backend & Databases:
+                      </strong>{" "}
                       MongoDB, MySQL, PostgreSQL, Prisma, Node.js, NestJS
                     </li>
                     <li>
-                      <strong className="text-zinc-200">APIs & Integrations:</strong>{" "}
+                      <strong className="text-zinc-200">
+                        APIs & Integrations:
+                      </strong>{" "}
                       GraphQL, REST API, Shopify, n8n, Cloudinary
                     </li>
                     <li>
-                      <strong className="text-zinc-200">Infrastructure & DevOps:</strong>{" "}
+                      <strong className="text-zinc-200">
+                        Infrastructure & DevOps:
+                      </strong>{" "}
                       Docker, Git, GitHub Actions
                     </li>
                     <li>
-                      <strong className="text-zinc-200">Deployment & Cloud:</strong>{" "}
+                      <strong className="text-zinc-200">
+                        Deployment & Cloud:
+                      </strong>{" "}
                       Vercel, Railway, DigitalOcean, Render
                     </li>
                   </ul>
@@ -248,13 +258,13 @@ export function ResumePreview() {
                   Dean&apos;s Lister
                 </p>
                 <p>
-                  <strong className="text-white">Relevant Coursework:</strong> Web
-                  Development, System Administration, Networking
+                  <strong className="text-white">Relevant Coursework:</strong>{" "}
+                  Web Development, System Administration, Networking
                 </p>
                 <p>
-                  <strong className="text-white">Capstone Title:</strong> Feedback
-                  Fusion: Empowering Feedback Management with Consumer Insights
-                  Using Tableau
+                  <strong className="text-white">Capstone Title:</strong>{" "}
+                  Feedback Fusion: Empowering Feedback Management with Consumer
+                  Insights Using Tableau
                 </p>
               </div>
             </div>

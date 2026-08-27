@@ -118,7 +118,7 @@ export default function FeaturedProjects() {
       : FEATURED_PROJECTS.filter((p) => p.category === selectedCategory);
 
   return (
-    <section className="max-w-5xl mx-auto space-y-8 p-6 lg:p-10 text-white">
+    <section className="max-w-6xl mx-auto space-y-8 p-6 lg:p-10 text-white">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <div className="inline-flex items-center space-x-1.5 text-xs text-sky-400 font-mono uppercase tracking-wider mb-1">

@@ -78,7 +78,7 @@ export function ConfigPreview({
 
   return (
     <ScrollArea className="flex-1 w-full bg-[#0d0e12] text-zinc-200 min-h-0">
-      <div className="max-w-5xl mx-auto p-3.5 sm:p-6 lg:p-8 space-y-4 sm:space-y-6">
+      <div className="max-w-6xl mx-auto p-3.5 sm:p-6 lg:p-8 space-y-4 sm:space-y-6">
         {/* Header Module */}
         <div className="relative overflow-hidden rounded-xl sm:rounded-2xl bg-gradient-to-r from-slate-900 via-sky-950/30 to-indigo-950/40 border border-sky-500/20 p-4 sm:p-6 shadow-2xl backdrop-blur-sm">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">

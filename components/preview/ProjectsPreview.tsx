@@ -63,7 +63,7 @@ export function ProjectsPreview({ onOpenAIQuery }: ProjectsPreviewProps) {
 
   return (
     <ScrollArea className="flex-1 w-full bg-[#121214] text-white min-h-0">
-      <div className="max-w-5xl mx-auto space-y-6 sm:space-y-8 p-3.5 sm:p-6 lg:p-10">
+      <div className="max-w-6xl mx-auto space-y-6 sm:space-y-8 p-3.5 sm:p-6 lg:p-10">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>

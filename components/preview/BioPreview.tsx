@@ -97,8 +97,7 @@ export function BioPreview({ onSwitchToFile, onOpenAIQuery }: BioPreviewProps) {
 
   return (
     <ScrollArea className="flex-1 w-full bg-[#121214] text-white min-h-0">
-      <div className="max-w-4xl mx-auto space-y-8 sm:space-y-12 p-3.5 sm:p-6 lg:p-10 w-full min-w-0">
-        
+      <div className="max-w-6xl mx-auto space-y-8 sm:space-y-12 p-3.5 sm:p-6 lg:p-10 w-full min-w-0">
         {/* Top Hero Section */}
         <div className="relative overflow-hidden rounded-xl sm:rounded-2xl bg-gradient-to-br from-[#1c1d22] via-[#16171b] to-[#121316] border border-[#2d3039] p-4 sm:p-6 lg:p-8 shadow-2xl w-full min-w-0">
           <div className="absolute -top-24 -right-24 w-72 h-72 bg-sky-500/10 rounded-full blur-3xl pointer-events-none" />
@@ -140,7 +139,8 @@ export function BioPreview({ onSwitchToFile, onOpenAIQuery }: BioPreviewProps) {
                 </span>
                 {latestCommit && (
                   <span className="text-[11px] text-zinc-500 hidden md:inline-block">
-                    • Latest commit: {new Date(latestCommit.date).toLocaleDateString()}
+                    • Latest commit:{" "}
+                    {new Date(latestCommit.date).toLocaleDateString()}
                   </span>
                 )}
               </div>
@@ -186,7 +186,11 @@ export function BioPreview({ onSwitchToFile, onOpenAIQuery }: BioPreviewProps) {
 
             <Button
               variant="outline"
-              onClick={() => onOpenAIQuery("Give me an executive summary of Lee Ryan Garcia's qualifications, projects, and strengths.")}
+              onClick={() =>
+                onOpenAIQuery(
+                  "Give me an executive summary of Lee Ryan Garcia's qualifications, projects, and strengths.",
+                )
+              }
               className="h-9 px-3.5 cursor-pointer bg-[#1b1c21] hover:bg-[#252830] border-[#30333d] hover:border-sky-500/40 text-zinc-300 hover:text-white text-xs font-medium rounded-lg flex items-center justify-center gap-1.5 transition-all w-full sm:w-auto sm:ml-auto"
             >
               <Bot className="w-3.5 h-3.5 text-sky-400 shrink-0" />
@@ -206,66 +210,69 @@ export function BioPreview({ onSwitchToFile, onOpenAIQuery }: BioPreviewProps) {
                 <div className="text-2xl sm:text-3xl font-extrabold text-white font-mono tracking-tight">
                   <AnimatedCounter value={stat.value} />
                 </div>
-                <div className="text-xs text-zinc-400 mt-1 font-medium">{stat.label}</div>
+                <div className="text-xs text-zinc-400 mt-1 font-medium">
+                  {stat.label}
+                </div>
               </CardContent>
             </Card>
           ))}
         </div>
 
         {/* What I Can Build Grid */}
-        {DEVELOPER_PROFILE.whatICanBuild && DEVELOPER_PROFILE.whatICanBuild.length > 0 && (
-          <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <h2 className="text-lg sm:text-xl font-bold flex items-center space-x-2 text-white">
-                <Blocks className="w-4 h-4 text-sky-400" />
-                <span>What I Can Build</span>
-              </h2>
-              <span className="text-xs text-zinc-500 font-mono hidden sm:inline-block">
-                Full-Lifecycle Solutions
-              </span>
-            </div>
+        {DEVELOPER_PROFILE.whatICanBuild &&
+          DEVELOPER_PROFILE.whatICanBuild.length > 0 && (
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <h2 className="text-lg sm:text-xl font-bold flex items-center space-x-2 text-white">
+                  <Blocks className="w-4 h-4 text-sky-400" />
+                  <span>What I Can Build</span>
+                </h2>
+                <span className="text-xs text-zinc-500 font-mono hidden sm:inline-block">
+                  Full-Lifecycle Solutions
+                </span>
+              </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {DEVELOPER_PROFILE.whatICanBuild.map((item, idx) => (
-                <Card
-                  key={idx}
-                  className="bg-[#16171b] border-[#272930] hover:border-sky-500/30 transition-all group"
-                >
-                  <CardHeader className="p-5 pb-3">
-                    <div className="flex items-center space-x-2.5 mb-1.5">
-                      <div className="w-7 h-7 rounded-md bg-sky-500/10 border border-sky-500/20 flex items-center justify-center shrink-0">
-                        {getBuildIcon(idx)}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {DEVELOPER_PROFILE.whatICanBuild.map((item, idx) => (
+                  <Card
+                    key={idx}
+                    className="bg-[#16171b] border-[#272930] hover:border-sky-500/30 transition-all group"
+                  >
+                    <CardHeader className="p-5 pb-3">
+                      <div className="flex items-center space-x-2.5 mb-1.5">
+                        <div className="w-7 h-7 rounded-md bg-sky-500/10 border border-sky-500/20 flex items-center justify-center shrink-0">
+                          {getBuildIcon(idx)}
+                        </div>
+                        <div>
+                          <CardTitle className="text-sm font-semibold text-white group-hover:text-sky-300 transition-colors">
+                            {item.title}
+                          </CardTitle>
+                          <p className="text-[11px] text-zinc-400 font-mono">
+                            {item.subtitle}
+                          </p>
+                        </div>
                       </div>
-                      <div>
-                        <CardTitle className="text-sm font-semibold text-white group-hover:text-sky-300 transition-colors">
-                          {item.title}
-                        </CardTitle>
-                        <p className="text-[11px] text-zinc-400 font-mono">
-                          {item.subtitle}
-                        </p>
+                    </CardHeader>
+                    <CardContent className="p-5 pt-0 space-y-3">
+                      <p className="text-xs text-zinc-300 leading-relaxed">
+                        {item.description}
+                      </p>
+                      <div className="flex flex-wrap gap-1.5 pt-1">
+                        {item.skills.map((skill) => (
+                          <span
+                            key={skill}
+                            className="px-2 py-0.5 rounded bg-[#20222a] border border-[#2e313b] text-[11px] font-mono text-zinc-300"
+                          >
+                            {skill}
+                          </span>
+                        ))}
                       </div>
-                    </div>
-                  </CardHeader>
-                  <CardContent className="p-5 pt-0 space-y-3">
-                    <p className="text-xs text-zinc-300 leading-relaxed">
-                      {item.description}
-                    </p>
-                    <div className="flex flex-wrap gap-1.5 pt-1">
-                      {item.skills.map((skill) => (
-                        <span
-                          key={skill}
-                          className="px-2 py-0.5 rounded bg-[#20222a] border border-[#2e313b] text-[11px] font-mono text-zinc-300"
-                        >
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
             </div>
-          </div>
-        )}
+          )}
 
         {/* Featured Production Systems Deep-Dive */}
         <div className="space-y-4">
@@ -327,15 +334,17 @@ export function BioPreview({ onSwitchToFile, onOpenAIQuery }: BioPreviewProps) {
                       Architecture & Stack
                     </span>
                     <div className="flex flex-wrap gap-1.5">
-                      {(project.architectureStack || project.tags).map((tech) => (
-                        <Badge
-                          key={tech}
-                          variant="outline"
-                          className="bg-[#1f2026] border-[#313540] text-zinc-200 text-[11px] font-mono py-0.5 px-2 font-normal"
-                        >
-                          {tech}
-                        </Badge>
-                      ))}
+                      {(project.architectureStack || project.tags).map(
+                        (tech) => (
+                          <Badge
+                            key={tech}
+                            variant="outline"
+                            className="bg-[#1f2026] border-[#313540] text-zinc-200 text-[11px] font-mono py-0.5 px-2 font-normal"
+                          >
+                            {tech}
+                          </Badge>
+                        ),
+                      )}
                     </div>
                   </div>
 
@@ -435,7 +444,8 @@ export function BioPreview({ onSwitchToFile, onOpenAIQuery }: BioPreviewProps) {
                 Ask My Portfolio Assistant
               </h3>
               <p className="text-xs text-zinc-400">
-                Click any structured prompt below to query AI about my experience, architecture, and background.
+                Click any structured prompt below to query AI about my
+                experience, architecture, and background.
               </p>
             </div>
           </div>
@@ -462,7 +472,8 @@ export function BioPreview({ onSwitchToFile, onOpenAIQuery }: BioPreviewProps) {
               Have a project or system that needs to be built?
             </h3>
             <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
-              I can help with full-stack development, automation pipelines, API integrations, and reliable production deployment.
+              I can help with full-stack development, automation pipelines, API
+              integrations, and reliable production deployment.
             </p>
           </div>
 
@@ -484,7 +495,6 @@ export function BioPreview({ onSwitchToFile, onOpenAIQuery }: BioPreviewProps) {
             </Button>
           </div>
         </div>
-
       </div>
     </ScrollArea>
   );

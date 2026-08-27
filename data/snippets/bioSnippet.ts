@@ -112,7 +112,7 @@ export default function BioHero() {
   const profile = DEVELOPER_PROFILE;
 
   return (
-    <section className="max-w-4xl mx-auto space-y-8 p-6 lg:p-10 text-white">
+    <section className="max-w-6xl mx-auto space-y-8 p-6 lg:p-10 text-white">
       {/* Hero Header */}
       <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#1c1d22] via-[#16171b] to-[#121316] border border-[#2d3039] p-6 lg:p-8 shadow-2xl">
         <div className="space-y-4">

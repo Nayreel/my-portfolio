@@ -135,7 +135,7 @@ function ExperienceCard({ exp }: { exp: ExperienceRecord }) {
 
 export default function CareerHistory() {
   return (
-    <section className="max-w-4xl mx-auto space-y-8 p-6 lg:p-10 text-white">
+    <section className="max-w-6xl mx-auto space-y-8 p-6 lg:p-10 text-white">
       <div>
         <div className="inline-flex items-center space-x-1.5 text-xs text-sky-400 font-mono uppercase tracking-wider mb-1">
           <Briefcase className="w-3.5 h-3.5" />

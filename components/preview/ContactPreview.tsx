@@ -120,7 +120,7 @@ export function ContactPreview() {
 
   return (
     <ScrollArea className="flex-1 w-full bg-[#121214] text-white min-h-0">
-      <div className="max-w-2xl mx-auto space-y-6 sm:space-y-8 p-3.5 sm:p-6 lg:p-10">
+      <div className="max-w-4xl mx-auto space-y-6 sm:space-y-8 p-3.5 sm:p-6 lg:p-10">
         <div>
           <div className="inline-flex items-center space-x-1.5 text-xs text-sky-400 font-mono uppercase tracking-wider mb-1">
             <Mail className="w-3.5 h-3.5" />

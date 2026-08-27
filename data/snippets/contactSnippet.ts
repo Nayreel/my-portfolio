@@ -74,7 +74,7 @@ export default function ContactModule() {
   };
 
   return (
-    <section className="max-w-2xl mx-auto space-y-8 p-6 lg:p-10 text-white">
+    <section className="max-w-4xl mx-auto space-y-8 p-6 lg:p-10 text-white">
       <div>
         <div className="inline-flex items-center space-x-1.5 text-xs text-sky-400 font-mono uppercase tracking-wider mb-1">
           <Mail className="w-3.5 h-3.5" />

@@ -1,7 +1,14 @@
 "use client";
 
 import React, { useRef, useState, useEffect } from "react";
-import { Briefcase, GraduationCap, Award, Check, Calendar, MapPin } from "lucide-react";
+import {
+  Briefcase,
+  GraduationCap,
+  Award,
+  Check,
+  Calendar,
+  MapPin,
+} from "lucide-react";
 import { EXPERIENCES, DEVELOPER_PROFILE, CONFERENCES } from "@/data";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
@@ -18,8 +25,9 @@ export function ExperiencePreview() {
 
     // Target the actual scrolling viewport inside the ScrollArea
     const viewport =
-      container.querySelector<HTMLElement>('[data-slot="scroll-area-viewport"]') ||
-      container;
+      container.querySelector<HTMLElement>(
+        '[data-slot="scroll-area-viewport"]',
+      ) || container;
 
     const calculateScroll = () => {
       if (!timelineRef.current || !viewport) return;
@@ -50,7 +58,7 @@ export function ExperiencePreview() {
       ref={containerRef}
       className="flex-1 w-full bg-[#121214] text-white min-h-0"
     >
-      <div className="max-w-4xl mx-auto space-y-6 sm:space-y-10 p-3.5 sm:p-6 lg:p-10">
+      <div className="max-w-6xl mx-auto space-y-6 sm:space-y-10 p-3.5 sm:p-6 lg:p-10">
         <div>
           <div className="inline-flex items-center space-x-1.5 text-xs text-sky-400 font-mono uppercase tracking-wider mb-1">
             <Briefcase className="w-3.5 h-3.5" />
@@ -62,13 +70,18 @@ export function ExperiencePreview() {
         </div>
 
         {/* Scroll-Enhanced Timeline */}
-        <div ref={timelineRef} className="relative pl-7 sm:pl-10 space-y-6 sm:space-y-8 select-none">
+        <div
+          ref={timelineRef}
+          className="relative pl-7 sm:pl-10 space-y-6 sm:space-y-8 select-none"
+        >
           {/* Base Neutral Vertical Track Line */}
           <div className="absolute left-3.5 sm:left-5 top-6 bottom-6 w-[2px] -translate-x-1/2 bg-[#262833] rounded-full" />
 
           {/* Dynamic Illuminated Scroll Highlight Beam */}
           <div
-            style={{ height: `${Math.max(0, Math.min(100, scrollProgress * 100))}%` }}
+            style={{
+              height: `${Math.max(0, Math.min(100, scrollProgress * 100))}%`,
+            }}
             className="absolute left-3.5 sm:left-5 top-6 w-[2px] -translate-x-1/2 bg-gradient-to-b from-sky-400 via-indigo-500 to-sky-300 rounded-full shadow-[0_0_12px_rgba(56,189,248,0.8)] z-0 origin-top transition-all duration-100 ease-out"
           />
 
@@ -90,7 +103,9 @@ export function ExperiencePreview() {
                   >
                     <div
                       className={`w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full transition-colors duration-300 ${
-                        isPassed ? "bg-sky-400 shadow-[0_0_6px_#38bdf8]" : "bg-zinc-600"
+                        isPassed
+                          ? "bg-sky-400 shadow-[0_0_6px_#38bdf8]"
+                          : "bg-zinc-600"
                       } group-hover:bg-white`}
                     />
                   </div>
@@ -123,7 +138,9 @@ export function ExperiencePreview() {
                       <Badge
                         variant="outline"
                         className={`text-xs font-mono bg-[#20222a] border-[#2d303d] flex items-center gap-1.5 transition-colors ${
-                          isPassed ? "text-sky-300 border-sky-500/30" : "text-zinc-300"
+                          isPassed
+                            ? "text-sky-300 border-sky-500/30"
+                            : "text-zinc-300"
                         }`}
                       >
                         <Calendar className="w-3 h-3 text-sky-400" />
@@ -178,8 +195,12 @@ export function ExperiencePreview() {
             >
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                 <div>
-                  <h4 className="font-semibold text-sm text-zinc-200">{edu.school}</h4>
-                  <p className="text-xs text-sky-400 font-mono mt-0.5">{edu.degree}</p>
+                  <h4 className="font-semibold text-sm text-zinc-200">
+                    {edu.school}
+                  </h4>
+                  <p className="text-xs text-sky-400 font-mono mt-0.5">
+                    {edu.degree}
+                  </p>
                 </div>
                 <Badge
                   variant="outline"
@@ -189,9 +210,19 @@ export function ExperiencePreview() {
                 </Badge>
               </div>
               <div className="text-xs text-zinc-400 space-y-1.5 pt-1">
-                <p><strong className="text-zinc-300">Capstone:</strong> {edu.capstone}</p>
-                <p><strong className="text-zinc-300">Relevant Coursework:</strong> {edu.coursework}</p>
-                <p className="text-zinc-500 font-mono text-[11px]">{edu.period} • {edu.location}</p>
+                <p>
+                  <strong className="text-zinc-300">Capstone:</strong>{" "}
+                  {edu.capstone}
+                </p>
+                <p>
+                  <strong className="text-zinc-300">
+                    Relevant Coursework:
+                  </strong>{" "}
+                  {edu.coursework}
+                </p>
+                <p className="text-zinc-500 font-mono text-[11px]">
+                  {edu.period} • {edu.location}
+                </p>
               </div>
             </div>
           ))}
