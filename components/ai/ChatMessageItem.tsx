@@ -13,6 +13,7 @@ import {
 import { ChatMessage } from "@/types/ai";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/toast";
+import { renderFormattedText } from "@/utils/formatText";
 
 interface ChatMessageItemProps {
   msg: ChatMessage;
@@ -39,7 +40,7 @@ export function ChatMessageItem({ msg }: ChatMessageItemProps) {
     return (
       <div className="flex justify-end">
         <div className="bg-[#202127] text-[#e6e8f0] px-3.5 py-2.5 rounded-2xl text-[12.5px] leading-relaxed max-w-[92%] border border-[#2b2d35] whitespace-pre-wrap">
-          {msg.content}
+          {renderFormattedText(msg.content)}
         </div>
       </div>
     );
@@ -61,17 +62,23 @@ export function ChatMessageItem({ msg }: ChatMessageItemProps) {
       )}
 
       {/* Main Response Content */}
-      <div className="text-[#d8d9e4] leading-[1.65] space-y-3 whitespace-pre-wrap">
+      <div className="text-[#d8d9e4] leading-[1.65] space-y-3">
         {msg.content.split("\n\n").map((para, pIdx) => {
           if (para.startsWith("```")) {
-            const cleanCode = para.replace(/```[a-z]*\n?/g, "");
+            const matchLang = para.match(/^```([a-zA-Z0-9_-]*)\n?/);
+            const lang = matchLang && matchLang[1] ? matchLang[1] : "code";
+            const cleanCode = para
+              .replace(/^```[a-zA-Z0-9_-]*\n?/, "")
+              .replace(/```$/, "")
+              .trim();
+
             return (
               <div
                 key={pIdx}
                 className="my-2 rounded-xl bg-[#111215] border border-[#24252c] overflow-hidden"
               >
                 <div className="px-3 py-1.5 bg-[#16171b] border-b border-[#24252c] flex items-center justify-between text-[11px] text-[#8b8d98]">
-                  <span className="font-mono text-[10.5px]">tsx</span>
+                  <span className="font-mono text-[10.5px]">{lang}</span>
                   <div className="flex items-center space-x-2">
                     <AtSign className="w-3 h-3 cursor-pointer hover:text-white" />
                     <Button
@@ -89,33 +96,46 @@ export function ChatMessageItem({ msg }: ChatMessageItemProps) {
                     </Button>
                   </div>
                 </div>
-                <div className="p-3 font-mono text-[11px] text-zinc-300 overflow-x-auto leading-relaxed bg-[#111215]">
-                  <span className="text-sky-300">&lt;span</span>{" "}
-                  <span className="text-amber-300">className</span>=
-                  <span className="text-emerald-300">
-                    &quot;font-mono text-xs&quot;
-                  </span>
-                  <span className="text-sky-300">&gt;</span>
-                  Ask Questions About Me
-                  <span className="text-sky-300">&lt;/span&gt;</span>
+                <div className="p-3 font-mono text-[11px] text-zinc-300 overflow-x-auto leading-relaxed bg-[#111215] whitespace-pre">
+                  <code>{cleanCode}</code>
                 </div>
               </div>
             );
           }
 
-          if (para.startsWith("- ") || para.startsWith("* ")) {
-            return (
-              <ul key={pIdx} className="space-y-1.5 pl-4 list-disc text-[#c8cad6]">
-                {para.split("\n").map((line, lIdx) => (
-                  <li key={lIdx} className="leading-snug">
-                    {line.replace(/^[-*]\s*/, "")}
-                  </li>
-                ))}
-              </ul>
-            );
-          }
-
-          return <p key={pIdx}>{para}</p>;
+          return (
+            <div key={pIdx} className="space-y-1.5">
+              {para.split("\n").map((line, lIdx) => {
+                const trimmed = line.trim();
+                if (
+                  trimmed.startsWith("- ") ||
+                  trimmed.startsWith("* ") ||
+                  trimmed.startsWith("• ")
+                ) {
+                  return (
+                    <div
+                      key={lIdx}
+                      className="flex items-start space-x-2 pl-2 text-[#c8cad6]"
+                    >
+                      <span className="text-[#8b8d98] select-none text-[10px] mt-0.5">
+                        •
+                      </span>
+                      <div className="flex-1 leading-snug">
+                        {renderFormattedText(
+                          trimmed.replace(/^[-*•]\s*/, ""),
+                        )}
+                      </div>
+                    </div>
+                  );
+                }
+                return (
+                  <p key={lIdx} className="leading-relaxed">
+                    {renderFormattedText(line)}
+                  </p>
+                );
+              })}
+            </div>
+          );
         })}
       </div>
 
