@@ -1,6 +1,9 @@
 {
   "compilerOptions": {
+<<<<<<< HEAD
     "target": "ES2017",
+=======
+>>>>>>> 105e9e1026b8d8b245a3527e3f7b988436b48de3
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -20,7 +23,12 @@
     ],
     "paths": {
       "@/*": ["./*"]
+<<<<<<< HEAD
     }
+=======
+    },
+    "target": "ES2017"
+>>>>>>> 105e9e1026b8d8b245a3527e3f7b988436b48de3
   },
   "include": [
     "next-env.d.ts",
