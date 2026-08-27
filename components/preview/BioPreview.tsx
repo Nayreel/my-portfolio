@@ -1,16 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import {
-  FolderGit2,
-  Mail,
-  Copy,
-  Bot,
-  Cpu,
-  MapPin,
-  Phone,
-} from "lucide-react";
-import { GithubIcon } from "@/components/icons";
+import { FolderGit2, Mail, Bot, Cpu, MapPin, Phone } from "lucide-react";
+import { GithubIcon, LinkedinIcon } from "@/components/icons";
 import { DEVELOPER_PROFILE } from "@/data";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -51,13 +43,6 @@ export function BioPreview({ onSwitchToFile, onOpenAIQuery }: BioPreviewProps) {
     };
   }, []);
 
-  const handleCopyEmail = () => {
-    navigator.clipboard.writeText(DEVELOPER_PROFILE.email);
-    toast.success("Email copied to clipboard", {
-      description: DEVELOPER_PROFILE.email,
-    });
-  };
-
   return (
     <ScrollArea className="flex-1 w-full bg-[#121214] text-white min-h-0">
       <div className="max-w-4xl mx-auto space-y-6 sm:space-y-10 p-3 sm:p-6 lg:p-10 w-full min-w-0">
@@ -93,7 +78,9 @@ export function BioPreview({ onSwitchToFile, onOpenAIQuery }: BioPreviewProps) {
               <div className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-2 sm:gap-4 text-xs text-zinc-400 font-mono pt-1 w-full min-w-0">
                 <span className="flex items-center space-x-1 text-zinc-300 max-w-full">
                   <MapPin className="w-3.5 h-3.5 text-sky-400 shrink-0" />
-                  <span className="break-words">{DEVELOPER_PROFILE.location}</span>
+                  <span className="break-words">
+                    {DEVELOPER_PROFILE.location}
+                  </span>
                 </span>
                 <span className="flex items-center space-x-1 text-zinc-300 max-w-full">
                   <Phone className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
@@ -131,19 +118,19 @@ export function BioPreview({ onSwitchToFile, onOpenAIQuery }: BioPreviewProps) {
               onClick={() =>
                 window.open("https://github.com/Nayreel", "_blank")
               }
-              className="h-8.5 px-3.5 cursor-pointer bg-[#252830] hover:bg-[#2e323d] border-[#3c4150] hover:border-zinc-500 text-zinc-300 hover:text-white text-xs font-medium rounded-lg flex items-center justify-center gap-1.5 transition-all hover:scale-[1.02] active:scale-[0.98] w-full sm:w-auto"
+              className="h-8.5 px-3.5 cursor-pointer bg-[#252830] hover:bg-[#2e323d] border-[#3c4150] hover:border-sky-500/40 text-white text-xs font-medium rounded-lg flex items-center justify-center gap-1.5 transition-all hover:scale-[1.02] active:scale-[0.98] w-full sm:w-auto"
             >
-              <GithubIcon className="w-3.5 h-3.5 text-zinc-400 shrink-0" />
+              <GithubIcon className="w-3.5 h-3.5 text-sky-400 shrink-0" />
               <span>GitHub Profile</span>
             </Button>
 
             <Button
               variant="outline"
-              onClick={handleCopyEmail}
-              className="h-8.5 px-3.5 cursor-pointer bg-[#252830] hover:bg-[#2e323d] border-[#3c4150] hover:border-zinc-500 text-zinc-300 hover:text-white text-xs font-medium rounded-lg flex items-center justify-center gap-1.5 transition-all hover:scale-[1.02] active:scale-[0.98] w-full sm:w-auto"
+              onClick={() => window.open(DEVELOPER_PROFILE.linkedin, "_blank")}
+              className="h-8.5 px-3.5 cursor-pointer bg-[#252830] hover:bg-[#2e323d] border-[#3c4150] hover:border-sky-500/40 text-zinc-300 hover:text-white text-xs font-medium rounded-lg flex items-center justify-center gap-1.5 transition-all hover:scale-[1.02] active:scale-[0.98] w-full sm:w-auto"
             >
-              <Copy className="w-3.5 h-3.5 text-zinc-400 shrink-0" />
-              <span className="truncate max-w-[200px]">{DEVELOPER_PROFILE.email}</span>
+              <LinkedinIcon className="w-3.5 h-3.5 text-sky-400 shrink-0" />
+              <span>LinkedIn Profile</span>
             </Button>
 
             <Button
@@ -153,9 +140,9 @@ export function BioPreview({ onSwitchToFile, onOpenAIQuery }: BioPreviewProps) {
                   "Give me a summary of Lee Ryan Garcia's projects, experience, and skills.",
                 )
               }
-              className="h-8.5 px-3.5 cursor-pointer bg-indigo-500/15 hover:bg-indigo-500/25 border-indigo-500/40 hover:border-indigo-400 text-indigo-300 text-xs font-mono rounded-lg flex items-center justify-center gap-1.5 transition-all hover:scale-[1.02] active:scale-[0.98] w-full sm:w-auto"
+              className="h-8.5 px-3.5 cursor-pointer bg-[#252830] hover:bg-[#2e323d] border-[#3c4150] hover:border-sky-500/40 text-white text-xs font-medium rounded-lg flex items-center justify-center gap-1.5 transition-all hover:scale-[1.02] active:scale-[0.98] w-full sm:w-auto"
             >
-              <Bot className="w-3.5 h-3.5 text-indigo-400 shrink-0" />
+              <Bot className="w-3.5 h-3.5 text-sky-400 shrink-0" />
               <span>Ask AI Assistant</span>
             </Button>
           </div>

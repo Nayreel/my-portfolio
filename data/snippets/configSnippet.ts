@@ -45,7 +45,7 @@ export const CONFIG_CODE_SNIPPET = `export interface IDEConfig {
 export const portfolioConfig: IDEConfig = {
   workspace: {
     name: "Portfolio IDE",
-    version: "2.4.0-production",
+    version: "2.0.0-production",
     developer: "Lee Ryan M. Garcia",
     role: "Software Engineer | Full-Stack & Automation Developer",
     environment: "production",

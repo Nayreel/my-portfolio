@@ -58,7 +58,7 @@ export function BottomPanel({
   const [terminalLogs, setTerminalLogs] = useState<TerminalLog[]>([
     {
       type: "system",
-      text: '⚡ Portfolio IDE [Version 2.4.0]\n(c) 2026 Lee Ryan Garcia. All systems operational.\nType "help" for a list of interactive commands or "projects" to view projects.',
+      text: '⚡ Portfolio IDE [Version 2.0.0]\n(c) 2026 Lee Ryan Garcia. All systems operational.\nType "help" for a list of interactive commands or "projects" to view projects.',
     },
   ]);
 
@@ -393,7 +393,7 @@ export function BottomPanel({
       <ScrollArea className="flex-1 bg-[#141414] font-mono text-xs p-3 min-h-0">
         {activeTab === "terminal" && (
           <div
-            className="min-h-full flex flex-col space-y-1"
+            className="min-h-full flex flex-col space-y-1 cursor-text select-text"
             onClick={() => inputRef.current?.focus()}
           >
             {terminalLogs.map((log, i) => (
@@ -425,7 +425,7 @@ export function BottomPanel({
                 onChange={(e) => setCommandInput(e.target.value)}
                 onKeyDown={handleKeyDown}
                 placeholder="type command (e.g. 'help', 'projects', 'fly', 'config', 'package')..."
-                className="flex-1 bg-transparent text-white focus:outline-none font-mono text-xs"
+                className="flex-1 bg-transparent text-white focus:outline-none font-mono text-xs cursor-text"
               />
             </form>
             <div ref={terminalEndRef} />

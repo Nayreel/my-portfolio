@@ -111,7 +111,7 @@ export function ConfigPreview({
                 Production
               </Badge>
               <Badge className="bg-sky-500/10 text-sky-300 border-sky-500/30 text-xs py-1">
-                Version 2.4.0
+                Version 2.0.0
               </Badge>
             </div>
           </div>
