@@ -215,47 +215,58 @@ export function GitHubContributionGraph() {
           </div>
         ) : (
           <ScrollArea className="w-full">
-            <div className="p-4 sm:p-5 min-w-[740px] select-none">
+            <div className="p-4 sm:p-5 w-full min-w-[680px] select-none">
               {/* Month Labels */}
-              <div className="flex text-[11px] text-[#7d8590] mb-2 pl-8 font-mono">
-                {weeks.map((week, idx) => (
-                  <div
-                    key={idx}
-                    className="w-[13px] mr-[3px] text-left text-[11px]"
-                  >
-                    {week.monthLabel && idx % 4 === 0 ? week.monthLabel : ""}
-                  </div>
-                ))}
+              <div className="flex items-center text-[10px] sm:text-[11px] text-[#7d8590] mb-2 font-mono w-full h-4">
+                <div className="w-7 sm:w-8 shrink-0" />
+                <div className="flex-1 flex gap-[2px] sm:gap-[3px] w-full">
+                  {weeks.map((week, idx) => (
+                    <div
+                      key={idx}
+                      className="flex-1 min-w-0 text-left relative"
+                    >
+                      {week.monthLabel && (
+                        <span className="absolute left-0 top-0 whitespace-nowrap">
+                          {week.monthLabel}
+                        </span>
+                      )}
+                    </div>
+                  ))}
+                </div>
               </div>
 
               {/* Grid: Day Labels + Week Columns */}
-              <div className="flex items-start">
+              <div className="flex items-start w-full">
                 {/* Day of Week Labels (Mon, Wed, Fri) */}
-                <div className="flex flex-col justify-between h-[109px] text-[10px] text-[#7d8590] pr-2 font-mono py-[1px]">
-                  <span className="h-[11px] leading-[11px] opacity-0">Sun</span>
-                  <span className="h-[11px] leading-[11px]">Mon</span>
-                  <span className="h-[11px] leading-[11px] opacity-0">Tue</span>
-                  <span className="h-[11px] leading-[11px]">Wed</span>
-                  <span className="h-[11px] leading-[11px] opacity-0">Thu</span>
-                  <span className="h-[11px] leading-[11px]">Fri</span>
-                  <span className="h-[11px] leading-[11px] opacity-0">Sat</span>
+                <div className="w-7 sm:w-8 shrink-0 grid grid-rows-7 gap-[2px] sm:gap-[3px] text-[10px] text-[#7d8590] pr-1.5 font-mono">
+                  <span className="aspect-square flex items-center opacity-0">Sun</span>
+                  <span className="aspect-square flex items-center leading-none">Mon</span>
+                  <span className="aspect-square flex items-center opacity-0">Tue</span>
+                  <span className="aspect-square flex items-center leading-none">Wed</span>
+                  <span className="aspect-square flex items-center opacity-0">Thu</span>
+                  <span className="aspect-square flex items-center leading-none">Fri</span>
+                  <span className="aspect-square flex items-center opacity-0">Sat</span>
                 </div>
 
                 {/* Week Columns */}
-                <div className="flex gap-[3px]">
+                <div className="flex-1 flex gap-[2px] sm:gap-[3px] w-full">
                   {weeks.map((week, colIdx) => (
-                    <div key={colIdx} className="flex flex-col gap-[3px]">
+                    <div
+                      key={colIdx}
+                      className="flex-1 flex flex-col gap-[2px] sm:gap-[3px] min-w-0"
+                    >
                       {week.days.map((day, rowIdx) => {
                         if (!day) {
                           return (
                             <div
                               key={rowIdx}
-                              className="w-[11px] h-[11px] rounded-[2px] opacity-0"
+                              className="w-full aspect-square rounded-[2px] opacity-0"
                             />
                           );
                         }
 
-                        const colorClass = COLOR_MAP[day.level] || COLOR_MAP[0];
+                        const colorClass =
+                          COLOR_MAP[day.level] || COLOR_MAP[0];
                         const dateFormatted = new Date(
                           day.date,
                         ).toLocaleDateString("en-US", {
@@ -266,9 +277,9 @@ export function GitHubContributionGraph() {
 
                         return (
                           <Tooltip key={rowIdx}>
-                            <TooltipTrigger>
+                            <TooltipTrigger className="w-full aspect-square block">
                               <div
-                                className={`w-[11px] h-[11px] rounded-[2px] ${colorClass} transition-transform hover:scale-125 cursor-pointer`}
+                                className={`w-full aspect-square rounded-[2px] ${colorClass} transition-transform hover:scale-125 cursor-pointer`}
                               />
                             </TooltipTrigger>
                             <TooltipContent

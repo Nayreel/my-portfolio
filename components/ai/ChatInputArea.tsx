@@ -6,11 +6,15 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/toast";
 
+import { SuggestedPrompt } from "@/types/ai";
+
 interface ChatInputAreaProps {
   inputPrompt: string;
   setInputPrompt: (val: string) => void;
   onSendMessage: () => void;
   isLoading: boolean;
+  suggestedPrompts?: SuggestedPrompt[];
+  onSelectPrompt?: (query: string) => void;
 }
 
 export function ChatInputArea({
@@ -18,12 +22,37 @@ export function ChatInputArea({
   setInputPrompt,
   onSendMessage,
   isLoading,
+  suggestedPrompts,
+  onSelectPrompt,
 }: ChatInputAreaProps) {
-  const [selectedModel, setSelectedModel] = useState("Gemini 3.7 Flash Medium");
+  const [selectedModel, setSelectedModel] = useState("Simulated AI (Resume Mode)");
   const [isModelDropdownOpen, setIsModelDropdownOpen] = useState(false);
 
   return (
-    <div className="p-3 pt-1 bg-[#141416] shrink-0">
+    <div className="p-3 pt-1 bg-[#141416] shrink-0 space-y-2">
+      {/* Quick Suggestions Chips Strip */}
+      {suggestedPrompts && suggestedPrompts.length > 0 && onSelectPrompt && (
+        <div className="flex items-center gap-1.5 overflow-x-auto custom-scrollbar pb-0.5 shrink-0">
+          <span className="text-[10px] text-[#787a88] font-mono shrink-0">
+            Quick Ask:
+          </span>
+          {suggestedPrompts.slice(0, 5).map((item, idx) => (
+            <Button
+              key={idx}
+              type="button"
+              variant="outline"
+              size="xs"
+              onClick={() => onSelectPrompt(item.query)}
+              disabled={isLoading}
+              className="h-6 px-2 py-0 text-[11px] rounded-lg bg-[#1a1b22] hover:bg-[#252834] border-[#2b2d39] hover:border-sky-500/40 text-[#c4c6d4] hover:text-white shrink-0 font-normal transition-colors cursor-pointer"
+            >
+              {item.icon && <span className="mr-1">{item.icon}</span>}
+              <span>{item.label}</span>
+            </Button>
+          ))}
+        </div>
+      )}
+
       <div className="relative rounded-2xl bg-[#1c1d22] border border-[#2d2f38] focus-within:border-[#424450] transition-colors p-2.5 flex flex-col justify-between min-h-[85px] shadow-sm">
         {/* Main Textarea */}
         <Textarea
@@ -36,7 +65,7 @@ export function ChatInputArea({
               onSendMessage();
             }
           }}
-          placeholder="Ask anything, @ to mention, / for actions"
+          placeholder="Ask anything about Lee Ryan's projects, experience, or skills..."
           className="w-full bg-transparent text-[12px] text-[#e4e6f0] placeholder-[#656775] focus-visible:ring-0 border-0 p-0 shadow-none resize-none min-h-[36px]"
         />
 
@@ -69,27 +98,29 @@ export function ChatInputArea({
               </Button>
 
               {isModelDropdownOpen && (
-                <div className="absolute bottom-7 left-0 w-48 rounded-xl bg-[#202127] border border-[#32343e] p-1 shadow-2xl z-50 text-xs">
-                  {["Gemini 3.7 Flash Medium", "Gemini 2.5 Pro", "Gemini 2.5 Flash"].map(
-                    (model) => (
-                      <Button
-                        key={model}
-                        type="button"
-                        variant="ghost"
-                        size="xs"
-                        onClick={() => {
-                          setSelectedModel(model);
-                          setIsModelDropdownOpen(false);
-                        }}
-                        className="w-full text-left justify-between px-2.5 py-1.5 h-auto rounded-lg hover:bg-[#2c2e38] text-[11px] text-[#e0e2ec] hover:text-white flex items-center font-normal cursor-pointer"
-                      >
-                        <span>{model}</span>
-                        {selectedModel === model && (
-                          <Check className="w-3 h-3 text-sky-400" />
-                        )}
-                      </Button>
-                    ),
-                  )}
+                <div className="absolute bottom-7 left-0 w-56 rounded-xl bg-[#202127] border border-[#32343e] p-1 shadow-2xl z-50 text-xs">
+                  {[
+                    "Simulated AI (Resume Mode)",
+                    "Gemini 3.7 Flash Medium",
+                    "Gemini 2.5 Pro",
+                  ].map((model) => (
+                    <Button
+                      key={model}
+                      type="button"
+                      variant="ghost"
+                      size="xs"
+                      onClick={() => {
+                        setSelectedModel(model);
+                        setIsModelDropdownOpen(false);
+                      }}
+                      className="w-full text-left justify-between px-2.5 py-1.5 h-auto rounded-lg hover:bg-[#2c2e38] text-[11px] text-[#e0e2ec] hover:text-white flex items-center font-normal cursor-pointer"
+                    >
+                      <span>{model}</span>
+                      {selectedModel === model && (
+                        <Check className="w-3 h-3 text-sky-400" />
+                      )}
+                    </Button>
+                  ))}
                 </div>
               )}
             </div>
@@ -101,7 +132,7 @@ export function ChatInputArea({
               type="button"
               variant="ghost"
               size="icon-xs"
-              onClick={() => toast.info("Voice input requires microphone permission")}
+              onClick={() => toast.info("Voice input simulated")}
               className="p-1 h-6 w-6 rounded text-[#7c7e8c] hover:text-[#d1d3dc] hover:bg-transparent transition-colors cursor-pointer"
               title="Voice input"
             >
@@ -124,6 +155,12 @@ export function ChatInputArea({
             </Button>
           </div>
         </div>
+      </div>
+
+      {/* Simulated AI Indicator */}
+      <div className="flex items-center justify-center space-x-1.5 text-[10px] text-[#6b6d7c] font-sans pb-0.5">
+        <span className="w-1.5 h-1.5 rounded-full bg-amber-400/80 shrink-0" />
+        <span>Simulated Portfolio AI • Responses generated from verified resume data</span>
       </div>
     </div>
   );

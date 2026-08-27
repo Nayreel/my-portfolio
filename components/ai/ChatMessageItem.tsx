@@ -17,9 +17,13 @@ import { renderFormattedText } from "@/utils/formatText";
 
 interface ChatMessageItemProps {
   msg: ChatMessage;
+  onSelectPrompt?: (query: string) => void;
 }
 
-export function ChatMessageItem({ msg }: ChatMessageItemProps) {
+export function ChatMessageItem({
+  msg,
+  onSelectPrompt,
+}: ChatMessageItemProps) {
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [isLiked, setIsLiked] = useState<boolean | null>(null);
   const [isWorkedExpanded, setIsWorkedExpanded] = useState(false);
@@ -138,6 +142,34 @@ export function ChatMessageItem({ msg }: ChatMessageItemProps) {
           );
         })}
       </div>
+
+      {/* Suggested Prompts Grid */}
+      {msg.suggestedPrompts &&
+        msg.suggestedPrompts.length > 0 &&
+        onSelectPrompt && (
+          <div className="pt-2 space-y-2">
+            <span className="text-[11px] text-[#787a88] font-mono block">
+              Suggested Questions (from verified resume):
+            </span>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+              {msg.suggestedPrompts.map((item, idx) => (
+                <Button
+                  key={idx}
+                  type="button"
+                  variant="outline"
+                  size="xs"
+                  onClick={() => onSelectPrompt(item.query)}
+                  className="justify-start h-auto py-2 px-2.5 bg-[#17181e] hover:bg-[#20222a] border-[#292b36] hover:border-sky-500/40 text-zinc-300 hover:text-white text-[11px] font-normal transition-all text-left rounded-lg group cursor-pointer"
+                >
+                  {item.icon && (
+                    <span className="mr-1.5 shrink-0">{item.icon}</span>
+                  )}
+                  <span className="truncate">{item.label}</span>
+                </Button>
+              ))}
+            </div>
+          </div>
+        )}
 
       {/* File Changed Bar */}
       {msg.fileChanges && (

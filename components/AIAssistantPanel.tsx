@@ -11,8 +11,8 @@ import {
   FileCode,
   Loader2,
 } from "lucide-react";
-import { PortfolioFile } from "@/data";
-import { ChatMessage } from "@/types/ai";
+import { PortfolioFile, DEVELOPER_PROFILE } from "@/data";
+import { ChatMessage, SuggestedPrompt } from "@/types/ai";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
 import {
@@ -23,6 +23,58 @@ import {
 import { toast } from "@/components/ui/toast";
 import { ChatMessageItem } from "@/components/ai/ChatMessageItem";
 import { ChatInputArea } from "@/components/ai/ChatInputArea";
+
+const RESUME_SUGGESTED_PROMPTS: SuggestedPrompt[] = [
+  {
+    icon: "⚡",
+    label: "Core Tech Stack",
+    query: "What is Lee Ryan's core technical stack and skills?",
+  },
+  {
+    icon: "🔄",
+    label: "n8n Automations",
+    query: "Tell me about his workflow automations and ERP integrations.",
+  },
+  {
+    icon: "🛒",
+    label: "MineGo Platform",
+    query:
+      "Tell me more about the technical stack and features in MineGo - Live Commerce Platform.",
+  },
+  {
+    icon: "📡",
+    label: "SIPAT Radar",
+    query:
+      "Tell me more about the technical stack and features in SIPAT - Tactical Radar & Citizen Recon Network.",
+  },
+  {
+    icon: "☀️",
+    label: "AI Energy Shop",
+    query:
+      "Tell me more about the technical stack and features in AI Energy Shop.",
+  },
+  {
+    icon: "💼",
+    label: "Work Experience",
+    query:
+      "What is his work experience at JAV Resource Corp, Buwelo, and Hokei Subic?",
+  },
+  {
+    icon: "🎓",
+    label: "Education & Honors",
+    query: "What are his education, honors, and capstone at Gordon College?",
+  },
+  {
+    icon: "🏆",
+    label: "Conferences & Pitching",
+    query: "What competitions and research conferences has he presented at?",
+  },
+  {
+    icon: "✉️",
+    label: "Contact & Hire",
+    query: "How can I contact or hire Lee Ryan Garcia?",
+  },
+];
 
 interface AIAssistantPanelProps {
   isOpen: boolean;
@@ -45,33 +97,15 @@ export function AIAssistantPanel({
       id: "init-1",
       role: "user",
       content:
-        'can you change it like ask more questions about me, or any etc...\n<span className="font-mono text-xs">Know More About Me</span>',
+        "Give me an overview of Lee Ryan Garcia's qualifications, experience, and projects.",
       timestamp: "2 min ago",
     },
     {
       id: "init-2",
       role: "assistant",
-      duration: "Worked for 43s",
-      content: `I have updated the header in \`AIAssistantPanel.tsx\` to:
-
-\`\`\`tsx
-<span className="font-mono text-xs">Ask Questions About Me</span>
-\`\`\`
-
-I also updated:
-- The suggested prompt to **"What is Lee Ryan's tech stack?"**
-- The message author header label to \`AI Assistant\`.
-
-If you prefer another phrase like **"Ask Me Anything"** or **"Ask About Lee Ryan"**, let me know and I can tweak it right away!`,
-      codeSnippet: {
-        lang: "tsx",
-        code: '<span className="font-mono text-xs">Ask Questions About Me</span>',
-      },
-      fileChanges: {
-        filesCount: 1,
-        additions: 3,
-        deletions: 3,
-      },
+      duration: "Worked for 14s",
+      content: `**${DEVELOPER_PROFILE.name}** is a **${DEVELOPER_PROFILE.title}** based in ${DEVELOPER_PROFILE.location}.\n\nHe specializes in building production web applications, n8n workflow automations, and scalable full-stack architectures with Next.js, TypeScript, PostgreSQL, and GraphQL.\n\nPick any question below to explore verified details from his resume and portfolio:`,
+      suggestedPrompts: RESUME_SUGGESTED_PROMPTS,
       timestamp: "Just now",
     },
   ]);
@@ -109,7 +143,10 @@ If you prefer another phrase like **"Ask Me Anything"** or **"Ask About Lee Ryan
         });
 
         let data: { text?: string; duration?: string } = {};
-        if (res.ok && res.headers.get("content-type")?.includes("application/json")) {
+        if (
+          res.ok &&
+          res.headers.get("content-type")?.includes("application/json")
+        ) {
           data = await res.json();
         }
 
@@ -165,8 +202,9 @@ If you prefer another phrase like **"Ask Me Anything"** or **"Ask About Lee Ryan
       {
         id: "new-1",
         role: "assistant",
-        duration: "Worked for 5s",
-        content: `New session started. Ask anything about Lee Ryan Garcia's background, system architectures, or request code inspections.`,
+        duration: "Worked for 2s",
+        content: `New session started. Ask anything about **${DEVELOPER_PROFILE.name}**'s background, system architectures, or request code inspections.\n\nYou can also click any suggested question below:`,
+        suggestedPrompts: RESUME_SUGGESTED_PROMPTS,
         timestamp: "Just now",
       },
     ]);
@@ -255,7 +293,11 @@ If you prefer another phrase like **"Ask Me Anything"** or **"Ask About Lee Ryan
       <ScrollArea className="flex-1 px-3 py-3 min-h-0">
         <div className="space-y-4">
           {messages.map((msg) => (
-            <ChatMessageItem key={msg.id} msg={msg} />
+            <ChatMessageItem
+              key={msg.id}
+              msg={msg}
+              onSelectPrompt={(query) => sendMessage(query)}
+            />
           ))}
 
           {isLoading && (
@@ -284,12 +326,12 @@ If you prefer another phrase like **"Ask Me Anything"** or **"Ask About Lee Ryan
           variant="ghost"
           size="xs"
           onClick={() =>
-            toast.info("No uncommitted changes in current working tree")
+            toast.info("Showing verified resume data from Lee Ryan Garcia")
           }
           className="px-2 py-0.5 h-auto rounded-md bg-[#1f2026] hover:bg-[#282a32] border border-[#2c2d36] text-[10.5px] text-[#c0c2cf] hover:text-white flex items-center space-x-1 transition-colors cursor-pointer font-normal"
         >
           <FileText className="w-3 h-3 text-[#7f8190]" />
-          <span>Review Changes</span>
+          <span>Resume Verified</span>
         </Button>
       </div>
 
@@ -299,6 +341,8 @@ If you prefer another phrase like **"Ask Me Anything"** or **"Ask About Lee Ryan
         setInputPrompt={setInputPrompt}
         onSendMessage={() => sendMessage()}
         isLoading={isLoading}
+        suggestedPrompts={RESUME_SUGGESTED_PROMPTS}
+        onSelectPrompt={(query) => sendMessage(query)}
       />
     </div>
   );

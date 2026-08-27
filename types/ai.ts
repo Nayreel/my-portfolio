@@ -11,6 +11,13 @@ export interface ChatMessageFileChanges {
   deletions: number;
 }
 
+export interface SuggestedPrompt {
+  label: string;
+  query: string;
+  icon?: string;
+  category?: string;
+}
+
 export interface ChatMessage {
   id: string;
   role: "user" | "assistant";
@@ -19,4 +26,6 @@ export interface ChatMessage {
   duration?: string;
   codeSnippet?: ChatMessageSnippet;
   fileChanges?: ChatMessageFileChanges;
+  suggestedPrompts?: SuggestedPrompt[];
 }
+
