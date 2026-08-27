@@ -94,6 +94,7 @@ export interface DeveloperProfile {
   bio: string;
   resumePdfUrl?: string;
   avatarUrl?: string;
+  profileUrl?: string;
   stats: { label: string; value: string }[];
   education: EducationItem[];
   philosophy?: DeveloperPhilosophy;

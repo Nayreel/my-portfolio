@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
-import { Plus, ChevronDown, Check, ArrowRight, Mic } from "lucide-react";
+import React from "react";
+import { Plus, ArrowRight, Mic } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/toast";
@@ -27,8 +27,6 @@ export function ChatInputArea({
   suggestedPrompts,
   onSelectPrompt,
 }: ChatInputAreaProps) {
-  const [selectedModel, setSelectedModel] = useState("Simulated AI (Resume Mode)");
-  const [isModelDropdownOpen, setIsModelDropdownOpen] = useState(false);
 
   return (
     <div className="p-3 pt-1 bg-[#141416] shrink-0 space-y-2">
@@ -90,45 +88,10 @@ export function ChatInputArea({
               <Plus className="w-3.5 h-3.5" />
             </Button>
 
-            {/* Model Selector Dropdown */}
-            <div className="relative">
-              <Button
-                type="button"
-                variant="ghost"
-                size="xs"
-                onClick={() => setIsModelDropdownOpen(!isModelDropdownOpen)}
-                className="px-2 py-0.5 h-auto rounded-lg text-[11px] text-[#a6a8b6] hover:text-white hover:bg-[#262831] flex items-center space-x-1 transition-colors cursor-pointer font-sans font-normal"
-              >
-                <span>{selectedModel}</span>
-                <ChevronDown className="w-3 h-3 text-[#777987]" />
-              </Button>
-
-              {isModelDropdownOpen && (
-                <div className="absolute bottom-7 left-0 w-56 rounded-xl bg-[#202127] border border-[#32343e] p-1 shadow-2xl z-50 text-xs">
-                  {[
-                    "Simulated AI (Resume Mode)",
-                    "Gemini 3.7 Flash Medium",
-                    "Gemini 2.5 Pro",
-                  ].map((model) => (
-                    <Button
-                      key={model}
-                      type="button"
-                      variant="ghost"
-                      size="xs"
-                      onClick={() => {
-                        setSelectedModel(model);
-                        setIsModelDropdownOpen(false);
-                      }}
-                      className="w-full text-left justify-between px-2.5 py-1.5 h-auto rounded-lg hover:bg-[#2c2e38] text-[11px] text-[#e0e2ec] hover:text-white flex items-center font-normal cursor-pointer"
-                    >
-                      <span>{model}</span>
-                      {selectedModel === model && (
-                        <Check className="w-3 h-3 text-sky-400" />
-                      )}
-                    </Button>
-                  ))}
-                </div>
-              )}
+            {/* Fixed Model Badge (Selection Disabled) */}
+            <div className="px-2 py-0.5 rounded-lg text-[11px] text-[#a6a8b6] bg-[#1a1b22] border border-[#2b2d39] flex items-center space-x-1.5 font-sans select-none">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+              <span>Gemini 3.7 Flash</span>
             </div>
           </div>
 

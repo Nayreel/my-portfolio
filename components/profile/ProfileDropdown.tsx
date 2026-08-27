@@ -16,10 +16,10 @@ import {
 } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/icons";
 import confetti from "canvas-confetti";
+import Image from "next/image";
 import { DEVELOPER_PROFILE } from "@/data";
 import { downloadResumePdf } from "@/lib/download";
 import { Badge } from "@/components/ui/badge";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -112,14 +112,11 @@ export function ProfileDropdown({
   openSettingsModal,
   antigravityMode,
   setAntigravityMode,
-  activeTheme = "cyan",
+  activeTheme,
   onSelectTheme,
 }: ProfileDropdownProps) {
-  const [internalThemeId, setInternalThemeId] = useState<string>(activeTheme);
+  const [internalThemeId, setInternalThemeId] = useState<string>("cyan");
   const selectedThemeId = activeTheme || internalThemeId;
-
-  const currentTheme =
-    THEME_OPTIONS.find((t) => t.id === selectedThemeId) || THEME_OPTIONS[0];
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(DEVELOPER_PROFILE.email);
@@ -148,19 +145,16 @@ export function ProfileDropdown({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="group flex items-center space-x-1 p-1 rounded hover:bg-white/10 transition-colors cursor-pointer bg-transparent border-0 focus:outline-none select-none shrink-0">
-        <Avatar className="w-5 h-5 shrink-0 rounded-full border border-white/10">
-          <AvatarImage
-            src={DEVELOPER_PROFILE.avatarUrl || "/avatar.png"}
+        <div className="relative w-5 h-5 shrink-0 rounded-full border border-white/20 overflow-hidden bg-[#15161a]">
+          <Image
+            src={DEVELOPER_PROFILE.profileUrl || DEVELOPER_PROFILE.avatarUrl || "/profile.png"}
             alt={DEVELOPER_PROFILE.name}
-            className="object-cover rounded-full"
+            fill
+            sizes="20px"
+            className="object-cover object-top rounded-full"
+            priority
           />
-          <AvatarFallback
-            className="text-[10px] font-bold text-white flex items-center justify-center transition-colors shadow-inner"
-            style={{ backgroundColor: currentTheme.color }}
-          >
-            L
-          </AvatarFallback>
-        </Avatar>
+        </div>
         <ChevronDown className="w-3 h-3 text-zinc-400 group-hover:text-zinc-200 transition-transform duration-200 group-data-[state=open]:rotate-180" />
       </DropdownMenuTrigger>
 
@@ -171,25 +165,14 @@ export function ProfileDropdown({
         {/* Profile Card Header */}
         <div className="p-3 bg-[#15161a] rounded-xl border border-[#262831] mb-1.5 space-y-2">
           <div className="flex items-center space-x-3">
-            <div
-              className="w-10 h-10 rounded-xl p-[1.5px] shrink-0 shadow-md transition-all"
-              style={{
-                background: `linear-gradient(135deg, ${currentTheme.color}, #6366f1)`,
-              }}
-            >
-              <Avatar className="w-full h-full rounded-[10px]">
-                <AvatarImage
-                  src={DEVELOPER_PROFILE.avatarUrl || "/avatar.png"}
-                  alt={DEVELOPER_PROFILE.name}
-                  className="rounded-[10px] object-cover"
-                />
-                <AvatarFallback
-                  className="w-full h-full bg-[#18191e] rounded-[10px] flex items-center justify-center font-bold font-mono text-xs transition-colors"
-                  style={{ color: currentTheme.color }}
-                >
-                  LG
-                </AvatarFallback>
-              </Avatar>
+            <div className="relative w-10 h-10 rounded-xl overflow-hidden border border-[#31333e] shrink-0 shadow-md bg-[#15161a]">
+              <Image
+                src={DEVELOPER_PROFILE.profileUrl || DEVELOPER_PROFILE.avatarUrl || "/profile.png"}
+                alt={DEVELOPER_PROFILE.name}
+                fill
+                sizes="40px"
+                className="object-cover object-top rounded-xl"
+              />
             </div>
             <div className="flex-1 min-w-0">
               <div className="font-bold text-white text-xs leading-tight">

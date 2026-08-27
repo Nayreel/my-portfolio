@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useSyncExternalStore } from "react";
 import confetti from "canvas-confetti";
 import { PORTFOLIO_FILES } from "@/data";
 import {
@@ -10,6 +10,39 @@ import {
   IDEThemeMode,
   PanelTab,
 } from "@/types/ide";
+
+const storageListeners = new Set<() => void>();
+
+function notifyStorageListeners() {
+  storageListeners.forEach((listener) => listener());
+}
+
+function useStoredPreference(key: string, fallback: string): string {
+  const subscribe = (callback: () => void) => {
+    storageListeners.add(callback);
+    const handleStorage = (e: StorageEvent) => {
+      if (e.key === key) callback();
+    };
+    window.addEventListener("storage", handleStorage);
+    return () => {
+      storageListeners.delete(callback);
+      window.removeEventListener("storage", handleStorage);
+    };
+  };
+
+  const getSnapshot = () => {
+    try {
+      if (typeof window === "undefined") return fallback;
+      return localStorage.getItem(key) ?? fallback;
+    } catch {
+      return fallback;
+    }
+  };
+
+  const getServerSnapshot = () => fallback;
+
+  return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+}
 
 export function usePortfolioIDE() {
   // Navigation & File state
@@ -37,9 +70,64 @@ export function usePortfolioIDE() {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isShortcutsOpen, setIsShortcutsOpen] = useState(false);
   const [antigravityMode, setAntigravityMode] = useState(false);
-  const [accentColor, setAccentColor] = useState("#38bdf8");
-  const [fontSize, setFontSize] = useState(13);
-  const [ideThemeMode, setIdeThemeMode] = useState<IDEThemeMode>("nebula");
+
+  // Stored Preferences via useSyncExternalStore (SSR-safe, zero cascading renders)
+  const activeThemeId = useStoredPreference("portfolio_theme_id", "cyan");
+  const accentColor = useStoredPreference("portfolio_accent_color", "#38bdf8");
+  const ideThemeMode = useStoredPreference(
+    "portfolio_ide_theme_mode",
+    "nebula",
+  ) as IDEThemeMode;
+  const rawFontSize = useStoredPreference("portfolio_font_size", "13");
+  const fontSize = parseInt(rawFontSize, 10) || 13;
+
+  const handleSetActiveThemeId = (themeId: string) => {
+    try {
+      localStorage.setItem("portfolio_theme_id", themeId);
+      notifyStorageListeners();
+    } catch {
+      // Ignore write errors
+    }
+  };
+
+  const handleSetAccentColor = (color: string) => {
+    try {
+      localStorage.setItem("portfolio_accent_color", color);
+      notifyStorageListeners();
+    } catch {
+      // Ignore write errors
+    }
+
+    const COLOR_MAP: Record<string, string> = {
+      "#38bdf8": "cyan",
+      "#a855f7": "purple",
+      "#10b981": "emerald",
+      "#f59e0b": "amber",
+      "#f43f5e": "rose",
+      "#0284c7": "blue",
+    };
+    if (COLOR_MAP[color]) {
+      handleSetActiveThemeId(COLOR_MAP[color]);
+    }
+  };
+
+  const handleSetIdeThemeMode = (mode: IDEThemeMode) => {
+    try {
+      localStorage.setItem("portfolio_ide_theme_mode", mode);
+      notifyStorageListeners();
+    } catch {
+      // Ignore write errors
+    }
+  };
+
+  const handleSetFontSize = (size: number) => {
+    try {
+      localStorage.setItem("portfolio_font_size", size.toString());
+      notifyStorageListeners();
+    } catch {
+      // Ignore write errors
+    }
+  };
 
   // AI External prompt trigger
   const [externalAIPrompt, setExternalAIPrompt] = useState<string | null>(null);
@@ -188,12 +276,14 @@ export function usePortfolioIDE() {
     setIsShortcutsOpen,
     antigravityMode,
     setAntigravityMode,
+    activeThemeId,
+    setActiveThemeId: handleSetActiveThemeId,
     accentColor,
-    setAccentColor,
+    setAccentColor: handleSetAccentColor,
     fontSize,
-    setFontSize,
+    setFontSize: handleSetFontSize,
     ideThemeMode,
-    setIdeThemeMode,
+    setIdeThemeMode: handleSetIdeThemeMode,
     externalAIPrompt,
     setExternalAIPrompt,
     cursorPos,

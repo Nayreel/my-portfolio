@@ -51,6 +51,8 @@ export default function AntigravityPortfolioApp() {
     setIsShortcutsOpen,
     antigravityMode,
     setAntigravityMode,
+    activeThemeId,
+    setActiveThemeId,
     accentColor,
     setAccentColor,
     fontSize,
@@ -113,7 +115,9 @@ export default function AntigravityPortfolioApp() {
         }}
         openSettingsModal={() => setIsSettingsOpen(true)}
         openShortcutsModal={() => setIsShortcutsOpen(true)}
+        activeTheme={activeThemeId}
         onSelectTheme={(theme) => {
+          setActiveThemeId(theme.id);
           setAccentColor(theme.color);
           setIdeThemeMode(theme.mode);
         }}
