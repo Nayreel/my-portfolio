@@ -1,29 +1,16 @@
 "use client";
 
 import React from "react";
-import {
-  Files,
-  Search,
-  GitBranch,
-  PlayCircle,
-  Puzzle,
-  Settings,
-} from "lucide-react";
+import { Files, Search, GitBranch, PlayCircle, Puzzle } from "lucide-react";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Badge } from "@/components/ui/badge";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { ActiveSidebarView } from "@/types/ide";
 
-export type ActiveSidebarView =
-  | "explorer"
-  | "search"
-  | "git"
-  | "debug"
-  | "extensions"
-  | "none";
+export type { ActiveSidebarView };
 
 interface ActivityBarProps {
   activeView: ActiveSidebarView;
@@ -34,14 +21,7 @@ interface ActivityBarProps {
   openContactTab: () => void;
 }
 
-export function ActivityBar({
-  activeView,
-  setActiveView,
-  isAIPanelOpen,
-  setIsAIPanelOpen,
-  openSettingsModal,
-  openContactTab,
-}: ActivityBarProps) {
+export function ActivityBar({ activeView, setActiveView }: ActivityBarProps) {
   const topButtons = [
     {
       id: "explorer" as ActiveSidebarView,

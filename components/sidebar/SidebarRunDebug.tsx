@@ -6,17 +6,13 @@ import {
   PauseCircle,
   RotateCcw,
   Square,
-  StepForward,
   ChevronDown,
   ChevronRight,
   Plus,
   Trash2,
   Bug,
   Activity,
-  CheckSquare,
-  Square as SquareOutline,
   X,
-  Sparkles,
 } from "lucide-react";
 import {
   DEBUG_CONFIGURATIONS,
@@ -54,9 +50,7 @@ export function SidebarRunDebug({
   );
   const [isDebugging, setIsDebugging] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
-  const [variables, setVariables] = useState<DebugVariableItem[]>(
-    INITIAL_DEBUG_VARIABLES,
-  );
+  const [variables] = useState<DebugVariableItem[]>(INITIAL_DEBUG_VARIABLES);
   const [watchExpressions, setWatchExpressions] =
     useState<DebugWatchExpression[]>(INITIAL_DEBUG_WATCH);
   const [breakpoints, setBreakpoints] = useState<DebugBreakpointItem[]>(

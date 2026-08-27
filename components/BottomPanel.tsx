@@ -1,32 +1,13 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
-import {
-  Terminal,
-  X,
-  Maximize2,
-  Minimize2,
-  Trash2,
-  CheckCircle,
-} from "lucide-react";
-import confetti from "canvas-confetti";
-import {
-  DEVELOPER_PROFILE,
-  PROJECTS,
-  EXPERIENCES,
-  SKILL_CATEGORIES,
-  CONFERENCES,
-  TERMINAL_COMMANDS_HELP,
-} from "@/data";
-import { downloadResumePdf } from "@/lib/download";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import React, { useState } from "react";
+import { CheckCircle } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+import { PanelTab } from "@/types/ide";
+import { BottomPanelHeader } from "./bottom-panel/BottomPanelHeader";
+import { TerminalTab } from "./bottom-panel/TerminalTab";
+
+export type { PanelTab } from "@/types/ide";
 
 interface BottomPanelProps {
   isOpen: boolean;
@@ -39,13 +20,6 @@ interface BottomPanelProps {
   debugLogMessage?: string | null;
 }
 
-export type PanelTab = "problems" | "output" | "debug" | "terminal" | "ports";
-
-interface TerminalLog {
-  type: "input" | "output" | "system";
-  text: string;
-}
-
 export function BottomPanel({
   isOpen,
   onClose,
@@ -56,149 +30,13 @@ export function BottomPanel({
   setActiveTab: setControlledActiveTab,
   debugLogMessage,
 }: BottomPanelProps) {
-  const [internalActiveTab, setInternalActiveTab] = useState<PanelTab>("terminal");
+  const [internalActiveTab, setInternalActiveTab] =
+    useState<PanelTab>("terminal");
   const activeTab = controlledActiveTab ?? internalActiveTab;
   const setActiveTab = setControlledActiveTab ?? setInternalActiveTab;
 
   const [isExpanded, setIsExpanded] = useState(false);
-  const [commandInput, setCommandInput] = useState("");
-  const [historyIndex, setHistoryIndex] = useState<number>(-1);
-  const [commandHistory, setCommandHistory] = useState<string[]>([]);
-  const [terminalLogs, setTerminalLogs] = useState<TerminalLog[]>([
-    {
-      type: "system",
-      text: '⚡ Portfolio IDE [Version 2.0.0]\n(c) 2026 Lee Ryan Garcia. All systems operational.\nType "help" for a list of interactive commands or "projects" to view projects.',
-    },
-  ]);
-
-  const terminalEndRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    if (activeTab === "terminal") {
-      terminalEndRef.current?.scrollIntoView({ behavior: "smooth" });
-    }
-  }, [terminalLogs, activeTab]);
-
-  const handleCommandSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const rawCmd = commandInput.trim();
-    if (!rawCmd) return;
-
-    setCommandHistory((prev) => [...prev, rawCmd]);
-    setHistoryIndex(-1);
-
-    const nextLogs: TerminalLog[] = [
-      ...terminalLogs,
-      {
-        type: "input",
-        text: `PS C:\\Portfolio\\LeeRyanGarcia> ${rawCmd}`,
-      },
-    ];
-    const cmd = rawCmd.toLowerCase();
-
-    if (cmd === "help") {
-      const helpText = TERMINAL_COMMANDS_HELP.map((h) => `  ${h.cmd.padEnd(20)} - ${h.desc}`).join("\n");
-      nextLogs.push({ type: "output", text: `Available IDE Portfolio Commands:\n${helpText}` });
-    } else if (cmd === "bio") {
-      nextLogs.push({ type: "output", text: `👤 ${DEVELOPER_PROFILE.name} - ${DEVELOPER_PROFILE.title}\n📍 ${DEVELOPER_PROFILE.location}\n✉️ ${DEVELOPER_PROFILE.email}\n${DEVELOPER_PROFILE.bio}` });
-      if (onSelectFile) onSelectFile("bio.tsx");
-    } else if (cmd === "projects") {
-      const pList = PROJECTS.map((p) => `🚀 ${p.title} (${p.category})\n   ${p.tagline}\n   Tech: ${p.tags.join(", ")}\n   Live: ${p.liveUrl}`).join("\n\n");
-      nextLogs.push({ type: "output", text: `Projects:\n\n${pList}` });
-      if (onSelectFile) onSelectFile("projects.tsx");
-    } else if (cmd === "skills") {
-      const sList = SKILL_CATEGORIES.map((c) => `[${c.category}]\n  ` + c.skills.map((s) => `${s.name} [${s.level}]`).join(", ")).join("\n\n");
-      nextLogs.push({ type: "output", text: `Engineering Stack:\n\n${sList}` });
-      if (onSelectFile) onSelectFile("tech-stack.json");
-    } else if (cmd === "experience") {
-      const eList = EXPERIENCES.map((e) => `💼 ${e.role} @ ${e.company} (${e.period})\n   ${e.highlights[0]}`).join("\n\n");
-      nextLogs.push({ type: "output", text: `Career Timeline:\n\n${eList}` });
-      if (onSelectFile) onSelectFile("experience.tsx");
-    } else if (cmd === "conferences") {
-      const cList = CONFERENCES.map((c) => `🏆 ${c.title}\n   📅 ${c.date}\n   ${c.des}`).join("\n\n");
-      nextLogs.push({ type: "output", text: `Conferences & Pitching Competitions:\n\n${cList}` });
-      if (onSelectFile) onSelectFile("resume.md");
-    } else if (cmd === "contact") {
-      nextLogs.push({ type: "output", text: `📬 Email: ${DEVELOPER_PROFILE.email}\n📞 Phone: ${DEVELOPER_PROFILE.phone}\n🌐 GitHub: ${DEVELOPER_PROFILE.github}\n💼 LinkedIn: ${DEVELOPER_PROFILE.linkedin}\n📍 Location: ${DEVELOPER_PROFILE.location}` });
-      if (onSelectFile) onSelectFile("get-in-touch.tsx");
-    } else if (cmd === "cat resume.md" || cmd === "resume") {
-      nextLogs.push({ type: "output", text: `📄 Opening Lee Ryan Garcia Formal Curriculum Vitae (resume.md)...` });
-      if (onSelectFile) onSelectFile("resume.md");
-    } else if (cmd.startsWith("download") && (cmd.includes("resume") || cmd.includes("cv"))) {
-      const fileUrl = DEVELOPER_PROFILE.resumePdfUrl || "/Lee_Ryan_Garcia_Resume.pdf";
-      const fileName = fileUrl.split("/").pop() || "Lee_Ryan_Garcia_Resume.pdf";
-      downloadResumePdf(fileUrl, fileName);
-      confetti({ particleCount: 80, spread: 70 });
-      nextLogs.push({ type: "output", text: `📥 Initiating download for ${fileName}...` });
-    } else if (cmd === "cat package.json" || cmd === "package" || cmd === "packages") {
-      nextLogs.push({ type: "output", text: `📦 Opening package.json...` });
-      if (onSelectFile) onSelectFile("package.json");
-    } else if (cmd === "cat config.ts" || cmd === "config" || cmd === "settings") {
-      nextLogs.push({ type: "output", text: `⚙️ Opening config.ts...` });
-      if (onSelectFile) onSelectFile("config.ts");
-    } else if (cmd.includes("fly") || cmd.includes("zero-g") || cmd.includes("gravity")) {
-      const nextMode = !antigravityMode;
-      setAntigravityMode(nextMode);
-      confetti({ particleCount: 90, spread: 80 });
-      nextLogs.push({
-        type: "output",
-        text: nextMode ? "🚀 Zero-G Physics: IGNITED!" : "🛬 Zero-G Physics: DEACTIVATED.",
-      });
-    } else if (cmd === "clear" || cmd === "cls") {
-      setTerminalLogs([]);
-      setCommandInput("");
-      return;
-    } else if (cmd === "neofetch") {
-      nextLogs.push({
-        type: "output",
-        text: `\n      /\\        OS: Developer Portfolio IDE v2\n     /  \\       Host: Next.js App Router + React 19\n    / /\\ \\      Developer: Lee Ryan M. Garcia\n   / /  \\ \\     Role: Software Engineer | Full-Stack & Automation\n  / /_/\\_\\ \\    Stack: Next.js, n8n, MongoDB, PostgreSQL, Tailwind\n /________/ \\   Honors: Cum Laude (Gordon College)\n                Shell: IDE Terminal (pwsh/bash)`,
-      });
-    } else if (cmd === "npm run build" || cmd === "build") {
-      confetti({ particleCount: 120, spread: 90 });
-      nextLogs.push({
-        type: "output",
-        text: `> next build\n✓ Compiled successfully in 380ms\n✓ Linting and checking validity of types ...\n✓ Build complete! Ready for deployment.`,
-      });
-    } else if (cmd === "npm run test" || cmd === "npm test" || cmd === "test") {
-      nextLogs.push({
-        type: "output",
-        text: `> vitest run\n✓ test/portfolio.spec.ts (17 tests) 142ms\nTest Files  3 passed (3)\n     Tests  17 passed (17)`,
-      });
-    } else {
-      nextLogs.push({
-        type: "output",
-        text: `Command not recognized: "${rawCmd}". Type "help" for a list of valid commands.`,
-      });
-    }
-
-    setTerminalLogs(nextLogs);
-    setCommandInput("");
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "ArrowUp") {
-      if (commandHistory.length > 0) {
-        const newIndex =
-          historyIndex === -1
-            ? commandHistory.length - 1
-            : Math.max(0, historyIndex - 1);
-        setHistoryIndex(newIndex);
-        setCommandInput(commandHistory[newIndex]);
-      }
-    } else if (e.key === "ArrowDown") {
-      if (historyIndex !== -1) {
-        const newIndex = historyIndex + 1;
-        if (newIndex >= commandHistory.length) {
-          setHistoryIndex(-1);
-          setCommandInput("");
-        } else {
-          setHistoryIndex(newIndex);
-          setCommandInput(commandHistory[newIndex]);
-        }
-      }
-    }
-  };
+  const [clearTerminalSignal, setClearTerminalSignal] = useState(0);
 
   if (!isOpen) return null;
 
@@ -209,169 +47,24 @@ export function BottomPanel({
       }`}
     >
       {/* Tab Navigation Header */}
-      <div className="h-9 px-2 sm:px-3 flex items-center justify-between border-b border-[#242526] text-xs bg-[#1f1f1f] shrink-0">
-        <div className="flex items-center space-x-0.5 sm:space-x-1 overflow-x-auto custom-scrollbar touch-pan-x min-w-0 mr-2">
-          <Button
-            type="button"
-            variant="ghost"
-            size="xs"
-            onClick={() => setActiveTab("problems")}
-            className={`px-2.5 py-1 h-auto rounded-sm flex items-center space-x-1.5 transition-colors cursor-pointer ${
-              activeTab === "problems"
-                ? "bg-[#252526] text-white border-b-2 border-sky-400 font-medium hover:bg-[#252526] hover:text-white"
-                : "text-[#888888] hover:text-[#cccccc] hover:bg-transparent"
-            }`}
-          >
-            <span>Problems</span>
-            <Badge
-              variant="outline"
-              className="text-[10px] px-1 py-0 border-zinc-700 pointer-events-none"
-            >
-              0
-            </Badge>
-          </Button>
-
-          <Button
-            type="button"
-            variant="ghost"
-            size="xs"
-            onClick={() => setActiveTab("output")}
-            className={`px-2.5 py-1 h-auto rounded-sm flex items-center space-x-1.5 transition-colors cursor-pointer ${
-              activeTab === "output"
-                ? "bg-[#252526] text-white border-b-2 border-sky-400 font-medium hover:bg-[#252526] hover:text-white"
-                : "text-[#888888] hover:text-[#cccccc] hover:bg-transparent"
-            }`}
-          >
-            <span>Output</span>
-          </Button>
-
-          <Button
-            type="button"
-            variant="ghost"
-            size="xs"
-            onClick={() => setActiveTab("terminal")}
-            className={`px-2.5 py-1 h-auto rounded-sm flex items-center space-x-1.5 transition-colors cursor-pointer ${
-              activeTab === "terminal"
-                ? "bg-[#252526] text-white border-b-2 border-sky-400 font-medium hover:bg-[#252526] hover:text-white"
-                : "text-[#888888] hover:text-[#cccccc] hover:bg-transparent"
-            }`}
-          >
-            <Terminal className="w-3 h-3 text-sky-400" />
-            <span>Terminal</span>
-          </Button>
-
-          <Button
-            type="button"
-            variant="ghost"
-            size="xs"
-            onClick={() => setActiveTab("ports")}
-            className={`px-2.5 py-1 h-auto rounded-sm flex items-center space-x-1.5 transition-colors cursor-pointer ${
-              activeTab === "ports"
-                ? "bg-[#252526] text-white border-b-2 border-sky-400 font-medium hover:bg-[#252526] hover:text-white"
-                : "text-[#888888] hover:text-[#cccccc] hover:bg-transparent"
-            }`}
-          >
-            <span>Ports</span>
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-          </Button>
-        </div>
-
-        {/* Panel Action Controls */}
-        <div className="flex items-center space-x-1">
-          {activeTab === "terminal" && (
-            <Tooltip>
-              <TooltipTrigger
-                onClick={() => setTerminalLogs([])}
-                className="p-1 hover:bg-[#2a2d2e] rounded text-[#888888] hover:text-white transition-colors cursor-pointer"
-              >
-                <Trash2 className="w-3 h-3" />
-              </TooltipTrigger>
-              <TooltipContent
-                side="top"
-                className="text-xs bg-[#1f1f1f] text-zinc-200 border-[#3c3c3c]"
-              >
-                Clear Terminal
-              </TooltipContent>
-            </Tooltip>
-          )}
-
-          <Tooltip>
-            <TooltipTrigger
-              onClick={() => setIsExpanded(!isExpanded)}
-              className="p-1 hover:bg-[#2a2d2e] rounded text-[#888888] hover:text-white transition-colors cursor-pointer"
-            >
-              {isExpanded ? (
-                <Minimize2 className="w-3 h-3" />
-              ) : (
-                <Maximize2 className="w-3 h-3" />
-              )}
-            </TooltipTrigger>
-            <TooltipContent
-              side="top"
-              className="text-xs bg-[#1f1f1f] text-zinc-200 border-[#3c3c3c]"
-            >
-              {isExpanded ? "Restore Panel Height" : "Maximize Panel Height"}
-            </TooltipContent>
-          </Tooltip>
-
-          <Tooltip>
-            <TooltipTrigger
-              onClick={onClose}
-              className="p-1 hover:bg-[#2a2d2e] rounded text-[#888888] hover:text-white transition-colors cursor-pointer"
-            >
-              <X className="w-3 h-3" />
-            </TooltipTrigger>
-            <TooltipContent
-              side="top"
-              className="text-xs bg-[#1f1f1f] text-zinc-200 border-[#3c3c3c]"
-            >
-              Close Panel (⌃`)
-            </TooltipContent>
-          </Tooltip>
-        </div>
-      </div>
+      <BottomPanelHeader
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        isExpanded={isExpanded}
+        setIsExpanded={setIsExpanded}
+        onClearTerminal={() => setClearTerminalSignal((s) => s + 1)}
+        onClose={onClose}
+      />
 
       {/* Tab Body */}
       <ScrollArea className="flex-1 bg-[#141414] font-mono text-xs p-3 min-h-0">
         {activeTab === "terminal" && (
-          <div
-            className="min-h-full flex flex-col space-y-1 cursor-text select-text"
-            onClick={() => inputRef.current?.focus()}
-          >
-            {terminalLogs.map((log, i) => (
-              <div
-                key={i}
-                className={`whitespace-pre-wrap leading-relaxed ${
-                  log.type === "input"
-                    ? "text-sky-300 font-semibold"
-                    : log.type === "system"
-                      ? "text-zinc-400 italic"
-                      : "text-[#d4d4d4]"
-                }`}
-              >
-                {log.text}
-              </div>
-            ))}
-
-            <form
-              onSubmit={handleCommandSubmit}
-              className="flex items-center space-x-2 pt-1"
-            >
-              <span className="text-emerald-400 font-bold shrink-0 select-none">
-                PS C:\Portfolio\LeeRyanGarcia&gt;
-              </span>
-              <input
-                ref={inputRef}
-                type="text"
-                value={commandInput}
-                onChange={(e) => setCommandInput(e.target.value)}
-                onKeyDown={handleKeyDown}
-                placeholder="type command (e.g. 'help', 'projects', 'fly', 'config', 'package')..."
-                className="flex-1 bg-transparent text-white focus:outline-none font-mono text-xs cursor-text"
-              />
-            </form>
-            <div ref={terminalEndRef} />
-          </div>
+          <TerminalTab
+            key={clearTerminalSignal}
+            onSelectFile={onSelectFile}
+            antigravityMode={antigravityMode}
+            setAntigravityMode={setAntigravityMode}
+          />
         )}
 
         {activeTab === "output" && (

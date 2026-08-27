@@ -20,7 +20,9 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
-export type ViewMode = "code" | "preview" | "split";
+import { ViewMode } from "@/types/ide";
+
+export type { ViewMode };
 
 interface EditorTabsProps {
   openTabs: PortfolioFile[];

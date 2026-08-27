@@ -34,6 +34,13 @@ export interface TerminalCommandHelp {
   desc: string;
 }
 
+export type PanelTab = "problems" | "output" | "debug" | "terminal" | "ports";
+
+export interface TerminalLog {
+  type: "input" | "output" | "system";
+  content: string;
+}
+
 export type ActiveSidebarView =
   | "explorer"
   | "search"
@@ -49,3 +56,4 @@ export type IDEThemeMode =
   | "cyberpunk"
   | "matrix"
   | "solar";
+

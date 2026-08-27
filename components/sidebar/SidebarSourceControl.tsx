@@ -40,7 +40,6 @@ export function SidebarSourceControl({
   const [isChangesSectionOpen, setIsChangesSectionOpen] = useState(true);
   const [isStagedCollapsed, setIsStagedCollapsed] = useState(false);
   const [isUnstagedCollapsed, setIsUnstagedCollapsed] = useState(false);
-  const [isGraphCollapsed, setIsGraphCollapsed] = useState(false);
   const [lastCommitNotice, setLastCommitNotice] = useState<string | null>(null);
   const [isGeneratingAI, setIsGeneratingAI] = useState(false);
 
@@ -229,9 +228,7 @@ export function SidebarSourceControl({
                       }
                     }}
                     placeholder={
-                      isGeneratingAI
-                        ? "Thinking..."
-                        : "Message (Ctrl+Enter ..."
+                      isGeneratingAI ? "Thinking..." : "Message (Ctrl+Enter ..."
                     }
                     className={`w-full bg-transparent border-0 ring-0 focus-visible:ring-0 focus-visible:border-0 shadow-none text-xs text-zinc-100 placeholder:text-zinc-500 pl-2 resize-none font-sans custom-scrollbar ${
                       commitMessage.trim()
@@ -253,7 +250,9 @@ export function SidebarSourceControl({
                     {commitMessage.trim() ? (
                       <Sparkles className="w-3.5 h-3.5 fill-white text-white" />
                     ) : isGeneratingAI ? (
-                      <span className="text-[11px] font-medium text-white">Thinking...</span>
+                      <span className="text-[11px] font-medium text-white">
+                        Thinking...
+                      </span>
                     ) : (
                       <>
                         <span>Generate</span>

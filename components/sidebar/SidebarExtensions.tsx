@@ -6,8 +6,6 @@ import {
   Search,
   Star,
   Download,
-  Settings,
-  Check,
   Zap,
   Atom,
   Database,
@@ -15,13 +13,11 @@ import {
   FileCode2,
   Sparkles,
   X,
-  Layers,
 } from "lucide-react";
 import { EXTENSIONS_CATALOG } from "@/data/sidebarData";
-import { ExtensionItem, ExtensionCategory } from "@/types/sidebar";
+import { ExtensionItem } from "@/types/sidebar";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface SidebarExtensionsProps {
@@ -36,8 +32,11 @@ export function SidebarExtensions({
   onClose,
 }: SidebarExtensionsProps) {
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState<"All" | "Installed" | "Recommended">("All");
-  const [extensions, setExtensions] = useState<ExtensionItem[]>(EXTENSIONS_CATALOG);
+  const [selectedCategory, setSelectedCategory] = useState<
+    "All" | "Installed" | "Recommended"
+  >("All");
+  const [extensions, setExtensions] =
+    useState<ExtensionItem[]>(EXTENSIONS_CATALOG);
 
   const toggleExtensionState = (extId: string) => {
     if (extId === "antigravity-physics-engine") {
@@ -67,9 +66,13 @@ export function SidebarExtensions({
       case "react":
         return <Atom className="w-5 h-5 text-cyan-400" />;
       case "tailwind":
-        return <span className="font-bold text-sky-400 text-xs font-mono">TW</span>;
+        return (
+          <span className="font-bold text-sky-400 text-xs font-mono">TW</span>
+        );
       case "typescript":
-        return <span className="font-bold text-blue-400 text-xs font-mono">TS</span>;
+        return (
+          <span className="font-bold text-blue-400 text-xs font-mono">TS</span>
+        );
       case "database":
         return <Database className="w-5 h-5 text-emerald-400" />;
       case "git":
@@ -77,7 +80,11 @@ export function SidebarExtensions({
       case "prettier":
         return <FileCode2 className="w-5 h-5 text-pink-400" />;
       case "eslint":
-        return <span className="font-bold text-indigo-400 text-xs font-mono">ES</span>;
+        return (
+          <span className="font-bold text-indigo-400 text-xs font-mono">
+            ES
+          </span>
+        );
       default:
         return <Puzzle className="w-5 h-5 text-sky-400" />;
     }
@@ -162,7 +169,9 @@ export function SidebarExtensions({
         <div className="p-2 space-y-2">
           {filteredExtensions.length === 0 ? (
             <div className="px-4 py-8 text-center text-zinc-500">
-              <p className="text-xs">No extensions found matching &ldquo;{searchQuery}&rdquo;</p>
+              <p className="text-xs">
+                No extensions found matching &ldquo;{searchQuery}&rdquo;
+              </p>
             </div>
           ) : (
             filteredExtensions.map((ext) => {
@@ -198,7 +207,9 @@ export function SidebarExtensions({
 
                       {/* Publisher & Stats */}
                       <div className="flex items-center justify-between mt-2 pt-1.5 border-t border-[#272727] text-[10px] text-zinc-500">
-                        <span className="truncate max-w-[90px]">{ext.publisher}</span>
+                        <span className="truncate max-w-[90px]">
+                          {ext.publisher}
+                        </span>
                         <div className="flex items-center space-x-2">
                           <span className="flex items-center space-x-0.5 text-amber-400">
                             <Star className="w-2.5 h-2.5 fill-amber-400" />

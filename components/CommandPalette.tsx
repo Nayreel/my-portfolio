@@ -16,14 +16,7 @@ import {
   BookOpen,
 } from "lucide-react";
 import { downloadResumePdf } from "@/lib/download";
-import {
-  PORTFOLIO_FILES,
-  PROJECTS,
-  EXPERIENCES,
-  SKILL_CATEGORIES,
-  DEVELOPER_PROFILE,
-  PortfolioFile,
-} from "@/data";
+import { PORTFOLIO_FILES, DEVELOPER_PROFILE, PortfolioFile } from "@/data";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -206,12 +199,15 @@ export function CommandPalette({
     {
       id: "act-download-resume",
       title: "Download CV / Resume (PDF)",
-      subtitle: "Download official Lee_Ryan_Garcia_Resume.pdf from public folder",
+      subtitle:
+        "Download official Lee_Ryan_Garcia_Resume.pdf from public folder",
       icon: Download,
       category: "Actions",
       action: () => {
-        const fileUrl = DEVELOPER_PROFILE.resumePdfUrl || "/Lee_Ryan_Garcia_Resume.pdf";
-        const fileName = fileUrl.split("/").pop() || "Lee_Ryan_Garcia_Resume.pdf";
+        const fileUrl =
+          DEVELOPER_PROFILE.resumePdfUrl || "/Lee_Ryan_Garcia_Resume.pdf";
+        const fileName =
+          fileUrl.split("/").pop() || "Lee_Ryan_Garcia_Resume.pdf";
         confetti({ particleCount: 80, spread: 70 });
         toast.success("Downloading Resume...", {
           description: fileName,

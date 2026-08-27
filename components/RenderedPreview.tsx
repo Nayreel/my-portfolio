@@ -24,8 +24,6 @@ export function RenderedPreview({
   activeFile,
   onSwitchToFile,
   onOpenAIQuery,
-  antigravityMode,
-  setAntigravityMode,
 }: RenderedPreviewProps) {
   switch (activeFile.id) {
     case "bio.tsx":
