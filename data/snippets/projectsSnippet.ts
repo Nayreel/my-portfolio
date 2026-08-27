@@ -1,9 +1,9 @@
 export const PROJECTS_CODE_SNIPPET = `"use client";
 
 import React, { useState } from "react";
-import { Rocket, ExternalLink, Cpu } from "lucide-react";
+import { FolderGit2, ExternalLink, Cpu } from "lucide-react";
 
-export type ProjectCategory = "All" | "AI & Automation" | "Client Work" | "Personal & Capstone";
+export type ProjectCategory = "All" | "Web & Automation" | "Client Work" | "Personal & Capstone";
 
 export interface Project {
   id: number;
@@ -23,7 +23,7 @@ export const FEATURED_PROJECTS: Project[] = [
     title: "AI Energy Shop",
     tagline: "Australian e-commerce platform for solar power systems & automated energy solutions",
     description: "Specializing in solar power systems, battery storage, and energy-efficient solutions with custom n8n automation workflows, ERP sync, and scalable Next.js web systems.",
-    category: "AI & Automation",
+    category: "Web & Automation",
     tags: ["Next.js", "n8n Automation", "Tailwind CSS", "Redux", "TypeScript", "E-Commerce"],
     liveUrl: "https://aienergyshop.com.au",
     githubUrl: "https://github.com/Nayreel",
@@ -107,7 +107,7 @@ export default function FeaturedProjects() {
 
   const categories: ProjectCategory[] = [
     "All",
-    "AI & Automation",
+    "Web & Automation",
     "Client Work",
     "Personal & Capstone",
   ];
@@ -122,7 +122,7 @@ export default function FeaturedProjects() {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <div className="inline-flex items-center space-x-1.5 text-xs text-sky-400 font-mono uppercase tracking-wider mb-1">
-            <Rocket className="w-3.5 h-3.5" />
+            <FolderGit2 className="w-3.5 h-3.5" />
             <span>Featured Engineering Portfolio</span>
           </div>
           <h1 className="text-3xl font-extrabold tracking-tight">My Projects</h1>

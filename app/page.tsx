@@ -51,16 +51,21 @@ export default function AntigravityPortfolioApp() {
       setIsTablet(tablet);
     };
 
-    handleResize();
-    // Default open on desktop
-    if (window.innerWidth >= 1024) {
-      setIsLeftSidebarOpen(true);
-      setIsAIPanelOpen(false);
-      setIsBottomPanelOpen(false);
-    }
-
     window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+
+    const timer = setTimeout(() => {
+      handleResize();
+      if (window.innerWidth >= 1024) {
+        setIsLeftSidebarOpen(true);
+        setIsAIPanelOpen(false);
+        setIsBottomPanelOpen(false);
+      }
+    }, 0);
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   // Modals & Preferences

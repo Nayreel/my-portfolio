@@ -334,9 +334,9 @@ export function ContactPreview() {
             href="https://github.com/Nayreel"
             target="_blank"
             rel="noreferrer"
-            className="flex items-center space-x-1 hover:text-white transition-colors"
+            className="flex items-center space-x-1 hover:text-sky-400 transition-colors"
           >
-            <GithubIcon className="w-3.5 h-3.5" />
+            <GithubIcon className="w-3.5 h-3.5 text-sky-400" />
             <span>GitHub (Nayreel)</span>
           </a>
           <a

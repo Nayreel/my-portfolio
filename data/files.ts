@@ -33,7 +33,7 @@ export const PORTFOLIO_FILES: PortfolioFile[] = [
     name: "featured-projects.tsx",
     path: "projects/featured-projects.tsx",
     folder: "projects",
-    icon: "Rocket",
+    icon: "FolderGit2",
     language: "typescript",
     description:
       "Showcase of AI Energy Shop, Feedback Fusion, Iontana, and client projects",

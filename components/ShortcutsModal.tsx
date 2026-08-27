@@ -7,7 +7,7 @@ import {
   BookOpen,
   Command,
   Layers,
-  Sparkles,
+  Palette,
   Search,
   ExternalLink,
 } from "lucide-react";
@@ -88,7 +88,7 @@ const GUIDE_SECTIONS = [
   {
     title: "5 Workspace Theme Modes",
     desc: "Tailored IDE aesthetic atmospheres: Dark Nebula (slate), Midnight Abyss (pure OLED #000000), Cyberpunk Synthwave (neon purple), Matrix Terminal (emerald green), and Solar Warm (espresso amber).",
-    icon: Sparkles,
+    icon: Palette,
   },
   {
     title: "Zero-Gravity Physics Engine",

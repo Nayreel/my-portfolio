@@ -2,13 +2,28 @@
 
 export type ProjectCategory =
   | "All"
-  | "AI & Automation"
+  | "Web & Automation"
   | "Client Work"
   | "Personal & Capstone";
 
 export interface ProjectMetric {
   label: string;
   value: string;
+}
+
+export interface WhatICanBuildItem {
+  title: string;
+  subtitle: string;
+  description: string;
+  skills: string[];
+}
+
+export interface EngineeringPillar {
+  number: string;
+  label: string;
+  title: string;
+  tech: string;
+  description: string;
 }
 
 export interface Project {
@@ -32,6 +47,11 @@ export interface Project {
   demoComponent?: string;
   imageColor: string;
   accent: string;
+  problem?: string;
+  solution?: string;
+  architectureStack?: string[];
+  whatISolved?: string[];
+  businessImpact?: string;
 }
 
 export interface EducationItem {
@@ -78,6 +98,8 @@ export interface DeveloperProfile {
   philosophy?: DeveloperPhilosophy;
   highlights?: string[];
   contact?: DeveloperContact;
+  whatICanBuild?: WhatICanBuildItem[];
+  pillars?: EngineeringPillar[];
 }
 
 export interface Conference {

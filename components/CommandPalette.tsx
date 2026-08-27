@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import {
   Search,
   FileCode,
-  Rocket,
+  FolderGit2,
   Briefcase,
   Cpu,
   Mail,
@@ -96,7 +96,7 @@ export function CommandPalette({
       id: "file-projects",
       title: "Open featured-projects.tsx",
       subtitle: "AI Energy Shop, Feedback Fusion, Iontana, Narra Tree & more",
-      icon: Rocket,
+      icon: FolderGit2,
       category: "Files",
       action: () => {
         const f = PORTFOLIO_FILES.find((x) => x.id === "projects.tsx");

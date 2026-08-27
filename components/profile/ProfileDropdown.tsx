@@ -313,7 +313,7 @@ export function ProfileDropdown({
             className="text-xs cursor-pointer py-2 px-2.5 rounded-lg hover:bg-[#272932] hover:text-white focus:bg-[#272932] focus:text-white flex items-center justify-between"
           >
             <div className="flex items-center space-x-2">
-              <GithubIcon className="w-3.5 h-3.5 text-zinc-300" />
+              <GithubIcon className="w-3.5 h-3.5 text-sky-400" />
               <span>GitHub (Nayreel)</span>
             </div>
             <ExternalLink className="w-3 h-3 text-zinc-500" />

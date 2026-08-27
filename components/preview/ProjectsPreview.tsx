@@ -1,12 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import {
-  Rocket,
-  ExternalLink,
-  Cpu,
-  Copy,
-} from "lucide-react";
+import { FolderGit2, ExternalLink, Cpu, Copy } from "lucide-react";
 import confetti from "canvas-confetti";
 import { PROJECTS, Project, ProjectCategory } from "@/data";
 import { Button } from "@/components/ui/button";
@@ -48,7 +43,7 @@ export function ProjectsPreview({ onOpenAIQuery }: ProjectsPreviewProps) {
 
   const categories: ProjectCategory[] = [
     "All",
-    "AI & Automation",
+    "Web & Automation",
     "Client Work",
     "Personal & Capstone",
   ];
@@ -73,7 +68,7 @@ export function ProjectsPreview({ onOpenAIQuery }: ProjectsPreviewProps) {
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <div className="inline-flex items-center space-x-1.5 text-xs text-sky-400 font-mono uppercase tracking-wider mb-1">
-              <Rocket className="w-3.5 h-3.5" />
+              <FolderGit2 className="w-3.5 h-3.5" />
               <span>Featured Engineering Portfolio</span>
             </div>
             <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
@@ -133,9 +128,31 @@ export function ProjectsPreview({ onOpenAIQuery }: ProjectsPreviewProps) {
               </CardHeader>
 
               <CardContent className="p-4 sm:p-6 pt-0 space-y-3 sm:space-y-4 relative z-10">
-                <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
+                <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
                   {project.description}
                 </p>
+
+                {/* What I Solved & Engineered */}
+                {project.whatISolved && project.whatISolved.length > 0 && (
+                  <div className="space-y-1.5 pt-1">
+                    <span className="text-[11px] font-mono text-sky-400 block uppercase tracking-wide">
+                      What I Solved
+                    </span>
+                    <ul className="space-y-1">
+                      {project.whatISolved.slice(0, 3).map((item, idx) => (
+                        <li
+                          key={idx}
+                          className="text-xs text-zinc-300 flex items-start space-x-1.5"
+                        >
+                          <span className="text-sky-400 font-bold shrink-0">
+                            •
+                          </span>
+                          <span className="leading-snug">{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
 
                 {/* Tech Tags */}
                 <div className="flex flex-wrap gap-1.5 pt-1">
