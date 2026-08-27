@@ -7,7 +7,7 @@ import {
   Check,
   Layers,
   Terminal,
-  Cpu,
+  Globe,
   Wrench,
   ShieldCheck,
   Search,
@@ -44,126 +44,41 @@ interface DependencyItem {
 }
 
 const SCRIPTS: ScriptItem[] = [
-  {
-    name: "dev",
-    command: "next dev",
-    description:
-      "Start development server on localhost:3000 with Turbopack fast refresh",
-    category: "development",
-  },
-  {
-    name: "build",
-    command: "next build",
-    description:
-      "Compile and optimize production bundle with static & SSR generation",
-    category: "build",
-  },
-  {
-    name: "start",
-    command: "next start",
-    description: "Run standalone production server instance",
-    category: "build",
-  },
-  {
-    name: "lint",
-    command: "eslint",
-    description: "Run Next.js ESLint and strict type-safety verification",
-    category: "quality",
-  },
-  {
-    name: "typecheck",
-    command: "tsc --noEmit",
-    description: "Verify TypeScript strict mode without compiling output files",
-    category: "quality",
-  },
+  { name: "dev", command: "next dev", description: "Start development server on localhost:3000 with Turbopack fast refresh", category: "development" },
+  { name: "build", command: "next build", description: "Compile and optimize production bundle with static & SSR generation", category: "build" },
+  { name: "start", command: "next start", description: "Run standalone production server instance", category: "build" },
+  { name: "lint", command: "eslint", description: "Run ESLint code quality & type safety analysis across repository", category: "quality" },
 ];
 
 const DEPENDENCIES: DependencyItem[] = [
-  {
-    name: "next",
-    version: "^16.3.2",
-    description:
-      "React framework with App Router, Server Components & Image Optimization",
-    category: "Framework",
-  },
-  {
-    name: "react",
-    version: "^19.2.8",
-    description: "Core UI library with Actions, Compiler & Concurrent features",
-    category: "Framework",
-  },
-  {
-    name: "react-dom",
-    version: "^19.2.8",
-    description: "DOM rendering and client-side hydration engine",
-    category: "Framework",
-  },
-  {
-    name: "lucide-react",
-    version: "^1.34.0",
-    description: "High-performance SVG icon collection for IDE & UI components",
-    category: "UI & Components",
-  },
-  {
-    name: "react-resizable-panels",
-    version: "^4.12.3",
-    description:
-      "Accessible, responsive multi-panel layout system for IDE split views",
-    category: "UI & Components",
-  },
-  {
-    name: "shadcn",
-    version: "^4.19.0",
-    description: "Radix UI & Tailwind-based accessible design primitives",
-    category: "UI & Components",
-  },
-  {
-    name: "motion",
-    version: "^13.1.1",
-    description: "Declarative spring physics and layout animation engine",
-    category: "Animation & FX",
-  },
-  {
-    name: "canvas-confetti",
-    version: "^1.9.4",
-    description:
-      "Interactive particle confetti generator for milestone triggers",
-    category: "Animation & FX",
-  },
-  {
-    name: "tailwind-merge",
-    version: "^3.6.0",
-    description:
-      "Utility function to cleanly merge Tailwind CSS classes dynamically",
-    category: "Utilities",
-  },
-  {
-    name: "zod",
-    version: "^4.4.3",
-    description:
-      "TypeScript-first schema declaration and data validation library",
-    category: "Utilities",
-  },
-  {
-    name: "sonner",
-    version: "^2.0.7",
-    description: "Minimalist, stackable notification toast system",
-    category: "UI & Components",
-  },
+  { name: "next", version: "16.3.2", description: "React framework with App Router, Server Components & SEO optimization", category: "Framework" },
+  { name: "react", version: "19.2.8", description: "Core UI library with Actions, Compiler & Concurrent rendering", category: "Framework" },
+  { name: "react-dom", version: "19.2.8", description: "DOM rendering and client-side hydration engine", category: "Framework" },
+  { name: "@base-ui/react", version: "^1.7.0", description: "Accessible, unstyled UI component primitives for dialogs and menus", category: "UI & Components" },
+  { name: "shadcn", version: "^4.19.0", description: "Accessible design component system built on Tailwind CSS", category: "UI & Components" },
+  { name: "lucide-react", version: "^1.34.0", description: "Clean, customizable SVG icon set for modern web applications", category: "UI & Components" },
+  { name: "react-resizable-panels", version: "^4.12.3", description: "Accessible multi-panel layout system for IDE split views", category: "UI & Components" },
+  { name: "motion", version: "^13.1.1", description: "Declarative spring physics and layout animation engine", category: "Animation & FX" },
+  { name: "canvas-confetti", version: "^1.9.4", description: "Interactive particle confetti generator for milestone triggers", category: "Animation & FX" },
+  { name: "tw-animate-css", version: "^1.4.0", description: "Smooth CSS animation primitives for Tailwind CSS", category: "Animation & FX" },
+  { name: "tailwind-merge", version: "^3.6.0", description: "Utility to merge Tailwind CSS classes dynamically without conflicts", category: "Utilities" },
+  { name: "class-variance-authority", version: "^0.7.1", description: "Type-safe CSS variant composition and component styling", category: "Utilities" },
+  { name: "clsx", version: "^2.1.1", description: "High-performance conditional className constructor utility", category: "Utilities" },
+  { name: "zod", version: "^4.4.3", description: "TypeScript-first schema declaration and data validation library", category: "Utilities" },
+  { name: "nodemailer", version: "^9.0.5", description: "Server-side email dispatch engine for contact form delivery", category: "Utilities" },
 ];
 
 const DEV_DEPENDENCIES = [
-  { name: "typescript", version: "^5.9.3", role: "Strict Type System" },
-  { name: "@types/node", version: "^20.0.0", role: "Node Runtime Typings" },
-  { name: "@types/react", version: "^19.0.0", role: "React 19 Typings" },
-  { name: "@types/react-dom", version: "^19.0.0", role: "DOM Typings" },
-  { name: "tailwindcss", version: "^4.0.0", role: "Utility CSS Engine" },
-  { name: "eslint", version: "^9.0.0", role: "Static Code Analysis" },
-  {
-    name: "eslint-config-next",
-    version: "^16.3.2",
-    role: "Next.js Lint Rules",
-  },
+  { name: "typescript", version: "^5", role: "Strict Type System" },
+  { name: "tailwindcss", version: "^4.3.3", role: "Utility CSS Engine" },
+  { name: "@tailwindcss/postcss", version: "^4.3.3", role: "Tailwind PostCSS Plugin" },
+  { name: "eslint", version: "^9", role: "Static Code Analysis" },
+  { name: "eslint-config-next", version: "16.3.2", role: "Next.js Lint Rules" },
+  { name: "@types/react", version: "^19", role: "React 19 Typings" },
+  { name: "@types/react-dom", version: "^19", role: "DOM Typings" },
+  { name: "@types/node", version: "^20", role: "Node Runtime Typings" },
+  { name: "@types/nodemailer", version: "^8.0.1", role: "Nodemailer Typings" },
+  { name: "@types/canvas-confetti", version: "^1.9.0", role: "Confetti Typings" },
 ];
 
 export function PackageJsonPreview({
@@ -211,8 +126,7 @@ export function PackageJsonPreview({
                     </Badge>
                   </h1>
                   <p className="text-xs text-zinc-400">
-                    Interactive IDE developer portfolio application for Lee Ryan
-                    M. Garcia
+                    Interactive IDE developer portfolio application for Lee Ryan M. Garcia
                   </p>
                 </div>
               </div>
@@ -238,7 +152,7 @@ export function PackageJsonPreview({
                 Runtime Environment
               </span>
               <span className="text-white font-semibold flex items-center gap-1.5 mt-0.5">
-                <Cpu className="w-3.5 h-3.5 text-sky-400" /> Node.js &amp; Edge
+                <Globe className="w-3.5 h-3.5 text-sky-400" /> Modern Web Browsers
               </span>
             </div>
             <div className="bg-[#12131a]/80 p-3 rounded-lg border border-white/5">
@@ -246,7 +160,7 @@ export function PackageJsonPreview({
                 Production Dependencies
               </span>
               <span className="text-emerald-400 font-semibold flex items-center gap-1.5 mt-0.5">
-                <ShieldCheck className="w-3.5 h-3.5" /> 10 Optimized Packages
+                <ShieldCheck className="w-3.5 h-3.5" /> {DEPENDENCIES.length} Packages
               </span>
             </div>
             <div className="bg-[#12131a]/80 p-3 rounded-lg border border-white/5">
@@ -254,7 +168,7 @@ export function PackageJsonPreview({
                 Scripts Configured
               </span>
               <span className="text-purple-400 font-semibold flex items-center gap-1.5 mt-0.5">
-                <Terminal className="w-3.5 h-3.5" /> 5 NPM Commands
+                <Terminal className="w-3.5 h-3.5" /> {SCRIPTS.length} NPM Commands
               </span>
             </div>
             <div className="bg-[#12131a]/80 p-3 rounded-lg border border-white/5">
@@ -350,18 +264,13 @@ export function PackageJsonPreview({
               <div className="flex items-center justify-between">
                 <div>
                   <CardTitle className="text-base text-white flex items-center gap-2">
-                    <Terminal className="w-4 h-4 text-purple-400" /> NPM
-                    Execution Scripts
+                    <Terminal className="w-4 h-4 text-purple-400" /> NPM Execution Scripts
                   </CardTitle>
                   <CardDescription className="text-xs text-zinc-400">
-                    CLI commands to run, build, test, and lint the portfolio
-                    repository
+                    CLI commands to run, build, and lint the portfolio repository
                   </CardDescription>
                 </div>
-                <Badge
-                  variant="outline"
-                  className="border-purple-500/30 text-purple-400 text-[10px]"
-                >
+                <Badge variant="outline" className="border-purple-500/30 text-purple-400 text-[10px]">
                   package.json &gt; scripts
                 </Badge>
               </div>
@@ -420,18 +329,13 @@ export function PackageJsonPreview({
               <div className="flex items-center justify-between">
                 <div>
                   <CardTitle className="text-base text-white flex items-center gap-2">
-                    <Layers className="w-4 h-4 text-sky-400" /> Core
-                    Dependencies
+                    <Layers className="w-4 h-4 text-sky-400" /> Core Dependencies
                   </CardTitle>
                   <CardDescription className="text-xs text-zinc-400">
-                    Production libraries powering UI components, animation,
-                    styling, and interactions
+                    Production libraries powering UI components, animation, styling, and interactions
                   </CardDescription>
                 </div>
-                <Badge
-                  variant="outline"
-                  className="border-sky-500/30 text-sky-400 text-[10px]"
-                >
+                <Badge variant="outline" className="border-sky-500/30 text-sky-400 text-[10px]">
                   {filteredDependencies.length} Packages
                 </Badge>
               </div>
@@ -474,16 +378,14 @@ export function PackageJsonPreview({
           <Card className="bg-[#12131a] border-zinc-800">
             <CardHeader className="pb-3">
               <CardTitle className="text-base text-white flex items-center gap-2">
-                <Wrench className="w-4 h-4 text-emerald-400" /> Development
-                &amp; Tooling Packages
+                <Wrench className="w-4 h-4 text-emerald-400" /> Development &amp; Tooling Packages
               </CardTitle>
               <CardDescription className="text-xs text-zinc-400">
-                Compiler utilities, type definitions, linters, and build
-                toolchains
+                Compiler utilities, type definitions, linters, and build toolchains
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5">
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5">
                 {DEV_DEPENDENCIES.map((dev) => (
                   <div
                     key={dev.name}
@@ -493,8 +395,8 @@ export function PackageJsonPreview({
                       {dev.name}
                     </div>
                     <div className="flex items-center justify-between text-[11px]">
-                      <span className="text-zinc-500">{dev.role}</span>
-                      <span className="font-mono text-emerald-400 text-[10px]">
+                      <span className="text-zinc-500 truncate mr-1">{dev.role}</span>
+                      <span className="font-mono text-emerald-400 text-[10px] shrink-0">
                         {dev.version}
                       </span>
                     </div>
@@ -508,7 +410,7 @@ export function PackageJsonPreview({
         {/* Footer Navigation */}
         <div className="flex flex-col sm:flex-row items-center justify-between p-4 rounded-xl bg-[#14151e] border border-zinc-800 text-xs gap-3">
           <div className="text-zinc-400">
-            Looking for IDE runtime settings, accent themes, or AI parameters?
+            Looking for IDE workspace settings, accent themes, or AI parameters?
           </div>
           <div className="flex items-center space-x-2">
             <Button

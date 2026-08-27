@@ -68,32 +68,16 @@ export function SidebarExplorer({
 
   const getFileIcon = (fileName: string) => {
     if (fileName.endsWith(".tsx") || fileName.endsWith(".jsx")) {
-      return (
-        <span className="text-[#38bdf8] text-[13px] leading-none font-bold mr-2 shrink-0 select-none">
-          ⚛
-        </span>
-      );
+      return <span className="text-[#38bdf8] text-[13px] leading-none font-bold mr-2 shrink-0 select-none">⚛</span>;
     }
     if (fileName.endsWith(".ts")) {
-      return (
-        <span className="text-[#3178c6] text-[11px] leading-none font-bold font-mono px-0.5 rounded bg-[#3178c6]/10 mr-2 shrink-0 select-none">
-          TS
-        </span>
-      );
+      return <span className="text-[#3178c6] text-[11px] leading-none font-bold font-mono px-0.5 rounded bg-[#3178c6]/10 mr-2 shrink-0 select-none">TS</span>;
     }
     if (fileName.endsWith(".json")) {
-      return (
-        <span className="text-[#facc15] text-[12px] leading-none font-bold font-mono mr-2 shrink-0 select-none">
-          &#123;&#125;
-        </span>
-      );
+      return <span className="text-[#facc15] text-[12px] leading-none font-bold font-mono mr-2 shrink-0 select-none">&#123;&#125;</span>;
     }
     if (fileName.endsWith(".md")) {
-      return (
-        <span className="text-[#60a5fa] text-[11px] leading-none font-bold font-mono mr-2 shrink-0 select-none">
-          M↓
-        </span>
-      );
+      return <span className="text-[#60a5fa] text-[11px] leading-none font-bold font-mono mr-2 shrink-0 select-none">M↓</span>;
     }
     return <FileCode className="w-3.5 h-3.5 text-sky-400 mr-2 shrink-0" />;
   };
@@ -108,52 +92,14 @@ export function SidebarExplorer({
 
   // Outline symbols
   const outlineItems: Record<string, string[]> = {
-    "bio.tsx": [
-      "LeeRyanProfile",
-      "EngineeringPhilosophy",
-      "AboutHero()",
-      "DeveloperStats()",
-    ],
-    "projects.tsx": [
-      "FlagshipProjects[]",
-      "ProjectCard()",
-      "MetricsBanner()",
-      "CodeInspectionModal()",
-    ],
-    "experience.tsx": [
-      "CareerTimeline[]",
-      "JAVResourceRecord",
-      "BuweloSupportRecord",
-      "HokeiSubicRecord",
-      "GordonCollegeEducation",
-    ],
-    "tech-stack.json": [
-      "developer",
-      "frontend[]",
-      "backend_and_databases[]",
-      "automation_and_integrations[]",
-      "devops_cloud_and_tools[]",
-    ],
-    "get-in-touch.tsx": [
-      "ContactModule()",
-      "handleSubmit()",
-      "SocialLinks()",
-      "DirectDispatch()",
-    ],
-    "resume.md": [
-      "Professional Summary",
-      "Work Experience",
-      "Education (Cum Laude)",
-      "Conferences & Competitions",
-      "Skills & Tech Stack",
-    ],
+    "bio.tsx": ["LeeRyanProfile", "EngineeringPhilosophy", "AboutHero()", "DeveloperStats()"],
+    "projects.tsx": ["FeaturedProjects[]", "ProjectCard()", "MetricsBanner()", "CodeInspectionModal()"],
+    "experience.tsx": ["CareerTimeline[]", "JAVResourceRecord", "BuweloSupportRecord", "HokeiSubicRecord", "GordonCollegeEducation"],
+    "tech-stack.json": ["developer", "frontend[]", "backend_and_databases[]", "automation_and_integrations[]", "devops_cloud_and_tools[]"],
+    "get-in-touch.tsx": ["ContactModule()", "handleSubmit()", "SocialLinks()", "DirectDispatch()"],
+    "resume.md": ["Professional Summary", "Work Experience", "Education (Cum Laude)", "Conferences & Competitions", "Skills & Tech Stack"],
     "package.json": ["dependencies", "devDependencies", "scripts"],
-    "config.ts": [
-      "portfolioConfig",
-      "themeSettings",
-      "editorConfig",
-      "aiAssistantConfig",
-    ],
+    "config.ts": ["portfolioConfig", "themeSettings", "editorConfig", "aiAssistantConfig"],
   };
 
   return (
@@ -284,9 +230,20 @@ export function SidebarExplorer({
         ) : (
           <div>
             {/* Root workspace folder header */}
-            <div className="flex items-center px-2 py-1 text-[13px] font-semibold text-[#cccccc] hover:text-white cursor-pointer group">
-              <ChevronDown className="w-3.5 h-3.5 mr-1 text-[#888888] shrink-0" />
-              <FolderOpen className="w-3.5 h-3.5 mr-1.5 text-sky-400 shrink-0" />
+            <div
+              onClick={() => toggleFolder("root")}
+              className="flex items-center px-2 py-1 text-[13px] font-semibold text-[#cccccc] hover:text-white cursor-pointer group"
+            >
+              {(openFolders["root"] ?? true) ? (
+                <ChevronDown className="w-3.5 h-3.5 mr-1 text-[#888888] shrink-0" />
+              ) : (
+                <ChevronRight className="w-3.5 h-3.5 mr-1 text-[#888888] shrink-0" />
+              )}
+              {(openFolders["root"] ?? true) ? (
+                <FolderOpen className="w-3.5 h-3.5 mr-1.5 text-sky-400 shrink-0" />
+              ) : (
+                <Folder className="w-3.5 h-3.5 mr-1.5 text-sky-400 shrink-0" />
+              )}
               <span className="truncate">my-portfolio</span>
               <Badge
                 variant="secondary"
@@ -296,104 +253,109 @@ export function SidebarExplorer({
               </Badge>
             </div>
 
-            {/* Folder Sections */}
-            {[
-              "about",
-              "projects",
-              "experience",
-              "skills",
-              "contact",
-              "resume",
-            ].map((folderKey) => {
-              const folderFiles = groupedFiles[folderKey] || [];
-              if (folderFiles.length === 0) return null;
-              const isOpen = openFolders[folderKey] ?? true;
+            {/* Folder Contents (both subfolders & root files inside my-portfolio) */}
+            {(openFolders["root"] ?? true) && (
+              <div className="space-y-0.5">
+                {/* Folder Sections */}
+                {[
+                  "about",
+                  "projects",
+                  "experience",
+                  "skills",
+                  "contact",
+                  "resume",
+                ].map((folderKey) => {
+                  const folderFiles = groupedFiles[folderKey] || [];
+                  if (folderFiles.length === 0) return null;
+                  const isOpen = openFolders[folderKey] ?? true;
 
-              return (
-                <div key={folderKey} className="pl-2">
-                  {/* Folder Header */}
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="xs"
-                    onClick={() => toggleFolder(folderKey)}
-                    className="w-full flex items-center px-1.5 py-0 h-[22px] rounded hover:bg-[#2a2d2e] text-[#cccccc] hover:text-white text-left transition-colors font-normal group cursor-pointer justify-start text-[13px]"
-                  >
-                    {isOpen ? (
-                      <ChevronDown className="w-3.5 h-3.5 mr-1 text-[#858585] group-hover:text-white shrink-0" />
-                    ) : (
-                      <ChevronRight className="w-3.5 h-3.5 mr-1 text-[#858585] group-hover:text-white shrink-0" />
-                    )}
-                    {isOpen ? (
-                      <FolderOpen className="w-4 h-4 mr-1.5 text-amber-400 shrink-0" />
-                    ) : (
-                      <Folder className="w-4 h-4 mr-1.5 text-amber-400 shrink-0" />
-                    )}
-                    <span className="truncate capitalize">{folderKey}</span>
-                    <span className="ml-auto text-[11px] text-[#666666]">
-                      {folderFiles.length}
-                    </span>
-                  </Button>
+                  return (
+                    <div key={folderKey} className="pl-2">
+                      {/* Folder Header */}
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="xs"
+                        onClick={() => toggleFolder(folderKey)}
+                        className="w-full flex items-center px-1.5 py-0 h-[22px] rounded hover:bg-[#2a2d2e] text-[#cccccc] hover:text-white text-left transition-colors font-normal group cursor-pointer justify-start text-[13px]"
+                      >
+                        {isOpen ? (
+                          <ChevronDown className="w-3.5 h-3.5 mr-1 text-[#858585] group-hover:text-white shrink-0" />
+                        ) : (
+                          <ChevronRight className="w-3.5 h-3.5 mr-1 text-[#858585] group-hover:text-white shrink-0" />
+                        )}
+                        {isOpen ? (
+                          <FolderOpen className="w-4 h-4 mr-1.5 text-amber-400 shrink-0" />
+                        ) : (
+                          <Folder className="w-4 h-4 mr-1.5 text-amber-400 shrink-0" />
+                        )}
+                        <span className="truncate capitalize">{folderKey}</span>
+                        <span className="ml-auto text-[11px] text-[#666666]">
+                          {folderFiles.length}
+                        </span>
+                      </Button>
 
-                  {/* Folder Children Files */}
-                  {isOpen && (
-                    <div className="pl-2 space-y-0.5 border-l border-[#282828] ml-2.5 my-0.5">
-                      {folderFiles.map((file) => {
-                        const isSelected = file.id === activeFileId;
-                        return (
-                          <Button
-                            key={file.id}
-                            type="button"
-                            variant="ghost"
-                            size="xs"
-                            onClick={() => onSelectFile(file)}
-                            className={`w-full flex items-center justify-between px-2 py-0 h-[22px] rounded-sm text-left transition-colors font-normal group cursor-pointer text-[13px] ${
-                              isSelected
-                                ? "bg-[#04395e] text-white font-medium border-l-2 border-sky-400 hover:bg-[#04395e] hover:text-white"
-                                : "hover:bg-[#2a2d2e] text-[#cccccc] hover:text-white"
-                            }`}
-                          >
-                            <div className="flex items-center space-x-1 truncate">
-                              {getFileIcon(file.name)}
-                              <span className="truncate">{file.name}</span>
-                            </div>
-                            <span className="text-[10px] font-mono text-amber-400/80">
-                              M
-                            </span>
-                          </Button>
-                        );
-                      })}
+                      {/* Folder Children Files */}
+                      {isOpen && (
+                        <div className="pl-2 space-y-0.5 border-l border-[#282828] ml-2.5 my-0.5">
+                          {folderFiles.map((file) => {
+                            const isSelected = file.id === activeFileId;
+                            return (
+                              <Button
+                                key={file.id}
+                                type="button"
+                                variant="ghost"
+                                size="xs"
+                                onClick={() => onSelectFile(file)}
+                                className={`w-full flex items-center justify-between px-2 py-0 h-[22px] rounded-sm text-left transition-colors font-normal group cursor-pointer text-[13px] ${
+                                  isSelected
+                                    ? "bg-[#04395e] text-white font-medium border-l-2 border-sky-400 hover:bg-[#04395e] hover:text-white"
+                                    : "hover:bg-[#2a2d2e] text-[#cccccc] hover:text-white"
+                                }`}
+                              >
+                                <div className="flex items-center space-x-1 truncate">
+                                  {getFileIcon(file.name)}
+                                  <span className="truncate">{file.name}</span>
+                                </div>
+                                <span className="text-[10px] font-mono text-amber-400/80">
+                                  M
+                                </span>
+                              </Button>
+                            );
+                          })}
+                        </div>
+                      )}
                     </div>
-                  )}
+                  );
+                })}
+
+                {/* Root files (package.json, config.ts) inside my-portfolio */}
+                <div className="pl-2 space-y-0.5">
+                  {(groupedFiles["root"] || []).map((file) => {
+                    const isSelected = file.id === activeFileId;
+                    return (
+                      <Button
+                        key={file.id}
+                        type="button"
+                        variant="ghost"
+                        size="xs"
+                        onClick={() => onSelectFile(file)}
+                        className={`w-full flex items-center justify-between px-2 py-0 h-[22px] rounded text-left transition-colors font-normal cursor-pointer text-[13px] ${
+                          isSelected
+                            ? "bg-[#04395e] text-white font-medium border-l-2 border-sky-400 hover:bg-[#04395e] hover:text-white"
+                            : "hover:bg-[#2a2d2e] text-[#cccccc] hover:text-white"
+                        }`}
+                      >
+                        <div className="flex items-center space-x-1 truncate">
+                          {getFileIcon(file.name)}
+                          <span className="truncate">{file.name}</span>
+                        </div>
+                      </Button>
+                    );
+                  })}
                 </div>
-              );
-            })}
-
-            {/* Root files (package.json, config.ts) */}
-            <div className="pl-2 space-y-0.5 mt-1 border-t border-[#252526] pt-1">
-              {(groupedFiles["root"] || []).map((file) => {
-                const isSelected = file.id === activeFileId;
-                return (
-                  <Button
-                    key={file.id}
-                    type="button"
-                    variant="ghost"
-                    size="xs"
-                    onClick={() => onSelectFile(file)}
-                    className={`w-full flex items-center justify-between px-2 py-0 h-[22px] rounded text-left transition-colors font-normal cursor-pointer text-[13px] ${
-                      isSelected
-                        ? "bg-[#04395e] text-white font-medium border-l-2 border-sky-400 hover:bg-[#04395e] hover:text-white"
-                        : "hover:bg-[#2a2d2e] text-[#cccccc] hover:text-white"
-                    }`}
-                  >
-                    <div className="flex items-center space-x-1 truncate">
-                      {getFileIcon(file.name)}
-                      <span className="truncate">{file.name}</span>
-                    </div>
-                  </Button>
-                );
-              })}
-            </div>
+              </div>
+            )}
           </div>
         )}
       </ScrollArea>
