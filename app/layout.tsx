@@ -28,18 +28,18 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Lee Ryan Garcia | Developer IDE Portfolio",
   description:
-    "Senior Full-Stack & AI Systems Engineer Portfolio styled as an interactive IDE with terminal emulator, Gemini 3.7 copilot, and live preview.",
+    "Software Engineer | Full-Stack & Automation Portfolio styled as an interactive IDE with terminal emulator, AI assistant, and live preview.",
   openGraph: {
     title: "Lee Ryan Garcia | Developer IDE Portfolio",
     description:
-      "Senior Full-Stack & AI Systems Engineer Portfolio styled as an interactive IDE.",
+      "Software Engineer | Full-Stack & Automation Portfolio styled as an interactive IDE.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "Lee Ryan Garcia | Developer IDE Portfolio",
     description:
-      "Senior Full-Stack & AI Systems Engineer Portfolio styled as an interactive IDE.",
+      "Software Engineer | Full-Stack & Automation Portfolio styled as an interactive IDE.",
   },
 };
 

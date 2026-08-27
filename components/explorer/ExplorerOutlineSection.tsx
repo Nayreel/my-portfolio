@@ -97,7 +97,9 @@ export function ExplorerOutlineSection({
                 key={idx}
                 className="flex items-center space-x-1.5 hover:text-sky-300 cursor-pointer transition-colors"
               >
-                <span className="text-amber-400 font-mono text-[10px]">[e]</span>
+                <span className="text-amber-400 font-mono text-[10px]">
+                  [e]
+                </span>
                 <span className="font-mono truncate">{symbol}</span>
               </div>
             ))}
@@ -129,7 +131,7 @@ export function ExplorerOutlineSection({
           <div className="px-3 py-1.5 space-y-1.5 text-[11px] text-[#888888] bg-[#141414] max-h-28 overflow-y-auto custom-scrollbar">
             <div className="flex flex-col">
               <span className="text-[#bbbbbb] font-medium truncate">
-                feat: add AI copilot &amp; interactive previews
+                feat: add AI &amp; interactive previews
               </span>
               <span className="text-[10px] text-[#666666]">
                 Lee Ryan Garcia • 2 hours ago
