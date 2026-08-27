@@ -1,14 +1,14 @@
-// data/sidebar/extensionsData.ts
 import { ExtensionItem } from "@/types/sidebar";
 
 export const EXTENSIONS_CATALOG: ExtensionItem[] = [
   {
     id: "antigravity-physics-engine",
     name: "antigravity-physics-engine",
-    displayName: "Antigravity Physics Engine",
+    displayName: "Zero-G Physics Engine",
     publisher: "Lee Ryan Garcia",
     version: "2.4.0",
-    description: "Adds 2D Matter.js floating physics particles and zero-gravity IDE effects.",
+    description:
+      "Adds 2D Matter.js floating physics particles and zero-gravity IDE effects.",
     iconType: "physics",
     rating: 5.0,
     reviewCount: 148,
@@ -25,7 +25,8 @@ export const EXTENSIONS_CATALOG: ExtensionItem[] = [
     displayName: "TypeScript & React Strict Hero",
     publisher: "Lee Ryan Garcia",
     version: "5.4.2",
-    description: "Enforces strict type systems, zero-any policy, and Next.js 15 App Router conventions.",
+    description:
+      "Enforces strict type systems, zero-any policy, and Next.js 15 App Router conventions.",
     iconType: "typescript",
     rating: 4.9,
     reviewCount: 312,
@@ -41,7 +42,8 @@ export const EXTENSIONS_CATALOG: ExtensionItem[] = [
     displayName: "Tailwind CSS IntelliSense",
     publisher: "Tailwind Labs",
     version: "0.12.5",
-    description: "Intelligent Tailwind CSS autocomplete, syntax highlighting, and CSS variable previews.",
+    description:
+      "Intelligent Tailwind CSS autocomplete, syntax highlighting, and CSS variable previews.",
     iconType: "tailwind",
     rating: 4.8,
     reviewCount: 890,
@@ -57,7 +59,8 @@ export const EXTENSIONS_CATALOG: ExtensionItem[] = [
     displayName: "Gemini Copilot AI Assistant",
     publisher: "Google DeepMind",
     version: "3.7.0",
-    description: "Conversational AI assistant embedded in the sidebar to answer portfolio and technical queries.",
+    description:
+      "Conversational AI assistant embedded in the sidebar to answer portfolio and technical queries.",
     iconType: "ai",
     rating: 5.0,
     reviewCount: 420,
@@ -73,7 +76,8 @@ export const EXTENSIONS_CATALOG: ExtensionItem[] = [
     displayName: "PostgreSQL & Supabase Explorer",
     publisher: "Supabase & Postgres Community",
     version: "1.8.0",
-    description: "Explore relational database schemas, execute SQL queries, and manage connection pools.",
+    description:
+      "Explore relational database schemas, execute SQL queries, and manage connection pools.",
     iconType: "database",
     rating: 4.7,
     reviewCount: 164,
@@ -89,7 +93,8 @@ export const EXTENSIONS_CATALOG: ExtensionItem[] = [
     displayName: "GitLens — Git Supercharged",
     publisher: "GitKraken",
     version: "14.1.0",
-    description: "Supercharge Git within VS Code — visualize code authorship at a glance via Git blame annotations.",
+    description:
+      "Supercharge Git within VS Code — visualize code authorship at a glance via Git blame annotations.",
     iconType: "git",
     rating: 4.8,
     reviewCount: 654,
@@ -105,7 +110,8 @@ export const EXTENSIONS_CATALOG: ExtensionItem[] = [
     displayName: "Prettier - Code Formatter",
     publisher: "Prettier",
     version: "10.1.0",
-    description: "Opinionated code formatter for consistent and clean JavaScript, TypeScript, CSS, and Markdown.",
+    description:
+      "Opinionated code formatter for consistent and clean JavaScript, TypeScript, CSS, and Markdown.",
     iconType: "prettier",
     rating: 4.9,
     reviewCount: 1205,
@@ -121,7 +127,8 @@ export const EXTENSIONS_CATALOG: ExtensionItem[] = [
     displayName: "ESLint Strict Linter",
     publisher: "Microsoft",
     version: "2.4.4",
-    description: "Integrates ESLint JavaScript and TypeScript linter into VS Code with automatic fixes.",
+    description:
+      "Integrates ESLint JavaScript and TypeScript linter into VS Code with automatic fixes.",
     iconType: "eslint",
     rating: 4.6,
     reviewCount: 430,

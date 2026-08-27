@@ -226,7 +226,7 @@ export function EditorTabs({
               side="bottom"
               className="text-xs bg-[#1f1f1f] text-zinc-200 border-[#3c3c3c]"
             >
-              Ask Antigravity Copilot to analyze {activeFile?.name}
+              Ask AI to analyze {activeFile?.name}
             </TooltipContent>
           </Tooltip>
         </div>
@@ -235,17 +235,27 @@ export function EditorTabs({
       {/* Breadcrumbs Bar */}
       <div className="h-6 bg-[#1e1e1e] px-2 sm:px-3 flex items-center justify-between text-[11px] font-mono text-[#888888] border-t border-[#252526] gap-2 overflow-hidden">
         <div className="flex items-center space-x-1 sm:space-x-1.5 flex-1 min-w-0 truncate">
-          <span className="text-[#666666] hidden sm:inline shrink-0">portfolio-v2</span>
+          <span className="text-[#666666] hidden sm:inline shrink-0">
+            portfolio-v2
+          </span>
           <ChevronRight className="w-3 h-3 text-[#555555] hidden sm:inline shrink-0" />
-          <span className="truncate shrink-0 max-w-[80px] sm:max-w-none">{activeFile?.folder || "root"}</span>
+          <span className="truncate shrink-0 max-w-[80px] sm:max-w-none">
+            {activeFile?.folder || "root"}
+          </span>
           <ChevronRight className="w-3 h-3 text-[#555555] shrink-0" />
-          <span className="text-[#cccccc] font-medium truncate">{activeFile?.name}</span>
+          <span className="text-[#cccccc] font-medium truncate">
+            {activeFile?.name}
+          </span>
           <ChevronRight className="w-3 h-3 text-[#555555] hidden md:inline shrink-0" />
-          <span className="text-amber-400/90 hidden md:inline truncate">[e] export default</span>
+          <span className="text-amber-400/90 hidden md:inline truncate">
+            [e] export default
+          </span>
         </div>
 
         <div className="flex items-center space-x-1.5 sm:space-x-2 text-[10px] text-[#777777] shrink-0">
-          <span className="hidden xs:inline whitespace-nowrap">{activeFile?.metadata?.lines || 50} lines</span>
+          <span className="hidden xs:inline whitespace-nowrap">
+            {activeFile?.metadata?.lines || 50} lines
+          </span>
           <Badge
             variant="outline"
             className={`text-[9px] py-0 px-1 whitespace-nowrap ${langInfo.color}`}

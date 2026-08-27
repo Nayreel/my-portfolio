@@ -53,7 +53,7 @@ const SHORTCUTS: ShortcutItem[] = [
   },
   {
     keys: ["Ctrl", "L"],
-    description: "Toggle Antigravity AI Copilot Panel",
+    description: "Toggle AI Panel",
     category: "Panels",
   },
   {
@@ -71,11 +71,17 @@ const SHORTCUTS: ShortcutItem[] = [
 const TERMINAL_COMMANDS = [
   { cmd: "help", desc: "List all interactive terminal CLI commands" },
   { cmd: "bio", desc: "Display Lee Ryan Garcia developer bio & pillars" },
-  { cmd: "projects", desc: "List all 9 featured & client engineering projects" },
+  {
+    cmd: "projects",
+    desc: "List all 9 featured & client engineering projects",
+  },
   { cmd: "skills", desc: "Display categorized technical matrix" },
   { cmd: "experience", desc: "View career milestones & professional history" },
   { cmd: "cat resume.md", desc: "Print formatted markdown curriculum vitae" },
-  { cmd: "download-resume", desc: "Download Lee_Ryan_Garcia_Resume.pdf directly" },
+  {
+    cmd: "download-resume",
+    desc: "Download Lee_Ryan_Garcia_Resume.pdf directly",
+  },
   { cmd: "clear", desc: "Clear terminal screen output" },
 ];
 
@@ -121,7 +127,8 @@ export function ShortcutsModal({
             </DialogTitle>
           </div>
           <DialogDescription className="text-xs text-zinc-400 mt-1">
-            Master the Portfolio IDE with keyboard bindings, terminal CLI commands, and feature guides.
+            Master the Portfolio IDE with keyboard bindings, terminal CLI
+            commands, and feature guides.
           </DialogDescription>
 
           {/* Tab Selection */}
@@ -225,7 +232,11 @@ export function ShortcutsModal({
             <div className="space-y-2">
               <div className="p-3 bg-[#111215] border border-[#272932] rounded-xl font-mono text-xs text-zinc-400 space-y-2">
                 <div className="text-[11px] text-zinc-500">
-                  Tip: Press <kbd className="px-1.5 py-0.2 bg-[#20222a] border border-[#333] rounded text-zinc-300">Ctrl + `</kbd> to toggle the terminal panel anytime.
+                  Tip: Press{" "}
+                  <kbd className="px-1.5 py-0.2 bg-[#20222a] border border-[#333] rounded text-zinc-300">
+                    Ctrl + `
+                  </kbd>{" "}
+                  to toggle the terminal panel anytime.
                 </div>
               </div>
 

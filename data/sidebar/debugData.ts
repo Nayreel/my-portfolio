@@ -73,7 +73,7 @@ export const INITIAL_DEBUG_VARIABLES: DebugVariableItem[] = [
       },
       {
         id: "v-runtime-physics",
-        name: "antigravityEngine",
+        name: "physicsEngine",
         value: "active",
         type: "boolean",
       },
@@ -161,7 +161,7 @@ export const INITIAL_DEBUG_CALLSTACK: DebugCallStackFrame[] = [
   },
   {
     id: "cs-3",
-    functionName: "initializeAntigravityPhysics",
+    functionName: "initializeZeroGPhysics",
     fileName: "components/AntigravityPhysics.tsx",
     lineNumber: 24,
   },

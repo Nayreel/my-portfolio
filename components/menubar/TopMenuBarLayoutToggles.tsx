@@ -69,7 +69,7 @@ export function TopMenuBarLayoutToggles({
             className={`w-3 h-3 mr-1 ${antigravityMode ? "text-amber-400 fill-amber-400" : ""}`}
           />
           <span className="hidden lg:inline">
-            {antigravityMode ? "Anti-G Active" : "Zero-G Mode"}
+            {antigravityMode ? "Zero-G Active" : "Zero-G Mode"}
           </span>
         </TooltipTrigger>
         <TooltipContent
@@ -129,12 +129,12 @@ export function TopMenuBarLayoutToggles({
             side="bottom"
             className="text-xs bg-[#1f1f1f] text-zinc-200 border-[#3c3c3c]"
           >
-            Toggle Antigravity AI Copilot
+            Toggle AI Panel
           </TooltipContent>
         </Tooltip>
       </div>
 
-      {/* Antigravity User Profile Dropdown with Themes */}
+      {/* User Profile Dropdown with Themes */}
       <ProfileDropdown
         onOpenResume={onOpenResume}
         onOpenContact={onOpenContact}
