@@ -148,19 +148,19 @@ export function StatusBar({
         {/* Language */}
         <span className="font-medium hidden md:inline">TypeScript JSX</span>
 
-        {/* Copilot AI branding */}
+        {/* AI branding */}
         <Tooltip>
           <TooltipTrigger
             onClick={onToggleAI}
             className="flex items-center space-x-1 hover:bg-black/20 px-1 py-0.5 rounded transition-colors font-semibold cursor-pointer text-sky-300"
           >
-            <span>Copilot AI</span>
+            <span>AI</span>
           </TooltipTrigger>
           <TooltipContent
             side="top"
             className="text-xs bg-[#1f1f1f] text-zinc-200 border-[#3c3c3c]"
           >
-            Toggle AI Reasoning Copilot (⌘L)
+            Toggle AI Reasoning
           </TooltipContent>
         </Tooltip>
 

@@ -54,10 +54,10 @@ export const EXTENSIONS_CATALOG: ExtensionItem[] = [
     tags: ["css", "tailwind", "styling", "ui"],
   },
   {
-    id: "gemini-copilot-agent",
-    name: "gemini-copilot-agent",
-    displayName: "Gemini Copilot AI Assistant",
-    publisher: "Google DeepMind",
+    id: "ai-assistant",
+    name: "ai-assistant",
+    displayName: "AI Assistant",
+    publisher: "Lee Ryan Garcia",
     version: "3.7.0",
     description:
       "Conversational AI assistant embedded in the sidebar to answer portfolio and technical queries.",

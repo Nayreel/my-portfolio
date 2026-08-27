@@ -159,8 +159,8 @@ export function CommandPalette({
     },
     {
       id: "act-ai",
-      title: "Ask Antigravity Copilot",
-      subtitle: "Launch Gemini 3.7 AI assistant panel",
+      title: "Ask AI",
+      subtitle: "Launch AI assistant panel",
       icon: Cpu,
       category: "Actions",
       action: () => onToggleAI(),

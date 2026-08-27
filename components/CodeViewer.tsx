@@ -163,7 +163,7 @@ export function CodeViewer({
             side="bottom"
             className="text-xs bg-[#1f1f1f] text-zinc-200 border-[#3c3c3c]"
           >
-            Ask Gemini Copilot to explain code
+            Ask AI to explain code
           </TooltipContent>
         </Tooltip>
 

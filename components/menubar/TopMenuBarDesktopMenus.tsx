@@ -143,7 +143,7 @@ export function TopMenuBarDesktopMenus({
             className="text-xs cursor-pointer hover:bg-[#094771] hover:text-white focus:bg-[#094771] focus:text-white"
           >
             <Sidebar className="w-3.5 h-3.5 mr-2 text-amber-400 scale-x-[-1]" />
-            <span>Toggle AI Copilot</span>
+            <span>Toggle AI</span>
           </DropdownMenuItem>
           <DropdownMenuSeparator className="bg-[#3c3c3c]" />
           <DropdownMenuItem
