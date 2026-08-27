@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/toast";
@@ -84,13 +85,20 @@ export function TopMenuBar({
           )}
         </Button>
 
-        {/* Antigravity IDE logo */}
+        {/* IDE logo */}
         <div
           onClick={openCommandPalette}
           className="flex items-center space-x-1.5 px-2 py-1 mr-1 rounded hover:bg-[#2a2d2e] cursor-pointer text-sky-400"
         >
-          <div className="w-3.5 h-3.5 rounded-sm bg-gradient-to-br from-sky-400 to-blue-600 flex items-center justify-center text-[9px] font-bold text-white shadow-sm">
-            Δ
+          <div className="relative w-4 h-4 rounded overflow-hidden shrink-0 shadow-sm border border-white/20 bg-white">
+            <Image
+              src="/el.jpg"
+              alt="Logo"
+              fill
+              sizes="16px"
+              className="object-cover"
+              priority
+            />
           </div>
           <span className="font-semibold text-xs tracking-tight text-white hidden sm:inline">
             Portfolio
