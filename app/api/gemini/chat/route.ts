@@ -118,6 +118,57 @@ export async function POST(req: NextRequest) {
         links ? `\n\n**Links**: ${links}` : ""
       }`;
     } else if (
+      query.includes("problem") ||
+      query.includes("challenge") ||
+      query.includes("solve") ||
+      query.includes("production issue")
+    ) {
+      textResponse = `**Key Production Problems Solved by ${DEVELOPER_PROFILE.name}**:
+
+1. **MineGo Platform (Live Commerce, Bidding & Payments)**:
+- **Challenge**: Race conditions during concurrent live bidding, stream latency desync, and handling secure escrow payments.
+- **Solution**: Built Redis distributed locking to prevent duplicate bidding, integrated WebRTC LiveKit for sub-second livestream video, and engineered an automated payment gateway integration with escrow release upon verified delivery.
+
+2. **JAV Resource Corporation (E-Commerce with n8n Automation)**:
+- **Challenge**: Scaling a multi-channel e-commerce store with manual inventory updates, slow quotation responses, and disconnected CRM/ERP data.
+- **Solution**: Built a Next.js e-commerce platform integrated with 10+ n8n workflow automations, connecting Strapi CRM and Odoo ERP for automated quote generation, inventory sync, and order notifications—cutting manual work by 60%+.
+
+3. **SIPAT (Tactical Radar & Telemetry)**:
+- **Challenge**: Browser lag and UI stutter when rendering hundreds of moving radar coordinates and hazard markers in real-time.
+- **Solution**: Designed high-throughput WebSocket streams via Socket.io with Leaflet canvas rendering and spatial partitioning to maintain smooth 60 FPS updates.
+
+4. **AI Energy Shop (Australian Solar E-Commerce)**:
+- **Challenge**: Complex multi-tiered solar savings calculations leading to customer drop-off.
+- **Solution**: Built an intuitive interactive configurator with Next.js and Redux, connected to n8n automated quote workflows and Strapi CMS.
+
+5. **Hokei Subic Corporation (Internal Web Tools)**:
+- **Challenge**: Slow legacy dashboards with high client-side load times.
+- **Solution**: Refactored frontends using Next.js Server Components and Tailwind CSS, reducing initial page load times by 40% and adding real-time Socket.io updates.`;
+    } else if (
+      query.includes("why should we hire") ||
+      query.includes("why hire") ||
+      query.includes("reasons to hire") ||
+      query.includes("why choose") ||
+      query.includes("hire lee") ||
+      query.includes("candidate")
+    ) {
+      textResponse = `**Why You Should Hire ${DEVELOPER_PROFILE.name}**:
+
+1. **Adaptive & Fast Learner**:
+He quickly masters new tech stacks, tools, and business domains. Whether diving into modern Next.js features, complex n8n workflows, or third-party APIs, he gets up to speed rapidly and delivers results with high autonomy.
+
+2. **Strong Problem-Solving Skills**:
+He doesn't just write code—he diagnoses real root causes. From fixing live bidding race conditions and slow dashboards to automating repetitive manual workflows and payments, he builds practical solutions that work reliably in production.
+
+3. **Complete Full-Stack & Automation Ability**:
+He can build your entire product end-to-end: clean, responsive user interfaces (Next.js, React, Tailwind CSS), solid backends (Node.js, PostgreSQL, Redis), and automated business pipelines (n8n, Strapi, Odoo ERP).
+
+4. **Solid Academic & Technical Foundation**:
+Graduated **Cum Laude** (Dean's Lister) in Information Technology from Gordon College and was a regional finalist pitching *Feedback Fusion* at the Philippine Startup Challenge (PSC8).
+
+5. **Great Communication & Support Mindset**:
+With 1 year of Cloud Technical Support experience at Buwelo supporting Microsoft 365, Azure, and Zendesk, he communicates clearly with teammates, understands client needs, and handles production issues calmly.`;
+    } else if (
       query.includes("executive summary") ||
       query.includes("qualifications") ||
       query.includes("strengths")
@@ -177,7 +228,7 @@ export async function POST(req: NextRequest) {
       query.includes("gordon") ||
       query.includes("cum laude")
     ) {
-      textResponse = `🎓 **Education & Academic Honors**:\n\n- **School**: Gordon College (Olongapo City, Philippines)\n- **Degree**: Bachelor of Science in Information Technology (BSIT)\n- **Honors**: **Cum Laude**, Dean’s Lister (Graduated July 2024)\n- **Capstone**: *Feedback Fusion: Empowering Feedback Management with Consumer Insights Using Tableau*\n- **Relevant Coursework**: Web Development, System Administration, Networking`;
+      textResponse = `**Education & Academic Honors**:\n\n- **School**: Gordon College (Olongapo City, Philippines)\n- **Degree**: Bachelor of Science in Information Technology (BSIT)\n- **Honors**: **Cum Laude**, Dean’s Lister (Graduated July 2024)\n- **Capstone**: *Feedback Fusion: Empowering Feedback Management with Consumer Insights Using Tableau*\n- **Relevant Coursework**: Web Development, System Administration, Networking`;
     } else if (
       query.includes("conference") ||
       query.includes("pitch") ||
@@ -185,7 +236,7 @@ export async function POST(req: NextRequest) {
       query.includes("psc8") ||
       query.includes("ircite")
     ) {
-      textResponse = `🏆 **Conferences & Pitching Competitions**:\n\n- **Philippine Startup Challenge 8 (PSC8)** (October 04, 2023) — Regional Pitching Competition (RPC) by the ICT Industry Development Bureau, pitching Feedback Fusion.\n- **International Research Conference on IT Education (IRCITE)** (March 08, 2024) — Invited Poster Presentation by PSITE-Central Luzon showcasing Capstone research.`;
+      textResponse = `**Conferences & Pitching Competitions**:\n\n- **Philippine Startup Challenge 8 (PSC8)** (October 04, 2023) — Regional Pitching Competition (RPC) by the ICT Industry Development Bureau, pitching Feedback Fusion.\n- **International Research Conference on IT Education (IRCITE)** (March 08, 2024) — Invited Poster Presentation by PSITE-Central Luzon showcasing Capstone research.`;
     } else if (
       query.includes("contact") ||
       query.includes("email") ||
@@ -193,7 +244,7 @@ export async function POST(req: NextRequest) {
       query.includes("interview") ||
       query.includes("phone")
     ) {
-      textResponse = `You can reach out to **${DEVELOPER_PROFILE.name}** directly:\n\n- ✉️ **Email**: [${DEVELOPER_PROFILE.email}](mailto:${DEVELOPER_PROFILE.email})\n- 📞 **Phone**: ${DEVELOPER_PROFILE.phone}\n- 💼 **LinkedIn**: [${DEVELOPER_PROFILE.linkedin}](${DEVELOPER_PROFILE.linkedin})\n- 🌐 **GitHub**: [github.com/Nayreel](https://github.com/Nayreel)\n- 📍 **Location**: ${DEVELOPER_PROFILE.location}\n\n*He is currently open to Software Engineering and Automation opportunities.*`;
+      textResponse = `You can reach out to **${DEVELOPER_PROFILE.name}** directly:\n\n- **Email**: [${DEVELOPER_PROFILE.email}](mailto:${DEVELOPER_PROFILE.email})\n- **Phone**: ${DEVELOPER_PROFILE.phone}\n- **LinkedIn**: [${DEVELOPER_PROFILE.linkedin}](${DEVELOPER_PROFILE.linkedin})\n- **GitHub**: [github.com/Nayreel](https://github.com/Nayreel)\n- **Location**: ${DEVELOPER_PROFILE.location}\n\n*He is currently open to Software Engineering and Automation opportunities.*`;
     } else {
       textResponse = `I've analyzed your question regarding "${userMessage}".\n\n**${DEVELOPER_PROFILE.name}** is a **${DEVELOPER_PROFILE.title}** based in ${DEVELOPER_PROFILE.location}.\n\nFeel free to ask about his **tech stack**, **projects (MineGo, SIPAT, AI Energy Shop, Feedback Fusion, Iontana)**, **career experience (JAV Resource Corp, Buwelo, Hokei Subic)**, **education (Gordon College Cum Laude)**, or how to **get in touch**!`;
     }

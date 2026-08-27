@@ -26,51 +26,61 @@ import { ChatInputArea } from "@/components/ai/ChatInputArea";
 
 const RESUME_SUGGESTED_PROMPTS: SuggestedPrompt[] = [
   {
-    icon: "⚡",
+    icon: "shield-check",
+    label: "Production Problems",
+    query: "What production problems has he solved?",
+  },
+  {
+    icon: "user-check",
+    label: "Why Hire Lee Ryan",
+    query: "Why should we hire Lee Ryan Garcia?",
+  },
+  {
+    icon: "zap",
     label: "Core Tech Stack",
     query: "What is Lee Ryan's core technical stack and skills?",
   },
   {
-    icon: "🔄",
+    icon: "workflow",
     label: "n8n Automations",
     query: "Tell me about his workflow automations and ERP integrations.",
   },
   {
-    icon: "🛒",
+    icon: "shopping-cart",
     label: "MineGo Platform",
     query:
       "Tell me more about the technical stack and features in MineGo - Live Commerce Platform.",
   },
   {
-    icon: "📡",
+    icon: "radio",
     label: "SIPAT Radar",
     query:
       "Tell me more about the technical stack and features in SIPAT - Tactical Radar & Citizen Recon Network.",
   },
   {
-    icon: "☀️",
+    icon: "sun",
     label: "AI Energy Shop",
     query:
       "Tell me more about the technical stack and features in AI Energy Shop.",
   },
   {
-    icon: "💼",
+    icon: "briefcase",
     label: "Work Experience",
     query:
       "What is his work experience at JAV Resource Corp, Buwelo, and Hokei Subic?",
   },
   {
-    icon: "🎓",
+    icon: "graduation-cap",
     label: "Education & Honors",
     query: "What are his education, honors, and capstone at Gordon College?",
   },
   {
-    icon: "🏆",
+    icon: "trophy",
     label: "Conferences & Pitching",
     query: "What competitions and research conferences has he presented at?",
   },
   {
-    icon: "✉️",
+    icon: "mail",
     label: "Contact & Hire",
     query: "How can I contact or hire Lee Ryan Garcia?",
   },
@@ -203,7 +213,7 @@ export function AIAssistantPanel({
         id: "new-1",
         role: "assistant",
         duration: "Worked for 2s",
-        content: `New session started. Ask anything about **${DEVELOPER_PROFILE.name}**'s background, system architectures, or request code inspections.\n\nYou can also click any suggested question below:`,
+        content: `New session started. Ask anything about **${DEVELOPER_PROFILE.name}**'s background, system architectures, or technical skills.\n\nYou can also click any suggested question below:`,
         suggestedPrompts: RESUME_SUGGESTED_PROMPTS,
         timestamp: "Just now",
       },

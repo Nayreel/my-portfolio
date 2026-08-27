@@ -14,6 +14,7 @@ import { ChatMessage } from "@/types/ai";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/toast";
 import { renderFormattedText } from "@/utils/formatText";
+import { PromptIcon } from "@/components/ai/PromptIcon";
 
 interface ChatMessageItemProps {
   msg: ChatMessage;
@@ -161,9 +162,11 @@ export function ChatMessageItem({
                   onClick={() => onSelectPrompt(item.query)}
                   className="justify-start h-auto py-2 px-2.5 bg-[#17181e] hover:bg-[#20222a] border-[#292b36] hover:border-sky-500/40 text-zinc-300 hover:text-white text-[11px] font-normal transition-all text-left rounded-lg group cursor-pointer"
                 >
-                  {item.icon && (
-                    <span className="mr-1.5 shrink-0">{item.icon}</span>
-                  )}
+                  <PromptIcon
+                    name={item.icon}
+                    label={item.label}
+                    className="w-3.5 h-3.5 mr-1.5 shrink-0"
+                  />
                   <span className="truncate">{item.label}</span>
                 </Button>
               ))}

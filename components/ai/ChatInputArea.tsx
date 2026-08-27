@@ -8,6 +8,8 @@ import { toast } from "@/components/ui/toast";
 
 import { SuggestedPrompt } from "@/types/ai";
 
+import { PromptIcon } from "@/components/ai/PromptIcon";
+
 interface ChatInputAreaProps {
   inputPrompt: string;
   setInputPrompt: (val: string) => void;
@@ -44,9 +46,13 @@ export function ChatInputArea({
               size="xs"
               onClick={() => onSelectPrompt(item.query)}
               disabled={isLoading}
-              className="h-6 px-2 py-0 text-[11px] rounded-lg bg-[#1a1b22] hover:bg-[#252834] border-[#2b2d39] hover:border-sky-500/40 text-[#c4c6d4] hover:text-white shrink-0 font-normal transition-colors cursor-pointer"
+              className="h-6 px-2 py-0 text-[11px] rounded-lg bg-[#1a1b22] hover:bg-[#252834] border-[#2b2d39] hover:border-sky-500/40 text-[#c4c6d4] hover:text-white shrink-0 font-normal transition-colors cursor-pointer flex items-center"
             >
-              {item.icon && <span className="mr-1">{item.icon}</span>}
+              <PromptIcon
+                name={item.icon}
+                label={item.label}
+                className="w-3 h-3 mr-1 shrink-0"
+              />
               <span>{item.label}</span>
             </Button>
           ))}
