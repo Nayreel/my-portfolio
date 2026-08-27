@@ -29,7 +29,7 @@ export function ChatInputArea({
 }: ChatInputAreaProps) {
   return (
     <div className="p-3 pt-1 bg-[#141416] shrink-0 space-y-2">
-      {/* Quick Suggestions Chips Strip*/}
+      {/* Quick Suggestions Chips Strip */}
       {suggestedPrompts && suggestedPrompts.length > 0 && onSelectPrompt && (
         <div className="flex items-center gap-1.5 overflow-x-auto custom-scrollbar pb-0.5 shrink-0">
           <span className="text-[10px] text-[#787a88] font-mono shrink-0">
