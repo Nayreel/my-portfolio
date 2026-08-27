@@ -127,43 +127,6 @@ export function ActivityBar({
         {/* Antigravity AI Trigger */}
         <div className="w-8 h-[1px] bg-[#2d2d2d] my-1" />
       </div>
-
-      {/* Bottom Activity Buttons */}
-      <div className="flex flex-col items-center space-y-1.5 w-full">
-        <Tooltip>
-          <TooltipTrigger
-            onClick={openContactTab}
-            className="w-full h-10 flex items-center justify-center text-[#858585] hover:text-sky-300 transition-colors cursor-pointer"
-          >
-            <Avatar className="w-6 h-6 ring-1 ring-sky-500/40">
-              <AvatarFallback className="bg-gradient-to-tr from-sky-500 to-indigo-600 text-[10px] font-bold text-white">
-                LG
-              </AvatarFallback>
-            </Avatar>
-          </TooltipTrigger>
-          <TooltipContent
-            side="right"
-            className="bg-[#1f1f1f] text-zinc-200 border-[#3c3c3c] text-xs"
-          >
-            Contact Lee Ryan Garcia
-          </TooltipContent>
-        </Tooltip>
-
-        <Tooltip>
-          <TooltipTrigger
-            onClick={openSettingsModal}
-            className="w-full h-10 flex items-center justify-center text-[#858585] hover:text-white transition-colors group cursor-pointer"
-          >
-            <Settings className="w-5 h-5 stroke-[1.75] group-hover:rotate-45 transition-transform" />
-          </TooltipTrigger>
-          <TooltipContent
-            side="right"
-            className="bg-[#1f1f1f] text-zinc-200 border-[#3c3c3c] text-xs"
-          >
-            Portfolio IDE Preferences & Theme
-          </TooltipContent>
-        </Tooltip>
-      </div>
     </aside>
   );
 }
