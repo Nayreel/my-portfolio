@@ -1,0 +1,341 @@
+"use client";
+
+import React, { useState, useEffect, useMemo } from "react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import {
+  GitHubContributionDay,
+  GitHubContributionsResponse,
+} from "@/types/github";
+
+const MONTH_NAMES = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
+
+const COLOR_MAP: Record<number, string> = {
+  0: "bg-[#161b22] border border-[#30363d]/40",
+  1: "bg-[#0e4429] border border-[#0e4429]",
+  2: "bg-[#006d32] border border-[#006d32]",
+  3: "bg-[#26a641] border border-[#26a641]",
+  4: "bg-[#39d353] border border-[#39d353]",
+};
+
+interface WeekColumn {
+  days: (GitHubContributionDay | null)[];
+  monthLabel?: string;
+}
+
+export function GitHubContributionGraph() {
+  const [selectedYear, setSelectedYear] = useState<string>("last");
+  const [data, setData] = useState<GitHubContributionsResponse | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  const handleYearSelect = (yr: string) => {
+    if (yr === selectedYear) return;
+    setIsLoading(true);
+    setSelectedYear(yr);
+  };
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const fetchContributions = async () => {
+      try {
+        const res = await fetch(
+          `/api/github/contributions?year=${selectedYear}`,
+        );
+        if (!res.ok) {
+          if (isMounted) setIsLoading(false);
+          return;
+        }
+        const contentType = res.headers.get("content-type");
+        if (!contentType || !contentType.includes("application/json")) {
+          if (isMounted) setIsLoading(false);
+          return;
+        }
+        const json: GitHubContributionsResponse = await res.json();
+        if (isMounted) {
+          setData(json);
+          setIsLoading(false);
+        }
+      } catch (err) {
+        console.error("Error fetching contributions:", err);
+        if (isMounted) setIsLoading(false);
+      }
+    };
+
+    fetchContributions();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [selectedYear]);
+
+  // Organize days into weeks (columns)
+  const weeks = useMemo(() => {
+    if (!data || !data.contributions || data.contributions.length === 0) {
+      return [];
+    }
+
+    const cols: WeekColumn[] = [];
+    let currentWeek: (GitHubContributionDay | null)[] = [];
+    let lastMonth = -1;
+
+    // Fill initial empty days in first week if first contribution day is not Sunday (0)
+    const firstDate = new Date(data.contributions[0].date);
+    const firstDayOfWeek = firstDate.getDay(); // 0 is Sun, 1 is Mon...
+
+    for (let i = 0; i < firstDayOfWeek; i++) {
+      currentWeek.push(null);
+    }
+
+    data.contributions.forEach((day) => {
+      const d = new Date(day.date);
+      const month = d.getMonth();
+
+      let monthLabel: string | undefined = undefined;
+      if (month !== lastMonth && currentWeek.length === 0) {
+        monthLabel = MONTH_NAMES[month];
+        lastMonth = month;
+      } else if (
+        month !== lastMonth &&
+        currentWeek.length > 0 &&
+        cols.length > 0
+      ) {
+        lastMonth = month;
+      }
+
+      currentWeek.push(day);
+
+      if (currentWeek.length === 7) {
+        cols.push({
+          days: currentWeek,
+          monthLabel,
+        });
+        currentWeek = [];
+      }
+    });
+
+    if (currentWeek.length > 0) {
+      while (currentWeek.length < 7) {
+        currentWeek.push(null);
+      }
+      cols.push({ days: currentWeek });
+    }
+
+    // Assign month labels across weeks logically
+    let prevMonth = -1;
+    cols.forEach((col) => {
+      const firstValidDay = col.days.find((d) => d !== null);
+      if (firstValidDay) {
+        const d = new Date(firstValidDay.date);
+        const m = d.getMonth();
+        if (m !== prevMonth) {
+          col.monthLabel = MONTH_NAMES[m];
+          prevMonth = m;
+        }
+      }
+    });
+
+    return cols;
+  }, [data]);
+
+  const displayTotal = data?.totalContributions?.toLocaleString() || "3,693";
+  const displayYearText =
+    selectedYear === "last" ? "in the last year" : `in ${selectedYear}`;
+
+  const availableYears: string[] =
+    data?.availableYears && data.availableYears.length > 0
+      ? data.availableYears
+      : ["2026", "2025", "2024", "2023", "2022"];
+
+  return (
+    <div className="w-full space-y-3 font-sans">
+      {/* Top Header Row with Year Filter beside contribution text */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 flex-wrap">
+        <h2 className="text-base sm:text-lg font-medium text-white tracking-tight flex items-center gap-1.5 flex-wrap">
+          <span className="font-semibold text-white">{displayTotal}</span>
+          <span className="text-zinc-400">contributions</span>
+          <span className="text-zinc-400">{displayYearText}</span>
+        </h2>
+
+        {/* Responsive Year Filter Pills beside display text */}
+        <div className="flex items-center gap-1 overflow-x-auto custom-scrollbar p-1 bg-[#161b22] border border-[#30363d] rounded-lg max-w-full shrink-0">
+          <button
+            type="button"
+            onClick={() => handleYearSelect("last")}
+            className={`px-2.5 py-1 text-xs font-mono font-medium rounded-md transition-all cursor-pointer ${
+              selectedYear === "last"
+                ? "bg-sky-500 text-black font-bold shadow-sm"
+                : "text-zinc-400 hover:text-white hover:bg-[#21262d]"
+            }`}
+          >
+            Last Year
+          </button>
+          {availableYears.map((yr) => (
+            <button
+              key={yr}
+              type="button"
+              onClick={() => handleYearSelect(yr)}
+              className={`px-2.5 py-1 text-xs font-mono font-medium rounded-md transition-all cursor-pointer ${
+                selectedYear === yr
+                  ? "bg-sky-500 text-black font-bold shadow-sm"
+                  : "text-zinc-400 hover:text-white hover:bg-[#21262d]"
+              }`}
+            >
+              {yr}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Full-Width Heatmap Card */}
+      <div className="w-full bg-[#0d1117] border border-[#30363d] rounded-lg shadow-lg overflow-hidden">
+        {isLoading ? (
+          <div className="h-44 flex flex-col items-center justify-center space-y-3 p-4 sm:p-5">
+            <div className="w-6 h-6 border-2 border-emerald-500 border-t-transparent rounded-full animate-spin" />
+            <p className="text-xs text-zinc-400 font-mono">
+              Fetching GitHub contribution matrix...
+            </p>
+          </div>
+        ) : (
+          <ScrollArea className="w-full">
+            <div className="p-4 sm:p-5 w-full min-w-[680px] select-none">
+              {/* Month Labels */}
+              <div className="flex items-center text-[10px] sm:text-[11px] text-[#7d8590] mb-2 font-mono w-full h-4">
+                <div className="w-7 sm:w-8 shrink-0" />
+                <div className="flex-1 flex gap-[2px] sm:gap-[3px] w-full">
+                  {weeks.map((week, idx) => (
+                    <div
+                      key={idx}
+                      className="flex-1 min-w-0 text-left relative"
+                    >
+                      {week.monthLabel && (
+                        <span className="absolute left-0 top-0 whitespace-nowrap">
+                          {week.monthLabel}
+                        </span>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Grid: Day Labels + Week Columns */}
+              <div className="flex items-start w-full">
+                {/* Day of Week Labels (Mon, Wed, Fri) */}
+                <div className="w-7 sm:w-8 shrink-0 grid grid-rows-7 gap-[2px] sm:gap-[3px] text-[10px] text-[#7d8590] pr-1.5 font-mono">
+                  <span className="aspect-square flex items-center opacity-0">Sun</span>
+                  <span className="aspect-square flex items-center leading-none">Mon</span>
+                  <span className="aspect-square flex items-center opacity-0">Tue</span>
+                  <span className="aspect-square flex items-center leading-none">Wed</span>
+                  <span className="aspect-square flex items-center opacity-0">Thu</span>
+                  <span className="aspect-square flex items-center leading-none">Fri</span>
+                  <span className="aspect-square flex items-center opacity-0">Sat</span>
+                </div>
+
+                {/* Week Columns */}
+                <div className="flex-1 flex gap-[2px] sm:gap-[3px] w-full">
+                  {weeks.map((week, colIdx) => (
+                    <div
+                      key={colIdx}
+                      className="flex-1 flex flex-col gap-[2px] sm:gap-[3px] min-w-0"
+                    >
+                      {week.days.map((day, rowIdx) => {
+                        if (!day) {
+                          return (
+                            <div
+                              key={rowIdx}
+                              className="w-full aspect-square rounded-[2px] opacity-0"
+                            />
+                          );
+                        }
+
+                        const colorClass =
+                          COLOR_MAP[day.level] || COLOR_MAP[0];
+                        const dateFormatted = new Date(
+                          day.date,
+                        ).toLocaleDateString("en-US", {
+                          month: "short",
+                          day: "numeric",
+                          year: "numeric",
+                        });
+
+                        return (
+                          <Tooltip key={rowIdx}>
+                            <TooltipTrigger className="w-full aspect-square block">
+                              <div
+                                className={`w-full aspect-square rounded-[2px] ${colorClass} transition-transform hover:scale-125 cursor-pointer`}
+                              />
+                            </TooltipTrigger>
+                            <TooltipContent
+                              side="top"
+                              className="text-xs bg-[#1f1f1f] text-zinc-200 border-[#3c3c3c] py-1 px-2 font-mono z-50"
+                            >
+                              <span className="font-semibold text-emerald-400">
+                                {day.count === 0
+                                  ? "No contributions"
+                                  : `${day.count} ${
+                                      day.count === 1
+                                        ? "contribution"
+                                        : "contributions"
+                                    }`}
+                              </span>{" "}
+                              on {dateFormatted}
+                            </TooltipContent>
+                          </Tooltip>
+                        );
+                      })}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Bottom Card Footer */}
+              <div className="mt-4 pt-3 flex flex-wrap items-center justify-between text-xs text-[#7d8590] border-t border-[#21262d] font-mono">
+                <a
+                  href="https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-profile/managing-contribution-settings-on-your-profile/why-are-my-contributions-not-showing-up-on-my-profile"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-sky-400 hover:underline inline-flex items-center gap-1"
+                >
+                  <span>Learn how we count contributions</span>
+                </a>
+
+                <div className="flex items-center space-x-1.5 text-[11px]">
+                  <span>Less</span>
+                  <div className="flex items-center gap-1">
+                    <span className="w-[11px] h-[11px] rounded-[2px] bg-[#161b22] border border-[#30363d]/40" />
+                    <span className="w-[11px] h-[11px] rounded-[2px] bg-[#0e4429]" />
+                    <span className="w-[11px] h-[11px] rounded-[2px] bg-[#006d32]" />
+                    <span className="w-[11px] h-[11px] rounded-[2px] bg-[#26a641]" />
+                    <span className="w-[11px] h-[11px] rounded-[2px] bg-[#39d353]" />
+                  </div>
+                  <span>More</span>
+                </div>
+              </div>
+            </div>
+            <ScrollBar
+              orientation="horizontal"
+              className="h-2 bg-[#12151b]/40 hover:bg-[#1a1e27]"
+            />
+          </ScrollArea>
+        )}
+      </div>
+    </div>
+  );
+}
