@@ -13,6 +13,7 @@ import {
   Zap,
   Copy,
   Download,
+  BookOpen,
 } from "lucide-react";
 import { downloadResumePdf } from "@/lib/download";
 import {
@@ -35,6 +36,7 @@ interface CommandPaletteProps {
   onSelectFile: (file: PortfolioFile) => void;
   onToggleTerminal: () => void;
   onToggleAI: () => void;
+  onOpenShortcuts?: () => void;
   antigravityMode: boolean;
   setAntigravityMode: (active: boolean | ((prev: boolean) => boolean)) => void;
 }
@@ -45,6 +47,7 @@ export function CommandPalette({
   onSelectFile,
   onToggleTerminal,
   onToggleAI,
+  onOpenShortcuts,
   antigravityMode,
   setAntigravityMode,
 }: CommandPaletteProps) {
@@ -188,6 +191,16 @@ export function CommandPalette({
         toast.success("Email copied to clipboard", {
           description: DEVELOPER_PROFILE.email,
         });
+      },
+    },
+    {
+      id: "act-docs-shortcuts",
+      title: "Documentation & Keyboard Shortcuts",
+      subtitle: "View keybindings, terminal CLI reference, and IDE guide",
+      icon: BookOpen,
+      category: "Actions",
+      action: () => {
+        if (onOpenShortcuts) onOpenShortcuts();
       },
     },
     {

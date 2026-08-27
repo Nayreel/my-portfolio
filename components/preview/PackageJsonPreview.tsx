@@ -15,7 +15,13 @@ import {
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { toast } from "@/components/ui/toast";
 
@@ -41,13 +47,15 @@ const SCRIPTS: ScriptItem[] = [
   {
     name: "dev",
     command: "next dev",
-    description: "Start development server on localhost:3000 with Turbopack fast refresh",
+    description:
+      "Start development server on localhost:3000 with Turbopack fast refresh",
     category: "development",
   },
   {
     name: "build",
     command: "next build",
-    description: "Compile and optimize production bundle with static & SSR generation",
+    description:
+      "Compile and optimize production bundle with static & SSR generation",
     category: "build",
   },
   {
@@ -74,7 +82,8 @@ const DEPENDENCIES: DependencyItem[] = [
   {
     name: "next",
     version: "^16.3.2",
-    description: "React framework with App Router, Server Components & Image Optimization",
+    description:
+      "React framework with App Router, Server Components & Image Optimization",
     category: "Framework",
   },
   {
@@ -98,7 +107,8 @@ const DEPENDENCIES: DependencyItem[] = [
   {
     name: "react-resizable-panels",
     version: "^4.12.3",
-    description: "Accessible, responsive multi-panel layout system for IDE split views",
+    description:
+      "Accessible, responsive multi-panel layout system for IDE split views",
     category: "UI & Components",
   },
   {
@@ -116,19 +126,22 @@ const DEPENDENCIES: DependencyItem[] = [
   {
     name: "canvas-confetti",
     version: "^1.9.4",
-    description: "Interactive particle confetti generator for milestone triggers",
+    description:
+      "Interactive particle confetti generator for milestone triggers",
     category: "Animation & FX",
   },
   {
     name: "tailwind-merge",
     version: "^3.6.0",
-    description: "Utility function to cleanly merge Tailwind CSS classes dynamically",
+    description:
+      "Utility function to cleanly merge Tailwind CSS classes dynamically",
     category: "Utilities",
   },
   {
     name: "zod",
     version: "^4.4.3",
-    description: "TypeScript-first schema declaration and data validation library",
+    description:
+      "TypeScript-first schema declaration and data validation library",
     category: "Utilities",
   },
   {
@@ -146,13 +159,21 @@ const DEV_DEPENDENCIES = [
   { name: "@types/react-dom", version: "^19.0.0", role: "DOM Typings" },
   { name: "tailwindcss", version: "^4.0.0", role: "Utility CSS Engine" },
   { name: "eslint", version: "^9.0.0", role: "Static Code Analysis" },
-  { name: "eslint-config-next", version: "^16.3.2", role: "Next.js Lint Rules" },
+  {
+    name: "eslint-config-next",
+    version: "^16.3.2",
+    role: "Next.js Lint Rules",
+  },
 ];
 
-export function PackageJsonPreview({ onSwitchToFile }: PackageJsonPreviewProps) {
+export function PackageJsonPreview({
+  onSwitchToFile,
+}: PackageJsonPreviewProps) {
   const [copiedScript, setCopiedScript] = useState<string | null>(null);
   const [searchFilter, setSearchFilter] = useState("");
-  const [activeTab, setActiveTab] = useState<"all" | "dependencies" | "scripts" | "devDeps">("all");
+  const [activeTab, setActiveTab] = useState<
+    "all" | "dependencies" | "scripts" | "devDeps"
+  >("all");
 
   const copyToClipboard = (text: string, label: string) => {
     navigator.clipboard.writeText(text);
@@ -165,7 +186,7 @@ export function PackageJsonPreview({ onSwitchToFile }: PackageJsonPreviewProps) 
     (dep) =>
       dep.name.toLowerCase().includes(searchFilter.toLowerCase()) ||
       dep.description.toLowerCase().includes(searchFilter.toLowerCase()) ||
-      dep.category.toLowerCase().includes(searchFilter.toLowerCase())
+      dep.category.toLowerCase().includes(searchFilter.toLowerCase()),
   );
 
   return (
@@ -182,12 +203,16 @@ export function PackageJsonPreview({ onSwitchToFile }: PackageJsonPreviewProps) 
                 <div>
                   <h1 className="text-lg sm:text-2xl font-bold text-white tracking-tight flex items-center gap-2">
                     lee-ryan-garcia-portfolio
-                    <Badge variant="outline" className="border-emerald-500/40 text-emerald-400 bg-emerald-500/10 text-xs font-mono">
+                    <Badge
+                      variant="outline"
+                      className="border-emerald-500/40 text-emerald-400 bg-emerald-500/10 text-xs font-mono"
+                    >
                       v2.0.0
                     </Badge>
                   </h1>
                   <p className="text-xs text-zinc-400">
-                    Interactive IDE developer portfolio application for Lee Ryan M. Garcia
+                    Interactive IDE developer portfolio application for Lee Ryan
+                    M. Garcia
                   </p>
                 </div>
               </div>
@@ -203,34 +228,39 @@ export function PackageJsonPreview({ onSwitchToFile }: PackageJsonPreviewProps) 
               <Badge className="bg-emerald-500/10 text-emerald-300 border-emerald-500/30 text-xs py-1">
                 TypeScript Strict
               </Badge>
-              <Badge className="bg-amber-500/10 text-amber-300 border-amber-500/30 text-xs py-1">
-                MIT License
-              </Badge>
             </div>
           </div>
 
           {/* Quick Metrics Grid */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6 pt-6 border-t border-white/10 text-xs">
             <div className="bg-[#12131a]/80 p-3 rounded-lg border border-white/5">
-              <span className="text-zinc-500 block text-[11px]">Runtime Environment</span>
+              <span className="text-zinc-500 block text-[11px]">
+                Runtime Environment
+              </span>
               <span className="text-white font-semibold flex items-center gap-1.5 mt-0.5">
                 <Cpu className="w-3.5 h-3.5 text-sky-400" /> Node.js &amp; Edge
               </span>
             </div>
             <div className="bg-[#12131a]/80 p-3 rounded-lg border border-white/5">
-              <span className="text-zinc-500 block text-[11px]">Production Dependencies</span>
+              <span className="text-zinc-500 block text-[11px]">
+                Production Dependencies
+              </span>
               <span className="text-emerald-400 font-semibold flex items-center gap-1.5 mt-0.5">
                 <ShieldCheck className="w-3.5 h-3.5" /> 10 Optimized Packages
               </span>
             </div>
             <div className="bg-[#12131a]/80 p-3 rounded-lg border border-white/5">
-              <span className="text-zinc-500 block text-[11px]">Scripts Configured</span>
+              <span className="text-zinc-500 block text-[11px]">
+                Scripts Configured
+              </span>
               <span className="text-purple-400 font-semibold flex items-center gap-1.5 mt-0.5">
                 <Terminal className="w-3.5 h-3.5" /> 5 NPM Commands
               </span>
             </div>
             <div className="bg-[#12131a]/80 p-3 rounded-lg border border-white/5">
-              <span className="text-zinc-500 block text-[11px]">Workspace Config</span>
+              <span className="text-zinc-500 block text-[11px]">
+                Workspace Config
+              </span>
               <Button
                 type="button"
                 variant="link"
@@ -253,7 +283,9 @@ export function PackageJsonPreview({ onSwitchToFile }: PackageJsonPreviewProps) 
               size="xs"
               onClick={() => setActiveTab("all")}
               className={`px-3 py-1 h-auto rounded-md transition-colors shrink-0 cursor-pointer ${
-                activeTab === "all" ? "bg-sky-500 text-black font-semibold hover:bg-sky-400 hover:text-black" : "text-zinc-400 hover:text-white hover:bg-zinc-800/60"
+                activeTab === "all"
+                  ? "bg-sky-500 text-black font-semibold hover:bg-sky-400 hover:text-black"
+                  : "text-zinc-400 hover:text-white hover:bg-zinc-800/60"
               }`}
             >
               Overview
@@ -264,7 +296,9 @@ export function PackageJsonPreview({ onSwitchToFile }: PackageJsonPreviewProps) 
               size="xs"
               onClick={() => setActiveTab("dependencies")}
               className={`px-3 py-1 h-auto rounded-md transition-colors shrink-0 cursor-pointer ${
-                activeTab === "dependencies" ? "bg-sky-500 text-black font-semibold hover:bg-sky-400 hover:text-black" : "text-zinc-400 hover:text-white hover:bg-zinc-800/60"
+                activeTab === "dependencies"
+                  ? "bg-sky-500 text-black font-semibold hover:bg-sky-400 hover:text-black"
+                  : "text-zinc-400 hover:text-white hover:bg-zinc-800/60"
               }`}
             >
               Dependencies ({DEPENDENCIES.length})
@@ -275,7 +309,9 @@ export function PackageJsonPreview({ onSwitchToFile }: PackageJsonPreviewProps) 
               size="xs"
               onClick={() => setActiveTab("scripts")}
               className={`px-3 py-1 h-auto rounded-md transition-colors shrink-0 cursor-pointer ${
-                activeTab === "scripts" ? "bg-sky-500 text-black font-semibold hover:bg-sky-400 hover:text-black" : "text-zinc-400 hover:text-white hover:bg-zinc-800/60"
+                activeTab === "scripts"
+                  ? "bg-sky-500 text-black font-semibold hover:bg-sky-400 hover:text-black"
+                  : "text-zinc-400 hover:text-white hover:bg-zinc-800/60"
               }`}
             >
               Scripts ({SCRIPTS.length})
@@ -286,7 +322,9 @@ export function PackageJsonPreview({ onSwitchToFile }: PackageJsonPreviewProps) 
               size="xs"
               onClick={() => setActiveTab("devDeps")}
               className={`px-3 py-1 h-auto rounded-md transition-colors shrink-0 cursor-pointer ${
-                activeTab === "devDeps" ? "bg-sky-500 text-black font-semibold hover:bg-sky-400 hover:text-black" : "text-zinc-400 hover:text-white hover:bg-zinc-800/60"
+                activeTab === "devDeps"
+                  ? "bg-sky-500 text-black font-semibold hover:bg-sky-400 hover:text-black"
+                  : "text-zinc-400 hover:text-white hover:bg-zinc-800/60"
               }`}
             >
               Dev Tools ({DEV_DEPENDENCIES.length})
@@ -312,13 +350,18 @@ export function PackageJsonPreview({ onSwitchToFile }: PackageJsonPreviewProps) 
               <div className="flex items-center justify-between">
                 <div>
                   <CardTitle className="text-base text-white flex items-center gap-2">
-                    <Terminal className="w-4 h-4 text-purple-400" /> NPM Execution Scripts
+                    <Terminal className="w-4 h-4 text-purple-400" /> NPM
+                    Execution Scripts
                   </CardTitle>
                   <CardDescription className="text-xs text-zinc-400">
-                    CLI commands to run, build, test, and lint the portfolio repository
+                    CLI commands to run, build, test, and lint the portfolio
+                    repository
                   </CardDescription>
                 </div>
-                <Badge variant="outline" className="border-purple-500/30 text-purple-400 text-[10px]">
+                <Badge
+                  variant="outline"
+                  className="border-purple-500/30 text-purple-400 text-[10px]"
+                >
                   package.json &gt; scripts
                 </Badge>
               </div>
@@ -331,7 +374,9 @@ export function PackageJsonPreview({ onSwitchToFile }: PackageJsonPreviewProps) 
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-2">
-                      <span className="font-mono text-sm font-bold text-sky-400">{script.name}</span>
+                      <span className="font-mono text-sm font-bold text-sky-400">
+                        {script.name}
+                      </span>
                       <span className="text-[10px] text-zinc-500 uppercase font-mono px-1.5 py-0.5 bg-zinc-800/80 rounded">
                         {script.category}
                       </span>
@@ -339,7 +384,9 @@ export function PackageJsonPreview({ onSwitchToFile }: PackageJsonPreviewProps) 
                     <Button
                       size="sm"
                       variant="ghost"
-                      onClick={() => copyToClipboard(`npm run ${script.name}`, script.name)}
+                      onClick={() =>
+                        copyToClipboard(`npm run ${script.name}`, script.name)
+                      }
                       className="h-7 px-2 text-xs text-zinc-400 hover:text-white hover:bg-zinc-700/50"
                     >
                       {copiedScript === script.name ? (
@@ -352,10 +399,14 @@ export function PackageJsonPreview({ onSwitchToFile }: PackageJsonPreviewProps) 
 
                   <div className="bg-[#0b0c10] px-2.5 py-1.5 rounded font-mono text-xs text-emerald-400 border border-zinc-800/80 flex items-center justify-between">
                     <span>npm run {script.name}</span>
-                    <span className="text-[10px] text-zinc-500">&rarr; {script.command}</span>
+                    <span className="text-[10px] text-zinc-500">
+                      &rarr; {script.command}
+                    </span>
                   </div>
 
-                  <p className="text-xs text-zinc-400 leading-normal">{script.description}</p>
+                  <p className="text-xs text-zinc-400 leading-normal">
+                    {script.description}
+                  </p>
                 </div>
               ))}
             </CardContent>
@@ -369,13 +420,18 @@ export function PackageJsonPreview({ onSwitchToFile }: PackageJsonPreviewProps) 
               <div className="flex items-center justify-between">
                 <div>
                   <CardTitle className="text-base text-white flex items-center gap-2">
-                    <Layers className="w-4 h-4 text-sky-400" /> Core Dependencies
+                    <Layers className="w-4 h-4 text-sky-400" /> Core
+                    Dependencies
                   </CardTitle>
                   <CardDescription className="text-xs text-zinc-400">
-                    Production libraries powering UI components, animation, styling, and interactions
+                    Production libraries powering UI components, animation,
+                    styling, and interactions
                   </CardDescription>
                 </div>
-                <Badge variant="outline" className="border-sky-500/30 text-sky-400 text-[10px]">
+                <Badge
+                  variant="outline"
+                  className="border-sky-500/30 text-sky-400 text-[10px]"
+                >
                   {filteredDependencies.length} Packages
                 </Badge>
               </div>
@@ -418,10 +474,12 @@ export function PackageJsonPreview({ onSwitchToFile }: PackageJsonPreviewProps) 
           <Card className="bg-[#12131a] border-zinc-800">
             <CardHeader className="pb-3">
               <CardTitle className="text-base text-white flex items-center gap-2">
-                <Wrench className="w-4 h-4 text-emerald-400" /> Development &amp; Tooling Packages
+                <Wrench className="w-4 h-4 text-emerald-400" /> Development
+                &amp; Tooling Packages
               </CardTitle>
               <CardDescription className="text-xs text-zinc-400">
-                Compiler utilities, type definitions, linters, and build toolchains
+                Compiler utilities, type definitions, linters, and build
+                toolchains
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -431,10 +489,14 @@ export function PackageJsonPreview({ onSwitchToFile }: PackageJsonPreviewProps) 
                     key={dev.name}
                     className="bg-[#161722] border border-zinc-800/80 rounded-lg p-2.5 text-xs space-y-1"
                   >
-                    <div className="font-mono font-medium text-white truncate">{dev.name}</div>
+                    <div className="font-mono font-medium text-white truncate">
+                      {dev.name}
+                    </div>
                     <div className="flex items-center justify-between text-[11px]">
                       <span className="text-zinc-500">{dev.role}</span>
-                      <span className="font-mono text-emerald-400 text-[10px]">{dev.version}</span>
+                      <span className="font-mono text-emerald-400 text-[10px]">
+                        {dev.version}
+                      </span>
                     </div>
                   </div>
                 ))}

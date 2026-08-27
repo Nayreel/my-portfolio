@@ -13,6 +13,7 @@ import { BottomPanel } from "@/components/BottomPanel";
 import { StatusBar } from "@/components/StatusBar";
 import { CommandPalette } from "@/components/CommandPalette";
 import { SettingsModal } from "@/components/SettingsModal";
+import { ShortcutsModal } from "@/components/ShortcutsModal";
 import { AntigravityPhysics } from "@/components/AntigravityPhysics";
 import {
   ResizableHandle,
@@ -65,6 +66,7 @@ export default function AntigravityPortfolioApp() {
   // Modals & Preferences
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [isShortcutsOpen, setIsShortcutsOpen] = useState(false);
   const [antigravityMode, setAntigravityMode] = useState(false);
   const [accentColor, setAccentColor] = useState("#38bdf8");
   const [fontSize, setFontSize] = useState(13);
@@ -92,7 +94,6 @@ export default function AntigravityPortfolioApp() {
     e.stopPropagation();
     const remaining = openTabs.filter((t) => t.id !== fileId);
     if (remaining.length === 0) {
-      // Always keep at least 1 file open
       remaining.push(PORTFOLIO_FILES[0]);
     }
     setOpenTabs(remaining);
@@ -104,25 +105,32 @@ export default function AntigravityPortfolioApp() {
   // Global Keyboard shortcuts
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // ⌘K or Ctrl+K or ⌘P or Ctrl+P: Command Palette
       if ((e.metaKey || e.ctrlKey) && (e.key === "k" || e.key === "p")) {
         e.preventDefault();
         setIsCommandPaletteOpen((prev) => !prev);
       }
-      // ⌘B or Ctrl+B: Toggle Explorer Sidebar
       if ((e.metaKey || e.ctrlKey) && e.key === "b") {
         e.preventDefault();
         setIsLeftSidebarOpen((prev) => !prev);
       }
-      // ⌘L or Ctrl+L: Toggle Antigravity AI
       if ((e.metaKey || e.ctrlKey) && e.key === "l") {
         e.preventDefault();
         setIsAIPanelOpen((prev) => !prev);
       }
-      // Ctrl+` (backtick): Toggle Terminal
       if ((e.ctrlKey || e.metaKey) && e.key === "`") {
         e.preventDefault();
         setIsBottomPanelOpen((prev) => !prev);
+      }
+      if (
+        e.key === "F1" ||
+        (e.key === "?" &&
+          !(
+            e.target instanceof HTMLInputElement ||
+            e.target instanceof HTMLTextAreaElement
+          ))
+      ) {
+        e.preventDefault();
+        setIsShortcutsOpen((prev) => !prev);
       }
     };
 
@@ -171,7 +179,7 @@ export default function AntigravityPortfolioApp() {
         antigravityMode={antigravityMode}
         setAntigravityMode={setAntigravityMode}
         onOpenLivePreviewTab={() => {
-          handleSelectFile(PORTFOLIO_FILES[1]); // projects
+          handleSelectFile(PORTFOLIO_FILES[1]);
           setViewMode("preview");
         }}
         onOpenResume={() => {
@@ -185,6 +193,7 @@ export default function AntigravityPortfolioApp() {
           setViewMode("preview");
         }}
         openSettingsModal={() => setIsSettingsOpen(true)}
+        openShortcutsModal={() => setIsShortcutsOpen(true)}
         onSelectTheme={(theme) => {
           setAccentColor(theme.color);
           setIdeThemeMode(theme.mode);
@@ -193,26 +202,20 @@ export default function AntigravityPortfolioApp() {
 
       {/* 2. Main Workspace Layout */}
       <div className="flex-1 flex overflow-hidden relative min-h-0">
-        {/* Far-Left Activity Bar (Desktop only; Mobile & Tablet use TopMenuBar Hamburger) */}
+        {/* Far-Left Activity Bar */}
         <div className="hidden lg:flex shrink-0 h-full">
           <ActivityBar
             activeView={activeSidebarView}
             setActiveView={(view) => {
               setActiveSidebarView(view);
-              if (view === "none") {
-                setIsLeftSidebarOpen(false);
-              } else {
-                setIsLeftSidebarOpen(true);
-              }
+              setIsLeftSidebarOpen(view !== "none");
             }}
             isAIPanelOpen={isAIPanelOpen}
             setIsAIPanelOpen={setIsAIPanelOpen}
             openSettingsModal={() => setIsSettingsOpen(true)}
             openContactTab={() => {
-              handleSelectFile(
-                PORTFOLIO_FILES.find((f) => f.id === "get-in-touch.tsx") ||
-                  PORTFOLIO_FILES[0],
-              );
+              const file = PORTFOLIO_FILES.find((f) => f.id === "get-in-touch.tsx") || PORTFOLIO_FILES[0];
+              handleSelectFile(file);
               setViewMode("preview");
             }}
           />
@@ -233,10 +236,7 @@ export default function AntigravityPortfolioApp() {
         {/* Primary Sidebar Overlay Drawer on Tablet/Mobile */}
         {isTablet && isLeftSidebarOpen && activeSidebarView !== "none" && (
           <>
-            <div
-              onClick={() => setIsLeftSidebarOpen(false)}
-              className="fixed inset-0 bg-black/60 backdrop-blur-xs z-35"
-            />
+            <div onClick={() => setIsLeftSidebarOpen(false)} className="fixed inset-0 bg-black/60 backdrop-blur-xs z-35" />
             <div className="fixed inset-y-9 left-0 z-40 w-72 max-w-[85vw] shadow-2xl border-r border-[#2d2d2d] bg-[#181818] flex flex-col">
               <SidebarExplorer
                 files={PORTFOLIO_FILES}
@@ -406,10 +406,7 @@ export default function AntigravityPortfolioApp() {
         {/* AI Copilot Drawer on Tablet / Mobile */}
         {isTablet && isAIPanelOpen && (
           <>
-            <div
-              onClick={() => setIsAIPanelOpen(false)}
-              className="fixed inset-0 bg-black/60 backdrop-blur-xs z-35"
-            />
+            <div onClick={() => setIsAIPanelOpen(false)} className="fixed inset-0 bg-black/60 backdrop-blur-xs z-35" />
             <div className="fixed inset-y-9 right-0 z-40 w-full sm:w-96 max-w-full shadow-2xl border-l border-[#2d2d2d] bg-[#181818] flex flex-col">
               <AIAssistantPanel
                 isOpen={isAIPanelOpen}
@@ -430,10 +427,7 @@ export default function AntigravityPortfolioApp() {
         {/* Bottom Terminal Drawer on Mobile */}
         {isMobile && isBottomPanelOpen && (
           <>
-            <div
-              onClick={() => setIsBottomPanelOpen(false)}
-              className="fixed inset-0 bg-black/60 backdrop-blur-xs z-35"
-            />
+            <div onClick={() => setIsBottomPanelOpen(false)} className="fixed inset-0 bg-black/60 backdrop-blur-xs z-35" />
             <div className="fixed bottom-6 inset-x-0 z-40 h-80 max-h-[70dvh] shadow-2xl border-t border-[#2d2d2d] bg-[#181818] flex flex-col">
               <BottomPanel
                 isOpen={isBottomPanelOpen}
@@ -468,6 +462,7 @@ export default function AntigravityPortfolioApp() {
         onSelectFile={handleSelectFile}
         onToggleTerminal={() => setIsBottomPanelOpen((p) => !p)}
         onToggleAI={() => setIsAIPanelOpen((p) => !p)}
+        onOpenShortcuts={() => setIsShortcutsOpen(true)}
         antigravityMode={antigravityMode}
         setAntigravityMode={setAntigravityMode}
       />
@@ -486,7 +481,14 @@ export default function AntigravityPortfolioApp() {
         setAntigravityMode={setAntigravityMode}
       />
 
-      {/* 6. Zero Gravity Floating Particles & Physics Overlay */}
+      {/* 6. Documentation & Keyboard Shortcuts Modal */}
+      <ShortcutsModal
+        isOpen={isShortcutsOpen}
+        onClose={() => setIsShortcutsOpen(false)}
+        onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}
+      />
+
+      {/* 7. Zero Gravity Floating Particles & Physics Overlay */}
       <AntigravityPhysics
         active={antigravityMode}
         onDeactivate={() => setAntigravityMode(false)}

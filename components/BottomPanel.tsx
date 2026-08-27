@@ -58,7 +58,7 @@ export function BottomPanel({
   const [terminalLogs, setTerminalLogs] = useState<TerminalLog[]>([
     {
       type: "system",
-      text: '⚡ Portfolio IDE [Version 2.4.0]\n(c) 2026 Lee Ryan Garcia. All systems operational.\nType "help" for a list of interactive commands or "projects" to view flagships.',
+      text: '⚡ Portfolio IDE [Version 2.4.0]\n(c) 2026 Lee Ryan Garcia. All systems operational.\nType "help" for a list of interactive commands or "projects" to view projects.',
     },
   ]);
 
@@ -109,7 +109,7 @@ export function BottomPanel({
       ).join("\n\n");
       nextLogs.push({
         type: "output",
-        text: `Flagship Projects:\n\n${pList}`,
+        text: `Projects:\n\n${pList}`,
       });
       if (onSelectFile) onSelectFile("projects.tsx");
     } else if (cmd === "skills") {
@@ -160,7 +160,8 @@ export function BottomPanel({
       cmd === "download cv" ||
       cmd === "get resume"
     ) {
-      const fileUrl = DEVELOPER_PROFILE.resumePdfUrl || "/Lee_Ryan_Garcia_Resume.pdf";
+      const fileUrl =
+        DEVELOPER_PROFILE.resumePdfUrl || "/Lee_Ryan_Garcia_Resume.pdf";
       const fileName = fileUrl.split("/").pop() || "Lee_Ryan_Garcia_Resume.pdf";
       downloadResumePdf(fileUrl, fileName);
       confetti({ particleCount: 80, spread: 70 });
@@ -168,19 +169,31 @@ export function BottomPanel({
         type: "output",
         text: `📥 Initiating download for ${fileName} from public folder...`,
       });
-    } else if (cmd === "cat package.json" || cmd === "package" || cmd === "packages") {
+    } else if (
+      cmd === "cat package.json" ||
+      cmd === "package" ||
+      cmd === "packages"
+    ) {
       nextLogs.push({
         type: "output",
         text: `📦 Opening package.json (Next.js 16, React 19 dependencies & scripts)...`,
       });
       if (onSelectFile) onSelectFile("package.json");
-    } else if (cmd === "cat config.ts" || cmd === "config" || cmd === "settings") {
+    } else if (
+      cmd === "cat config.ts" ||
+      cmd === "config" ||
+      cmd === "settings"
+    ) {
       nextLogs.push({
         type: "output",
         text: `⚙️ Opening config.ts (IDE workspace parameters & Gemini AI settings)...`,
       });
       if (onSelectFile) onSelectFile("config.ts");
-    } else if (cmd.includes("fly") || cmd.includes("zero-g") || cmd.includes("gravity")) {
+    } else if (
+      cmd.includes("fly") ||
+      cmd.includes("zero-g") ||
+      cmd.includes("gravity")
+    ) {
       const nextMode = !antigravityMode;
       setAntigravityMode(nextMode);
       confetti({ particleCount: 90, spread: 80 });

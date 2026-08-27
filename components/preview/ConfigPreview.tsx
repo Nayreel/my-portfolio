@@ -16,7 +16,13 @@ import {
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { toast } from "@/components/ui/toast";
 
@@ -56,7 +62,10 @@ const AI_CAPABILITIES = [
   },
 ];
 
-export function ConfigPreview({ onSwitchToFile, onOpenAIQuery }: ConfigPreviewProps) {
+export function ConfigPreview({
+  onSwitchToFile,
+  onOpenAIQuery,
+}: ConfigPreviewProps) {
   const [selectedAccent, setSelectedAccent] = useState("#38bdf8");
   const [minimapEnabled, setMinimapEnabled] = useState(true);
   const [bracketPairColor, setBracketPairColor] = useState(true);
@@ -81,12 +90,16 @@ export function ConfigPreview({ onSwitchToFile, onOpenAIQuery }: ConfigPreviewPr
                 <div>
                   <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight flex items-center gap-2">
                     config.ts
-                    <Badge variant="outline" className="border-sky-500/40 text-sky-400 bg-sky-500/10 text-xs font-mono">
+                    <Badge
+                      variant="outline"
+                      className="border-sky-500/40 text-sky-400 bg-sky-500/10 text-xs font-mono"
+                    >
                       portfolioConfig
                     </Badge>
                   </h1>
                   <p className="text-xs text-zinc-400">
-                    Workspace preferences, editor typography, theme parameters, and AI assistant settings
+                    Workspace preferences, editor typography, theme parameters,
+                    and AI assistant settings
                   </p>
                 </div>
               </div>
@@ -94,7 +107,8 @@ export function ConfigPreview({ onSwitchToFile, onOpenAIQuery }: ConfigPreviewPr
 
             <div className="flex flex-wrap items-center gap-2">
               <Badge className="bg-emerald-500/10 text-emerald-300 border-emerald-500/30 text-xs py-1">
-                <CheckCircle2 className="w-3 h-3 mr-1" /> Environment: Production
+                <CheckCircle2 className="w-3 h-3 mr-1" /> Environment:
+                Production
               </Badge>
               <Badge className="bg-sky-500/10 text-sky-300 border-sky-500/30 text-xs py-1">
                 Version 2.4.0
@@ -105,25 +119,34 @@ export function ConfigPreview({ onSwitchToFile, onOpenAIQuery }: ConfigPreviewPr
           {/* Quick Config Specs */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6 pt-6 border-t border-white/10 text-xs">
             <div className="bg-[#12131a]/80 p-3 rounded-lg border border-white/5">
-              <span className="text-zinc-500 block text-[11px]">Developer / Owner</span>
+              <span className="text-zinc-500 block text-[11px]">
+                Developer / Owner
+              </span>
               <span className="text-white font-semibold flex items-center gap-1.5 mt-0.5">
-                <Monitor className="w-3.5 h-3.5 text-sky-400" /> Lee Ryan M. Garcia
+                <Monitor className="w-3.5 h-3.5 text-sky-400" /> Lee Ryan M.
+                Garcia
               </span>
             </div>
             <div className="bg-[#12131a]/80 p-3 rounded-lg border border-white/5">
-              <span className="text-zinc-500 block text-[11px]">AI Model Engine</span>
+              <span className="text-zinc-500 block text-[11px]">
+                AI Model Engine
+              </span>
               <span className="text-purple-400 font-semibold flex items-center gap-1.5 mt-0.5">
                 <Bot className="w-3.5 h-3.5" /> Gemini 3.7 Flash
               </span>
             </div>
             <div className="bg-[#12131a]/80 p-3 rounded-lg border border-white/5">
-              <span className="text-zinc-500 block text-[11px]">Interactive Shell</span>
+              <span className="text-zinc-500 block text-[11px]">
+                Interactive Shell
+              </span>
               <span className="text-emerald-400 font-semibold flex items-center gap-1.5 mt-0.5">
                 <Terminal className="w-3.5 h-3.5" /> PowerShell / Bash Emulation
               </span>
             </div>
             <div className="bg-[#12131a]/80 p-3 rounded-lg border border-white/5">
-              <span className="text-zinc-500 block text-[11px]">Code Base Meta</span>
+              <span className="text-zinc-500 block text-[11px]">
+                Code Base Meta
+              </span>
               <Button
                 type="button"
                 variant="link"
@@ -153,15 +176,21 @@ export function ConfigPreview({ onSwitchToFile, onOpenAIQuery }: ConfigPreviewPr
               <div className="p-3 rounded-xl bg-[#161722] border border-zinc-800/80 space-y-2">
                 <div className="flex items-center justify-between text-xs">
                   <span className="text-zinc-400">Workspace Title</span>
-                  <span className="font-mono text-white font-medium">Portfolio IDE</span>
+                  <span className="font-mono text-white font-medium">
+                    Portfolio IDE
+                  </span>
                 </div>
                 <div className="flex items-center justify-between text-xs">
                   <span className="text-zinc-400">Primary Role</span>
-                  <span className="text-sky-400 font-medium">Full-Stack &amp; Automation Engineer</span>
+                  <span className="text-sky-400 font-medium">
+                    Full-Stack &amp; Automation Engineer
+                  </span>
                 </div>
                 <div className="flex items-center justify-between text-xs">
                   <span className="text-zinc-400">Education</span>
-                  <span className="text-amber-400 font-medium">BSIT, Cum Laude (Gordon College)</span>
+                  <span className="text-amber-400 font-medium">
+                    BSIT, Cum Laude (Gordon College)
+                  </span>
                 </div>
                 <div className="flex items-center justify-between text-xs">
                   <span className="text-zinc-400">Live Repository</span>
@@ -178,31 +207,45 @@ export function ConfigPreview({ onSwitchToFile, onOpenAIQuery }: ConfigPreviewPr
 
               {/* Feature Toggles */}
               <div className="space-y-2 pt-1">
-                <span className="text-xs font-semibold text-zinc-300 block">Workspace Capabilities</span>
+                <span className="text-xs font-semibold text-zinc-300 block">
+                  Workspace Capabilities
+                </span>
                 <div className="grid grid-cols-2 gap-2 text-xs">
                   <div className="p-2.5 rounded-lg bg-[#161722] border border-zinc-800 flex items-center justify-between">
                     <span className="text-zinc-300 flex items-center gap-1.5">
-                      <Terminal className="w-3.5 h-3.5 text-emerald-400" /> Terminal Shell
+                      <Terminal className="w-3.5 h-3.5 text-emerald-400" />{" "}
+                      Terminal Shell
                     </span>
-                    <Badge className="bg-emerald-500/20 text-emerald-300 text-[10px] py-0">ON</Badge>
+                    <Badge className="bg-emerald-500/20 text-emerald-300 text-[10px] py-0">
+                      ON
+                    </Badge>
                   </div>
                   <div className="p-2.5 rounded-lg bg-[#161722] border border-zinc-800 flex items-center justify-between">
                     <span className="text-zinc-300 flex items-center gap-1.5">
-                      <Bot className="w-3.5 h-3.5 text-purple-400" /> AI Assistant
+                      <Bot className="w-3.5 h-3.5 text-purple-400" /> AI
+                      Assistant
                     </span>
-                    <Badge className="bg-purple-500/20 text-purple-300 text-[10px] py-0">ACTIVE</Badge>
+                    <Badge className="bg-purple-500/20 text-purple-300 text-[10px] py-0">
+                      ACTIVE
+                    </Badge>
                   </div>
                   <div className="p-2.5 rounded-lg bg-[#161722] border border-zinc-800 flex items-center justify-between">
                     <span className="text-zinc-300 flex items-center gap-1.5">
-                      <Zap className="w-3.5 h-3.5 text-amber-400" /> Zero-G Engine
+                      <Zap className="w-3.5 h-3.5 text-amber-400" /> Zero-G
+                      Engine
                     </span>
-                    <Badge className="bg-amber-500/20 text-amber-300 text-[10px] py-0">READY</Badge>
+                    <Badge className="bg-amber-500/20 text-amber-300 text-[10px] py-0">
+                      READY
+                    </Badge>
                   </div>
                   <div className="p-2.5 rounded-lg bg-[#161722] border border-zinc-800 flex items-center justify-between">
                     <span className="text-zinc-300 flex items-center gap-1.5">
-                      <Compass className="w-3.5 h-3.5 text-sky-400" /> Git Contribution
+                      <Compass className="w-3.5 h-3.5 text-sky-400" /> Git
+                      Contribution
                     </span>
-                    <Badge className="bg-sky-500/20 text-sky-300 text-[10px] py-0">SYNCED</Badge>
+                    <Badge className="bg-sky-500/20 text-sky-300 text-[10px] py-0">
+                      SYNCED
+                    </Badge>
                   </div>
                 </div>
               </div>
@@ -213,10 +256,12 @@ export function ConfigPreview({ onSwitchToFile, onOpenAIQuery }: ConfigPreviewPr
           <Card className="bg-[#12131a] border-zinc-800">
             <CardHeader className="pb-3">
               <CardTitle className="text-base text-white flex items-center gap-2">
-                <Palette className="w-4 h-4 text-purple-400" /> Theme &amp; Editor Styling
+                <Palette className="w-4 h-4 text-purple-400" /> Theme &amp;
+                Editor Styling
               </CardTitle>
               <CardDescription className="text-xs text-zinc-400">
-                Visual aesthetics, typography styling, and code editor preferences
+                Visual aesthetics, typography styling, and code editor
+                preferences
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -232,7 +277,9 @@ export function ConfigPreview({ onSwitchToFile, onOpenAIQuery }: ConfigPreviewPr
                       type="button"
                       variant="ghost"
                       size="xs"
-                      onClick={() => handleAccentChange(accent.hex, accent.name)}
+                      onClick={() =>
+                        handleAccentChange(accent.hex, accent.name)
+                      }
                       className={`h-8 flex-1 p-0 rounded-lg border transition-all flex items-center justify-center cursor-pointer ${
                         selectedAccent === accent.hex
                           ? "border-white ring-2 ring-white/30 scale-105"
@@ -248,18 +295,29 @@ export function ConfigPreview({ onSwitchToFile, onOpenAIQuery }: ConfigPreviewPr
               <div className="space-y-2 pt-1 text-xs">
                 <div className="flex items-center justify-between p-2.5 rounded-lg bg-[#161722] border border-zinc-800">
                   <div>
-                    <span className="text-white block font-medium">Font Family</span>
-                    <span className="text-[11px] text-zinc-500 font-mono">JetBrains Mono, Fira Code</span>
+                    <span className="text-white block font-medium">
+                      Font Family
+                    </span>
+                    <span className="text-[11px] text-zinc-500 font-mono">
+                      JetBrains Mono, Fira Code
+                    </span>
                   </div>
-                  <Badge variant="outline" className="font-mono text-zinc-400 text-[10px]">
+                  <Badge
+                    variant="outline"
+                    className="font-mono text-zinc-400 text-[10px]"
+                  >
                     13px / 1.6
                   </Badge>
                 </div>
 
                 <div className="flex items-center justify-between p-2.5 rounded-lg bg-[#161722] border border-zinc-800">
                   <div>
-                    <span className="text-white block font-medium">Minimap Preview</span>
-                    <span className="text-[11px] text-zinc-500">Render miniature code outline</span>
+                    <span className="text-white block font-medium">
+                      Minimap Preview
+                    </span>
+                    <span className="text-[11px] text-zinc-500">
+                      Render miniature code outline
+                    </span>
                   </div>
                   <Button
                     type="button"
@@ -278,8 +336,12 @@ export function ConfigPreview({ onSwitchToFile, onOpenAIQuery }: ConfigPreviewPr
 
                 <div className="flex items-center justify-between p-2.5 rounded-lg bg-[#161722] border border-zinc-800">
                   <div>
-                    <span className="text-white block font-medium">Bracket Pair Colorization</span>
-                    <span className="text-[11px] text-zinc-500">Highlight matching bracket pairs</span>
+                    <span className="text-white block font-medium">
+                      Bracket Pair Colorization
+                    </span>
+                    <span className="text-[11px] text-zinc-500">
+                      Highlight matching bracket pairs
+                    </span>
                   </div>
                   <Button
                     type="button"
@@ -306,10 +368,12 @@ export function ConfigPreview({ onSwitchToFile, onOpenAIQuery }: ConfigPreviewPr
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
               <div>
                 <CardTitle className="text-base text-white flex items-center gap-2">
-                  <Bot className="w-4 h-4 text-purple-400" /> AI Copilot Configuration
+                  <Bot className="w-4 h-4 text-purple-400" /> AI Copilot
+                  Configuration
                 </CardTitle>
                 <CardDescription className="text-xs text-zinc-400">
-                  Parameters and capabilities for the integrated portfolio intelligent assistant
+                  Parameters and capabilities for the integrated portfolio
+                  intelligent assistant
                 </CardDescription>
               </div>
               <Badge className="bg-purple-500/10 text-purple-300 border-purple-500/30 font-mono text-xs w-fit">
@@ -321,20 +385,36 @@ export function ConfigPreview({ onSwitchToFile, onOpenAIQuery }: ConfigPreviewPr
             {/* Model Parameters */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
               <div className="bg-[#161722] p-3 rounded-lg border border-zinc-800">
-                <span className="text-zinc-500 block text-[11px]">Provider</span>
-                <span className="text-white font-medium mt-0.5 block">Google AI Studio</span>
+                <span className="text-zinc-500 block text-[11px]">
+                  Provider
+                </span>
+                <span className="text-white font-medium mt-0.5 block">
+                  Google AI Studio
+                </span>
               </div>
               <div className="bg-[#161722] p-3 rounded-lg border border-zinc-800">
-                <span className="text-zinc-500 block text-[11px]">Temperature</span>
-                <span className="text-emerald-400 font-mono font-medium mt-0.5 block">0.7 (Balanced)</span>
+                <span className="text-zinc-500 block text-[11px]">
+                  Temperature
+                </span>
+                <span className="text-emerald-400 font-mono font-medium mt-0.5 block">
+                  0.7 (Balanced)
+                </span>
               </div>
               <div className="bg-[#161722] p-3 rounded-lg border border-zinc-800">
-                <span className="text-zinc-500 block text-[11px]">Streaming Response</span>
-                <span className="text-sky-400 font-medium mt-0.5 block">Enabled (Real-time)</span>
+                <span className="text-zinc-500 block text-[11px]">
+                  Streaming Response
+                </span>
+                <span className="text-sky-400 font-medium mt-0.5 block">
+                  Enabled (Real-time)
+                </span>
               </div>
               <div className="bg-[#161722] p-3 rounded-lg border border-zinc-800">
-                <span className="text-zinc-500 block text-[11px]">Response Mode</span>
-                <span className="text-purple-400 font-medium mt-0.5 block">Interactive Chat</span>
+                <span className="text-zinc-500 block text-[11px]">
+                  Response Mode
+                </span>
+                <span className="text-purple-400 font-medium mt-0.5 block">
+                  Interactive Chat
+                </span>
               </div>
             </div>
 
@@ -353,7 +433,9 @@ export function ConfigPreview({ onSwitchToFile, onOpenAIQuery }: ConfigPreviewPr
                       <Cpu className="w-3.5 h-3.5 text-purple-400" />
                       {cap.title}
                     </div>
-                    <p className="text-[11px] text-zinc-400 leading-relaxed">{cap.desc}</p>
+                    <p className="text-[11px] text-zinc-400 leading-relaxed">
+                      {cap.desc}
+                    </p>
                   </div>
                 ))}
               </div>
@@ -362,12 +444,18 @@ export function ConfigPreview({ onSwitchToFile, onOpenAIQuery }: ConfigPreviewPr
             {/* Ask AI Quick Prompt */}
             {onOpenAIQuery && (
               <div className="pt-2 flex flex-wrap items-center gap-2">
-                <span className="text-xs text-zinc-400">Try quick questions:</span>
+                <span className="text-xs text-zinc-400">
+                  Try quick questions:
+                </span>
                 <Button
                   type="button"
                   variant="ghost"
                   size="xs"
-                  onClick={() => onOpenAIQuery("Tell me about Lee Ryan's experience building automated workflows")}
+                  onClick={() =>
+                    onOpenAIQuery(
+                      "Tell me about Lee Ryan's experience building automated workflows",
+                    )
+                  }
                   className="px-2.5 py-1 h-auto rounded-md bg-[#1a1c2a] hover:bg-[#202236] border border-purple-500/30 text-purple-300 text-xs transition-colors cursor-pointer"
                 >
                   &ldquo;Tell me about workflow automations&rdquo; &rarr;
@@ -376,10 +464,14 @@ export function ConfigPreview({ onSwitchToFile, onOpenAIQuery }: ConfigPreviewPr
                   type="button"
                   variant="ghost"
                   size="xs"
-                  onClick={() => onOpenAIQuery("What flagship projects has Lee Ryan deployed to production?")}
+                  onClick={() =>
+                    onOpenAIQuery(
+                      "What projects has Lee Ryan deployed to production?",
+                    )
+                  }
                   className="px-2.5 py-1 h-auto rounded-md bg-[#1a1c2a] hover:bg-[#202236] border border-sky-500/30 text-sky-300 text-xs transition-colors cursor-pointer"
                 >
-                  &ldquo;What flagship projects are deployed?&rdquo; &rarr;
+                  &ldquo;What projects are deployed?&rdquo; &rarr;
                 </Button>
               </div>
             )}
@@ -397,12 +489,14 @@ export function ConfigPreview({ onSwitchToFile, onOpenAIQuery }: ConfigPreviewPr
               onClick={() => onSwitchToFile && onSwitchToFile("projects.tsx")}
               className="bg-sky-500 hover:bg-sky-400 text-black font-semibold text-xs"
             >
-              View Flagship Projects
+              View Projects
             </Button>
             <Button
               size="sm"
               variant="outline"
-              onClick={() => onSwitchToFile && onSwitchToFile("get-in-touch.tsx")}
+              onClick={() =>
+                onSwitchToFile && onSwitchToFile("get-in-touch.tsx")
+              }
               className="border-zinc-700 text-zinc-300 hover:text-white text-xs"
             >
               Contact Lee Ryan

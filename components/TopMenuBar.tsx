@@ -58,6 +58,7 @@ interface TopMenuBarProps {
   onOpenResume?: () => void;
   onOpenContact?: () => void;
   openSettingsModal?: () => void;
+  openShortcutsModal?: () => void;
   activeTheme?: string;
   onSelectTheme?: (theme: ThemeOption) => void;
 }
@@ -79,11 +80,14 @@ export function TopMenuBar({
   onOpenResume,
   onOpenContact,
   openSettingsModal,
+  openShortcutsModal,
   activeTheme,
   onSelectTheme,
 }: TopMenuBarProps) {
-  const resumeUrl = DEVELOPER_PROFILE.resumePdfUrl || "/Lee_Ryan_Garcia_Resume.pdf";
-  const resumeFilename = resumeUrl.split("/").pop() || "Lee_Ryan_Garcia_Resume.pdf";
+  const resumeUrl =
+    DEVELOPER_PROFILE.resumePdfUrl || "/Lee_Ryan_Garcia_Resume.pdf";
+  const resumeFilename =
+    resumeUrl.split("/").pop() || "Lee_Ryan_Garcia_Resume.pdf";
 
   const handleDownloadResume = () => {
     toast.success("Downloading Resume...", {
@@ -257,7 +261,7 @@ export function TopMenuBar({
                 <span>Go to Featured Projects</span>
               </DropdownMenuItem>
               <DropdownMenuItem
-                onClick={openCommandPalette}
+                onClick={onOpenContact}
                 className="text-xs cursor-pointer hover:bg-[#094771] hover:text-white focus:bg-[#094771] focus:text-white"
               >
                 <Send className="w-3.5 h-3.5 mr-2 text-emerald-400" />
@@ -301,9 +305,9 @@ export function TopMenuBar({
             >
               <DropdownMenuItem
                 onClick={() =>
-                  toast.success("Portfolio IDE v2.4", {
+                  toast.success("Portfolio IDE v2", {
                     description:
-                      "Built with Next.js 16, React 19, Tailwind CSS, and Gemini 3.7 Flash.",
+                      "Built with Next.js 16, React 19, TypeScript, Tailwind CSS v4, shadcn/ui, Base UI, Motion, Lucide Icons, and Resizable Panels.",
                   })
                 }
                 className="text-xs cursor-pointer hover:bg-[#094771] hover:text-white focus:bg-[#094771] focus:text-white"
@@ -312,7 +316,7 @@ export function TopMenuBar({
                 <span>About Portfolio IDE</span>
               </DropdownMenuItem>
               <DropdownMenuItem
-                onClick={openCommandPalette}
+                onClick={openShortcutsModal || openCommandPalette}
                 className="text-xs cursor-pointer hover:bg-[#094771] hover:text-white focus:bg-[#094771] focus:text-white"
               >
                 <FileText className="w-3.5 h-3.5 mr-2 text-emerald-400" />
@@ -334,8 +338,12 @@ export function TopMenuBar({
           title="Portfolio IDE (Click for Command Palette ⌘K)"
         >
           <span className="truncate">
-            <span className="hidden md:inline">my-portfolio - Portfolio IDE - </span>
-            <span className="text-sky-300 sm:text-inherit font-mono sm:font-sans">{activeFileName}</span>
+            <span className="hidden md:inline">
+              my-portfolio - Portfolio IDE -{" "}
+            </span>
+            <span className="text-sky-300 sm:text-inherit font-mono sm:font-sans">
+              {activeFileName}
+            </span>
           </span>
         </Button>
       </div>

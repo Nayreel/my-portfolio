@@ -1,15 +1,7 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import {
-  Cpu,
-  Code2,
-  Server,
-  Bot,
-  Wrench,
-  Search,
-  Star,
-} from "lucide-react";
+import { Cpu, Code2, Server, Bot, Wrench, Search, Star } from "lucide-react";
 import { SKILL_CATEGORIES } from "@/data";
 import { SkillLevel } from "@/types/skills";
 import { LEVEL_CONFIG } from "@/utils/skills";
@@ -25,7 +17,6 @@ const CATEGORY_ICONS: Record<string, React.ElementType> = {
   Bot,
   Wrench,
 };
-
 
 export function SkillsPreview() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -111,28 +102,39 @@ export function SkillsPreview() {
             >
               ALL
             </Button>
-            {(["Core", "Production", "Advanced", "Integration", "Working"] as SkillLevel[]).map(
-              (lvl) => {
-                const isSelected = selectedLevel === lvl.toUpperCase();
-                return (
-                  <Button
-                    key={lvl}
-                    type="button"
-                    variant="ghost"
-                    size="xs"
-                    onClick={() => setSelectedLevel(isSelected ? "ALL" : lvl.toUpperCase())}
-                    className={`text-[11px] px-2 py-1 h-auto rounded-md font-mono transition-all flex items-center space-x-1.5 border cursor-pointer ${
-                      isSelected
-                        ? LEVEL_CONFIG[lvl].badgeClass + " ring-1 ring-white/20 font-bold hover:brightness-110"
-                        : "bg-[#1a1c23] text-zinc-400 hover:text-zinc-200 hover:bg-[#20222a] border-[#272930]"
-                    }`}
-                  >
-                    <span className={`w-1.5 h-1.5 rounded-full ${LEVEL_CONFIG[lvl].dotClass}`} />
-                    <span>{LEVEL_CONFIG[lvl].label}</span>
-                  </Button>
-                );
-              }
-            )}
+            {(
+              [
+                "Core",
+                "Production",
+                "Advanced",
+                "Integration",
+                "Working",
+              ] as SkillLevel[]
+            ).map((lvl) => {
+              const isSelected = selectedLevel === lvl.toUpperCase();
+              return (
+                <Button
+                  key={lvl}
+                  type="button"
+                  variant="ghost"
+                  size="xs"
+                  onClick={() =>
+                    setSelectedLevel(isSelected ? "ALL" : lvl.toUpperCase())
+                  }
+                  className={`text-[11px] px-2 py-1 h-auto rounded-md font-mono transition-all flex items-center space-x-1.5 border cursor-pointer ${
+                    isSelected
+                      ? LEVEL_CONFIG[lvl].badgeClass +
+                        " ring-1 ring-white/20 font-bold hover:brightness-110"
+                      : "bg-[#1a1c23] text-zinc-400 hover:text-zinc-200 hover:bg-[#20222a] border-[#272930]"
+                  }`}
+                >
+                  <span
+                    className={`w-1.5 h-1.5 rounded-full ${LEVEL_CONFIG[lvl].dotClass}`}
+                  />
+                  <span>{LEVEL_CONFIG[lvl].label}</span>
+                </Button>
+              );
+            })}
           </div>
         </div>
 
@@ -178,7 +180,8 @@ export function SkillsPreview() {
                       variant="outline"
                       className="text-[10px] font-mono text-zinc-400 border-[#272930] bg-[#1a1c23]"
                     >
-                      {cat.skills.length} {cat.skills.length === 1 ? "tech" : "techs"}
+                      {cat.skills.length}{" "}
+                      {cat.skills.length === 1 ? "tech" : "techs"}
                     </Badge>
                   </div>
 
@@ -226,11 +229,13 @@ export function SkillsPreview() {
         <div className="flex items-center justify-between text-xs font-mono text-zinc-500 border-t border-[#202228] pt-4">
           <div className="flex items-center space-x-2">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-            <span>Showing {totalFilteredSkills} technologies in active stack</span>
+            <span>
+              Showing {totalFilteredSkills} technologies in active stack
+            </span>
           </div>
           <div className="flex items-center space-x-1 text-[11px] text-zinc-400">
             <Star className="w-3 h-3 text-amber-400 fill-amber-400 inline" />
-            <span>= Flagship Stack</span>
+            <span>= Stack</span>
           </div>
         </div>
       </div>
