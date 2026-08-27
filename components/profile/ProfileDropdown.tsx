@@ -166,7 +166,7 @@ export function ProfileDropdown({
 
       <DropdownMenuContent
         align="end"
-        className="w-72 max-w-[calc(100vw-1.5rem)] bg-[#1e1f24] border-[#31333e] text-[#cccccc] p-1.5 shadow-2xl rounded-2xl z-50 text-xs"
+        className="w-80 sm:w-84 max-w-[calc(100vw-1.5rem)] bg-[#1e1f24] border-[#31333e] text-[#cccccc] p-1.5 shadow-2xl rounded-2xl z-50 text-xs"
       >
         {/* Profile Card Header */}
         <div className="p-3 bg-[#15161a] rounded-xl border border-[#262831] mb-1.5 space-y-2">
@@ -191,11 +191,11 @@ export function ProfileDropdown({
                 </AvatarFallback>
               </Avatar>
             </div>
-            <div className="truncate min-w-0">
-              <div className="font-bold text-white text-xs truncate">
+            <div className="flex-1 min-w-0">
+              <div className="font-bold text-white text-xs leading-tight">
                 {DEVELOPER_PROFILE.name}
               </div>
-              <div className="text-[10.5px] text-sky-400 font-mono truncate">
+              <div className="text-[10.5px] text-sky-400 font-mono leading-snug mt-0.5 whitespace-normal break-words">
                 {DEVELOPER_PROFILE.title}
               </div>
             </div>
